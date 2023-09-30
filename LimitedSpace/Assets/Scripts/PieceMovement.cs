@@ -1,22 +1,31 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PieceMovement : MonoBehaviour
 {
+    [SerializeField] private LayerMask pieceLayer;
+    [SerializeField] private GameController _controller;
+
     private Vector3 _anchor;
     private Camera _camera;
     private Vector3 _positionBeforeMove;
+    private Vector2Int _size;
+    private static readonly Vector3 _offset = new Vector3(0.5f, 0.5f, 0f);
+
     private void Start()
     {
         _camera = Camera.main;
+        var pieceCollider = GetComponent<Collider2D>();
+        _size = new Vector2Int(
+            Mathf.RoundToInt(pieceCollider.bounds.size.x),
+            Mathf.RoundToInt(pieceCollider.bounds.size.y)
+        );
     }
 
     private void OnMouseDrag()
     {
         var worldPosition = GetMousePosition();
         var position = worldPosition - _anchor;
+        position.z = -1.0f; //Makes object float above others
 
         transform.position = position;
     }
@@ -31,34 +40,50 @@ public class PieceMovement : MonoBehaviour
 
     private void OnMouseDown()
     {
-        _positionBeforeMove = transform.position;
+        var piecePosition = transform.position;
+        _positionBeforeMove = piecePosition;
+
         var position = GetMousePosition();
-        _anchor = position - transform.position;
+        _anchor = position - piecePosition;
     }
 
     private void OnMouseUp()
     {
         //check if final position is valid
-        var hits = Physics2D.RaycastAll(transform.position + new Vector3(0.5f, 0.5f, 0f), Vector2.zero);
-        if (hits.Length > 1) 
+        for (int x = 0; x < _size.x; x++)
         {
-            foreach (var hit in hits)
+            for (int y = 0; y < _size.y; y++)
             {
-                Debug.Log("Hit " + hit.collider.name);
+                var tile = new Vector3(x, y, 0);
+                var hits = Physics2D.RaycastAll(transform.position + tile + _offset, Vector2.zero, Mathf.Infinity, pieceLayer);
+                if (hits.Length > 1)
+                {
+                    //Move piece back to original position
+                    transform.position = _positionBeforeMove;
+                    return;
+                }
             }
-
-            transform.position = _positionBeforeMove;
         }
-        
+
         //move piece to near int position
         var position = transform.position;
         position.x = Mathf.Round(position.x);
         position.y = Mathf.Round(position.y);
+        position.z = 0.0f;
         transform.position = position;
+        
+        _controller.OnPiecePlaced();
     }
 
     private void Update()
     {
-        Debug.DrawLine(Vector3.zero, transform.position);
+        for (int x = 0; x < _size.x; x++)
+        {
+            for (int y = 0; y < _size.y; y++)
+            {
+                var tile = new Vector3(x, y, 0);
+                Debug.DrawLine(Vector3.zero, transform.position + tile + _offset);
+            }
+        }
     }
 }
