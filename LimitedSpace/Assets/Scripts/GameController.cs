@@ -1,12 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
     [SerializeField] private GameObject bed;
     [SerializeField] private LayerMask checkLayer;
+    [SerializeField] private Button _backToHomeButton;
+    [SerializeField] private TMP_Text _endGameText;
 
     private Camera _camera;
     private Vector2Int _bedSize;
@@ -20,6 +25,15 @@ public class GameController : MonoBehaviour
             Mathf.RoundToInt(bedCollider.bounds.size.x),
             Mathf.RoundToInt(bedCollider.bounds.size.y)
         );
+
+        _backToHomeButton.gameObject.SetActive(false);
+        _backToHomeButton.onClick.AddListener(BackToHomeClicked);
+        _endGameText.gameObject.SetActive(false);
+    }
+
+    private void BackToHomeClicked()
+    {
+        SceneManager.LoadScene("Home");
     }
 
     public void OnPiecePlaced()
@@ -41,6 +55,8 @@ public class GameController : MonoBehaviour
         if (emptySpaceCount ==0)
         {
             Debug.Log("Todos os gatinhos a mimir");
+            _backToHomeButton.gameObject.SetActive(true);
+            _endGameText.gameObject.SetActive(true);
         }
     }
 }
