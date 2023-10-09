@@ -13,9 +13,16 @@ public class GameController : MonoBehaviour
     [SerializeField] private Button _backToHomeButton;
     [SerializeField] private TMP_Text _endGameText;
 
+    public static GameController Instance { get; private set; }
+
     private Camera _camera;
     private Vector2Int _bedSize;
     private static readonly Vector3 _offset = new Vector3(0.5f, 0.5f, 0f);
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -29,6 +36,11 @@ public class GameController : MonoBehaviour
         _backToHomeButton.gameObject.SetActive(false);
         _backToHomeButton.onClick.AddListener(BackToHomeClicked);
         _endGameText.gameObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
     }
 
     private void BackToHomeClicked()

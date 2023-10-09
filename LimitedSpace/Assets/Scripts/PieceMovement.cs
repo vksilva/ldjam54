@@ -3,7 +3,6 @@ using UnityEngine;
 public class PieceMovement : MonoBehaviour
 {
     [SerializeField] private LayerMask pieceLayer;
-    [SerializeField] private GameController _controller;
 
     private Vector3 _anchor;
     private Camera _camera;
@@ -72,7 +71,7 @@ public class PieceMovement : MonoBehaviour
         position.z = 0.0f;
         transform.position = position;
         
-        _controller.OnPiecePlaced();
+        GameController.Instance.OnPiecePlaced();
     }
 
     private void Update()
