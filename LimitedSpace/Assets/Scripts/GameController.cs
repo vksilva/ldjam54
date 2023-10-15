@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private LayerMask checkLayer;
     [SerializeField] private Button _backToHomeButton;
     [SerializeField] private TMP_Text _endGameText;
+    [SerializeField] private Vector2 _gameArea;
 
     public static GameController Instance { get; private set; }
 
@@ -27,6 +28,7 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         _camera = Camera.main;
+        SetCameraSize();
         var bedCollider = bed.GetComponent<Collider2D>();
         _bedSize = new Vector2Int(
             Mathf.RoundToInt(bedCollider.bounds.size.x),
@@ -36,6 +38,8 @@ public class GameController : MonoBehaviour
         _backToHomeButton.gameObject.SetActive(false);
         _backToHomeButton.onClick.AddListener(BackToHomeClicked);
         _endGameText.gameObject.SetActive(false);
+
+        SceneManager.LoadScene("LevelUI", LoadSceneMode.Additive);
     }
 
     private void OnDestroy()
@@ -69,6 +73,25 @@ public class GameController : MonoBehaviour
             Debug.Log("Todos os gatinhos a mimir");
             _backToHomeButton.gameObject.SetActive(true);
             _endGameText.gameObject.SetActive(true);
+        }
+    }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(Vector2.zero, _gameArea);
+    }
+
+    private void SetCameraSize()
+    {
+        var gameAspect = _gameArea.x / _gameArea.y;
+        if (gameAspect < _camera.aspect)
+        {
+            _camera.orthographicSize = _gameArea.y / 2;
+        }
+        else
+        {
+            _camera.orthographicSize = _gameArea.x / (2 * _camera.aspect);
         }
     }
 }
