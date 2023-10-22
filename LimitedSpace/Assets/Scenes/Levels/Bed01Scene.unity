@@ -681,7 +681,7 @@ MonoBehaviour:
     m_Bits: 9
   _backToHomeButton: {fileID: 1623653323}
   _endGameText: {fileID: 1699973032}
-  _gameArea: {x: 8, y: 10}
+  _gameArea: {x: 14.81, y: 19.24}
 --- !u!4 &1672407449
 Transform:
   m_ObjectHideFlags: 0

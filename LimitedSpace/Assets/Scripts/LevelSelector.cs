@@ -1,16 +1,25 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Button = UnityEngine.UI.Button;
 
 public class LevelSelector : MonoBehaviour
 {
-    [SerializeField] private Button _level01;
-    [SerializeField] private Button _level02;
+    [SerializeField] private int levelCount;
+    
+    [SerializeField] private Button levelTemplateButton;
 
     private void Start()
     {
-        _level01.onClick.AddListener(()=>LoadLevel(1));
-        _level02.onClick.AddListener(()=>LoadLevel(2));
+        for (int i = 1; i <= levelCount; i++)
+        {
+            var levelNumber = i;
+            var newLevelButton = Instantiate(levelTemplateButton, levelTemplateButton.transform.parent);
+            newLevelButton.onClick.AddListener(()=>LoadLevel(levelNumber));
+            var text = newLevelButton.GetComponentInChildren<TMP_Text>();
+            text.text = $"Level {levelNumber}";
+        }
+        levelTemplateButton.gameObject.SetActive(false);
     }
 
     private void LoadLevel(int levelId)
