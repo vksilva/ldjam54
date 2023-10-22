@@ -10,15 +10,13 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] private GameObject bed;
     [SerializeField] private LayerMask checkLayer;
-    [SerializeField] private Button _backToHomeButton;
-    [SerializeField] private TMP_Text _endGameText;
-    [SerializeField] private Vector2 _gameArea;
+    [SerializeField] private Vector2 _gameArea = new (15, 20);
 
     public static GameController Instance { get; private set; }
 
     private Camera _camera;
     private Vector2Int _bedSize;
-    private static readonly Vector3 _offset = new Vector3(0.5f, 0.5f, 0f);
+    private static readonly Vector3 _offset = new (0.5f, 0.5f, 0f);
 
     private void Awake()
     {
@@ -34,10 +32,6 @@ public class GameController : MonoBehaviour
             Mathf.RoundToInt(bedCollider.bounds.size.x),
             Mathf.RoundToInt(bedCollider.bounds.size.y)
         );
-
-        _backToHomeButton.gameObject.SetActive(false);
-        _backToHomeButton.onClick.AddListener(BackToHomeClicked);
-        _endGameText.gameObject.SetActive(false);
 
         SceneManager.LoadScene("LevelUI", LoadSceneMode.Additive);
     }
@@ -68,11 +62,9 @@ public class GameController : MonoBehaviour
                 }
             }
         }
-        if (emptySpaceCount ==0)
+        if (emptySpaceCount == 0)
         {
-            Debug.Log("Todos os gatinhos a mimir");
-            _backToHomeButton.gameObject.SetActive(true);
-            _endGameText.gameObject.SetActive(true);
+            LevelUIController.Instance.ShowEndGameCanvas();
         }
     }
     
