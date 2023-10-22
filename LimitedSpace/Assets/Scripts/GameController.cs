@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] private GameObject bed;
     [SerializeField] private LayerMask checkLayer;
-    [SerializeField] private Vector2 _gameArea = new (15, 20);
+    [SerializeField] private Vector2Int _gameArea = new (15, 20);
 
     public static GameController Instance { get; private set; }
 
@@ -71,7 +71,7 @@ public class GameController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireCube(Vector2.zero, _gameArea);
+        Gizmos.DrawWireCube(Vector2.zero, new Vector3(_gameArea.x, _gameArea.y));
     }
 
     private void SetCameraSize()
@@ -79,11 +79,11 @@ public class GameController : MonoBehaviour
         var gameAspect = _gameArea.x / _gameArea.y;
         if (gameAspect < _camera.aspect)
         {
-            _camera.orthographicSize = _gameArea.y / 2;
+            _camera.orthographicSize = _gameArea.y / 2.0f;
         }
         else
         {
-            _camera.orthographicSize = _gameArea.x / (2 * _camera.aspect);
+            _camera.orthographicSize = _gameArea.x / (2.0f * _camera.aspect);
         }
     }
 }
