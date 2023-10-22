@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 414290825675999517}
   - component: {fileID: 8049845255338235416}
   m_Layer: 0
-  m_Name: cat_L_03
+  m_Name: cat_J_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 34b0cc0030ec7d043bcf9df2b10e0f88, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f1e7f6bab4fd44046acf8489b49440fc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -137,7 +137,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
-    oldSize: {x: 2, y: 3}
+    oldSize: {x: 3, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -145,10 +145,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 3}
-      - {x: 0.007753849, y: 1.9908391}
-      - {x: 0.98296154, y: 1.9740347}
-      - {x: 1.0068159, y: -0.007753849}
-      - {x: 2, y: 0}
-      - {x: 2, y: 3}
+    - - {x: 0, y: 2}
+      - {x: 0, y: 0.9875643}
+      - {x: 1.9919292, y: 0.9922998}
+      - {x: 2.0188677, y: 0}
+      - {x: 3, y: 0}
+      - {x: 3, y: 2}
   m_UseDelaunayMesh: 0

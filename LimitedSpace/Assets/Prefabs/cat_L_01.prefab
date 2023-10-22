@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 414290825675999517}
   - component: {fileID: 8049845255338235416}
   m_Layer: 0
-  m_Name: cat_L_03
+  m_Name: cat_L_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 34b0cc0030ec7d043bcf9df2b10e0f88, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f3658fe3002ebc64cae413ac011d632d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -146,9 +146,9 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0, y: 3}
-      - {x: 0.007753849, y: 1.9908391}
-      - {x: 0.98296154, y: 1.9740347}
-      - {x: 1.0068159, y: -0.007753849}
+      - {x: 0, y: 0}
       - {x: 2, y: 0}
-      - {x: 2, y: 3}
+      - {x: 1.9767385, y: 0.9858992}
+      - {x: 0.97435236, y: 1.0112697}
+      - {x: 0.97767645, y: 2.9767382}
   m_UseDelaunayMesh: 0

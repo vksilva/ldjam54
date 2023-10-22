@@ -331,7 +331,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2950813645937609133, guid: 720084e4b6a44a248904a5a3572819bb, type: 3}
       propertyPath: m_Name
-      value: Bed_4x3
+      value: Bed_4x4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7076691393757713030, guid: 720084e4b6a44a248904a5a3572819bb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7076691393757713030, guid: 720084e4b6a44a248904a5a3572819bb, type: 3}
       propertyPath: m_LocalPosition.x

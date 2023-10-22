@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 897864363131851049}
   - component: {fileID: 8932526430470723028}
   m_Layer: 3
-  m_Name: Bed_4x4
+  m_Name: bed_4x4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
