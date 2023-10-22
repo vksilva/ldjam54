@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private GameObject bed;
-    [SerializeField] private LayerMask checkLayer;
     [SerializeField] private Vector2Int _gameArea = new (15, 20);
 
     public static GameController Instance { get; private set; }
@@ -17,6 +16,7 @@ public class GameController : MonoBehaviour
     private Camera _camera;
     private Vector2Int _bedSize;
     private static readonly Vector3 _offset = new (0.5f, 0.5f, 0f);
+    private readonly LayerMask _checkLayer = 9;
 
     private void Awake()
     {
@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour
             for (int y = 0; y < _bedSize.y; y++)
             {
                 var tile = new Vector3(x, y, 0);
-                var hits = Physics2D.RaycastAll(bed.transform.position + tile + _offset, Vector2.zero, Mathf.Infinity,checkLayer);
+                var hits = Physics2D.RaycastAll(bed.transform.position + tile + _offset, Vector2.zero, Mathf.Infinity,_checkLayer);
                 if (hits.Length < 2)
                 {
                     emptySpaceCount++;
