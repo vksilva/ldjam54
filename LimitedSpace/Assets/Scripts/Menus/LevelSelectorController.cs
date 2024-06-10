@@ -1,34 +1,40 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Button = UnityEngine.UI.Button;
 
 public class LevelSelectorController : MonoBehaviour
 {
-    [SerializeField] private int[] levelCount;
+    [SerializeField] private int[] worldLevelCount;
     
     [SerializeField] private TMP_Text worldTemplateLabel;
     [SerializeField] private Button levelTemplateButton;
 
     private void Start()
     {
-        for (var w = 1; w <= levelCount.Length; w++)
+        for (var world = 1; world <= worldLevelCount.Length; world++)
         {
-            var world = w;
-            var worldLabel = Instantiate(worldTemplateLabel, worldTemplateLabel.transform.parent);
-            worldLabel.text = $"World {world:D2}";
-            for (var l = 1; l <= levelCount[world-1]; l++)
-            {
-                var level = l;
-                var newLevelButton = Instantiate(levelTemplateButton, levelTemplateButton.transform.parent);
-                newLevelButton.onClick.AddListener(()=>LoadLevel(world, level));
-                var text = newLevelButton.GetComponentInChildren<TMP_Text>();
-                text.text = $"Level {level:D2}";
-            }    
+            CreateWorldSection(world);
         }
         
         worldTemplateLabel.gameObject.SetActive(false);
         levelTemplateButton.gameObject.SetActive(false);
+    }
+
+    private void CreateWorldSection(int w)
+    {
+        var world = w;
+        var worldLabel = Instantiate(worldTemplateLabel, worldTemplateLabel.transform.parent);
+        worldLabel.text = $"World {world:D2}";
+        for (var l = 1; l <= worldLevelCount[world-1]; l++)
+        {
+            var level = l;
+            var newLevelButton = Instantiate(levelTemplateButton, levelTemplateButton.transform.parent);
+            newLevelButton.onClick.AddListener(()=>LoadLevel(world, level));
+            var text = newLevelButton.GetComponentInChildren<TMP_Text>();
+            text.text = $"Level {level:D2}";
+        }
     }
 
     private static void LoadLevel(int world, int level)

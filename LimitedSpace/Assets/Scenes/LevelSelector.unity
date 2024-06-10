@@ -1111,7 +1111,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 959705629}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.47678572
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1183,7 +1183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18cf21e443534b446892fd0ec26b4428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelCount: 050000000a000000
+  worldLevelCount: 050000000a000000
   worldTemplateLabel: {fileID: 472174656}
   levelTemplateButton: {fileID: 157666810}
 --- !u!4 &1812137723
