@@ -1,89 +1,87 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class GameController : MonoBehaviour
+namespace Gameplay
 {
-    [SerializeField] private GameObject bed;
-    [SerializeField] private Vector2Int _gameArea = new (15, 20);
-
-    public static GameController Instance { get; private set; }
-
-    private Camera _camera;
-    private Vector2Int _bedSize;
-    private static readonly Vector3 _offset = new (0.5f, 0.5f, 0f);
-    private readonly LayerMask _checkLayer = 9;
-
-    private void Awake()
+    public class GameController : MonoBehaviour
     {
-        Instance = this;
-    }
+        [SerializeField] private GameObject bed;
+        [SerializeField] private Vector2Int _gameArea = new (15, 20);
 
-    private void Start()
-    {
-        _camera = Camera.main;
-        SetCameraSize();
-        var bedCollider = bed.GetComponent<Collider2D>();
-        _bedSize = new Vector2Int(
-            Mathf.RoundToInt(bedCollider.bounds.size.x),
-            Mathf.RoundToInt(bedCollider.bounds.size.y)
-        );
+        public static GameController Instance { get; private set; }
 
-        SceneManager.LoadScene("LevelUI", LoadSceneMode.Additive);
-    }
+        private Camera _camera;
+        private Vector2Int _bedSize;
+        private static readonly Vector3 _offset = new (0.5f, 0.5f, 0f);
+        private readonly LayerMask _checkLayer = 9;
 
-    private void OnDestroy()
-    {
-        Instance = null;
-    }
-
-    private void BackToHomeClicked()
-    {
-        SceneManager.LoadScene("Home");
-    }
-
-    public void OnPiecePlaced()
-    {
-        //Check if all bed is populated
-        var emptySpaceCount = 0;
-        for (int x = 0; x < _bedSize.x; x++)
+        private void Awake()
         {
-            for (int y = 0; y < _bedSize.y; y++)
+            Instance = this;
+        }
+
+        private void Start()
+        {
+            _camera = Camera.main;
+            SetCameraSize();
+            var bedCollider = bed.GetComponent<Collider2D>();
+            _bedSize = new Vector2Int(
+                Mathf.RoundToInt(bedCollider.bounds.size.x),
+                Mathf.RoundToInt(bedCollider.bounds.size.y)
+            );
+
+            SceneManager.LoadScene("LevelUI", LoadSceneMode.Additive);
+        }
+
+        private void OnDestroy()
+        {
+            Instance = null;
+        }
+
+        private void BackToHomeClicked()
+        {
+            SceneManager.LoadScene("Home");
+        }
+
+        public void OnPiecePlaced()
+        {
+            //Check if all bed is populated
+            var emptySpaceCount = 0;
+            for (int x = 0; x < _bedSize.x; x++)
             {
-                var tile = new Vector3(x, y, 0);
-                var hits = Physics2D.RaycastAll(bed.transform.position + tile + _offset, Vector2.zero, Mathf.Infinity,_checkLayer);
-                if (hits.Length < 2)
+                for (int y = 0; y < _bedSize.y; y++)
                 {
-                    emptySpaceCount++;
+                    var tile = new Vector3(x, y, 0);
+                    var hits = Physics2D.RaycastAll(bed.transform.position + tile + _offset, Vector2.zero, Mathf.Infinity,_checkLayer);
+                    if (hits.Length < 2)
+                    {
+                        emptySpaceCount++;
+                    }
                 }
             }
+            if (emptySpaceCount == 0)
+            {
+                LevelUIController.Instance.ShowEndGameCanvas();
+            }
         }
-        if (emptySpaceCount == 0)
-        {
-            LevelUIController.Instance.ShowEndGameCanvas();
-        }
-    }
     
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireCube(Vector2.zero, new Vector3(_gameArea.x, _gameArea.y));
-    }
-
-    private void SetCameraSize()
-    {
-        var gameAspect = _gameArea.x / _gameArea.y;
-        if (gameAspect < _camera.aspect)
+        private void OnDrawGizmos()
         {
-            _camera.orthographicSize = _gameArea.y / 2.0f;
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireCube(Vector2.zero, new Vector3(_gameArea.x, _gameArea.y));
         }
-        else
+
+        private void SetCameraSize()
         {
-            _camera.orthographicSize = _gameArea.x / (2.0f * _camera.aspect);
+            var gameAspect = _gameArea.x / _gameArea.y;
+            if (gameAspect < _camera.aspect)
+            {
+                _camera.orthographicSize = _gameArea.y / 2.0f;
+            }
+            else
+            {
+                _camera.orthographicSize = _gameArea.x / (2.0f * _camera.aspect);
+            }
         }
     }
 }
