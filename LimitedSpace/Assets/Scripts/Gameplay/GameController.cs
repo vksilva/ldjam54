@@ -29,6 +29,11 @@ namespace Gameplay
                 Mathf.RoundToInt(bedCollider.bounds.size.x),
                 Mathf.RoundToInt(bedCollider.bounds.size.y)
             );
+            
+            //Force Bed z = 1 to avoid issue with pieces
+            var position = bed.transform.position;
+            position = new Vector3(position.x, position.y, 1);
+            bed.transform.position = position;
 
             SceneManager.LoadScene("LevelUI", LoadSceneMode.Additive);
         }
@@ -40,7 +45,7 @@ namespace Gameplay
 
         private void BackToHomeClicked()
         {
-            SceneManager.LoadScene("Home");
+            SceneManager.LoadScene("LevelSelector");
         }
 
         public void OnPiecePlaced()
