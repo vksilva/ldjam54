@@ -44,7 +44,7 @@ namespace Gameplay
 
         private void OnBackToHomeButtonClicked()
         {
-            SceneManager.LoadScene("Home");
+            SceneManager.LoadScene("LevelSelector");
         }
 
         private void OnContinueButtonClicked()
