@@ -2256,7 +2256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1539828738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2271,6 +2271,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   closeButton: {fileID: 112284753}
   backgroundButton: {fileID: 1410356142}
+  soundToggle: {fileID: 1039143057}
+  musicToggle: {fileID: 784560475}
 --- !u!4 &1539828739
 Transform:
   m_ObjectHideFlags: 0
@@ -2520,7 +2522,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 959705630}
   m_HandleRect: {fileID: 959705629}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2675,7 +2677,7 @@ MonoBehaviour:
   worldTemplateLabel: {fileID: 472174656}
   levelTemplateButton: {fileID: 157666810}
   settingsButton: {fileID: 1058298961}
-  settingsPopUp: {fileID: 1539828737}
+  settingsPopUp: {fileID: 1539828738}
 --- !u!4 &1812137723
 Transform:
   m_ObjectHideFlags: 0

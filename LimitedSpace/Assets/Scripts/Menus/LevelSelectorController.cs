@@ -13,7 +13,7 @@ namespace Menus
         [SerializeField] private TMP_Text worldTemplateLabel;
         [SerializeField] private Button levelTemplateButton;
         [SerializeField] private Button settingsButton;
-        [SerializeField] private GameObject settingsPopUp;
+        [SerializeField] private SettingsPopUp settingsPopUp;
         
         private void Start()
         {

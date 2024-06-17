@@ -10,8 +10,6 @@ public class SettingsPopUp : MonoBehaviour
     [SerializeField] private Toggle musicToggle;
     
     
-    
-    // Start is called before the first frame update
     void Start()
     {
         AddListeners();
