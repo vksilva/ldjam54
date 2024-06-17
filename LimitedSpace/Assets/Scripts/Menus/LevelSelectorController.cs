@@ -13,8 +13,8 @@ namespace Menus
         [SerializeField] private TMP_Text worldTemplateLabel;
         [SerializeField] private Button levelTemplateButton;
         [SerializeField] private Button settingsButton;
+        [SerializeField] private GameObject settingsPopUp;
         
-
         private void Start()
         {
             for (var world = 1; world <= worldLevelCount.Length; world++)
@@ -24,6 +24,7 @@ namespace Menus
         
             worldTemplateLabel.gameObject.SetActive(false);
             levelTemplateButton.gameObject.SetActive(false);
+            settingsPopUp.gameObject.SetActive(false);
             
             ConnectButtons();
         }
@@ -60,7 +61,7 @@ namespace Menus
 
         private void ShowSettings()
         {
-            throw new System.NotImplementedException();
+            settingsPopUp.gameObject.SetActive(true);
         }
     }
 }
