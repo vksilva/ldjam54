@@ -1,10 +1,15 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class SettingsPopUp : MonoBehaviour
 {
     [SerializeField] private Button closeButton;
     [SerializeField] private Button backgroundButton;
+    [SerializeField] private Toggle soundToggle;
+    [SerializeField] private Toggle musicToggle;
+    
+    
     
     // Start is called before the first frame update
     void Start()
@@ -14,11 +19,23 @@ public class SettingsPopUp : MonoBehaviour
 
     private void AddListeners()
     {
-        closeButton.onClick.AddListener(Close);
-        backgroundButton.onClick.AddListener(Close);
+        closeButton.onClick.AddListener(OnClose);
+        backgroundButton.onClick.AddListener(OnClose);
+        soundToggle.onValueChanged.AddListener(OnSoundToggled);
+        musicToggle.onValueChanged.AddListener(OnMusicToggled);
     }
 
-    public void Close()
+    private void OnMusicToggled(bool isOn)
+    {
+        Debug.Log($"Music is {isOn}");
+    }
+
+    private void OnSoundToggled(bool isOn)
+    {
+        Debug.Log($"Sound is {isOn}");
+    }
+
+    private void OnClose()
     {
         gameObject.SetActive(false);
     }
