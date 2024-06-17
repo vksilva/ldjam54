@@ -7,11 +7,22 @@ public class PausePopUpController : MonoBehaviour
 {
     [SerializeField] private Button continueButton;
     [SerializeField] private Button backToLevelSelectorButton;
+    [SerializeField] private Button closeButton;
+    [SerializeField] private Button backgroundButton;
+    
+    
     
     void Start()
     {
         continueButton.onClick.AddListener(OnContinueButtonClicked);
         backToLevelSelectorButton.onClick.AddListener(OnBackToLevelSelectorButton);
+        closeButton.onClick.AddListener(OnClose);
+        backgroundButton.onClick.AddListener(OnClose);
+    }
+
+    private void OnClose()
+    {
+        gameObject.SetActive(false);
     }
 
     private void OnBackToLevelSelectorButton()
