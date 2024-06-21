@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,7 +24,13 @@ namespace Gameplay
         private void Start()
         {
             _camera = Camera.main;
-            SetCameraSize();
+
+            if (!_camera)
+            {
+                throw new Exception("Game camera missing");
+            }
+            
+            _camera.orthographicSize = CalculateCameraSize(_gameArea, _camera.aspect);
             var bedCollider = bed.GetComponent<Collider2D>();
             _bedSize = new Vector2Int(
                 Mathf.RoundToInt(bedCollider.bounds.size.x),
@@ -80,17 +87,17 @@ namespace Gameplay
             Gizmos.DrawWireCube(Vector2.zero, new Vector3(_gameArea.x, _gameArea.y));
         }
 
-        private void SetCameraSize()
+        public static float CalculateCameraSize(Vector2Int gameArea, float cameraAspect)
         {
-            var gameAspect = _gameArea.x / (float)_gameArea.y;
+            var gameAspect = gameArea.x / (float)gameArea.y;
 
-            if (gameAspect < _camera.aspect)
+            if (gameAspect < cameraAspect)
             {
-                _camera.orthographicSize = _gameArea.y / 2.0f;
+                return gameArea.y / 2.0f;
             }
             else
             {
-                _camera.orthographicSize = _gameArea.x / (2.0f * _camera.aspect);
+                return gameArea.x / (2.0f * cameraAspect);
             }
         }
     }
