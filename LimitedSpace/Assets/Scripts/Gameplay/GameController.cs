@@ -32,8 +32,7 @@ namespace Gameplay
             
             //Force Bed z = 1 to avoid issue with pieces
             var position = bed.transform.position;
-            position = new Vector3(position.x, position.y, 1);
-            bed.transform.position = position;
+            bed.transform.position = new Vector3(position.x, position.y, 1);
 
             SceneManager.LoadScene("LevelUI", LoadSceneMode.Additive);
         }
@@ -50,7 +49,14 @@ namespace Gameplay
 
         public void OnPiecePlaced()
         {
-            //Check if all bed is populated
+            if (IsBedCompleted())
+            {
+                LevelUIController.Instance.ShowEndGameCanvas();
+            }
+        }
+
+        private bool IsBedCompleted()
+        {
             var emptySpaceCount = 0;
             for (int x = 0; x < _bedSize.x; x++)
             {
@@ -64,12 +70,10 @@ namespace Gameplay
                     }
                 }
             }
-            if (emptySpaceCount == 0)
-            {
-                LevelUIController.Instance.ShowEndGameCanvas();
-            }
+
+            return emptySpaceCount == 0;
         }
-    
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.cyan;
@@ -78,7 +82,8 @@ namespace Gameplay
 
         private void SetCameraSize()
         {
-            var gameAspect = _gameArea.x / _gameArea.y;
+            var gameAspect = _gameArea.x / (float)_gameArea.y;
+
             if (gameAspect < _camera.aspect)
             {
                 _camera.orthographicSize = _gameArea.y / 2.0f;
