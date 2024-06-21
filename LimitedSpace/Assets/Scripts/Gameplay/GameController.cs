@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -49,16 +50,17 @@ namespace Gameplay
             Instance = null;
         }
 
-        private void BackToHomeClicked()
+        private async void OpenEndGamePopUp()
         {
-            SceneManager.LoadScene("LevelSelector");
+            await Task.Delay(1000);
+            LevelUIController.Instance.ShowEndGameCanvas();
         }
 
         public void OnPiecePlaced()
         {
             if (IsBedCompleted())
             {
-                LevelUIController.Instance.ShowEndGameCanvas();
+                OpenEndGamePopUp();
             }
         }
 
