@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09244b1a18a7d754da63b03253ca60d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bed: {fileID: 0}
+  bed: {fileID: 1729313940}
   _gameArea: {x: 10, y: 16}
 --- !u!4 &1672407449
 Transform:
@@ -511,6 +511,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1040417b6c2ba8a409527df15a04a386, type: 3}
+--- !u!1 &1729313940 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2541025257083874245, guid: 1040417b6c2ba8a409527df15a04a386, type: 3}
+  m_PrefabInstance: {fileID: 1729313939}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4188179409556337987
 PrefabInstance:
   m_ObjectHideFlags: 0
