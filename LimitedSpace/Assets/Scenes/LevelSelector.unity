@@ -2679,10 +2679,10 @@ MonoBehaviour:
     levelCount: 5
   - name: Medium
     number: 2
-    levelCount: 10
+    levelCount: 4
   - name: Hard
     number: 3
-    levelCount: 2
+    levelCount: 4
   worldTemplateLabel: {fileID: 472174656}
   levelTemplateButton: {fileID: 157666810}
   settingsButton: {fileID: 1058298961}
