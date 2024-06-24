@@ -8,7 +8,7 @@ namespace Menus
     public class LevelSelectorController : MonoBehaviour
     {
         // Each entry value is how many levels each world have
-        [SerializeField] private int[] worldLevelCount;
+        [SerializeField] private WorldData[] worlds;
     
         [SerializeField] private TMP_Text worldTemplateLabel;
         [SerializeField] private Button levelTemplateButton;
@@ -17,9 +17,9 @@ namespace Menus
         
         private void Start()
         {
-            for (var world = 1; world <= worldLevelCount.Length; world++)
+            for (var index = 0; index < worlds.Length; index++)
             {
-                CreateWorldSection(world);
+                CreateWorldSection(worlds[index]);
             }
         
             worldTemplateLabel.gameObject.SetActive(false);
@@ -29,13 +29,13 @@ namespace Menus
             ConnectButtons();
         }
 
-        private void CreateWorldSection(int world)
+        private void CreateWorldSection(WorldData world)
         {
             var worldLabel = Instantiate(worldTemplateLabel, worldTemplateLabel.transform.parent);
-            worldLabel.text = $"World {world:D2}";
-            for (var l = 1; l <= worldLevelCount[world-1]; l++)
+            worldLabel.text = world.name;
+            for (var l = 1; l <= world.levelCount; l++)
             {
-                CreateLevelButton(world, l);
+                CreateLevelButton(world.number, l);
             }
         }
 
