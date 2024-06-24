@@ -1,4 +1,5 @@
 using System;
+using Menus;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -9,6 +10,8 @@ namespace Gameplay
         [SerializeField] private PausePopUpController pausePopUp;
         [SerializeField] private UIController uiController;
         [SerializeField] private EndGameController endGameController;
+        [SerializeField] private ResetPopUpController resetPopUpController;
+        
         public static LevelUIController Instance { get; private set; }
 
         private void Awake()
@@ -22,6 +25,7 @@ namespace Gameplay
 
             pausePopUp.gameObject.SetActive(false);
             endGameController.gameObject.SetActive(false);
+            resetPopUpController.gameObject.SetActive(false);
         }
 
         public void ShowEndGameCanvas()

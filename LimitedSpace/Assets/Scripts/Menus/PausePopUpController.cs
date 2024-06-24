@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PausePopUpController : MonoBehaviour
@@ -9,8 +10,6 @@ public class PausePopUpController : MonoBehaviour
     [SerializeField] private Button backToLevelSelectorButton;
     [SerializeField] private Button closeButton;
     [SerializeField] private Button backgroundButton;
-    
-    
     
     void Start()
     {
