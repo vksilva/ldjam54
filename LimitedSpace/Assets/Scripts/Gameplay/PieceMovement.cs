@@ -1,16 +1,23 @@
+using System;
 using UnityEngine;
 
 namespace Gameplay
 {
     public class PieceMovement : MonoBehaviour
     {
-        [SerializeField] private LayerMask pieceLayer;
+        [SerializeField] private bool _obstacle = false;
 
+        private LayerMask pieceLayer;
         private Vector3 _anchor;
         private Camera _camera;
         private Vector3 _positionBeforeMove;
         private Vector2Int _size;
-        private static readonly Vector3 _offset = new Vector3(0.5f, 0.5f, 0f);
+        private static readonly Vector3 _offset = new (0.5f, 0.5f, 0f);
+
+        private void Awake()
+        {
+           pieceLayer = LayerMask.GetMask("Default");
+        }
 
         private void Start()
         {
@@ -24,6 +31,10 @@ namespace Gameplay
 
         private void OnMouseDrag()
         {
+            if (_obstacle)
+            {
+                return;
+            }
             var worldPosition = GetMousePosition();
             var position = worldPosition - _anchor;
             position.z = -1.0f; //Makes object float above others
@@ -41,6 +52,10 @@ namespace Gameplay
 
         private void OnMouseDown()
         {
+            if (_obstacle)
+            {
+                return;
+            }
             var piecePosition = transform.position;
             _positionBeforeMove = piecePosition;
 
@@ -50,6 +65,10 @@ namespace Gameplay
 
         private void OnMouseUp()
         {
+            if (_obstacle)
+            {
+                return;
+            }
             //check if final position is valid
             for (int x = 0; x < _size.x; x++)
             {
