@@ -2673,7 +2673,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18cf21e443534b446892fd0ec26b4428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldLevelCount: 050000000a000000
+  worlds:
+  - name: Easy
+    number: 1
+    levelCount: 5
+  - name: Medium
+    number: 2
+    levelCount: 10
+  - name: Hard
+    number: 3
+    levelCount: 2
   worldTemplateLabel: {fileID: 472174656}
   levelTemplateButton: {fileID: 157666810}
   settingsButton: {fileID: 1058298961}
