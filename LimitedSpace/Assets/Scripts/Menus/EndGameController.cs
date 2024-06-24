@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class EngGameController : MonoBehaviour
+public class EndGameController : MonoBehaviour
 {
     [SerializeField] private Button backToLevelSelectorButton;
     

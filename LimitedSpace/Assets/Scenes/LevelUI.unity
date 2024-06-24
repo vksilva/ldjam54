@@ -1188,7 +1188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pausePopUp: {fileID: 480196449}
   uiController: {fileID: 1769175561}
-  engGameController: {fileID: 1398990181}
+  endGameController: {fileID: 1398990181}
 --- !u!4 &1031909681
 Transform:
   m_ObjectHideFlags: 0
@@ -1642,7 +1642,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1398990180
 Transform:
   m_ObjectHideFlags: 0
