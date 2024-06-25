@@ -1,7 +1,7 @@
-using System;
+using AppCore;
 using Menus;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Application = AppCore.Application;
 
 namespace Gameplay
 {
@@ -13,6 +13,8 @@ namespace Gameplay
         [SerializeField] private ResetPopUpController resetPopUpController;
         
         public static LevelUIController Instance { get; private set; }
+
+        private AudioService _audioService;
 
         private void Awake()
         {
@@ -26,6 +28,9 @@ namespace Gameplay
             pausePopUp.gameObject.SetActive(false);
             endGameController.gameObject.SetActive(false);
             resetPopUpController.gameObject.SetActive(false);
+
+            _audioService = Application.Instance.Get<AudioService>();
+            _audioService.PlayMusic("gameplay");
         }
 
         public void ShowEndGameCanvas()
