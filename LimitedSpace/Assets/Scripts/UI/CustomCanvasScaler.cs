@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace UI
 {
+    [RequireComponent(typeof(Canvas), typeof(GraphicRaycaster))]
     public class CustomCanvasScaler : CanvasScaler
     {
         protected override void OnEnable()
