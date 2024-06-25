@@ -19,6 +19,10 @@ namespace AppCore
         private readonly List<AudioSource> SfxSources = new ();
 
         private string currentMusic = string.Empty;
+        private string previousMusic = string.Empty;
+
+        private bool musicOff;
+        private bool sfxOff;
 
         public void Init()
         {
@@ -40,6 +44,12 @@ namespace AppCore
         
         public void PlayMusic(string music)
         {
+            if (musicOff)
+            {
+                previousMusic = music;
+                return;
+            }
+
             if (music == currentMusic)
             {
                 return;
@@ -59,14 +69,51 @@ namespace AppCore
             }
         }
 
+        public void ResumeMusic()
+        {
+            PlayMusic(previousMusic);
+        }
+
         public void StopMusic()
         {
+            if (string.IsNullOrEmpty(currentMusic))
+            {
+                return;
+            }
+            previousMusic = currentMusic;
             currentMusic = string.Empty;
             MusicSource.Stop();
         }
 
+        public void SetMusicOff(bool off)
+        {
+            musicOff = off;
+            if (off)
+            {
+                StopMusic();
+            }
+            else
+            {
+                ResumeMusic();
+            }
+        }
+
+        public void SetSfxOff(bool off)
+        {
+            sfxOff = off;
+            if (off)
+            {
+                StopAllSounds();
+            }
+        }
+
         public SfxHandler PlaySfx(string sfx)
         {
+            if (sfxOff)
+            {
+                return new SfxHandler(null);
+            }
+            
             foreach (var sfxSource in SfxSources)
             {
                 if (sfxSource.isPlaying)

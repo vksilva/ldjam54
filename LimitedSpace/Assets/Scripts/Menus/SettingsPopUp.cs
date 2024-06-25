@@ -1,6 +1,8 @@
+using AppCore;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Application = AppCore.Application;
 
 public class SettingsPopUp : MonoBehaviour
 {
@@ -8,11 +10,13 @@ public class SettingsPopUp : MonoBehaviour
     [SerializeField] private Button backgroundButton;
     [SerializeField] private Toggle soundToggle;
     [SerializeField] private Toggle musicToggle;
-    
-    
-    void Start()
+
+    private AudioService _audioService;
+
+    private void Start()
     {
         AddListeners();
+        _audioService = Application.Instance.Get<AudioService>();
     }
 
     private void AddListeners()
@@ -25,11 +29,13 @@ public class SettingsPopUp : MonoBehaviour
 
     private void OnMusicToggled(bool isOn)
     {
+        _audioService.SetMusicOff(!isOn);
         Debug.Log($"Music is {isOn}");
     }
 
     private void OnSoundToggled(bool isOn)
     {
+        _audioService.SetSfxOff(!isOn);
         Debug.Log($"Sound is {isOn}");
     }
 

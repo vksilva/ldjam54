@@ -1,6 +1,8 @@
+using AppCore;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Application = AppCore.Application;
 using Button = UnityEngine.UI.Button;
 
 namespace Menus
@@ -21,6 +23,8 @@ namespace Menus
             {
                 CreateWorldSection(worlds[index]);
             }
+            
+            Application.Instance.Get<AudioService>().PlayMusic("menu");
         
             worldTemplateLabel.gameObject.SetActive(false);
             levelTemplateButton.gameObject.SetActive(false);
