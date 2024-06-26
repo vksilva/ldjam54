@@ -41,3 +41,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: FloatingPiece
+    uniqueID: 3210991459
+    locked: 0
