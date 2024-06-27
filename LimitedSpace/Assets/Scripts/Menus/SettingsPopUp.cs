@@ -35,9 +35,9 @@ public class SettingsPopUp : MonoBehaviour
 
     private void OnSoundToggled(bool isOn)
     {
-        _audioService.PlaySfx(AudioSFXEnum.click);
-        
         _audioService.SetSfxOff(!isOn);
+        
+        _audioService.PlaySfx(AudioSFXEnum.click);
     }
 
     private void OnClose()
