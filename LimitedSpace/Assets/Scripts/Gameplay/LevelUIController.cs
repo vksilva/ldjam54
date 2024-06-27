@@ -30,7 +30,7 @@ namespace Gameplay
             resetPopUpController.gameObject.SetActive(false);
 
             _audioService = Application.Instance.Get<AudioService>();
-            _audioService.PlayMusic("gameplay");
+            _audioService.PlayMusic(AudioMusicEnum.gameplay);
         }
 
         public void ShowEndGameCanvas()

@@ -15,7 +15,7 @@ public class EndGameController : MonoBehaviour
 
     private void OnBackToLevelSelectorButton()
     {
-        Application.Instance.Get<AudioService>().PlaySfx("closePopUp");
+        Application.Instance.Get<AudioService>().PlaySfx(AudioSFXEnum.closePopUp);
         
         var command = new BackToLevelSelectorCommand();
         command.Execute();

@@ -186,18 +186,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxCount: 4
   _musicConfigEntries:
-  - name: menu
+  - name: 1
     audioClip: {fileID: 8300000, guid: f7603b79d476bde4b8e32dfcccda8453, type: 3}
-  - name: gameplay
+  - name: 2
     audioClip: {fileID: 8300000, guid: d8f5894154967f04e805aaadd1180935, type: 3}
   _sfxConfigEntries:
-  - name: closePopUp
+  - name: 1
     audioClip: {fileID: 8300000, guid: fabd6cfeec0c5764992424a1c768b5af, type: 3}
-  - name: click
+  - name: 2
     audioClip: {fileID: 8300000, guid: fabd6cfeec0c5764992424a1c768b5af, type: 3}
-  - name: moveUpPiece
+  - name: 3
     audioClip: {fileID: 8300000, guid: fabd6cfeec0c5764992424a1c768b5af, type: 3}
-  - name: moveDownPiece
+  - name: 4
     audioClip: {fileID: 8300000, guid: fabd6cfeec0c5764992424a1c768b5af, type: 3}
 --- !u!4 &1138798243
 Transform:

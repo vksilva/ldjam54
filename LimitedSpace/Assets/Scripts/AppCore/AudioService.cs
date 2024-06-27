@@ -9,17 +9,17 @@ namespace AppCore
     {
         [SerializeField] private int sfxCount = 4;
 
-        [SerializeField] private List<AudioConfigEntry> _musicConfigEntries = new ();
-        [SerializeField] private List<AudioConfigEntry> _sfxConfigEntries = new ();
+        [SerializeField] private List<AudioConfigEntry<AudioMusicEnum>> _musicConfigEntries = new ();
+        [SerializeField] private List<AudioConfigEntry<AudioSFXEnum>> _sfxConfigEntries = new ();
 
-        private Dictionary<string, AudioClip> _musicMap = new();
-        private Dictionary<string, AudioClip> _sfxMap = new();
+        private Dictionary<AudioMusicEnum, AudioClip> _musicMap = new();
+        private Dictionary<AudioSFXEnum, AudioClip> _sfxMap = new();
         
         private AudioSource MusicSource;
         private readonly List<AudioSource> SfxSources = new ();
 
-        private string currentMusic = string.Empty;
-        private string previousMusic = string.Empty;
+        private AudioMusicEnum currentMusic = AudioMusicEnum.none;
+        private AudioMusicEnum previousMusic = AudioMusicEnum.none;
 
         private bool musicOff;
         private bool sfxOff;
@@ -42,7 +42,7 @@ namespace AppCore
             }
         }
         
-        public void PlayMusic(string music)
+        public void PlayMusic(AudioMusicEnum music)
         {
             if (musicOff)
             {
@@ -76,12 +76,12 @@ namespace AppCore
 
         public void StopMusic()
         {
-            if (string.IsNullOrEmpty(currentMusic))
+            if (currentMusic == AudioMusicEnum.none)
             {
                 return;
             }
             previousMusic = currentMusic;
-            currentMusic = string.Empty;
+            currentMusic = AudioMusicEnum.none;
             MusicSource.Stop();
         }
 
@@ -107,7 +107,7 @@ namespace AppCore
             }
         }
 
-        public SfxHandler PlaySfx(string sfx)
+        public SfxHandler PlaySfx(AudioSFXEnum sfx)
         {
             if (sfxOff)
             {

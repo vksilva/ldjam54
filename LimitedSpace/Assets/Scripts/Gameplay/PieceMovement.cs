@@ -1,6 +1,8 @@
 using AppCore;
+using UI;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Application = AppCore.Application;
 
 namespace Gameplay
@@ -82,7 +84,7 @@ namespace Gameplay
 
         private void OnMouseDrag()
         {
-            if (_obstacle)
+            if (_obstacle || IsPointerOverUI())
             {
                 return;
             }
@@ -102,12 +104,12 @@ namespace Gameplay
 
         private void OnMouseDown()
         {
-            if (_obstacle)
+            if (_obstacle || IsPointerOverUI())
             {
                 return;
             }
 
-            _audioService.PlaySfx("moveUpPiece");
+            _audioService.PlaySfx(AudioSFXEnum.MoveUpPiece);
             
             DisplayShadow(true);
             _pieceSpriteRenderer.sortingLayerName = FloatingPieceSortingLayer;
@@ -121,7 +123,7 @@ namespace Gameplay
 
         private void OnMouseUp()
         {
-            if (_obstacle)
+            if (_obstacle || IsPointerOverUI())
             {
                 return;
             }
@@ -129,7 +131,7 @@ namespace Gameplay
             DisplayShadow(false);
             _pieceSpriteRenderer.sortingLayerName = DefaultPieceSortingLayer;
             
-            _audioService.PlaySfx("moveDownPiece");
+            _audioService.PlaySfx(AudioSFXEnum.MoveDownPiece);
             
             //check if final position is valid
             for (int x = 0; x < _size.x; x++)
@@ -155,6 +157,11 @@ namespace Gameplay
             transform.position = position;
         
             GameController.Instance.OnPiecePlaced();
+        }
+
+        private bool IsPointerOverUI()
+        {
+            return MouseOverUILayerObject.IsPointerOverUIObject();
         }
 
         // private void Update()

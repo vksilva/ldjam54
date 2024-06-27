@@ -4,9 +4,9 @@ using UnityEngine;
 namespace AppCore
 {
     [Serializable]
-    public struct AudioConfigEntry
+    public struct AudioConfigEntry<T>
     {
-        public string name;
+        public T name;
         public AudioClip audioClip;
     }
 }

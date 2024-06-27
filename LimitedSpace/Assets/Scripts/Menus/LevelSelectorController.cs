@@ -24,7 +24,7 @@ namespace Menus
                 CreateWorldSection(worlds[index]);
             }
             
-            Application.Instance.Get<AudioService>().PlayMusic("menu");
+            Application.Instance.Get<AudioService>().PlayMusic(AudioMusicEnum.menu);
         
             worldTemplateLabel.gameObject.SetActive(false);
             levelTemplateButton.gameObject.SetActive(false);
@@ -55,7 +55,6 @@ namespace Menus
         {
             var sceneName = $"world_{world:D2}_level_{level:D2}";
             SceneManager.LoadScene(sceneName);
-            Debug.Log($"Load level: {sceneName}");
         }
 
         private void ConnectButtons()
