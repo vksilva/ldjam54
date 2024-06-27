@@ -1,6 +1,5 @@
 using AppCore;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 using Application = AppCore.Application;
 
@@ -29,18 +28,24 @@ public class SettingsPopUp : MonoBehaviour
 
     private void OnMusicToggled(bool isOn)
     {
+        _audioService.PlaySfx("click");
+        
         _audioService.SetMusicOff(!isOn);
         Debug.Log($"Music is {isOn}");
     }
 
     private void OnSoundToggled(bool isOn)
     {
+        _audioService.PlaySfx("click");
+        
         _audioService.SetSfxOff(!isOn);
         Debug.Log($"Sound is {isOn}");
     }
 
     private void OnClose()
     {
+        _audioService.PlaySfx("closePopUp");
+        
         gameObject.SetActive(false);
     }
 }

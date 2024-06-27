@@ -1,6 +1,7 @@
-using System;
+using AppCore;
 using Unity.Mathematics;
 using UnityEngine;
+using Application = AppCore.Application;
 
 namespace Gameplay
 {
@@ -8,7 +9,7 @@ namespace Gameplay
     {
         [SerializeField] private bool _obstacle = false;
         
-        private Vector3 _shadowOffset = new (-0.1f, -0.3f);
+        private static readonly Vector3 _shadowOffset = new (-0.1f, -0.3f);
         private static Material _shadowMaterial;
         private LayerMask pieceLayer;
         private Vector3 _anchor;
@@ -22,6 +23,8 @@ namespace Gameplay
         private const string DefaultPieceSortingLayer = "Default";
 
         private SpriteRenderer _pieceSpriteRenderer;
+        
+        private AudioService _audioService;
         
         private void Awake()
         {
@@ -39,6 +42,8 @@ namespace Gameplay
             );
 
             SetCatShadow();
+            
+            _audioService = Application.Instance.Get<AudioService>();
         }
 
         private void SetCatShadow()
@@ -101,6 +106,8 @@ namespace Gameplay
             {
                 return;
             }
+
+            _audioService.PlaySfx("moveUpPiece");
             
             DisplayShadow(true);
             _pieceSpriteRenderer.sortingLayerName = FloatingPieceSortingLayer;
@@ -121,6 +128,8 @@ namespace Gameplay
             
             DisplayShadow(false);
             _pieceSpriteRenderer.sortingLayerName = DefaultPieceSortingLayer;
+            
+            _audioService.PlaySfx("moveDownPiece");
             
             //check if final position is valid
             for (int x = 0; x < _size.x; x++)

@@ -1,6 +1,7 @@
+using AppCore;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Application = AppCore.Application;
 
 public class EndGameController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class EndGameController : MonoBehaviour
 
     private void OnBackToLevelSelectorButton()
     {
+        Application.Instance.Get<AudioService>().PlaySfx("closePopUp");
+        
         var command = new BackToLevelSelectorCommand();
         command.Execute();
     }

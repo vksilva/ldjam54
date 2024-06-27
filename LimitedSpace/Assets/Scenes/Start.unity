@@ -190,7 +190,15 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: f7603b79d476bde4b8e32dfcccda8453, type: 3}
   - name: gameplay
     audioClip: {fileID: 8300000, guid: d8f5894154967f04e805aaadd1180935, type: 3}
-  _sfxConfigEntries: []
+  _sfxConfigEntries:
+  - name: closePopUp
+    audioClip: {fileID: 8300000, guid: fabd6cfeec0c5764992424a1c768b5af, type: 3}
+  - name: click
+    audioClip: {fileID: 8300000, guid: fabd6cfeec0c5764992424a1c768b5af, type: 3}
+  - name: moveUpPiece
+    audioClip: {fileID: 8300000, guid: fabd6cfeec0c5764992424a1c768b5af, type: 3}
+  - name: moveDownPiece
+    audioClip: {fileID: 8300000, guid: fabd6cfeec0c5764992424a1c768b5af, type: 3}
 --- !u!4 &1138798243
 Transform:
   m_ObjectHideFlags: 0
