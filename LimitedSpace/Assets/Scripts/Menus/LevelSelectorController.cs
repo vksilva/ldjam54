@@ -17,20 +17,28 @@ namespace Menus
         [SerializeField] private Button settingsButton;
         [SerializeField] private SettingsPopUp settingsPopUp;
         
+        private static AudioService _audioService;
+        
         private void Start()
         {
             for (var index = 0; index < worlds.Length; index++)
             {
                 CreateWorldSection(worlds[index]);
             }
-            
-            Application.Instance.Get<AudioService>().PlayMusic(AudioMusicEnum.menu);
+
+            GetServices();
+            _audioService.PlayMusic(AudioMusicEnum.menu);
         
             worldTemplateLabel.gameObject.SetActive(false);
             levelTemplateButton.gameObject.SetActive(false);
             settingsPopUp.gameObject.SetActive(false);
             
             ConnectButtons();
+        }
+
+        private static void GetServices()
+        {
+            _audioService = Application.Instance.Get<AudioService>();
         }
 
         private void CreateWorldSection(WorldData world)
@@ -53,6 +61,8 @@ namespace Menus
 
         private static void LoadLevel(int world, int level)
         {
+            _audioService.PlaySfx(AudioSFXEnum.click);
+            
             var sceneName = $"world_{world:D2}_level_{level:D2}";
             SceneManager.LoadScene(sceneName);
         }
@@ -64,6 +74,7 @@ namespace Menus
 
         private void ShowSettings()
         {
+            _audioService.PlaySfx(AudioSFXEnum.click);
             settingsPopUp.gameObject.SetActive(true);
         }
     }

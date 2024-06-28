@@ -1,7 +1,9 @@
 using System;
 using System.Threading.Tasks;
+using AppCore;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Application = AppCore.Application;
 
 namespace Gameplay
 {
@@ -52,7 +54,8 @@ namespace Gameplay
 
         private async void OpenEndGamePopUp()
         {
-            await Task.Delay(1000);
+            await Task.Delay(500);
+            Application.Instance.Get<AudioService>().PlaySfx(AudioSFXEnum.EndGameCelebration);
             LevelUIController.Instance.ShowEndGameCanvas();
         }
 

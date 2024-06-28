@@ -13,6 +13,7 @@
         closePopUp,
         click,
         MoveUpPiece,
-        MoveDownPiece
+        MoveDownPiece,
+        EndGameCelebration
     };
 }
