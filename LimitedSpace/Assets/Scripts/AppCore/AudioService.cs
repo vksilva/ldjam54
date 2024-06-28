@@ -24,7 +24,7 @@ namespace AppCore
         private bool musicOff;
         private bool sfxOff;
 
-        public void Init()
+        public void Init(StateService stateService)
         {
             _musicMap = _musicConfigEntries.ToDictionary(x => x.name, x => x.audioClip);
             _sfxMap = _sfxConfigEntries.ToDictionary(x => x.name, x => x.audioClip);
@@ -40,6 +40,9 @@ namespace AppCore
                 sfxSource.playOnAwake = false;
                 sfxSource.loop = false;
             }
+
+            musicOff = stateService.gameState.settingsState.isMusicOff;
+            sfxOff = stateService.gameState.settingsState.isSFXOff;
         }
         
         public void PlayMusic(AudioMusicEnum music)

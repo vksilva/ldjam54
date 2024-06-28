@@ -11,11 +11,26 @@ public class SettingsPopUp : MonoBehaviour
     [SerializeField] private Toggle musicToggle;
 
     private AudioService _audioService;
+    private StateService _stateService;
 
     private void Start()
     {
+        GetServices();
+        SetInitialState();
+
         AddListeners();
+    }
+
+    private void SetInitialState()
+    {
+        musicToggle.isOn = !_stateService.gameState.settingsState.isMusicOff;
+        soundToggle.isOn = !_stateService.gameState.settingsState.isSFXOff;
+    }
+
+    private void GetServices()
+    {
         _audioService = Application.Instance.Get<AudioService>();
+        _stateService = Application.Instance.Get<StateService>();
     }
 
     private void AddListeners()
@@ -31,6 +46,9 @@ public class SettingsPopUp : MonoBehaviour
         _audioService.PlaySfx(AudioSFXEnum.click);
         
         _audioService.SetMusicOff(!isOn);
+
+        _stateService.gameState.settingsState.isMusicOff = !isOn;
+        _stateService.Save();
     }
 
     private void OnSoundToggled(bool isOn)
@@ -38,6 +56,9 @@ public class SettingsPopUp : MonoBehaviour
         _audioService.SetSfxOff(!isOn);
         
         _audioService.PlaySfx(AudioSFXEnum.click);
+
+        _stateService.gameState.settingsState.isSFXOff = !isOn;
+        _stateService.Save();
     }
 
     private void OnClose()

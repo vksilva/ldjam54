@@ -8,11 +8,17 @@ namespace AppCore
         [SerializeField] private GameObject servicesContainer;
         [SerializeField] private AudioService audioService;
         
+        private StateService stateService;
+        
         private void Start()
         {
             DontDestroyOnLoad(servicesContainer);
             
-            audioService.Init();
+            stateService = new StateService();
+            stateService.Init();
+            Application.Instance.Add(stateService);
+            
+            audioService.Init(stateService);
             Application.Instance.Add(audioService);
 
             SceneManager.LoadScene(1);
