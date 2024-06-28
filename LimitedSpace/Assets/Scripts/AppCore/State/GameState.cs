@@ -6,5 +6,6 @@ namespace AppCore
     public class GameState
     {
         public SettingsState settingsState = new ();
+        public LevelsState LevelsState = new ();
     }
 }

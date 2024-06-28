@@ -18,6 +18,7 @@ namespace Menus
         [SerializeField] private SettingsPopUp settingsPopUp;
         
         private static AudioService _audioService;
+        private static StateService _stateService;
         
         private void Start()
         {
@@ -39,6 +40,7 @@ namespace Menus
         private static void GetServices()
         {
             _audioService = Application.Instance.Get<AudioService>();
+            _stateService = Application.Instance.Get<StateService>();
         }
 
         private void CreateWorldSection(WorldData world)

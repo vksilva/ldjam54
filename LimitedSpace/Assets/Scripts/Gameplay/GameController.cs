@@ -19,6 +19,9 @@ namespace Gameplay
         private static readonly Vector3 _offset = new (0.5f, 0.5f, 0f);
         private readonly LayerMask _checkLayer = 9;
 
+        private static AudioService _audioService;
+        private static StateService _stateService;
+
         private void Awake()
         {
             Instance = this;
@@ -44,7 +47,15 @@ namespace Gameplay
             var position = bed.transform.position;
             bed.transform.position = new Vector3(position.x, position.y, 1);
 
+            GetServices();
+
             SceneManager.LoadScene("LevelUI", LoadSceneMode.Additive);
+        }
+
+        private static void GetServices()
+        {
+            _audioService = Application.Instance.Get<AudioService>();
+            _stateService = Application.Instance.Get<StateService>();
         }
 
         private void OnDestroy()
@@ -55,7 +66,7 @@ namespace Gameplay
         private async void OpenEndGamePopUp()
         {
             await Task.Delay(500);
-            Application.Instance.Get<AudioService>().PlaySfx(AudioSFXEnum.EndGameCelebration);
+            _audioService.PlaySfx(AudioSFXEnum.EndGameCelebration);
             LevelUIController.Instance.ShowEndGameCanvas();
         }
 
@@ -63,6 +74,12 @@ namespace Gameplay
         {
             if (IsBedCompleted())
             {
+                if (!_stateService.gameState.LevelsState.winLevels.Contains(SceneManager.GetActiveScene().name))
+                {
+                    _stateService.gameState.LevelsState.winLevels.Add(SceneManager.GetActiveScene().name);
+                    _stateService.Save();
+                }
+                
                 OpenEndGamePopUp();
             }
         }
