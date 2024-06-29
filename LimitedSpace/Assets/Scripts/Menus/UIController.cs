@@ -26,7 +26,7 @@ public class UIController : MonoBehaviour
 
     private static void GetServices()
     {
-        _audioService = Application.Instance.Get<AudioService>();
+        _audioService = Application.Get<AudioService>();
     }
 
     private void AddListeners()

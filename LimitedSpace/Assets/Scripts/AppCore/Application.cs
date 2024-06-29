@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace AppCore
 {
@@ -19,22 +20,30 @@ namespace AppCore
                 return _instance;
             }
         }
+        
+        public static bool Initialized { get; private set; }
 
         private readonly Dictionary<Type, object> services = new ();
 
+        public void Init()
+        {
+            Initialized = true;
+        }
+        
         public void Add<T>(T service)
         {
             services.Add(typeof(T), service);
         }
 
-        public T Get<T>()
+        public static T Get<T>()
         {
-            if (services.TryGetValue(typeof(T), out var service))
+            if (Instance.services.TryGetValue(typeof(T), out var service))
             {
                 return (T) service;
             }
 
-            throw new Exception($"Service not initialized {nameof(T)}");
+            Debug.LogWarning($"Service {nameof(T)} not initialized.");
+            return default;
         }
     }
 }

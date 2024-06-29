@@ -29,7 +29,7 @@ namespace Gameplay
             endGameController.gameObject.SetActive(false);
             resetPopUpController.gameObject.SetActive(false);
 
-            _audioService = Application.Instance.Get<AudioService>();
+            _audioService = Application.Get<AudioService>();
             _audioService.PlayMusic(AudioMusicEnum.gameplay);
         }
 

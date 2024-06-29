@@ -25,8 +25,8 @@ namespace Gameplay
         private const string DefaultPieceSortingLayer = "Default";
 
         private SpriteRenderer _pieceSpriteRenderer;
-        
-        private AudioService _audioService;
+
+        private GameController _gameController;
         
         private void Awake()
         {
@@ -36,6 +36,8 @@ namespace Gameplay
 
         private void Start()
         {
+            _gameController = GameController.Instance;
+            
             _camera = Camera.main;
             var pieceCollider = GetComponent<Collider2D>();
             _size = new Vector2Int(
@@ -44,8 +46,6 @@ namespace Gameplay
             );
 
             SetCatShadow();
-            
-            _audioService = Application.Instance.Get<AudioService>();
         }
 
         private void SetCatShadow()
@@ -109,7 +109,7 @@ namespace Gameplay
                 return;
             }
 
-            _audioService.PlaySfx(AudioSFXEnum.MoveUpPiece);
+            _gameController.PlayGameSfx(AudioSFXEnum.MoveUpPiece);
             
             DisplayShadow(true);
             _pieceSpriteRenderer.sortingLayerName = FloatingPieceSortingLayer;
@@ -131,7 +131,7 @@ namespace Gameplay
             DisplayShadow(false);
             _pieceSpriteRenderer.sortingLayerName = DefaultPieceSortingLayer;
             
-            _audioService.PlaySfx(AudioSFXEnum.MoveDownPiece);
+            _gameController.PlayGameSfx(AudioSFXEnum.MoveDownPiece);
             
             //check if final position is valid
             for (int x = 0; x < _size.x; x++)

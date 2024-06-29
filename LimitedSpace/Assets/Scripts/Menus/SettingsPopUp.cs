@@ -29,8 +29,8 @@ public class SettingsPopUp : MonoBehaviour
 
     private void GetServices()
     {
-        _audioService = Application.Instance.Get<AudioService>();
-        _stateService = Application.Instance.Get<StateService>();
+        _audioService = Application.Get<AudioService>();
+        _stateService = Application.Get<StateService>();
     }
 
     private void AddListeners()

@@ -19,7 +19,7 @@ namespace Menus
         {
             AddListeners();
 
-            _audioService = Application.Instance.Get<AudioService>();
+            _audioService = Application.Get<AudioService>();
         }
 
         private void AddListeners()

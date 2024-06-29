@@ -9,6 +9,8 @@ namespace AppCore
         [SerializeField] private AudioService audioService;
         
         private StateService stateService;
+
+        public static string SceneToStart = null;
         
         private void Start()
         {
@@ -20,7 +22,14 @@ namespace AppCore
             
             audioService.Init(stateService);
             Application.Instance.Add(audioService);
+            
+            Application.Instance.Init();
 
+            if (!string.IsNullOrEmpty(SceneToStart))
+            {
+                SceneManager.LoadScene(SceneToStart);
+                return;
+            }
             SceneManager.LoadScene(1);
         }
     }

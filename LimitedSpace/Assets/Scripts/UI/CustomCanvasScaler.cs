@@ -12,7 +12,7 @@ namespace UI
             uiScaleMode = ScaleMode.ScaleWithScreenSize;
             referenceResolution = new Vector2(1080, 1920);
             screenMatchMode = ScreenMatchMode.MatchWidthOrHeight;
-            matchWidthOrHeight = 0;
+            matchWidthOrHeight = 1; // Height
             referencePixelsPerUnit = 100;
         }
     }
