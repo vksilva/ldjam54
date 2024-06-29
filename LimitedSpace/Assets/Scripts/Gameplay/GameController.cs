@@ -9,11 +9,10 @@ namespace Gameplay
 {
     public class GameController : MonoBehaviour
     {
-        [SerializeField] private GameObject bed;
         [SerializeField] private Vector2Int _gameArea = new (15, 20);
 
         public static GameController Instance { get; private set; }
-
+        private Bed _bed;
         private Camera _camera;
         private Vector2Int _bedSize;
         private static readonly Vector3 _offset = new (0.5f, 0.5f, 0f);
@@ -21,6 +20,8 @@ namespace Gameplay
 
         private static AudioService _audioService;
         private static StateService _stateService;
+
+        private RaycastHit2D[] _rayCastResult = new RaycastHit2D[5];
 
         private void Awake()
         {
@@ -31,21 +32,23 @@ namespace Gameplay
         {
             _camera = Camera.main;
 
+            _bed = FindObjectOfType<Bed>();
+
             if (!_camera)
             {
                 throw new Exception("Game camera missing");
             }
             
             _camera.orthographicSize = CalculateCameraSize(_gameArea, _camera.aspect);
-            var bedCollider = bed.GetComponent<Collider2D>();
+            var bedCollider = _bed.GetComponent<Collider2D>();
             _bedSize = new Vector2Int(
                 Mathf.RoundToInt(bedCollider.bounds.size.x),
                 Mathf.RoundToInt(bedCollider.bounds.size.y)
             );
             
             //Force Bed z = 1 to avoid issue with pieces
-            var position = bed.transform.position;
-            bed.transform.position = new Vector3(position.x, position.y, 1);
+            var position = _bed.transform.position;
+            _bed.transform.position = new Vector3(position.x, position.y, 1);
 
             GetServices();
 
@@ -87,13 +90,13 @@ namespace Gameplay
         private bool IsBedCompleted()
         {
             var emptySpaceCount = 0;
-            for (int x = 0; x < _bedSize.x; x++)
+            for (var x = 0; x < _bedSize.x; x++)
             {
-                for (int y = 0; y < _bedSize.y; y++)
+                for (var y = 0; y < _bedSize.y; y++)
                 {
                     var tile = new Vector3(x, y, 0);
-                    var hits = Physics2D.RaycastAll(bed.transform.position + tile + _offset, Vector2.zero, Mathf.Infinity,_checkLayer);
-                    if (hits.Length < 2)
+                    var size = Physics2D.RaycastNonAlloc(_bed.transform.position + tile + _offset, Vector2.zero, _rayCastResult, Mathf.Infinity, _checkLayer);
+                    if (size < 2)
                     {
                         emptySpaceCount++;
                     }
