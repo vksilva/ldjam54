@@ -46,7 +46,7 @@ namespace Menus
         private void CreateWorldSection(WorldData world)
         {
             var worldLabel = Instantiate(worldTemplateLabel, worldTemplateLabel.transform.parent);
-            worldLabel.text = world.name;
+            worldLabel.text = world.name.ToUpper();
             for (var l = 1; l <= world.levelCount; l++)
             {
                 CreateLevelButton(world.number, l);
