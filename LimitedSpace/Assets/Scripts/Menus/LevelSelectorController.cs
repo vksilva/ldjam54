@@ -13,7 +13,7 @@ namespace Menus
         [SerializeField] private WorldData[] worlds;
     
         [SerializeField] private TMP_Text worldTemplateLabel;
-        [SerializeField] private Button levelTemplateButton;
+        [SerializeField] private LevelButton levelTemplateButton;
         [SerializeField] private Button settingsButton;
         [SerializeField] private SettingsPopUp settingsPopUp;
         
@@ -22,13 +22,21 @@ namespace Menus
         
         private void Start()
         {
+            if (!Application.Initialized)
+            {
+                Initialize.SceneToStart = SceneManager.GetActiveScene().name;
+                Debug.LogWarning($"Application not initialized, starting from {Initialize.SceneToStart}");
+                SceneManager.LoadScene(0);
+                return;
+            }
+            
+            GetServices();
+            _audioService.PlayMusic(AudioMusicEnum.menu);
+            
             for (var index = 0; index < worlds.Length; index++)
             {
                 CreateWorldSection(worlds[index]);
             }
-
-            GetServices();
-            _audioService.PlayMusic(AudioMusicEnum.menu);
         
             worldTemplateLabel.gameObject.SetActive(false);
             levelTemplateButton.gameObject.SetActive(false);
@@ -56,9 +64,9 @@ namespace Menus
         private void CreateLevelButton(int world, int level)
         {
             var newLevelButton = Instantiate(levelTemplateButton, levelTemplateButton.transform.parent);
-            newLevelButton.onClick.AddListener(()=>LoadLevel(world, level));
-            var text = newLevelButton.GetComponentInChildren<TMP_Text>();
-            text.text = $"Level {level:D2}";
+            bool isCompleted = _stateService.gameState.LevelsState.winLevels.Contains($"world_{world:D2}_level_{level:D2}");
+            newLevelButton.Setup($"Level {level:D2}", isCompleted, ()=>LoadLevel(world, level));
+            
         }
 
         private static void LoadLevel(int world, int level)
