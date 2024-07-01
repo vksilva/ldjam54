@@ -3,25 +3,28 @@ using UnityEngine;
 using UnityEngine.UI;
 using Application = AppCore.Application;
 
-public class CreditsPopUp : MonoBehaviour
+namespace Menus
 {
-    [SerializeField] private Button closeButton;
-    [SerializeField] private Button backgroundButton;
-
-    private AudioService _audioService;
-
-    private void Start()
+    public class CreditsPopUp : MonoBehaviour
     {
-        _audioService = Application.Get<AudioService>();
-        
-        closeButton.onClick.AddListener(OnClose);
-        backgroundButton.onClick.AddListener(OnClose);
-    }
+        [SerializeField] private Button closeButton;
+        [SerializeField] private Button backgroundButton;
 
-    private void OnClose()
-    {
-        _audioService.PlaySfx(AudioSFXEnum.closePopUp);
+        private AudioService _audioService;
+
+        private void Start()
+        {
+            _audioService = Application.Get<AudioService>();
         
-        gameObject.SetActive(false);
+            closeButton.onClick.AddListener(OnClose);
+            backgroundButton.onClick.AddListener(OnClose);
+        }
+
+        private void OnClose()
+        {
+            _audioService.PlaySfx(AudioSFXEnum.closePopUp);
+        
+            gameObject.SetActive(false);
+        }
     }
 }

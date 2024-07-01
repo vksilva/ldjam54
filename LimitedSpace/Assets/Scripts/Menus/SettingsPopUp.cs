@@ -3,68 +3,71 @@ using UnityEngine;
 using UnityEngine.UI;
 using Application = AppCore.Application;
 
-public class SettingsPopUp : MonoBehaviour
+namespace Menus
 {
-    [SerializeField] private Button closeButton;
-    [SerializeField] private Button backgroundButton;
-    [SerializeField] private Toggle soundToggle;
-    [SerializeField] private Toggle musicToggle;
-
-    private AudioService _audioService;
-    private StateService _stateService;
-
-    private void Start()
+    public class SettingsPopUp : MonoBehaviour
     {
-        GetServices();
-        SetInitialState();
+        [SerializeField] private Button closeButton;
+        [SerializeField] private Button backgroundButton;
+        [SerializeField] private Toggle soundToggle;
+        [SerializeField] private Toggle musicToggle;
 
-        AddListeners();
-    }
+        private AudioService _audioService;
+        private StateService _stateService;
 
-    private void SetInitialState()
-    {
-        musicToggle.isOn = !_stateService.gameState.settingsState.isMusicOff;
-        soundToggle.isOn = !_stateService.gameState.settingsState.isSFXOff;
-    }
+        private void Start()
+        {
+            GetServices();
+            SetInitialState();
 
-    private void GetServices()
-    {
-        _audioService = Application.Get<AudioService>();
-        _stateService = Application.Get<StateService>();
-    }
+            AddListeners();
+        }
 
-    private void AddListeners()
-    {
-        closeButton.onClick.AddListener(OnClose);
-        backgroundButton.onClick.AddListener(OnClose);
-        soundToggle.onValueChanged.AddListener(OnSoundToggled);
-        musicToggle.onValueChanged.AddListener(OnMusicToggled);
-    }
+        private void SetInitialState()
+        {
+            musicToggle.isOn = !_stateService.gameState.settingsState.isMusicOff;
+            soundToggle.isOn = !_stateService.gameState.settingsState.isSFXOff;
+        }
 
-    private void OnMusicToggled(bool isOn)
-    {
-        _audioService.PlaySfx(AudioSFXEnum.click);
+        private void GetServices()
+        {
+            _audioService = Application.Get<AudioService>();
+            _stateService = Application.Get<StateService>();
+        }
+
+        private void AddListeners()
+        {
+            closeButton.onClick.AddListener(OnClose);
+            backgroundButton.onClick.AddListener(OnClose);
+            soundToggle.onValueChanged.AddListener(OnSoundToggled);
+            musicToggle.onValueChanged.AddListener(OnMusicToggled);
+        }
+
+        private void OnMusicToggled(bool isOn)
+        {
+            _audioService.PlaySfx(AudioSFXEnum.click);
         
-        _audioService.SetMusicOff(!isOn);
+            _audioService.SetMusicOff(!isOn);
 
-        _stateService.gameState.settingsState.isMusicOff = !isOn;
-        _stateService.Save();
-    }
+            _stateService.gameState.settingsState.isMusicOff = !isOn;
+            _stateService.Save();
+        }
 
-    private void OnSoundToggled(bool isOn)
-    {
-        _audioService.SetSfxOff(!isOn);
+        private void OnSoundToggled(bool isOn)
+        {
+            _audioService.SetSfxOff(!isOn);
         
-        _audioService.PlaySfx(AudioSFXEnum.click);
+            _audioService.PlaySfx(AudioSFXEnum.click);
 
-        _stateService.gameState.settingsState.isSFXOff = !isOn;
-        _stateService.Save();
-    }
+            _stateService.gameState.settingsState.isSFXOff = !isOn;
+            _stateService.Save();
+        }
 
-    private void OnClose()
-    {
-        _audioService.PlaySfx(AudioSFXEnum.closePopUp);
+        private void OnClose()
+        {
+            _audioService.PlaySfx(AudioSFXEnum.closePopUp);
         
-        gameObject.SetActive(false);
+            gameObject.SetActive(false);
+        }
     }
 }
