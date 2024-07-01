@@ -16,6 +16,8 @@ namespace Menus
         [SerializeField] private LevelButton levelTemplateButton;
         [SerializeField] private Button settingsButton;
         [SerializeField] private SettingsPopUp settingsPopUp;
+        [SerializeField] private Button creditsButton;
+        [SerializeField] private CreditsPopUp creditsPopUp;
         
         private static AudioService _audioService;
         private static StateService _stateService;
@@ -41,6 +43,7 @@ namespace Menus
             worldTemplateLabel.gameObject.SetActive(false);
             levelTemplateButton.gameObject.SetActive(false);
             settingsPopUp.gameObject.SetActive(false);
+            creditsPopUp.gameObject.SetActive(false);
             
             ConnectButtons();
         }
@@ -80,6 +83,13 @@ namespace Menus
         private void ConnectButtons()
         {
             settingsButton.onClick.AddListener(ShowSettings);
+            creditsButton.onClick.AddListener(ShowCredits);
+        }
+
+        private void ShowCredits()
+        {
+            _audioService.PlaySfx(AudioSFXEnum.click);
+            creditsPopUp.gameObject.SetActive(true);
         }
 
         private void ShowSettings()
