@@ -2,5 +2,16 @@
       "title": "A Mimir",
       "settings": "Settings",
       "sound_effects": "Sound effects",
-      "music": "Music"
+      "music": "Music",
+      "level": "Level",
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard",
+      "credits": "Credits",
+      "reset_level": "Reset level",
+      "reset": "Restart",
+      "continue": "Continue",
+      "all_cats_are_a_mimir": "All cats are a mimir",
+      "back_to_home": "Back to home",
+      "paused": "Paused"
 }

@@ -19,13 +19,13 @@ namespace AppCore.Localization
 
         public string GetTranslatedText(string key)
         {
+            key = key.Trim();
             if (languageDictionary.TryGetValue(key, out var value))
             {
                 return value;
             }
             Debug.LogWarning($"Key {key} does not exist on languageDictionary");
             return key;
-
         }
 
     }

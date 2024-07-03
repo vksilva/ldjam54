@@ -2,5 +2,16 @@
       "title": "A Mimir",
       "settings": "Configurações",
       "sound_effects": "Efeitos sonoros",
-      "music": "Música"
+      "music": "Música",
+      "level": "Fase",
+      "easy": "Fácil",
+      "medium": "Médio",
+      "hard": "Difícil",
+      "credits": "Créditos",
+      "reset_level": "Reiniciar fase",
+      "reset": "Reiniciar",
+      "continue": "Continuar",
+      "all_cats_are_a_mimir": "Todos os gatinhos estão a mimir",
+      "back_to_home": "Voltar para início",
+      "paused": "Pausado"
 }
