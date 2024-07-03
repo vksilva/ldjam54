@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace AppCore
+namespace AppCore.State
 {
     public class StateService
     {

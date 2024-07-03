@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using AppCore.Localization;
+using AppCore.State;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace AppCore
@@ -7,9 +9,10 @@ namespace AppCore
     {
         [SerializeField] private GameObject servicesContainer;
         [SerializeField] private AudioService audioService;
+        [SerializeField] private LocalizationService localizationService;
         
         private StateService stateService;
-
+        
         public static string SceneToStart = null;
         
         private void Start()
@@ -22,6 +25,9 @@ namespace AppCore
             
             audioService.Init(stateService);
             Application.Instance.Add(audioService);
+            
+            localizationService.Init();
+            Application.Instance.Add(localizationService);
             
             Application.Instance.Init();
 

@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using AppCore;
+using AppCore.State;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Application = AppCore.Application;
