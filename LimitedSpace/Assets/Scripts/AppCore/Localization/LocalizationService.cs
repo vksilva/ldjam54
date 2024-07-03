@@ -3,6 +3,7 @@ using System.Linq;
 using AppCore.State;
 using UnityEngine;
 using Newtonsoft.Json;
+using UnityEngine.SceneManagement;
 
 namespace AppCore.Localization
 {
@@ -49,12 +50,7 @@ namespace AppCore.Localization
         
         private void UpdateTextLanguage()
         {
-            var texts = FindObjectsOfType<LocalizedText>();
-
-            foreach (var text in texts)
-            {
-                text.UpdateText();
-            }
+            SceneManager.LoadScene(1);
         }
     }
 }
