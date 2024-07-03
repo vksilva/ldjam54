@@ -21,7 +21,13 @@ namespace AppCore.Localization
             _stateService = state;
             if (_stateService.gameState.settingsState.currentLanguage == LanguagesEnum.none)
             {
-                _stateService.gameState.settingsState.currentLanguage = LanguagesEnum.en_us;
+                var currentDeviceLanguage = UnityEngine.Application.systemLanguage;
+                _stateService.gameState.settingsState.currentLanguage = currentDeviceLanguage switch
+                {
+                    SystemLanguage.Portuguese => LanguagesEnum.pt_br,
+                    SystemLanguage.English => LanguagesEnum.en_us,
+                    _ => LanguagesEnum.en_us
+                };
             }
             
             languageMap = languageEnumList.ToDictionary(x => x.name, x => x.language);
