@@ -13,9 +13,6 @@ public class LanguagePopUp : MonoBehaviour
     [SerializeField] private Button pt_brLanguageButton;
     [SerializeField] private Button en_usLanguageButton;
     
-    
-    
-    private StateService _stateService;
     private AudioService _audioService;
     private LocalizationService _localizationService;
     
@@ -27,7 +24,6 @@ public class LanguagePopUp : MonoBehaviour
 
     private void GetServices()
     {
-        _stateService = Application.Get<StateService>();
         _audioService = Application.Get<AudioService>();
         _localizationService = Application.Get<LocalizationService>();
     }

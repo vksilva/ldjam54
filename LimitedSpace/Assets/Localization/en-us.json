@@ -14,5 +14,6 @@
       "all_cats_are_a_mimir": "All cats are a mimir",
       "back_to_home": "Back to home",
       "paused": "Paused",
-      "language": "Language"
+      "language": "Language",
+      "select_language_button": "Select language"
 }

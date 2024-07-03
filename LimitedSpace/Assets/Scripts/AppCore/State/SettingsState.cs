@@ -1,4 +1,5 @@
 ﻿using System;
+using AppCore.Localization;
 
 namespace AppCore
 {
@@ -7,5 +8,6 @@ namespace AppCore
     {
         public bool isMusicOff;
         public bool isSFXOff;
+        public LanguagesEnum currentLanguage;
     }
 }

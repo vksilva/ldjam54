@@ -27,7 +27,7 @@ namespace AppCore
             audioService.Init(stateService);
             Application.Instance.Add(audioService);
             
-            localizationService.Init();
+            localizationService.Init(stateService);
             Application.Instance.Add(localizationService);
             
             Application.Instance.Init();

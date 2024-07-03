@@ -1,6 +1,7 @@
 using AppCore;
 using AppCore.Audio;
 using AppCore.State;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Application = AppCore.Application;
@@ -13,7 +14,9 @@ namespace Menus
         [SerializeField] private Button backgroundButton;
         [SerializeField] private Toggle soundToggle;
         [SerializeField] private Toggle musicToggle;
-
+        [SerializeField] private Button selectLanguageButton;
+        [SerializeField] private GameObject languagePopUp;
+        
         private AudioService _audioService;
         private StateService _stateService;
 
@@ -29,6 +32,8 @@ namespace Menus
         {
             musicToggle.isOn = !_stateService.gameState.settingsState.isMusicOff;
             soundToggle.isOn = !_stateService.gameState.settingsState.isSFXOff;
+            
+            languagePopUp.SetActive(false);
         }
 
         private void GetServices()
@@ -43,6 +48,12 @@ namespace Menus
             backgroundButton.onClick.AddListener(OnClose);
             soundToggle.onValueChanged.AddListener(OnSoundToggled);
             musicToggle.onValueChanged.AddListener(OnMusicToggled);
+            selectLanguageButton.onClick.AddListener(OnSelectLanguage);
+        }
+
+        private void OnSelectLanguage()
+        {
+            languagePopUp.SetActive(true);
         }
 
         private void OnMusicToggled(bool isOn)

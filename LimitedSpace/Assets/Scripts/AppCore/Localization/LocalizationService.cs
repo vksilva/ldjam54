@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using AppCore.State;
 using UnityEngine;
 using Newtonsoft.Json;
 
@@ -12,10 +13,18 @@ namespace AppCore.Localization
         private Dictionary<string, string> languageDictionary;
         private Dictionary<LanguagesEnum, TextAsset> languageMap = new();
 
-        public void Init()
+        private StateService _stateService;
+
+        public void Init(StateService state)
         {
+            _stateService = state;
+            if (_stateService.gameState.settingsState.currentLanguage == LanguagesEnum.none)
+            {
+                _stateService.gameState.settingsState.currentLanguage = LanguagesEnum.en_us;
+            }
+            
             languageMap = languageEnumList.ToDictionary(x => x.name, x => x.language);
-            var json = languageMap[LanguagesEnum.pt_br].text;
+            var json = languageMap[_stateService.gameState.settingsState.currentLanguage].text;
             languageDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
         }
 
@@ -25,6 +34,9 @@ namespace AppCore.Localization
             languageDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
 
             UpdateTextLanguage();
+            
+            _stateService.gameState.settingsState.currentLanguage = language;
+            _stateService.Save();
         }
 
         public string GetTranslatedText(string key)
