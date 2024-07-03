@@ -1,4 +1,4 @@
-﻿namespace AppCore
+﻿namespace AppCore.Audio
 {
     public enum AudioMusicEnum
     {

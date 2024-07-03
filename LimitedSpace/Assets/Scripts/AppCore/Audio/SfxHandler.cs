@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AppCore
+namespace AppCore.Audio
 {
     public struct SfxHandler
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using AppCore.State;
 using UnityEngine;
 
-namespace AppCore
+namespace AppCore.Audio
 {
     public class AudioService : MonoBehaviour
     {

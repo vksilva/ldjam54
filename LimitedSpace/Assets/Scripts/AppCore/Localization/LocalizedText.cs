@@ -5,6 +5,9 @@ namespace AppCore.Localization
 {
     public class LocalizedText : MonoBehaviour
     {
+        private LocalizationService localizationService;
+        private TMP_Text textToLocalize;
+        private string key;
         private void Start()
         {
             if (!Application.Initialized)
@@ -12,10 +15,16 @@ namespace AppCore.Localization
                 return;
             }
 
-            var localizationService = Application.Get<LocalizationService>();
+            localizationService = Application.Get<LocalizationService>();
+            textToLocalize = gameObject.GetComponent<TMP_Text>();
+            key = textToLocalize.text;
 
-            var textToLocalize = gameObject.GetComponent<TMP_Text>();
-            textToLocalize.text = localizationService.GetTranslatedText(textToLocalize.text);
+            UpdateText();
+        }
+
+        public void UpdateText()
+        {
+            textToLocalize.text = localizationService.GetTranslatedText(key);
         }
     }
 }
