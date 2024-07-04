@@ -22,6 +22,7 @@ namespace Gameplay
         private Vector2Int _size;
         private static readonly Vector3 _offset = new (0.5f, 0.5f, 0f);
         private GameObject _shadow;
+        private bool isDragging;
 
         private const string FloatingPieceSortingLayer = "FloatingPiece";
         private const string DefaultPieceSortingLayer = "Default";
@@ -52,6 +53,8 @@ namespace Gameplay
                 Mathf.RoundToInt(pieceCollider.bounds.size.x),
                 Mathf.RoundToInt(pieceCollider.bounds.size.y)
             );
+
+            isDragging = false;
 
             SetCatShadow();
         }
@@ -92,7 +95,7 @@ namespace Gameplay
 
         private void OnMouseDrag()
         {
-            if (_obstacle || IsPointerOverUI())
+            if (!isDragging)
             {
                 return;
             }
@@ -117,6 +120,8 @@ namespace Gameplay
                 return;
             }
 
+            isDragging = true;
+
             _gameController.PlayGameSfx(AudioSFXEnum.MoveUpPiece);
             
             DisplayShadow(true);
@@ -137,6 +142,7 @@ namespace Gameplay
             }
             
             DisplayShadow(false);
+            isDragging = false;
             _pieceSpriteRenderer.sortingLayerName = DefaultPieceSortingLayer;
             
             _gameController.PlayGameSfx(AudioSFXEnum.MoveDownPiece);
