@@ -15,6 +15,7 @@ namespace Gameplay
         private static readonly Vector3 _shadowOffset = new (-0.1f, -0.3f);
         private static Material _shadowMaterial;
         private LayerMask pieceLayer;
+        private LayerMask bedLayer;
         private Vector3 _anchor;
         private Camera _camera;
         private Vector3 _positionBeforeMove;
@@ -24,6 +25,7 @@ namespace Gameplay
 
         private const string FloatingPieceSortingLayer = "FloatingPiece";
         private const string DefaultPieceSortingLayer = "Default";
+        private const string BedSortingLayer = "Bed";
 
         private SpriteRenderer _pieceSpriteRenderer;
 
@@ -32,6 +34,7 @@ namespace Gameplay
         private void Awake()
         {
            pieceLayer = LayerMask.GetMask("Default");
+           bedLayer = LayerMask.GetMask("Bed");
            _pieceSpriteRenderer = GetComponent<SpriteRenderer>();
         }
 
@@ -141,7 +144,8 @@ namespace Gameplay
                 {
                     var tile = new Vector3(x, y, 0);
                     var hits = Physics2D.RaycastAll(transform.position + tile + _offset, Vector2.zero, Mathf.Infinity, pieceLayer);
-                    if (hits.Length > 1)
+                    var hitsOnBed = Physics2D.RaycastAll(transform.position + tile + _offset, Vector2.zero, Mathf.Infinity, bedLayer);
+                    if (hits.Length > 1 || hitsOnBed.Length == 0)
                     {
                         //Move piece back to original position
                         transform.position = _positionBeforeMove;
