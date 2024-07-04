@@ -24,14 +24,17 @@ namespace AppCore.BackKey
 
         public void PushAction(Action action)
         {
-            Debug.Log($"Push");
             backKeyActions.Push(action);
         }
 
         public void PopAction()
         {
-            Debug.Log($"Pop");
             backKeyActions.Pop();
+        }
+
+        public void CleanActions()
+        {
+            backKeyActions.Clear();
         }
     }
 }

@@ -40,8 +40,8 @@ namespace Gameplay
                 SceneManager.LoadScene(0);
                 return;
             }
-            GetServices();
             
+            GetServices();
             SetUpCamera();
             SetUpBed();
 

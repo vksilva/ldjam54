@@ -1,4 +1,5 @@
 using AppCore.Audio;
+using AppCore.BackKey;
 using Menus;
 using UnityEngine;
 using Application = AppCore.Application;
@@ -15,6 +16,7 @@ namespace Gameplay
         public static LevelUIController Instance { get; private set; }
 
         private AudioService _audioService;
+        private BackKeyService _backKeyService;
 
         private void Awake()
         {
@@ -23,14 +25,23 @@ namespace Gameplay
     
         private void Start()
         {
+            GetServices();
+            
             uiController.gameObject.SetActive(true);
-
             pausePopUp.gameObject.SetActive(false);
             endGameController.gameObject.SetActive(false);
             resetPopUpController.gameObject.SetActive(false);
 
-            _audioService = Application.Get<AudioService>();
             _audioService.PlayMusic(AudioMusicEnum.gameplay);
+            _backKeyService.PushAction(pausePopUp.Show);
+        }
+
+        private void GetServices()
+        {
+            _backKeyService = Application.Get<BackKeyService>();
+            _backKeyService.CleanActions();
+            
+            _audioService = Application.Get<AudioService>();
         }
 
         public void ShowEndGameCanvas()
