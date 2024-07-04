@@ -3647,7 +3647,7 @@ MonoBehaviour:
   soundToggle: {fileID: 1039143057}
   musicToggle: {fileID: 784560475}
   selectLanguageButton: {fileID: 2018922135}
-  languagePopUp: {fileID: 1186705739}
+  languagePopUp: {fileID: 1186705740}
 --- !u!4 &1539828739
 Transform:
   m_ObjectHideFlags: 0

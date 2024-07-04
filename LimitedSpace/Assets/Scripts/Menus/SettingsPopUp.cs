@@ -1,5 +1,7 @@
+using System;
 using AppCore;
 using AppCore.Audio;
+using AppCore.BackKey;
 using AppCore.State;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,23 +10,23 @@ using Application = AppCore.Application;
 
 namespace Menus
 {
-    public class SettingsPopUp : MonoBehaviour
+    public class SettingsPopUp : MonoBehaviour, IPopUp
     {
         [SerializeField] private Button closeButton;
         [SerializeField] private Button backgroundButton;
         [SerializeField] private Toggle soundToggle;
         [SerializeField] private Toggle musicToggle;
         [SerializeField] private Button selectLanguageButton;
-        [SerializeField] private GameObject languagePopUp;
+        [SerializeField] private LanguagePopUp languagePopUp;
         
         private AudioService _audioService;
         private StateService _stateService;
+        private BackKeyService _backKeyService;
 
-        private void Start()
+        private void Awake()
         {
             GetServices();
             SetInitialState();
-
             AddListeners();
         }
 
@@ -33,19 +35,20 @@ namespace Menus
             musicToggle.isOn = !_stateService.gameState.settingsState.isMusicOff;
             soundToggle.isOn = !_stateService.gameState.settingsState.isSFXOff;
             
-            languagePopUp.SetActive(false);
+            languagePopUp.gameObject.SetActive(false);
         }
 
         private void GetServices()
         {
             _audioService = Application.Get<AudioService>();
             _stateService = Application.Get<StateService>();
+            _backKeyService = Application.Get<BackKeyService>();
         }
 
         private void AddListeners()
         {
-            closeButton.onClick.AddListener(OnClose);
-            backgroundButton.onClick.AddListener(OnClose);
+            closeButton.onClick.AddListener(Hide);
+            backgroundButton.onClick.AddListener(Hide);
             soundToggle.onValueChanged.AddListener(OnSoundToggled);
             musicToggle.onValueChanged.AddListener(OnMusicToggled);
             selectLanguageButton.onClick.AddListener(OnSelectLanguage);
@@ -53,7 +56,7 @@ namespace Menus
 
         private void OnSelectLanguage()
         {
-            languagePopUp.SetActive(true);
+            languagePopUp.Show();
         }
 
         private void OnMusicToggled(bool isOn)
@@ -76,9 +79,16 @@ namespace Menus
             _stateService.Save();
         }
 
-        private void OnClose()
+        public void Show()
+        {
+            gameObject.SetActive(true);
+            _backKeyService.PushAction(Hide);
+        }
+
+        public void Hide()
         {
             _audioService.PlaySfx(AudioSFXEnum.closePopUp);
+            _backKeyService.PopAction();
         
             gameObject.SetActive(false);
         }

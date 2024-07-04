@@ -1,12 +1,14 @@
 using AppCore;
 using AppCore.Audio;
+using AppCore.BackKey;
 using AppCore.Localization;
 using AppCore.State;
+using Menus;
 using UnityEngine;
 using UnityEngine.UI;
 using Application = AppCore.Application;
 
-public class LanguagePopUp : MonoBehaviour
+public class LanguagePopUp : MonoBehaviour, IPopUp
 {
     [SerializeField] private Button closeButton;
     [SerializeField] private Button backgroundButton;
@@ -15,8 +17,9 @@ public class LanguagePopUp : MonoBehaviour
     
     private AudioService _audioService;
     private LocalizationService _localizationService;
+    private BackKeyService _backKeyService;
     
-    private void Start()
+    private void Awake()
     {
         GetServices();
         AddListeners();
@@ -26,12 +29,13 @@ public class LanguagePopUp : MonoBehaviour
     {
         _audioService = Application.Get<AudioService>();
         _localizationService = Application.Get<LocalizationService>();
+        _backKeyService = Application.Get<BackKeyService>();
     }
 
     private void AddListeners()
     {
-        closeButton.onClick.AddListener(OnClose);
-        backgroundButton.onClick.AddListener(OnClose);
+        closeButton.onClick.AddListener(Hide);
+        backgroundButton.onClick.AddListener(Hide);
         pt_brLanguageButton.onClick.AddListener(()=>OnChangeLanguage(LanguagesEnum.pt_br));
         en_usLanguageButton.onClick.AddListener(()=>OnChangeLanguage(LanguagesEnum.en_us));
     }
@@ -41,9 +45,16 @@ public class LanguagePopUp : MonoBehaviour
         _localizationService.SetCurrentLanguage(language);
     }
 
-    private void OnClose()
+    public void Show()
+    {
+        gameObject.SetActive(true);
+        _backKeyService.PushAction(Hide);
+    }
+
+    public void Hide()
     {
         _audioService.PlaySfx(AudioSFXEnum.closePopUp);
+        _backKeyService.PopAction();
         
         gameObject.SetActive(false);
     }

@@ -110,7 +110,7 @@ namespace Menus
         private void ShowSettings()
         {
             _audioService.PlaySfx(AudioSFXEnum.click);
-            settingsPopUp.gameObject.SetActive(true);
+            settingsPopUp.Show();
         }
 
         private void CloseLevelSelector()
