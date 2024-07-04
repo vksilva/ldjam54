@@ -143,9 +143,11 @@ namespace Gameplay
                 for (int y = 0; y < _size.y; y++)
                 {
                     var tile = new Vector3(x, y, 0);
+                    var hitGrabArea = _gameController.PiecesGrabArea.Contains(transform.position + tile + _offset);
+                    
                     var hits = Physics2D.RaycastAll(transform.position + tile + _offset, Vector2.zero, Mathf.Infinity, pieceLayer);
                     var hitsOnBed = Physics2D.RaycastAll(transform.position + tile + _offset, Vector2.zero, Mathf.Infinity, bedLayer);
-                    if (hits.Length > 1 || hitsOnBed.Length == 0)
+                    if (hits.Length > 1 || (hitsOnBed.Length == 0 && !hitGrabArea))
                     {
                         //Move piece back to original position
                         transform.position = _positionBeforeMove;

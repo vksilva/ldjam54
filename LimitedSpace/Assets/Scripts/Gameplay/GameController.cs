@@ -11,6 +11,9 @@ namespace Gameplay
 {
     public class GameController : MonoBehaviour
     {
+        [SerializeField] private Rect piecesGrabArea = new Rect(-5, -8, 10, 7);
+        public Rect PiecesGrabArea => piecesGrabArea;
+        
         public static GameController Instance { get; private set; }
         private Bed _bed;
         private Camera _camera;
@@ -124,6 +127,15 @@ namespace Gameplay
         public void PlayGameSfx(AudioSFXEnum sfx)
         {
             _audioService.PlaySfx(sfx);
+        }
+        
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            var pos = new Vector3(piecesGrabArea.xMin, piecesGrabArea.yMin);
+            var size = new Vector3(piecesGrabArea.width, piecesGrabArea.height);
+            
+            Gizmos.DrawWireCube(pos + size/2, size);
         }
     }
 }
