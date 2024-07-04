@@ -41,7 +41,11 @@ namespace Gameplay
         private void Start()
         {
             _gameController = GameController.Instance;
-            
+
+            var position = transform.position;
+            position = new Vector3(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y), 0);
+            transform.position = position;
+
             _camera = Camera.main;
             var pieceCollider = GetComponent<Collider2D>();
             _size = new Vector2Int(
@@ -143,7 +147,7 @@ namespace Gameplay
                 for (int y = 0; y < _size.y; y++)
                 {
                     var tile = new Vector3(x, y, 0);
-                    var hitGrabArea = _gameController.PiecesGrabArea.Contains(transform.position + tile + _offset);
+                    var hitGrabArea = CheckHitArea(_gameController.PiecesGrabArea, transform.position + tile + _offset);
                     
                     var hits = Physics2D.RaycastAll(transform.position + tile + _offset, Vector2.zero, Mathf.Infinity, pieceLayer);
                     var hitsOnBed = Physics2D.RaycastAll(transform.position + tile + _offset, Vector2.zero, Mathf.Infinity, bedLayer);
@@ -171,16 +175,9 @@ namespace Gameplay
             return MouseOverUILayerObject.IsPointerOverUIObject();
         }
 
-        // private void Update()
-        // {
-        //     for (int x = 0; x < _size.x; x++)
-        //     {
-        //         for (int y = 0; y < _size.y; y++)
-        //         {
-        //             var tile = new Vector3(x, y, 0);
-        //             Debug.DrawLine(Vector3.zero, transform.position + tile + _offset);
-        //         }
-        //     }
-        // }
+        private bool CheckHitArea(RectInt area, Vector3 position)
+        {
+            return position.x > area.xMin && position.x < area.xMax && position.y > area.yMin && position.y < area.yMax;
+        }
     }
 }

@@ -11,8 +11,8 @@ namespace Gameplay
 {
     public class GameController : MonoBehaviour
     {
-        [SerializeField] private Rect piecesGrabArea = new Rect(-5, -8, 10, 7);
-        public Rect PiecesGrabArea => piecesGrabArea;
+        [SerializeField] private RectInt piecesGrabArea = new (-5, -8, 10, 7);
+        public RectInt PiecesGrabArea => piecesGrabArea;
         
         public static GameController Instance { get; private set; }
         private Bed _bed;
