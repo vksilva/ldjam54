@@ -1,5 +1,6 @@
 using AppCore;
 using AppCore.Audio;
+using AppCore.BackKey;
 using AppCore.Localization;
 using AppCore.State;
 using TMPro;
@@ -25,6 +26,7 @@ namespace Menus
         private static AudioService _audioService;
         private static StateService _stateService;
         private static LocalizationService _localizationService;
+        private static BackKeyService _backKeyService;
         
         private void Start()
         {
@@ -49,6 +51,8 @@ namespace Menus
             settingsPopUp.gameObject.SetActive(false);
             creditsPopUp.gameObject.SetActive(false);
             
+            _backKeyService.PushAction(CloseLevelSelector);
+            
             ConnectButtons();
         }
 
@@ -57,6 +61,7 @@ namespace Menus
             _audioService = Application.Get<AudioService>();
             _stateService = Application.Get<StateService>();
             _localizationService = Application.Get<LocalizationService>();
+            _backKeyService = Application.Get<BackKeyService>();
         }
 
         private void CreateWorldSection(WorldData world)
@@ -99,13 +104,20 @@ namespace Menus
         private void ShowCredits()
         {
             _audioService.PlaySfx(AudioSFXEnum.click);
-            creditsPopUp.gameObject.SetActive(true);
+            creditsPopUp.Show();
         }
 
         private void ShowSettings()
         {
             _audioService.PlaySfx(AudioSFXEnum.click);
             settingsPopUp.gameObject.SetActive(true);
+        }
+
+        private void CloseLevelSelector()
+        {
+            Debug.Log("Show confirm popup");
+            UnityEngine.Application.Quit();
+            // To do: Implement confirmation to exit pop up
         }
     }
 }
