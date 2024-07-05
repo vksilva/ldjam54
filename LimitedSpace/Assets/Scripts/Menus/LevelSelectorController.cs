@@ -98,7 +98,6 @@ namespace Menus
         private void ConnectButtons()
         {
             settingsButton.onClick.AddListener(ShowSettings);
-            creditsButton.onClick.AddListener(ShowCredits);
         }
 
         private void ShowCredits()

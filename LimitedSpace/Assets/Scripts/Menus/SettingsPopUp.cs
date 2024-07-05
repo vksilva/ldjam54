@@ -18,7 +18,11 @@ namespace Menus
         [SerializeField] private Toggle musicToggle;
         [SerializeField] private Button selectLanguageButton;
         [SerializeField] private LanguagePopUp languagePopUp;
-        
+        [SerializeField] private Button creditsButton;
+        [SerializeField] private CreditsPopUp creditsPopUp;
+
+
+
         private AudioService _audioService;
         private StateService _stateService;
         private BackKeyService _backKeyService;
@@ -36,6 +40,7 @@ namespace Menus
             soundToggle.isOn = !_stateService.gameState.settingsState.isSFXOff;
             
             languagePopUp.gameObject.SetActive(false);
+            ConnectButtons();
         }
 
         private void GetServices()
@@ -57,6 +62,17 @@ namespace Menus
         private void OnSelectLanguage()
         {
             languagePopUp.Show();
+        }
+
+        private void ConnectButtons()
+        {
+            creditsButton.onClick.AddListener(ShowCredits);
+        }
+
+        private void ShowCredits()
+        {
+            _audioService.PlaySfx(AudioSFXEnum.click);
+            creditsPopUp.Show();
         }
 
         private void OnMusicToggled(bool isOn)
