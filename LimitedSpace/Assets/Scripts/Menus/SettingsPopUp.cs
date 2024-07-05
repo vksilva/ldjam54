@@ -1,9 +1,6 @@
-using System;
-using AppCore;
 using AppCore.Audio;
 using AppCore.BackKey;
 using AppCore.State;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Application = AppCore.Application;
@@ -20,8 +17,6 @@ namespace Menus
         [SerializeField] private LanguagePopUp languagePopUp;
         [SerializeField] private Button creditsButton;
         [SerializeField] private CreditsPopUp creditsPopUp;
-
-
 
         private AudioService _audioService;
         private StateService _stateService;
@@ -52,8 +47,8 @@ namespace Menus
 
         private void AddListeners()
         {
-            closeButton.onClick.AddListener(Hide);
-            backgroundButton.onClick.AddListener(Hide);
+            closeButton.onClick.AddListener(OnClose);
+            backgroundButton.onClick.AddListener(OnClose);
             soundToggle.onValueChanged.AddListener(OnSoundToggled);
             musicToggle.onValueChanged.AddListener(OnMusicToggled);
             selectLanguageButton.onClick.AddListener(OnSelectLanguage);
@@ -61,6 +56,7 @@ namespace Menus
 
         private void OnSelectLanguage()
         {
+            _audioService.PlaySfx(AudioSFXEnum.click);
             languagePopUp.Show();
         }
 
@@ -78,7 +74,6 @@ namespace Menus
         private void OnMusicToggled(bool isOn)
         {
             _audioService.PlaySfx(AudioSFXEnum.click);
-        
             _audioService.SetMusicOff(!isOn);
 
             _stateService.gameState.settingsState.isMusicOff = !isOn;
@@ -88,11 +83,16 @@ namespace Menus
         private void OnSoundToggled(bool isOn)
         {
             _audioService.SetSfxOff(!isOn);
-        
             _audioService.PlaySfx(AudioSFXEnum.click);
 
             _stateService.gameState.settingsState.isSFXOff = !isOn;
             _stateService.Save();
+        }
+        
+        private void OnClose()
+        {
+            _audioService.PlaySfx(AudioSFXEnum.closePopUp);
+            Hide();
         }
 
         public void Show()
@@ -103,9 +103,7 @@ namespace Menus
 
         public void Hide()
         {
-            _audioService.PlaySfx(AudioSFXEnum.closePopUp);
             _backKeyService.PopAction();
-        
             gameObject.SetActive(false);
         }
     }

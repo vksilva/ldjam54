@@ -40,13 +40,13 @@ public class UIController : MonoBehaviour
     {
         _audioService.PlaySfx(AudioSFXEnum.click);
         
-        pausePopUp.gameObject.SetActive(true);
+        pausePopUp.Show();
     }
 
     private void OnResetButtonClicked()
     {
         _audioService.PlaySfx(AudioSFXEnum.click);
         
-        resetPopUp.gameObject.SetActive(true);
+        resetPopUp.Show();
     }
 }
