@@ -4,6 +4,7 @@ using UI;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 using Application = AppCore.Application;
 
 namespace Gameplay
@@ -11,32 +12,33 @@ namespace Gameplay
     public class PieceMovement : MonoBehaviour
     {
         [SerializeField] private bool _obstacle = false;
-        
-        private static readonly Vector3 _shadowOffset = new (-0.1f, -0.3f);
-        private static Material _shadowMaterial;
+
         private LayerMask pieceLayer;
         private LayerMask bedLayer;
         private Vector3 _anchor;
         private Camera _camera;
         private Vector3 _positionBeforeMove;
         private Vector2Int _size;
-        private static readonly Vector3 _offset = new (0.5f, 0.5f, 0f);
-        private GameObject _shadow;
+        private static readonly Vector3 _offset = new(0.5f, 0.5f, 0f);
         private bool isDragging;
 
         private const string FloatingPieceSortingLayer = "FloatingPiece";
         private const string DefaultPieceSortingLayer = "Default";
         private const string BedSortingLayer = "Bed";
 
-        private SpriteRenderer _pieceSpriteRenderer;
+        private SortingGroup _pieceSortingGroup;
 
         private GameController _gameController;
-        
+
+        private readonly RaycastHit2D[] _hitResults = new RaycastHit2D[5];
+        private SpriteRenderer _catRenderer;
+        private static readonly int ShadowOffset = Shader.PropertyToID("_ShadowOffset");
+
         private void Awake()
         {
-           pieceLayer = LayerMask.GetMask("Default");
-           bedLayer = LayerMask.GetMask("Bed");
-           _pieceSpriteRenderer = GetComponent<SpriteRenderer>();
+            pieceLayer = LayerMask.GetMask(DefaultPieceSortingLayer);
+            bedLayer = LayerMask.GetMask(BedSortingLayer);
+            _pieceSortingGroup = GetComponent<SortingGroup>();
         }
 
         private void Start()
@@ -55,42 +57,16 @@ namespace Gameplay
             );
 
             isDragging = false;
-
-            SetCatShadow();
-        }
-
-        private void SetCatShadow()
-        {
-            if (_shadowMaterial == null)
-            {
-                _shadowMaterial = Resources.Load<Material>("Materials/CatShadowMaterial");
-            }
-            
-            _shadow = new GameObject("Shadow");
-            
-            _shadow.transform.SetParent(transform, true);
-            _shadow.transform.localPosition = _shadowOffset;
-            _shadow.transform.rotation = quaternion.identity;
-            
-            var catRenderer = GetComponent<SpriteRenderer>();
-            var shadowSpriteRenderer = _shadow.AddComponent<SpriteRenderer>();
-            shadowSpriteRenderer.sprite = catRenderer.sprite;
-            shadowSpriteRenderer.material = _shadowMaterial;
-
-            shadowSpriteRenderer.sortingLayerName = FloatingPieceSortingLayer;
-            shadowSpriteRenderer.sortingOrder = catRenderer.sortingOrder - 1;
-            
-            _shadow.SetActive(false);
+            _catRenderer = GetComponentInChildren<SpriteRenderer>();
+            DisplayShadow(false);
         }
 
         private void DisplayShadow(bool show)
         {
-            _shadow.SetActive(show);
-        }
-
-        private void LateUpdate()
-        {
-            _shadow.transform.localPosition = _shadowOffset;
+            var mpb = new MaterialPropertyBlock();
+            _catRenderer.GetPropertyBlock(mpb);
+            mpb.SetFloat(ShadowOffset, show ? 2f : 0.5f);
+            _catRenderer.SetPropertyBlock(mpb);
         }
 
         private void OnMouseDrag()
@@ -99,6 +75,7 @@ namespace Gameplay
             {
                 return;
             }
+
             var worldPosition = GetMousePosition();
             var position = worldPosition - _anchor;
 
@@ -123,10 +100,10 @@ namespace Gameplay
             isDragging = true;
 
             _gameController.PlayGameSfx(AudioSFXEnum.MoveUpPiece);
-            
+
             DisplayShadow(true);
-            _pieceSpriteRenderer.sortingLayerName = FloatingPieceSortingLayer;
-            
+            _pieceSortingGroup.sortingLayerName = FloatingPieceSortingLayer;
+
             var piecePosition = transform.position;
             _positionBeforeMove = piecePosition;
 
@@ -140,24 +117,29 @@ namespace Gameplay
             {
                 return;
             }
-            
+
             DisplayShadow(false);
             isDragging = false;
-            _pieceSpriteRenderer.sortingLayerName = DefaultPieceSortingLayer;
-            
+            _pieceSortingGroup.sortingLayerName = DefaultPieceSortingLayer;
+
             _gameController.PlayGameSfx(AudioSFXEnum.MoveDownPiece);
-            
+
+            var position = transform.position;
+
             //check if final position is valid
             for (int x = 0; x < _size.x; x++)
             {
                 for (int y = 0; y < _size.y; y++)
                 {
                     var tile = new Vector3(x, y, 0);
-                    var hitGrabArea = CheckHitArea(_gameController.PiecesGrabArea, transform.position + tile + _offset);
-                    
-                    var hits = Physics2D.RaycastAll(transform.position + tile + _offset, Vector2.zero, Mathf.Infinity, pieceLayer);
-                    var hitsOnBed = Physics2D.RaycastAll(transform.position + tile + _offset, Vector2.zero, Mathf.Infinity, bedLayer);
-                    if (hits.Length > 1 || (hitsOnBed.Length == 0 && !hitGrabArea))
+
+                    var hitGrabArea = CheckHitArea(_gameController.PiecesGrabArea, position + tile + _offset);
+
+                    var pieceHits = Physics2D.RaycastNonAlloc(position + tile + _offset, Vector2.zero, _hitResults,
+                        Mathf.Infinity, pieceLayer);
+                    var bedHits = Physics2D.RaycastNonAlloc(position + tile + _offset, Vector2.zero, _hitResults,
+                        Mathf.Infinity, bedLayer);
+                    if (pieceHits > 1 || (bedHits == 0 && !hitGrabArea))
                     {
                         //Move piece back to original position
                         transform.position = _positionBeforeMove;
@@ -167,12 +149,11 @@ namespace Gameplay
             }
 
             //move piece to near int position
-            var position = transform.position;
             position.x = Mathf.Round(position.x);
             position.y = Mathf.Round(position.y);
             position.z = 0.0f;
             transform.position = position;
-        
+
             GameController.Instance.OnPiecePlaced();
         }
 
