@@ -34,7 +34,7 @@ Shader "Vanessa/SpritesWithShadow"
 
         Pass
         {
-        CGPROGRAM
+            CGPROGRAM
             #pragma vertex ShadowVert
             #pragma fragment ShadowFrag
             #pragma target 2.0
@@ -49,17 +49,20 @@ Shader "Vanessa/SpritesWithShadow"
 
             float4 _ShadowAmplitude;
             float4 _ShadowSpeed;
-            
+            float _ShadowNoise;
+
             v2f ShadowVert(appdata_t IN)
             {
                 v2f OUT;
 
-                UNITY_SETUP_INSTANCE_ID (IN);
+                UNITY_SETUP_INSTANCE_ID(IN);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
 
-                OUT.vertex = UnityFlipSprite(IN.vertex * get_scaling(_Time.y, _ShadowAmplitude.xy, _ShadowSpeed.xy), _Flip);
+                OUT.vertex = UnityFlipSprite(
+                    IN.vertex * get_scaling(_Time.y + _ShadowNoise, _ShadowAmplitude.xy, _ShadowSpeed.xy), _Flip);
                 OUT.vertex = UnityObjectToClipPos(OUT.vertex);
-                OUT.vertex +=  mul(unity_CameraProjection,float4(-0.1 * _ShadowOffset,_ProjectionParams.x * -0.1 * _ShadowOffset, 0, 0));
+                OUT.vertex += mul(unity_CameraProjection,
+                                  float4(-0.1 * _ShadowOffset, _ProjectionParams.x * -0.1 * _ShadowOffset, 0, 0));
                 OUT.texcoord = IN.texcoord;
                 OUT.color = IN.color * _Color * _RendererColor;
 
@@ -72,16 +75,16 @@ Shader "Vanessa/SpritesWithShadow"
 
             fixed4 ShadowFrag(v2f IN) : SV_Target
             {
-                fixed4 c = SampleSpriteTexture (IN.texcoord).a * _ShadowColor;
+                fixed4 c = SampleSpriteTexture(IN.texcoord).a * _ShadowColor;
                 c.rgb *= c.a;
                 return c;
             }
-        ENDCG
+            ENDCG
         }
-        
+
         Pass
         {
-        CGPROGRAM
+            CGPROGRAM
             #pragma vertex FaceVert
             #pragma fragment SpriteFrag
             #pragma target 2.0
@@ -93,15 +96,17 @@ Shader "Vanessa/SpritesWithShadow"
 
             float4 _ShadowAmplitude;
             float4 _ShadowSpeed;
-            
+            float _ShadowNoise;
+
             v2f FaceVert(appdata_t IN)
             {
                 v2f OUT;
 
-                UNITY_SETUP_INSTANCE_ID (IN);
+                UNITY_SETUP_INSTANCE_ID(IN);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
 
-                OUT.vertex = UnityFlipSprite(IN.vertex * get_scaling(_Time.y, _ShadowAmplitude, _ShadowSpeed), _Flip);
+                OUT.vertex = UnityFlipSprite(
+                    IN.vertex * get_scaling(_Time.y + _ShadowNoise, _ShadowAmplitude, _ShadowSpeed), _Flip);
                 OUT.vertex = UnityObjectToClipPos(OUT.vertex);
                 OUT.texcoord = IN.texcoord;
                 OUT.color = IN.color * _Color * _RendererColor;
@@ -112,7 +117,7 @@ Shader "Vanessa/SpritesWithShadow"
 
                 return OUT;
             }
-        ENDCG
+            ENDCG
         }
     }
 }
