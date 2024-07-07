@@ -10,7 +10,10 @@ Shader "Vanessa/SpritesWithShadow"
         [PerRendererData] _AlphaTex ("External Alpha", 2D) = "white" {}
         [PerRendererData] _EnableExternalAlpha ("Enable External Alpha", Float) = 0
         _ShadowColor ("Shadow Color", Color) = (0,0,0,1)
-        [PerRendererData] _ShadowOffset("Shadow Offset", Range(0,5)) = 1
+        [PerRendererData] _ShadowOffset("Shadow Offset", Float) = 1
+        _ShadowAmplitude("Shadow Amplitude", Vector) = (0, 0, 0, 0)
+        _ShadowSpeed("Shadow Speed", Vector) = (0, 0, 0, 0)
+        [PerRendererData] _ShadowNoise("Shadow Noise", float) = 0
     }
 
     SubShader
@@ -39,9 +42,13 @@ Shader "Vanessa/SpritesWithShadow"
             #pragma multi_compile_local _ PIXELSNAP_ON
             #pragma multi_compile _ ETC1_EXTERNAL_ALPHA
             #include "UnitySprites.cginc"
+            #include "SpriteScaling.cginc"
 
             float4 _ShadowColor;
             float _ShadowOffset;
+
+            float4 _ShadowAmplitude;
+            float4 _ShadowSpeed;
             
             v2f ShadowVert(appdata_t IN)
             {
@@ -50,7 +57,7 @@ Shader "Vanessa/SpritesWithShadow"
                 UNITY_SETUP_INSTANCE_ID (IN);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
 
-                OUT.vertex = UnityFlipSprite(IN.vertex, _Flip);
+                OUT.vertex = UnityFlipSprite(IN.vertex * get_scaling(_Time.y, _ShadowAmplitude.xy, _ShadowSpeed.xy), _Flip);
                 OUT.vertex = UnityObjectToClipPos(OUT.vertex);
                 OUT.vertex +=  mul(unity_CameraProjection,float4(-0.1 * _ShadowOffset,_ProjectionParams.x * -0.1 * _ShadowOffset, 0, 0));
                 OUT.texcoord = IN.texcoord;
@@ -75,13 +82,36 @@ Shader "Vanessa/SpritesWithShadow"
         Pass
         {
         CGPROGRAM
-            #pragma vertex SpriteVert
+            #pragma vertex FaceVert
             #pragma fragment SpriteFrag
             #pragma target 2.0
             #pragma multi_compile_instancing
             #pragma multi_compile_local _ PIXELSNAP_ON
             #pragma multi_compile _ ETC1_EXTERNAL_ALPHA
             #include "UnitySprites.cginc"
+            #include "SpriteScaling.cginc"
+
+            float4 _ShadowAmplitude;
+            float4 _ShadowSpeed;
+            
+            v2f FaceVert(appdata_t IN)
+            {
+                v2f OUT;
+
+                UNITY_SETUP_INSTANCE_ID (IN);
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
+
+                OUT.vertex = UnityFlipSprite(IN.vertex * get_scaling(_Time.y, _ShadowAmplitude, _ShadowSpeed), _Flip);
+                OUT.vertex = UnityObjectToClipPos(OUT.vertex);
+                OUT.texcoord = IN.texcoord;
+                OUT.color = IN.color * _Color * _RendererColor;
+
+                #ifdef PIXELSNAP_ON
+                OUT.vertex = UnityPixelSnap (OUT.vertex);
+                #endif
+
+                return OUT;
+            }
         ENDCG
         }
     }
