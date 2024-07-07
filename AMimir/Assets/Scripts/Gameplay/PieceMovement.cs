@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 using Application = AppCore.Application;
+using Random = UnityEngine.Random;
 
 namespace Gameplay
 {
@@ -33,6 +34,7 @@ namespace Gameplay
         private readonly RaycastHit2D[] _hitResults = new RaycastHit2D[5];
         private SpriteRenderer _catRenderer;
         private static readonly int ShadowOffset = Shader.PropertyToID("_ShadowOffset");
+        private static readonly int ShadowNoise = Shader.PropertyToID("_ShadowNoise");
 
         private void Awake()
         {
@@ -59,8 +61,17 @@ namespace Gameplay
             isDragging = false;
             _catRenderer = GetComponentInChildren<SpriteRenderer>();
             DisplayShadow(false);
+            SetNoise(Random.Range(0, Mathf.PI*2f));
         }
 
+        private void SetNoise(float noise)
+        {
+            var mpb = new MaterialPropertyBlock();
+            _catRenderer.GetPropertyBlock(mpb);
+            mpb.SetFloat(ShadowNoise, noise);
+            _catRenderer.SetPropertyBlock(mpb);
+        }
+        
         private void DisplayShadow(bool show)
         {
             var mpb = new MaterialPropertyBlock();
