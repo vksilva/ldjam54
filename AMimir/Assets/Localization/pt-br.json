@@ -15,5 +15,8 @@
       "back_to_home": "Voltar para início",
       "paused": "Pausado",
       "language": "Idioma",
-      "select_language_button": "Selecionar idioma"
+      "select_language_button": "Selecionar idioma",
+      "close_game": "Fechar jogo?",
+      "confirm_close_game_button": "Sim",
+      "decline_close_game_button": "Não"
 }

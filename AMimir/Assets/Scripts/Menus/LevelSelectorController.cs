@@ -22,6 +22,7 @@ namespace Menus
         [SerializeField] private SettingsPopUp settingsPopUp;
         [SerializeField] private Button creditsButton;
         [SerializeField] private CreditsPopUp creditsPopUp;
+        [SerializeField] private CloseGamePopUp closeGamePopUp;
         
         private static AudioService _audioService;
         private static StateService _stateService;
@@ -50,6 +51,7 @@ namespace Menus
             levelTemplateButton.gameObject.SetActive(false);
             settingsPopUp.gameObject.SetActive(false);
             creditsPopUp.gameObject.SetActive(false);
+            closeGamePopUp.gameObject.SetActive(false);
             
             _backKeyService.PushAction(CloseLevelSelector);
             
@@ -114,9 +116,7 @@ namespace Menus
 
         private void CloseLevelSelector()
         {
-            Debug.Log("Show confirm popup");
-            UnityEngine.Application.Quit();
-            // To do: Implement confirmation to exit pop up
+            closeGamePopUp.Show();
         }
     }
 }

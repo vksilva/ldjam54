@@ -15,5 +15,8 @@
       "back_to_home": "Back to home",
       "paused": "Paused",
       "language": "Language",
-      "select_language_button": "Select language"
+      "select_language_button": "Select language",
+      "close_game": "Close game?",
+      "confirm_close_game_button": "Yes",
+      "decline_close_game_button": "No"
 }
