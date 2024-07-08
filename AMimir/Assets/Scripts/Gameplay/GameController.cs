@@ -70,7 +70,6 @@ namespace Gameplay
             {
                 throw new Exception("Game camera missing");
             }
-
         }
 
         private void GetServices()

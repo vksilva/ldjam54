@@ -1,11 +1,8 @@
-using AppCore;
 using AppCore.Audio;
 using UI;
-using Unity.Mathematics;
+using UnityEditor.Scripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
-using Application = AppCore.Application;
 using Random = UnityEngine.Random;
 
 namespace Gameplay
@@ -91,6 +88,42 @@ namespace Gameplay
             var position = worldPosition - _anchor;
 
             transform.position = position;
+
+            ShowBackgroundHighLight();
+        }
+
+        private void ShowBackgroundHighLight()
+        {
+            var position = transform.position;
+            
+            Debug.Log($"Current position: {position}");
+            Debug.Log($"Near int position: {NearIntPosition()}");
+
+            Debug.Log($"Cat size: {_size.x}, {_size.y}");
+
+            int pieceHits = 0;
+            for (int x = 0; x < _size.x; x++)
+            {
+                for (int y = 0; y < _size.y; y++)
+                {
+                    var tile = new Vector3(x, y, 0);
+
+                    // pieceHits += Physics2D.RaycastNonAlloc(position + tile + _offset, Vector2.zero, _hitResults,
+                    //     Mathf.Infinity, pieceLayer);
+                    
+                    var hit = Physics2D.RaycastNonAlloc(position + tile + _offset, Vector2.zero, _hitResults,
+                        Mathf.Infinity, pieceLayer);
+                    pieceHits += hit;
+                    if (hit > 0)
+                    {
+                        Debug.Log($"Hit on position {x}, {y}");
+                        
+                    }
+
+                }
+            }
+            
+            Debug.Log($"Piece hits: {pieceHits}");
         }
 
         private Vector3 GetMousePosition()
@@ -153,6 +186,7 @@ namespace Gameplay
                     if (pieceHits > 1 || (bedHits == 0 && !hitGrabArea))
                     {
                         //Move piece back to original position
+                        // TODO check surrounding area for a valid position instead of returning piece
                         transform.position = _positionBeforeMove;
                         return;
                     }
@@ -160,12 +194,20 @@ namespace Gameplay
             }
 
             //move piece to near int position
+            transform.position = NearIntPosition();
+
+            GameController.Instance.OnPiecePlaced();
+        }
+
+        private Vector3 NearIntPosition()
+        {
+            var position = transform.position;
+            
             position.x = Mathf.Round(position.x);
             position.y = Mathf.Round(position.y);
             position.z = 0.0f;
-            transform.position = position;
-
-            GameController.Instance.OnPiecePlaced();
+            
+            return position;
         }
 
         private bool IsPointerOverUI()

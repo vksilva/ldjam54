@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -608.91}
+  m_AnchoredPosition: {x: 0, y: -440.47058}
   m_SizeDelta: {x: 348, y: 348}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &189948220
@@ -836,7 +836,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1309089897}
-  - {fileID: 683602259}
   - {fileID: 1311191942}
+  - {fileID: 683602259}
   - {fileID: 1618407565}
   - {fileID: 2124531796}
