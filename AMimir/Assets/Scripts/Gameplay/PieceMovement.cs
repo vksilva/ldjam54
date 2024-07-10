@@ -1,6 +1,6 @@
+using System;
 using AppCore.Audio;
 using UI;
-using UnityEditor.Scripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Random = UnityEngine.Random;
@@ -94,12 +94,18 @@ namespace Gameplay
 
         private void ShowBackgroundHighLight()
         {
-            var position = transform.position;
+            foreach (var tile in _gameController.highlightGridTiles)
+            {
+                tile.Value.SetActive(false);
+            }
             
-            Debug.Log($"Current position: {position}");
-            Debug.Log($"Near int position: {NearIntPosition()}");
-
-            Debug.Log($"Cat size: {_size.x}, {_size.y}");
+            var position = transform.position;
+            var nearIntPosition = NearIntPosition(position);
+            
+            // Debug.Log($"Current position: {position}");
+            // Debug.Log($"Near int position: {nearIntPosition}");
+            //
+            // Debug.Log($"Cat size: {_size.x}, {_size.y}");
 
             int pieceHits = 0;
             for (int x = 0; x < _size.x; x++)
@@ -107,23 +113,24 @@ namespace Gameplay
                 for (int y = 0; y < _size.y; y++)
                 {
                     var tile = new Vector3(x, y, 0);
-
-                    // pieceHits += Physics2D.RaycastNonAlloc(position + tile + _offset, Vector2.zero, _hitResults,
-                    //     Mathf.Infinity, pieceLayer);
+                    var tilePosition = position + tile + _offset;
                     
-                    var hit = Physics2D.RaycastNonAlloc(position + tile + _offset, Vector2.zero, _hitResults,
+                    var hitPiece = Physics2D.RaycastNonAlloc(tilePosition, Vector2.zero, _hitResults,
                         Mathf.Infinity, pieceLayer);
-                    pieceHits += hit;
-                    if (hit > 0)
+                    var hitBed = Physics2D.RaycastNonAlloc(tilePosition, Vector2.zero, _hitResults,
+                        Mathf.Infinity, bedLayer);
+                    pieceHits += hitPiece;
+                    if (hitPiece > 0 && hitBed > 0)
                     {
                         Debug.Log($"Hit on position {x}, {y}");
-                        
+                        tilePosition = NearIntPosition(tilePosition);
+                        Debug.Log($"tile position {tilePosition}");
+                        var gridTile = _gameController.highlightGridTiles[new Vector2Int( (int)tilePosition.x, (int)tilePosition.y) ];
+                        gridTile.SetActive(true);
                     }
-
                 }
             }
-            
-            Debug.Log($"Piece hits: {pieceHits}");
+            Debug.Log($"-----");
         }
 
         private Vector3 GetMousePosition()
@@ -194,18 +201,16 @@ namespace Gameplay
             }
 
             //move piece to near int position
-            transform.position = NearIntPosition();
+            transform.position = NearIntPosition(position);
 
             GameController.Instance.OnPiecePlaced();
         }
 
-        private Vector3 NearIntPosition()
+        private Vector3 NearIntPosition(Vector3 position)
         {
-            var position = transform.position;
-            
             position.x = Mathf.Round(position.x);
             position.y = Mathf.Round(position.y);
-            position.z = 0.0f;
+            position.z = 0;
             
             return position;
         }

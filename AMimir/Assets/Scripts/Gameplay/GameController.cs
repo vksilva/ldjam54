@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AppCore;
 using AppCore.Audio;
@@ -11,14 +12,16 @@ namespace Gameplay
 {
     public class GameController : MonoBehaviour
     {
-        [SerializeField] private RectInt piecesGrabArea = new (-5, -8, 10, 7);
+        [SerializeField] private RectInt piecesGrabArea = new(-5, -8, 10, 7);
+        [SerializeField] private GameObject gridTilePrefab;
         public RectInt PiecesGrabArea => piecesGrabArea;
-        
+
         public static GameController Instance { get; private set; }
+        public readonly Dictionary<Vector2Int, GameObject> highlightGridTiles = new();
         private Bed _bed;
         private Camera _camera;
         private Vector2Int _bedSize;
-        private static readonly Vector3 _offset = new (0.5f, 0.5f, 0f);
+        private static readonly Vector3 _offset = new(0.5f, 0.5f, 0f);
         private readonly LayerMask _checkLayer = 9;
 
         private AudioService _audioService;
@@ -40,7 +43,7 @@ namespace Gameplay
                 SceneManager.LoadScene(0);
                 return;
             }
-            
+
             GetServices();
             SetUpCamera();
             SetUpBed();
@@ -56,11 +59,26 @@ namespace Gameplay
                 Mathf.RoundToInt(bedCollider.bounds.size.x),
                 Mathf.RoundToInt(bedCollider.bounds.size.y)
             );
-            
+
             //Force Bed z = 1 to avoid issue with pieces
             var bedTransform = _bed.transform;
-            var position = bedTransform.position;
-            bedTransform.position = new Vector3(position.x, position.y, 1);
+            var pos = bedTransform.position;
+            pos.z = 1;
+            bedTransform.position = pos;
+
+            var bedPosition = new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
+
+            // Set Highlight grid in the bed
+            for (int x = 0; x < _bedSize.x; x++)
+            {
+                var posX = bedPosition.x + x;
+                for (int y = 0; y < _bedSize.y; y++)
+                {
+                    var posY = bedPosition.y + y;
+                    var tile = Instantiate(gridTilePrefab, new Vector3(posX, posY, 0), Quaternion.identity);
+                    highlightGridTiles[new Vector2Int(posX, posY)] = tile;
+                }
+            }
         }
 
         private void SetUpCamera()
@@ -99,7 +117,7 @@ namespace Gameplay
                     _stateService.gameState.LevelsState.winLevels.Add(SceneManager.GetActiveScene().name);
                     _stateService.Save();
                 }
-                
+
                 OpenEndGamePopUp();
             }
         }
@@ -112,7 +130,8 @@ namespace Gameplay
                 for (var y = 0; y < _bedSize.y; y++)
                 {
                     var tile = new Vector3(x, y, 0);
-                    var size = Physics2D.RaycastNonAlloc(_bed.transform.position + tile + _offset, Vector2.zero, _rayCastResult, Mathf.Infinity, _checkLayer);
+                    var size = Physics2D.RaycastNonAlloc(_bed.transform.position + tile + _offset, Vector2.zero,
+                        _rayCastResult, Mathf.Infinity, _checkLayer);
                     if (size < 2)
                     {
                         emptySpaceCount++;
@@ -127,14 +146,14 @@ namespace Gameplay
         {
             _audioService.PlaySfx(sfx);
         }
-        
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
             var pos = new Vector3(piecesGrabArea.xMin, piecesGrabArea.yMin);
             var size = new Vector3(piecesGrabArea.width, piecesGrabArea.height);
-            
-            Gizmos.DrawWireCube(pos + size/2, size);
+
+            Gizmos.DrawWireCube(pos + size / 2, size);
         }
     }
 }
