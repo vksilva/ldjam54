@@ -177,7 +177,6 @@ namespace Gameplay
             DisplayShadow(false);
             CleanHighlightGrid();
             isDragging = false;
-            _pieceSortingGroup.sortingLayerName = DefaultPieceSortingLayer;
 
             _gameController.PlayGameSfx(AudioSFXEnum.MoveDownPiece);
 
@@ -201,7 +200,11 @@ namespace Gameplay
                         //Move piece back to original position
                         // TODO check surrounding area for a valid position instead of returning piece
                         _catCollider.enabled = false;
-                        transform.DOMove(_positionBeforeMove, catReturnSpeed).SetSpeedBased().OnComplete(()=>_catCollider.enabled=true);
+                        transform.DOMove(_positionBeforeMove, catReturnSpeed).SetSpeedBased().OnComplete(()=>
+                        {
+                            _catCollider.enabled = true;
+                            _pieceSortingGroup.sortingLayerName = DefaultPieceSortingLayer;
+                        });
                         return;
                     }
                 }
@@ -209,6 +212,7 @@ namespace Gameplay
 
             //move piece to near int position
             transform.position = NearIntPosition();
+            _pieceSortingGroup.sortingLayerName = DefaultPieceSortingLayer;
 
             GameController.Instance.OnPiecePlaced();
         }
