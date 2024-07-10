@@ -1,5 +1,5 @@
-using System;
 using AppCore.Audio;
+using DG.Tweening;
 using UI;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -19,14 +19,15 @@ namespace Gameplay
         private Vector2Int _size;
         private static readonly Vector3 _offset = new(0.5f, 0.5f, 0f);
         private bool isDragging;
+        private const float catReturnSpeed = 15f;
 
         private const string FloatingPieceSortingLayer = "FloatingPiece";
         private const string DefaultPieceSortingLayer = "Default";
         private const string BedSortingLayer = "Bed";
 
         private SortingGroup _pieceSortingGroup;
-
         private GameController _gameController;
+        private Collider2D _catCollider;
 
         private readonly RaycastHit2D[] _hitResults = new RaycastHit2D[5];
         private SpriteRenderer _catRenderer;
@@ -38,6 +39,7 @@ namespace Gameplay
             pieceLayer = LayerMask.GetMask(DefaultPieceSortingLayer);
             bedLayer = LayerMask.GetMask(BedSortingLayer);
             _pieceSortingGroup = GetComponent<SortingGroup>();
+            _catCollider = GetComponent<Collider2D>();
         }
 
         private void Start()
@@ -187,7 +189,6 @@ namespace Gameplay
                 for (int y = 0; y < _size.y; y++)
                 {
                     var tile = new Vector3(x, y, 0);
-
                     var hitGrabArea = CheckHitArea(_gameController.PiecesGrabArea, position + tile + _offset);
 
                     var origin = position + tile + _offset;
@@ -199,7 +200,8 @@ namespace Gameplay
                     {
                         //Move piece back to original position
                         // TODO check surrounding area for a valid position instead of returning piece
-                        transform.position = _positionBeforeMove;
+                        _catCollider.enabled = false;
+                        transform.DOMove(_positionBeforeMove, catReturnSpeed).SetSpeedBased().OnComplete(()=>_catCollider.enabled=true);
                         return;
                     }
                 }
