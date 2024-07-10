@@ -6011,7 +6011,7 @@ MonoBehaviour:
   worlds:
   - name: easy
     number: 1
-    levelCount: 5
+    levelCount: 8
   - name: medium
     number: 2
     levelCount: 4
