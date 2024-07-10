@@ -94,10 +94,7 @@ namespace Gameplay
 
         private void ShowBackgroundHighLight()
         {
-            foreach (var tile in _gameController.highlightGridTiles)
-            {
-                tile.Value.SetActive(false);
-            }
+            CleanHighlightGrid();
 
             var nearIntPosition = NearIntPosition();
 
@@ -109,19 +106,33 @@ namespace Gameplay
                     var tileCoordinate = nearIntPosition + tile;
                     var tileCenterPosition = tileCoordinate + _offset;
 
-                    var hitPiece = Physics2D.RaycastNonAlloc(tileCenterPosition, Vector2.zero, _hitResults,
-                        Mathf.Infinity, pieceLayer);
                     var hitBed = Physics2D.RaycastNonAlloc(tileCenterPosition, Vector2.zero, _hitResults,
                         Mathf.Infinity, bedLayer);
+                    var hitPiece = Physics2D.RaycastNonAlloc(tileCenterPosition, Vector2.zero, _hitResults,
+                        Mathf.Infinity, pieceLayer);
                     if (hitPiece > 0 && hitBed > 0)
                     {
                         if (_gameController.highlightGridTiles.TryGetValue(
                                 new Vector2Int((int)tileCoordinate.x, (int)tileCoordinate.y), out var gridTile))
                         {
-                            gridTile.SetActive(true);
+                            if (_hitResults[0].collider.gameObject != this.gameObject)
+                            {
+                                continue;
+                            }
+                            
+                            gridTile.gameObject.SetActive(true);
+                            gridTile.SetColor(hitPiece == 1);
                         }
                     }
                 }
+            }
+        }
+
+        private void CleanHighlightGrid()
+        {
+            foreach (var tile in _gameController.highlightGridTiles.Values)
+            {
+                tile.gameObject.SetActive(false);
             }
         }
 
@@ -162,6 +173,7 @@ namespace Gameplay
             }
 
             DisplayShadow(false);
+            CleanHighlightGrid();
             isDragging = false;
             _pieceSortingGroup.sortingLayerName = DefaultPieceSortingLayer;
 

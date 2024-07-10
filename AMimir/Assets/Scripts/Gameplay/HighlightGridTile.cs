@@ -1,14 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class HighlightGridTile : MonoBehaviour
+namespace Gameplay
 {
-    [SerializeField] private Color freeSpaceColor;
-    [SerializeField] private Color occupiedSpaceColor;
-
-    public void SetColor(bool free)
+    public class HighlightGridTile : MonoBehaviour
     {
-        // todo
+        [SerializeField] private Color freeSpaceColor;
+        [SerializeField] private Color occupiedSpaceColor;
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        
+        public void SetColor(bool free)
+        {
+            if (free)
+            {
+                spriteRenderer.color = freeSpaceColor;
+            }
+            else
+            {
+                spriteRenderer.color = occupiedSpaceColor;
+            }
+        }
     }
 }

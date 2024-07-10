@@ -13,11 +13,11 @@ namespace Gameplay
     public class GameController : MonoBehaviour
     {
         [SerializeField] private RectInt piecesGrabArea = new(-5, -8, 10, 7);
-        [SerializeField] private GameObject gridTilePrefab;
+        [SerializeField] private HighlightGridTile gridTilePrefab;
         public RectInt PiecesGrabArea => piecesGrabArea;
 
         public static GameController Instance { get; private set; }
-        public readonly Dictionary<Vector2Int, GameObject> highlightGridTiles = new();
+        public readonly Dictionary<Vector2Int, HighlightGridTile> highlightGridTiles = new();
         private Bed _bed;
         private Camera _camera;
         private Vector2Int _bedSize;
