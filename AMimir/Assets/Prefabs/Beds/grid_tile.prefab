@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 698635733872472928}
   - component: {fileID: 656667669170399482}
+  - component: {fileID: 8316996532567125089}
   m_Layer: 0
   m_Name: grid_tile
   m_TagString: Untagged
@@ -84,3 +85,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8316996532567125089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2595950240132110628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2ecf7b5c648cf94d88f9ed05c8ebf37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freeSpaceColor: {r: 0.19339623, g: 0.7735849, b: 0.23484974, a: 1}
+  occupiedSpaceColor: {r: 0.6981132, g: 0.16794232, b: 0.16794232, a: 1}

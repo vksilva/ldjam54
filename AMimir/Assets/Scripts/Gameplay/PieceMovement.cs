@@ -58,7 +58,7 @@ namespace Gameplay
             isDragging = false;
             _catRenderer = GetComponentInChildren<SpriteRenderer>();
             DisplayShadow(false);
-            SetNoise(Random.Range(0, Mathf.PI*2f));
+            SetNoise(Random.Range(0, Mathf.PI * 2f));
         }
 
         private void SetNoise(float noise)
@@ -68,7 +68,7 @@ namespace Gameplay
             mpb.SetFloat(ShadowNoise, noise);
             _catRenderer.SetPropertyBlock(mpb);
         }
-        
+
         private void DisplayShadow(bool show)
         {
             var mpb = new MaterialPropertyBlock();
@@ -98,39 +98,31 @@ namespace Gameplay
             {
                 tile.Value.SetActive(false);
             }
-            
-            var position = transform.position;
-            var nearIntPosition = NearIntPosition(position);
-            
-            // Debug.Log($"Current position: {position}");
-            // Debug.Log($"Near int position: {nearIntPosition}");
-            //
-            // Debug.Log($"Cat size: {_size.x}, {_size.y}");
 
-            int pieceHits = 0;
+            var nearIntPosition = NearIntPosition();
+
             for (int x = 0; x < _size.x; x++)
             {
                 for (int y = 0; y < _size.y; y++)
                 {
                     var tile = new Vector3(x, y, 0);
-                    var tilePosition = position + tile + _offset;
-                    
-                    var hitPiece = Physics2D.RaycastNonAlloc(tilePosition, Vector2.zero, _hitResults,
+                    var tileCoordinate = nearIntPosition + tile;
+                    var tileCenterPosition = tileCoordinate + _offset;
+
+                    var hitPiece = Physics2D.RaycastNonAlloc(tileCenterPosition, Vector2.zero, _hitResults,
                         Mathf.Infinity, pieceLayer);
-                    var hitBed = Physics2D.RaycastNonAlloc(tilePosition, Vector2.zero, _hitResults,
+                    var hitBed = Physics2D.RaycastNonAlloc(tileCenterPosition, Vector2.zero, _hitResults,
                         Mathf.Infinity, bedLayer);
-                    pieceHits += hitPiece;
                     if (hitPiece > 0 && hitBed > 0)
                     {
-                        Debug.Log($"Hit on position {x}, {y}");
-                        tilePosition = NearIntPosition(tilePosition);
-                        Debug.Log($"tile position {tilePosition}");
-                        var gridTile = _gameController.highlightGridTiles[new Vector2Int( (int)tilePosition.x, (int)tilePosition.y) ];
-                        gridTile.SetActive(true);
+                        if (_gameController.highlightGridTiles.TryGetValue(
+                                new Vector2Int((int)tileCoordinate.x, (int)tileCoordinate.y), out var gridTile))
+                        {
+                            gridTile.SetActive(true);
+                        }
                     }
                 }
             }
-            Debug.Log($"-----");
         }
 
         private Vector3 GetMousePosition()
@@ -186,9 +178,10 @@ namespace Gameplay
 
                     var hitGrabArea = CheckHitArea(_gameController.PiecesGrabArea, position + tile + _offset);
 
-                    var pieceHits = Physics2D.RaycastNonAlloc(position + tile + _offset, Vector2.zero, _hitResults,
+                    var origin = position + tile + _offset;
+                    var pieceHits = Physics2D.RaycastNonAlloc(origin, Vector2.zero, _hitResults,
                         Mathf.Infinity, pieceLayer);
-                    var bedHits = Physics2D.RaycastNonAlloc(position + tile + _offset, Vector2.zero, _hitResults,
+                    var bedHits = Physics2D.RaycastNonAlloc(origin, Vector2.zero, _hitResults,
                         Mathf.Infinity, bedLayer);
                     if (pieceHits > 1 || (bedHits == 0 && !hitGrabArea))
                     {
@@ -201,17 +194,18 @@ namespace Gameplay
             }
 
             //move piece to near int position
-            transform.position = NearIntPosition(position);
+            transform.position = NearIntPosition();
 
             GameController.Instance.OnPiecePlaced();
         }
 
-        private Vector3 NearIntPosition(Vector3 position)
+        private Vector3 NearIntPosition()
         {
+            var position = transform.position;
             position.x = Mathf.Round(position.x);
             position.y = Mathf.Round(position.y);
             position.z = 0;
-            
+
             return position;
         }
 
