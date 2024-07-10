@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AppCore;
 using AppCore.Audio;
 using AppCore.State;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Application = AppCore.Application;
@@ -13,9 +14,8 @@ namespace Gameplay
     public class GameController : MonoBehaviour
     {
         [SerializeField] private RectInt piecesGrabArea = new(-5, -8, 10, 7);
-        [SerializeField] private HighlightGridTile gridTilePrefab;
         public RectInt PiecesGrabArea => piecesGrabArea;
-
+        
         public static GameController Instance { get; private set; }
         public readonly Dictionary<Vector2Int, HighlightGridTile> highlightGridTiles = new();
         private Bed _bed;
@@ -23,6 +23,8 @@ namespace Gameplay
         private Vector2Int _bedSize;
         private static readonly Vector3 _offset = new(0.5f, 0.5f, 0f);
         private readonly LayerMask _checkLayer = 9;
+        private HighlightGridTile gridTilePrefab;
+        private GameObject frameSquare;
 
         private AudioService _audioService;
         private StateService _stateService;
@@ -43,6 +45,9 @@ namespace Gameplay
                 SceneManager.LoadScene(0);
                 return;
             }
+
+            gridTilePrefab = Resources.Load<HighlightGridTile>("GameElements/grid_tile");
+            frameSquare = Resources.Load<GameObject>("GameElements/Square");
 
             GetServices();
             SetUpCamera();
@@ -76,6 +81,7 @@ namespace Gameplay
                 {
                     var posY = bedPosition.y + y;
                     var tile = Instantiate(gridTilePrefab, new Vector3(posX, posY, 0), Quaternion.identity);
+                    tile.gameObject.SetActive(false);
                     highlightGridTiles[new Vector2Int(posX, posY)] = tile;
                 }
             }
@@ -88,6 +94,24 @@ namespace Gameplay
             {
                 throw new Exception("Game camera missing");
             }
+
+            // const float borderSize = 10f;
+            // var imageSize = frameSquare.GetComponent<SpriteRenderer>().bounds.size;
+            
+            // // left
+            // var leftFramePosition = new Vector3(piecesGrabArea.x-imageSize.x * borderSize/2, piecesGrabArea.center.y, 0);
+            // var leftFrame = Instantiate(frameSquare, leftFramePosition, quaternion.identity);
+            // leftFrame.transform.localScale = new Vector3(borderSize, piecesGrabArea.height, 1);
+            //
+            // // right
+            // var rightFramePosition = new Vector3(piecesGrabArea.xMax+imageSize.x * borderSize/2, piecesGrabArea.center.y, 0);
+            // var rightFrame = Instantiate(frameSquare, rightFramePosition, quaternion.identity);
+            // rightFrame.transform.localScale = new Vector3(borderSize, piecesGrabArea.height, 1);
+            //
+            // // bottom
+            // var bottomFramePosition = new Vector3(piecesGrabArea.center.x, piecesGrabArea.y - imageSize.y * borderSize / 2, 0);
+            // var bottomFrame = Instantiate(frameSquare, bottomFramePosition, quaternion.identity);
+            // bottomFrame.transform.localScale = new Vector3(piecesGrabArea.width + 2*borderSize, borderSize, 1);
         }
 
         private void GetServices()

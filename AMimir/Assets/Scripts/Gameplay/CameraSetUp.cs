@@ -1,8 +1,6 @@
-﻿using System;
-using Gameplay;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace AppCore
+namespace Gameplay
 {
     [ExecuteInEditMode]
     public class CameraSetUp : MonoBehaviour

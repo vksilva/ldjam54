@@ -442,7 +442,6 @@ MonoBehaviour:
     y: -8
     width: 10
     height: 7
-  gridTilePrefab: {fileID: 8316996532567125089, guid: 7f781f3b0a6893b4293fc265a5e607e9, type: 3}
 --- !u!4 &1672407449
 Transform:
   m_ObjectHideFlags: 0
@@ -476,7 +475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5169085808755074638, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: orthographic size
-      value: 8.890909
+      value: 8.892045
       objectReference: {fileID: 0}
     - target: {fileID: 7938176268018679338, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: m_LocalPosition.x
