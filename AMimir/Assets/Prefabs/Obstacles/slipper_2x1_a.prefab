@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 176909905408790173}
   - component: {fileID: 723503316778189575}
   m_Layer: 0
-  m_Name: slipper_I_2x1_a
+  m_Name: slipper_2x1_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
