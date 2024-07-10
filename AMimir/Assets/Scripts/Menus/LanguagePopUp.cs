@@ -1,8 +1,6 @@
-using AppCore;
 using AppCore.Audio;
 using AppCore.BackKey;
 using AppCore.Localization;
-using AppCore.State;
 using Menus;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +12,7 @@ public class LanguagePopUp : MonoBehaviour, IPopUp
     [SerializeField] private Button backgroundButton;
     [SerializeField] private Button pt_brLanguageButton;
     [SerializeField] private Button en_usLanguageButton;
+    [SerializeField] private SettingsPopUp settingsPopUp;
     
     private AudioService _audioService;
     private LocalizationService _localizationService;
@@ -47,6 +46,7 @@ public class LanguagePopUp : MonoBehaviour, IPopUp
 
     public void Show()
     {
+        settingsPopUp.Hide();
         gameObject.SetActive(true);
         _backKeyService.PushAction(Hide);
     }
@@ -57,5 +57,7 @@ public class LanguagePopUp : MonoBehaviour, IPopUp
         _backKeyService.PopAction();
         
         gameObject.SetActive(false);
+        
+        settingsPopUp.Show();
     }
 }

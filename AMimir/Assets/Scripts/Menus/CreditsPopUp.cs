@@ -10,6 +10,7 @@ namespace Menus
     {
         [SerializeField] private Button closeButton;
         [SerializeField] private Button backgroundButton;
+        [SerializeField] private SettingsPopUp settingsPopUp;
 
         private AudioService _audioService;
         private BackKeyService _backKeyService;
@@ -28,6 +29,8 @@ namespace Menus
 
         public void Show()
         {
+            settingsPopUp.Hide();
+            
             gameObject.SetActive(true);
             _backKeyService.PushAction(Hide);
         }
@@ -38,6 +41,8 @@ namespace Menus
             _backKeyService.PopAction();
         
             gameObject.SetActive(false);
+            
+            settingsPopUp.Show();
         }
     }
 }

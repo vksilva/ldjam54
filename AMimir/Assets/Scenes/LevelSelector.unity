@@ -1609,6 +1609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   closeButton: {fileID: 1079547672}
   backgroundButton: {fileID: 2090634614}
+  settingsPopUp: {fileID: 1539828738}
 --- !u!1 &472174654
 GameObject:
   m_ObjectHideFlags: 0
@@ -3317,7 +3318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3942,6 +3943,7 @@ MonoBehaviour:
   backgroundButton: {fileID: 1024998169}
   pt_brLanguageButton: {fileID: 1600105240}
   en_usLanguageButton: {fileID: 1510881910}
+  settingsPopUp: {fileID: 1539828738}
 --- !u!4 &1186705742
 Transform:
   m_ObjectHideFlags: 0
@@ -6020,8 +6022,6 @@ MonoBehaviour:
   levelTemplateButton: {fileID: 157666813}
   settingsButton: {fileID: 1058298961}
   settingsPopUp: {fileID: 1539828738}
-  creditsButton: {fileID: 0}
-  creditsPopUp: {fileID: 253328365}
   closeGamePopUp: {fileID: 738171045}
 --- !u!4 &1812137723
 Transform:
@@ -7216,7 +7216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
