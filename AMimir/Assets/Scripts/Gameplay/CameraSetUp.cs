@@ -19,6 +19,7 @@ namespace Gameplay
         private RectInt _catPlacementArea;
 
         private float XOffset => oddSize ? 0.5f : 0.0f;
+        private int intXOffset => oddSize ? 1 : 0;
 
         private Vector2Int _previousSize;
         private float _previousAspect;
@@ -43,7 +44,7 @@ namespace Gameplay
                 var cameraWidth = cameraHeight * _camera.aspect;
                 _grabArea.SetMinMax(
                     new Vector2Int(
-                        -Mathf.FloorToInt(cameraWidth),
+                        intXOffset - Mathf.FloorToInt(cameraWidth),
                         -Mathf.FloorToInt(cameraHeight)
                     ),
                     new Vector2Int(
@@ -55,7 +56,7 @@ namespace Gameplay
 
                 _catPlacementArea.SetMinMax(
                     new Vector2Int(
-                        -_gameArea.x/2,
+                        intXOffset -_gameArea.x/2,
                         -_gameArea.y/2
                     ),
                     new Vector2Int(
