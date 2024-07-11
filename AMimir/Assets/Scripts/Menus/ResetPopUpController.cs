@@ -1,4 +1,3 @@
-using AppCore;
 using AppCore.Audio;
 using AppCore.BackKey;
 using UnityEngine;
@@ -14,6 +13,7 @@ namespace Menus
         [SerializeField] private Button closeButton;
         [SerializeField] private Button backgroundButton;
         [SerializeField] private Button resetButton;
+        [SerializeField] private PausePopUpController pausePopUp;
 
         private static AudioService _audioService;
         private static BackKeyService _backKeyService;
@@ -28,7 +28,7 @@ namespace Menus
 
         private void AddListeners()
         {
-            continueButton.onClick.AddListener(OnContinueButtonClicked);
+            continueButton.onClick.AddListener(OnClose);
             resetButton.onClick.AddListener(OnResetButton);
             closeButton.onClick.AddListener(OnClose);
             backgroundButton.onClick.AddListener(OnClose);
@@ -41,12 +41,6 @@ namespace Menus
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         
-        private void OnContinueButtonClicked()
-        {
-            _audioService.PlaySfx(AudioSFXEnum.click);
-            Hide();
-        }
-        
         private void OnClose()
         {
             _audioService.PlaySfx(AudioSFXEnum.click);
@@ -55,6 +49,7 @@ namespace Menus
 
         public void Show()
         {
+            pausePopUp.Hide();
             gameObject.SetActive(true);
             _backKeyService.PushAction(Hide);
         }
@@ -63,6 +58,7 @@ namespace Menus
         {
             gameObject.SetActive(false);
             _backKeyService.PopAction();
+            pausePopUp.Show();
         }
     }
 }

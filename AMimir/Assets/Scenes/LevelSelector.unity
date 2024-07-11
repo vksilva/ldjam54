@@ -6011,13 +6011,13 @@ MonoBehaviour:
   worlds:
   - name: easy
     number: 1
-    levelCount: 8
+    levelCount: 9
   - name: medium
     number: 2
-    levelCount: 4
+    levelCount: 7
   - name: hard
     number: 3
-    levelCount: 5
+    levelCount: 6
   worldTemplateLabel: {fileID: 472174656}
   levelTemplateButton: {fileID: 157666813}
   settingsButton: {fileID: 1058298961}
