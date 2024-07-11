@@ -42,7 +42,7 @@ namespace AppCore
                 return (T) service;
             }
 
-            Debug.LogWarning($"Service {nameof(T)} not initialized.");
+            Debug.LogWarning($"Service {typeof(T).Name} not initialized.");
             return default;
         }
     }

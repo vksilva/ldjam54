@@ -1,6 +1,7 @@
 ﻿using AppCore.Audio;
 using AppCore.BackKey;
 using AppCore.Localization;
+using AppCore.SafeArea;
 using AppCore.State;
 using Extensions;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace AppCore
         [SerializeField] private AudioService audioService;
         [SerializeField] private LocalizationService localizationService;
         [SerializeField] private BackKeyService backKeyService;
-        
+        [SerializeField] private SafeAreaService safeAreaService;
         
         private StateService stateService;
         
@@ -35,6 +36,8 @@ namespace AppCore
             Application.Instance.Add(localizationService);
             
             Application.Instance.Add(backKeyService);
+            
+            Application.Instance.Add(safeAreaService);
             
             Application.Instance.Init();
 

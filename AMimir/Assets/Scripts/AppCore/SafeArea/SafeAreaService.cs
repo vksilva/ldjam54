@@ -8,16 +8,25 @@ namespace AppCore.SafeArea
         [SerializeField] private bool useDebugSafeArea;
         [SerializeField] private Rect debugSafeArea;
 
-        private readonly UnityEvent<Vector2, Vector2> updateSafeAreaEvent = new ();
+        private readonly UnityEvent<Rect> updateSafeAreaEvent = new ();
         private Rect SafeAreaRect => useDebugSafeArea ? debugSafeArea : Screen.safeArea;
 
-        private Vector2 anchorMin;
-        private Vector2 anchorMax;
         private Rect previousSafeArea;
+        private Rect anchor;
 
-        public void RegisterSafeArea(UnityAction<Vector2, Vector2> onUpdate)
+        public void RegisterSafeArea(UnityAction<Rect> onUpdate)
         {
             updateSafeAreaEvent.AddListener(onUpdate);
+        }
+
+        public void UnregisterSafeArea(UnityAction<Rect> onUpdate)
+        {
+            updateSafeAreaEvent.RemoveListener(onUpdate);
+        }
+
+        public Rect GetSafeArea()
+        {
+            return anchor;
         }
         
         private void Update()
@@ -34,14 +43,16 @@ namespace AppCore.SafeArea
 
             previousSafeArea = SafeAreaRect;
             
-            anchorMin = SafeAreaRect.position;
-            anchorMax = SafeAreaRect.position + SafeAreaRect.size;
+            anchor.min = SafeAreaRect.position;
+            anchor.max = SafeAreaRect.position + SafeAreaRect.size;
             
             // Normalize from 0 to 1
-            anchorMin.x /= Screen.width;
-            anchorMin.y /= Screen.height;
-            anchorMax.x /= Screen.width;
-            anchorMax.y /= Screen.height;
+            anchor.xMin /= Screen.width;
+            anchor.yMin /= Screen.height;
+            anchor.xMax /= Screen.width;
+            anchor.yMax /= Screen.height;
+
+            updateSafeAreaEvent?.Invoke(anchor);
         }
     }
 }

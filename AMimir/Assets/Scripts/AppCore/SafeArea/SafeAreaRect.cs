@@ -6,16 +6,31 @@ namespace AppCore.SafeArea
     public class SafeAreaRect : MonoBehaviour
     {
         private RectTransform panel;
+        private SafeAreaService safeAreaService;
         
         private void Awake()
         {
             panel = GetComponent<RectTransform>();
+
+            if (!Application.Initialized)
+            {
+                return;
+            }
+
+            safeAreaService = Application.Get<SafeAreaService>();
+            safeAreaService.RegisterSafeArea(UpdatePanel);
+            UpdatePanel(safeAreaService.GetSafeArea());
         }
 
-        private void UpdatePanel(Vector2 anchorMin, Vector2 anchorMax)
+        private void OnDestroy()
         {
-            panel.anchorMin = anchorMin;
-            panel.anchorMax = anchorMax;
+            Application.Get<SafeAreaService>()?.UnregisterSafeArea(UpdatePanel);
+        }
+
+        private void UpdatePanel(Rect anchor)
+        {
+            panel.anchorMin = anchor.min;
+            panel.anchorMax = anchor.max;
         }
     }
 }
