@@ -2,6 +2,7 @@
 using AppCore.BackKey;
 using AppCore.Localization;
 using AppCore.State;
+using Extensions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -37,7 +38,7 @@ namespace AppCore
             
             Application.Instance.Init();
 
-            if (!string.IsNullOrEmpty(SceneToStart))
+            if (!SceneToStart.IsNullOrEmpty())
             {
                 SceneManager.LoadScene(SceneToStart);
                 return;

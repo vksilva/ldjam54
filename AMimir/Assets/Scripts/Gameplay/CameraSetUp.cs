@@ -1,21 +1,28 @@
-﻿using UnityEngine;
+﻿using Extensions;
+using UnityEngine;
 
 namespace Gameplay
 {
     [ExecuteInEditMode]
     public class CameraSetUp : MonoBehaviour
     {
+        private const int GameAreaDivisionAxis = -1;
+
         private Camera _camera;
 
         [SerializeField] private bool oddSize;
-        
-        [SerializeField] private Vector2Int _gameArea = new (15, 20);
+
+        [SerializeField] private Vector2Int _gameArea = new(15, 20);
+
+        public RectInt GrabArea => _grabArea;
+        private RectInt _grabArea;
+        private RectInt _catPlacementArea;
 
         private float XOffset => oddSize ? 0.5f : 0.0f;
-        
+
         private Vector2Int _previousSize;
         private float _previousAspect;
-        
+
         private void Start()
         {
             _camera = GetComponent<Camera>();
@@ -31,6 +38,31 @@ namespace Gameplay
                 transform.position = new Vector3(XOffset, 0f, -10f);
                 _previousSize = _gameArea;
                 _previousAspect = _camera.aspect;
+
+                var cameraHeight = _camera.orthographicSize;
+                var cameraWidth = cameraHeight * _camera.aspect;
+                _grabArea.SetMinMax(
+                    new Vector2Int(
+                        -Mathf.FloorToInt(cameraWidth),
+                        -Mathf.FloorToInt(cameraHeight)
+                    ),
+                    new Vector2Int(
+                        Mathf.FloorToInt(cameraWidth)
+                        , GameAreaDivisionAxis
+                    )
+                );
+
+
+                _catPlacementArea.SetMinMax(
+                    new Vector2Int(
+                        -_gameArea.x/2,
+                        -_gameArea.y/2
+                    ),
+                    new Vector2Int(
+                        _gameArea.x/2,
+                        GameAreaDivisionAxis
+                    )
+                );
             }
         }
 
@@ -38,8 +70,8 @@ namespace Gameplay
         {
             var gameAspect = gameArea.x / (float)gameArea.y;
 
-            return gameAspect < cameraAspect 
-                ? gameArea.y / 2.0f 
+            return gameAspect < cameraAspect
+                ? gameArea.y / 2.0f
                 : gameArea.x / (2.0f * cameraAspect);
         }
 
@@ -49,11 +81,15 @@ namespace Gameplay
             UpdateCameraSize();
         }
 #endif
-        
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.cyan;
-            Gizmos.DrawWireCube(new Vector2(XOffset,0f), new Vector3(_gameArea.x, _gameArea.y));
+            Gizmos.DrawWireCube(new Vector3(XOffset, 0f), _gameArea.ToVector3());
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireCube(_grabArea.center, _grabArea.size.ToVector3());
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(_catPlacementArea.center, _catPlacementArea.size.ToVector3());
         }
     }
 }
