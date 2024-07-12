@@ -23,7 +23,7 @@ namespace AppCore.SafeArea
 
         private void OnDestroy()
         {
-            Application.Get<SafeAreaService>()?.UnregisterSafeArea(UpdatePanel);
+            safeAreaService.UnregisterSafeArea(UpdatePanel);
         }
 
         private void UpdatePanel(Rect anchor)
