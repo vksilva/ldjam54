@@ -1,5 +1,9 @@
-﻿using Extensions;
+﻿using System;
+using AppCore.SafeArea;
+using Extensions;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Application = AppCore.Application;
 
 namespace Gameplay
 {
@@ -14,12 +18,16 @@ namespace Gameplay
 
         [SerializeField] private Vector2Int _gameArea = new(15, 20);
 
-        public RectInt GrabArea => _grabArea;
-        private RectInt _grabArea;
-        private RectInt _catPlacementArea;
+        public RectInt GrabArea => grabArea;
+        private RectInt grabArea;
+        private RectInt catPlacementArea;
 
         private float XOffset => oddSize ? 0.5f : 0.0f;
         private int intXOffset => oddSize ? 1 : 0;
+
+        private Rect cameraRect;
+        private Rect safeArea;
+        private Rect safeAreaAnchors = Rect.MinMaxRect(0, 0, 1, 1);
 
         private Vector2Int _previousSize;
         private float _previousAspect;
@@ -29,6 +37,38 @@ namespace Gameplay
             _camera = GetComponent<Camera>();
 
             UpdateCameraSize();
+
+            if (!Application.Initialized)
+            {
+                return;
+            }
+
+            Application.Get<SafeAreaService>().RegisterSafeArea(UpdateSafeArea);
+        }
+
+        private void OnDestroy()
+        {
+            if (!Application.Initialized)
+            {
+                return;
+            }
+
+            Application.Get<SafeAreaService>().UnregisterSafeArea(UpdateSafeArea);
+        }
+
+        private void UpdateSafeArea(Rect anchors)
+        {
+            safeAreaAnchors = anchors;
+            var min = new Vector2(
+                Mathf.Lerp(cameraRect.xMin, cameraRect.xMax, safeAreaAnchors.xMin),
+                Mathf.Lerp(cameraRect.yMin, cameraRect.yMax, safeAreaAnchors.yMin)
+            );
+            var max = new Vector2(
+                Mathf.Lerp(cameraRect.xMin, cameraRect.xMax, safeAreaAnchors.xMax),
+                Mathf.Lerp(cameraRect.yMin, cameraRect.yMax, safeAreaAnchors.yMax)
+            );
+            safeArea = Rect.MinMaxRect(min.x, min.y, max.x, max.y);
+            Debug.Log($"camera: {cameraRect} anchor: {safeAreaAnchors} safeArea: {safeArea}");
         }
 
         private void UpdateCameraSize()
@@ -39,10 +79,12 @@ namespace Gameplay
                 transform.position = new Vector3(XOffset, 0f, -10f);
                 _previousSize = _gameArea;
                 _previousAspect = _camera.aspect;
+                cameraRect.min = -_gameArea/2;
+                cameraRect.size = _gameArea;
 
                 var cameraHeight = _camera.orthographicSize;
                 var cameraWidth = cameraHeight * _camera.aspect;
-                _grabArea.SetMinMax(
+                grabArea.SetMinMax(
                     new Vector2Int(
                         intXOffset - Mathf.FloorToInt(cameraWidth),
                         -Mathf.FloorToInt(cameraHeight)
@@ -54,16 +96,18 @@ namespace Gameplay
                 );
 
 
-                _catPlacementArea.SetMinMax(
+                catPlacementArea.SetMinMax(
                     new Vector2Int(
-                        intXOffset -_gameArea.x/2,
-                        -_gameArea.y/2
+                        intXOffset - _gameArea.x / 2,
+                        -_gameArea.y / 2
                     ),
                     new Vector2Int(
-                        _gameArea.x/2,
+                        _gameArea.x / 2,
                         GameAreaDivisionAxis
                     )
                 );
+
+                UpdateSafeArea(safeAreaAnchors);
             }
         }
 
@@ -86,11 +130,13 @@ namespace Gameplay
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.cyan;
-            Gizmos.DrawWireCube(new Vector3(XOffset, 0f), _gameArea.ToVector3());
+            Gizmos.DrawWireCube(cameraRect.center, cameraRect.size);
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireCube(_grabArea.center, _grabArea.size.ToVector3());
+            Gizmos.DrawWireCube(grabArea.center, grabArea.size.ToVector3());
             Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(_catPlacementArea.center, _catPlacementArea.size.ToVector3());
+            Gizmos.DrawWireCube(catPlacementArea.center, catPlacementArea.size.ToVector3());
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(safeArea.center, safeArea.size);
         }
     }
 }

@@ -19,7 +19,6 @@ namespace AppCore.SafeArea
 
             safeAreaService = Application.Get<SafeAreaService>();
             safeAreaService.RegisterSafeArea(UpdatePanel);
-            UpdatePanel(safeAreaService.GetSafeArea());
         }
 
         private void OnDestroy()
