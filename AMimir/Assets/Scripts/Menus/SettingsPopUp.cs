@@ -17,6 +17,8 @@ namespace Menus
         [SerializeField] private LanguagePopUp languagePopUp;
         [SerializeField] private Button creditsButton;
         [SerializeField] private CreditsPopUp creditsPopUp;
+        [SerializeField] private Button privacyPolicyButton;
+        [SerializeField] private Button termsOfServiceButton;
 
         private AudioService _audioService;
         private StateService _stateService;
@@ -52,6 +54,20 @@ namespace Menus
             soundToggle.onValueChanged.AddListener(OnSoundToggled);
             musicToggle.onValueChanged.AddListener(OnMusicToggled);
             selectLanguageButton.onClick.AddListener(OnSelectLanguage);
+            privacyPolicyButton.onClick.AddListener(OnPrivacyPolicy);
+            termsOfServiceButton.onClick.AddListener(OnTermsOfService);
+        }
+
+        private void OnTermsOfService()
+        {
+            Debug.Log($"OnTermsOfService");
+            UnityEngine.Application.OpenURL("https://busta.dev/legal/terms-and-conditions/games.busta.mimir/");
+        }
+
+        private void OnPrivacyPolicy()
+        {
+            Debug.Log($"OnPrivacyPolicy");
+            UnityEngine.Application.OpenURL("https://busta.dev/legal/privacy-policy/games.busta.mimir/");
         }
 
         private void OnSelectLanguage()

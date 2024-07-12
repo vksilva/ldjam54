@@ -18,5 +18,7 @@
       "select_language_button": "Selecionar idioma",
       "close_game": "Fechar jogo?",
       "confirm_close_game_button": "Sim",
-      "decline_close_game_button": "Não"
+      "decline_close_game_button": "Não",
+      "privacy_policy_button": "Política de privacidade",
+      "terms_of_service_button": "Termos de serviço"
 }
