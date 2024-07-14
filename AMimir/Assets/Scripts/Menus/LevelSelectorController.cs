@@ -6,6 +6,7 @@ using AppCore.State;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Application = AppCore.Application;
 using Button = UnityEngine.UI.Button;
 
@@ -18,6 +19,8 @@ namespace Menus
     
         [SerializeField] private TMP_Text worldTemplateLabel;
         [SerializeField] private LevelButton levelTemplateButton;
+        [SerializeField] private LayoutGroup worldTemplateLayout;
+        
         [SerializeField] private Button settingsButton;
         [SerializeField] private SettingsPopUp settingsPopUp;
         [SerializeField] private CloseGamePopUp closeGamePopUp;
@@ -65,24 +68,26 @@ namespace Menus
 
         private void CreateWorldSection(WorldData world)
         {
-            var worldLabel = Instantiate(worldTemplateLabel, worldTemplateLabel.transform.parent);
+            var parent = worldTemplateLabel.transform.parent;
+            var worldLabel = Instantiate(worldTemplateLabel, parent);
+            var worldLayout = Instantiate(worldTemplateLayout, parent);
 
             var localizedWorld = _localizationService.GetTranslatedText(world.name);
             
             worldLabel.text = localizedWorld.ToUpper();
             for (var l = 1; l <= world.levelCount; l++)
             {
-                CreateLevelButton(world.number, l);
+                CreateLevelButton(world.number, l, worldLayout.transform);
             }
         }
 
-        private void CreateLevelButton(int world, int level)
+        private void CreateLevelButton(int world, int level, Transform container)
         {
             var localizedLevel = _localizationService.GetTranslatedText("level");
             
-            var newLevelButton = Instantiate(levelTemplateButton, levelTemplateButton.transform.parent);
+            var newLevelButton = Instantiate(levelTemplateButton, container);
             bool isCompleted = _stateService.gameState.LevelsState.winLevels.Contains($"world_{world:D2}_level_{level:D2}");
-            newLevelButton.Setup($"{localizedLevel} {level:D2}", isCompleted, ()=>LoadLevel(world, level));
+            newLevelButton.Setup($"{localizedLevel} {level:D2}", world, isCompleted, ()=>LoadLevel(world, level));
             
         }
 
