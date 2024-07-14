@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Firebase;
+using Firebase.Analytics;
 using UnityEngine;
 
 namespace AppCore.Firebase
@@ -23,6 +25,11 @@ namespace AppCore.Firebase
                 Initialized = false;
                 Debug.Log("Firebase Failed");
             }
+        }
+
+        public void LogEvent(string name, params Parameter[] parameters)
+        {
+            FirebaseAnalytics.LogEvent(name, parameters);
         }
     }
 }
