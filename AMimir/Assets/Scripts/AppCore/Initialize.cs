@@ -1,5 +1,7 @@
-﻿using AppCore.Audio;
+﻿using System.Threading.Tasks;
+using AppCore.Audio;
 using AppCore.BackKey;
+using AppCore.Firebase;
 using AppCore.Localization;
 using AppCore.SafeArea;
 using AppCore.State;
@@ -17,15 +19,17 @@ namespace AppCore
         [SerializeField] private BackKeyService backKeyService;
         [SerializeField] private SafeAreaService safeAreaService;
         
-        private StateService stateService;
-        
         public static string SceneToStart = null;
         
-        private void Start()
+        private async void Start()
         {
             DontDestroyOnLoad(servicesContainer);
+
+            var firebaseService = new FirebaseService();
+            await firebaseService.Init();
+            Application.Instance.Add(firebaseService);
             
-            stateService = new StateService();
+            var stateService = new StateService();
             stateService.Init();
             Application.Instance.Add(stateService);
             
@@ -40,7 +44,7 @@ namespace AppCore
             Application.Instance.Add(safeAreaService);
             
             Application.Instance.Init();
-
+            
             if (!SceneToStart.IsNullOrEmpty())
             {
                 SceneManager.LoadScene(SceneToStart);

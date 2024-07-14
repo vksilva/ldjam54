@@ -1,5 +1,39 @@
 {
   "dependencies": {
+    "com.google.external-dependency-manager": {
+      "version": "git+https://github.com/GameWorkstore/com.google.external-dependency-manager.git#1.2.180",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "d237e2fc0a2f561335ce360f831f37dde151d7d0"
+    },
+    "com.google.firebase.analytics": {
+      "version": "git+https://github.com/GameWorkstore/com.google.firebase.analytics.git#12.1.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.google.firebase.app": "12.1.0"
+      },
+      "hash": "2db34f3983d467af47d9c86bbba12ff65569879d"
+    },
+    "com.google.firebase.app": {
+      "version": "git+https://github.com/GameWorkstore/com.google.firebase.app.git#12.1.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.google.external-dependency-manager": "1.2.177"
+      },
+      "hash": "233ba8541f97bb6afcb4149b3c27415fde2b38df"
+    },
+    "com.google.firebase.crashlytics": {
+      "version": "git+https://github.com/GameWorkstore/com.google.firebase.crashlytics.git#12.1.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.google.firebase.app": "12.1.0"
+      },
+      "hash": "80142b0e4951236cf802a9340b65ef3625bac32b"
+    },
     "com.unity.2d.animation": {
       "version": "9.0.3",
       "depth": 1,
@@ -170,6 +204,13 @@
     "com.unity.mathematics": {
       "version": "1.2.6",
       "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.mobile.android-logcat": {
+      "version": "1.3.2",
+      "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"

@@ -1,5 +1,4 @@
-﻿using AppCore;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using UnityEngine;
 
 namespace Gameplay.Editor.Tests
