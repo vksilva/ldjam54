@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Firebase;
 using Firebase.Analytics;
@@ -17,7 +18,6 @@ namespace AppCore.Firebase
             {
                 firebaseApp = FirebaseApp.DefaultInstance;
                 Initialized = true;
-                Debug.Log("Firebase Initialized");
             }
             else
             {
@@ -31,6 +31,7 @@ namespace AppCore.Firebase
             if (Initialized)
             {
                 FirebaseAnalytics.LogEvent(name, parameters);
+                Debug.Log($"Firebase: [{name}]");
             }
         }
     }
