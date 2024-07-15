@@ -23,12 +23,13 @@ namespace AppCore.Tracking
             firebaseService.LogEvent(TrackingEvents.LevelStarted, param);
         }
 
-        public void TrackLevelEnded(int level, int moves, float timeSeconds, string result)
+        public void TrackLevelEnded(string level, int moves, int failedMoves, float timeSeconds, string result)
         {
             Parameter[] param =
             {
                 new(TrackingParameters.Level, level),
                 new(TrackingParameters.Moves, moves),
+                new(TrackingParameters.FailedMoves, failedMoves),
                 new(TrackingParameters.TimeSeconds, timeSeconds),
                 new(TrackingParameters.Result, result),
             };

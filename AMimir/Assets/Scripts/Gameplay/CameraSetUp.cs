@@ -68,7 +68,6 @@ namespace Gameplay
                 Mathf.Lerp(cameraRect.yMin, cameraRect.yMax, safeAreaAnchors.yMax)
             );
             safeArea = Rect.MinMaxRect(min.x, min.y, max.x, max.y);
-            Debug.Log($"camera: {cameraRect} anchor: {safeAreaAnchors} safeArea: {safeArea}");
         }
 
         private void UpdateCameraSize()

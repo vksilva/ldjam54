@@ -12,6 +12,7 @@ namespace AppCore.Tracking
     {
         public const string Level = "level";
         public const string Moves = "moves";
+        public const string FailedMoves = "failed_moves";
         public const string TimeSeconds = "time_s";
         public const string Result = "result";
     }
