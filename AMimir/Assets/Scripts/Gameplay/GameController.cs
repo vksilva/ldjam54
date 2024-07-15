@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AppCore;
 using AppCore.Audio;
 using AppCore.State;
+using AppCore.Tracking;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Application = AppCore.Application;
@@ -15,18 +17,22 @@ namespace Gameplay
         
         public static GameController Instance { get; private set; }
         public readonly Dictionary<Vector2Int, HighlightGridTile> highlightGridTiles = new();
+        public int failedMovesCounter = 0;
+        
+        private AudioService _audioService;
+        private StateService _stateService;
+        private TrackingService _trackingService;
         private Bed _bed;
         private CameraSetUp _cameraSetUp;
         private Vector2Int _bedSize;
         private static readonly Vector3 _offset = new(0.5f, 0.5f, 0f);
         private readonly LayerMask _checkLayer = 9;
         private HighlightGridTile gridTilePrefab;
-        private GameObject frameSquare;
-
-        private AudioService _audioService;
-        private StateService _stateService;
-
+        private int movesCounter = 0;
+        private float timeCounter = 0;
         private readonly RaycastHit2D[] _rayCastResult = new RaycastHit2D[5];
+        private const string winMessage = "Win";
+        private const string quitMessage = "Quit";
 
         private void Awake()
         {
@@ -50,12 +56,14 @@ namespace Gameplay
                 return;
             }
             gridTilePrefab = Resources.Load<HighlightGridTile>("GameElements/grid_tile");
-            frameSquare = Resources.Load<GameObject>("GameElements/Square");
 
             GetServices();
             SetUpBed();
 
             SceneManager.LoadScene("LevelUI", LoadSceneMode.Additive);
+            
+            _stateService.gameState.LevelsState.lastPlayedLevel = SceneManager.GetActiveScene().name;
+            _stateService.Save();
         }
 
         private void SetUpBed()
@@ -89,10 +97,16 @@ namespace Gameplay
             }
         }
 
+        private void Update()
+        {
+            timeCounter += Time.deltaTime;
+        }
+
         private void GetServices()
         {
             _audioService = Application.Get<AudioService>();
             _stateService = Application.Get<StateService>();
+            _trackingService = Application.Get<TrackingService>();
         }
 
         private void OnDestroy()
@@ -102,6 +116,8 @@ namespace Gameplay
 
         private async void OpenEndGamePopUp()
         {
+            _trackingService.TrackLevelEnded(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter, timeCounter, winMessage);
+            
             await Task.Delay(500);
             _audioService.PlaySfx(AudioSFXEnum.EndGameCelebration);
             LevelUIController.Instance.ShowEndGameCanvas();
@@ -109,6 +125,7 @@ namespace Gameplay
 
         public void OnPiecePlaced()
         {
+            movesCounter++;
             if (IsBedCompleted())
             {
                 if (!_stateService.gameState.LevelsState.winLevels.Contains(SceneManager.GetActiveScene().name))

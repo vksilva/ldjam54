@@ -199,12 +199,14 @@ namespace Gameplay
                     {
                         //Move piece back to original position
                         // TODO check surrounding area for a valid position instead of returning piece
+                        
                         _catCollider.enabled = false;
                         transform.DOMove(_positionBeforeMove, catReturnSpeed).SetSpeedBased().OnComplete(()=>
                         {
                             _catCollider.enabled = true;
                             _pieceSortingGroup.sortingLayerName = DefaultPieceSortingLayer;
                         });
+                        _gameController.failedMovesCounter++;
                         return;
                     }
                 }
