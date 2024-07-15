@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Firebase;
 using Firebase.Analytics;
@@ -29,7 +28,10 @@ namespace AppCore.Firebase
 
         public void LogEvent(string name, params Parameter[] parameters)
         {
-            FirebaseAnalytics.LogEvent(name, parameters);
+            if (Initialized)
+            {
+                FirebaseAnalytics.LogEvent(name, parameters);
+            }
         }
     }
 }

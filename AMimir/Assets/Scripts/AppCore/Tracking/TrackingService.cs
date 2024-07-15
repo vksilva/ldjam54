@@ -1,7 +1,7 @@
 using AppCore.Firebase;
 using Firebase.Analytics;
 
-namespace AppCore
+namespace AppCore.Tracking
 {
     public class TrackingService
     {
@@ -28,9 +28,9 @@ namespace AppCore
             Parameter[] param =
             {
                 new(TrackingParameters.Level, level),
-                new(TrackingParameters.Level, moves),
-                new(TrackingParameters.Level, timeSeconds),
-                new(TrackingParameters.Level, result),
+                new(TrackingParameters.Moves, moves),
+                new(TrackingParameters.TimeSeconds, timeSeconds),
+                new(TrackingParameters.Result, result),
             };
             firebaseService.LogEvent(TrackingEvents.LevelEnded, param);
         }

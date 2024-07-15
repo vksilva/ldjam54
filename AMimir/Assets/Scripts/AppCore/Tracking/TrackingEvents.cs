@@ -1,4 +1,4 @@
-namespace AppCore
+namespace AppCore.Tracking
 {
     public static class TrackingEvents
     {
@@ -10,6 +10,9 @@ namespace AppCore
 
     public static class TrackingParameters
     {
-        public static string Level = "level";
+        public const string Level = "level";
+        public const string Moves = "moves";
+        public const string TimeSeconds = "time_s";
+        public const string Result = "result";
     }
 }

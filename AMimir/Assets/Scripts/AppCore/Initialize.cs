@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using AppCore.Audio;
+﻿using AppCore.Audio;
 using AppCore.BackKey;
 using AppCore.Firebase;
 using AppCore.Localization;
 using AppCore.SafeArea;
 using AppCore.State;
+using AppCore.Tracking;
 using Extensions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
