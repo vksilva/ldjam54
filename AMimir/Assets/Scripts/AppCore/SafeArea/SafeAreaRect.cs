@@ -23,6 +23,11 @@ namespace AppCore.SafeArea
 
         private void OnDestroy()
         {
+            if (!Application.Initialized)
+            {
+                return;
+            }
+            
             safeAreaService.UnregisterSafeArea(UpdatePanel);
         }
 

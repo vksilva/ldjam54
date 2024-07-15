@@ -18,7 +18,6 @@ namespace AppCore.SafeArea
         {
             updateSafeAreaEvent.AddListener(onUpdate);
             updateSafeAreaEvent?.Invoke(anchor);
-            Debug.Log($"RegisterSafeArea to {anchor}");
         }
 
         public void UnregisterSafeArea(UnityAction<Rect> onUpdate)
