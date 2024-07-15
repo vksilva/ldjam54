@@ -1,8 +1,11 @@
+using System.Threading.Tasks;
 using AppCore;
 using AppCore.Audio;
 using AppCore.BackKey;
 using AppCore.Localization;
 using AppCore.State;
+using DG.Tweening;
+using Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,6 +27,8 @@ namespace Menus
         [SerializeField] private Button settingsButton;
         [SerializeField] private SettingsPopUp settingsPopUp;
         [SerializeField] private CloseGamePopUp closeGamePopUp;
+        [SerializeField] private ScrollRect scrollRect;
+        [SerializeField] private Canvas loadingCanvas;
         
         private static AudioService _audioService;
         private static StateService _stateService;
@@ -40,12 +45,14 @@ namespace Menus
                 return;
             }
             
+            loadingCanvas.gameObject.SetActive(true);
+            
             GetServices();
             _audioService.PlayMusic(AudioMusicEnum.menu);
             
-            for (var index = 0; index < worlds.Length; index++)
+            foreach (var t in worlds)
             {
-                CreateWorldSection(worlds[index]);
+                CreateWorldSection(t);
             }
         
             worldTemplateLabel.gameObject.SetActive(false);
@@ -56,6 +63,34 @@ namespace Menus
             _backKeyService.PushAction(CloseLevelSelector);
             
             ConnectButtons();
+
+            FocusLastPlayedLevel();
+        }
+
+        private async void FocusLastPlayedLevel()
+        {
+            Canvas.ForceUpdateCanvases();
+            await Task.Delay(1);
+            var button = GameObject.Find(_stateService.gameState.LevelsState.lastPlayedLevel);
+            if (_stateService.gameState.LevelsState.lastPlayedLevel.IsNullOrEmpty() || !button)
+            {
+                return;
+            }
+            
+            var originalMovementType = scrollRect.movementType;
+            scrollRect.movementType = ScrollRect.MovementType.Clamped;
+            var buttonTransform = button.GetComponent<RectTransform>();
+            var layoutTransform = button.transform.parent.GetComponent<RectTransform>();
+            var contentTransform = scrollRect.content.GetComponent<RectTransform>();
+            var contentPos =  contentTransform.anchoredPosition;
+            contentPos.y = - (buttonTransform.anchoredPosition.y + layoutTransform.anchoredPosition.y);
+            contentTransform.anchoredPosition = contentPos;
+            
+            Canvas.ForceUpdateCanvases();
+
+            await Task.Delay(1);
+            loadingCanvas.gameObject.SetActive(false);
+            scrollRect.movementType = originalMovementType;
         }
 
         private static void GetServices()
@@ -84,18 +119,18 @@ namespace Menus
         private void CreateLevelButton(int world, int level, Transform container)
         {
             var localizedLevel = _localizationService.GetTranslatedText("level");
-            
+            var levelName = LevelUtils.GetLevelName(world, level);
             var newLevelButton = Instantiate(levelTemplateButton, container);
-            bool isCompleted = _stateService.gameState.LevelsState.winLevels.Contains($"world_{world:D2}_level_{level:D2}");
-            newLevelButton.Setup($"{localizedLevel} {level:D2}", world, isCompleted, ()=>LoadLevel(world, level));
-            
+            newLevelButton.name = levelName;
+            bool isCompleted = _stateService.gameState.LevelsState.winLevels.Contains(levelName);
+            newLevelButton.Setup($"{localizedLevel} {level:D2}", world, isCompleted, ()=>LoadLevel(levelName));
         }
 
-        private static void LoadLevel(int world, int level)
+        private static void LoadLevel(string levelName)
         {
             _audioService.PlaySfx(AudioSFXEnum.click);
-            
-            var sceneName = $"world_{world:D2}_level_{level:D2}";
+
+            var sceneName = levelName;
             SceneManager.LoadScene(sceneName);
         }
 
