@@ -19,11 +19,11 @@ namespace Menus
     {
         // Each entry value is how many levels each world have
         [SerializeField] private WorldData[] worlds;
-    
+
         [SerializeField] private TMP_Text worldTemplateLabel;
         [SerializeField] private LevelButton levelTemplateButton;
         [SerializeField] private LayoutGroup worldTemplateLayout;
-        
+
         [SerializeField] private Button settingsButton;
         [SerializeField] private SettingsPopUp settingsPopUp;
         [SerializeField] private CloseGamePopUp closeGamePopUp;
@@ -34,8 +34,8 @@ namespace Menus
         private static StateService _stateService;
         private static LocalizationService _localizationService;
         private static BackKeyService _backKeyService;
-        
-        private void Start()
+
+        private async void Start()
         {
             if (!Application.Initialized)
             {
@@ -44,52 +44,55 @@ namespace Menus
                 SceneManager.LoadScene(0);
                 return;
             }
-            
+
             loadingCanvas.gameObject.SetActive(true);
-            
+
             GetServices();
             _audioService.PlayMusic(AudioMusicEnum.menu);
-            
+
             foreach (var t in worlds)
             {
                 CreateWorldSection(t);
             }
-        
+
             worldTemplateLabel.gameObject.SetActive(false);
             levelTemplateButton.gameObject.SetActive(false);
             settingsPopUp.gameObject.SetActive(false);
             closeGamePopUp.gameObject.SetActive(false);
-            
+
             _backKeyService.PushAction(CloseLevelSelector);
-            
+
             ConnectButtons();
 
-            FocusLastPlayedLevel();
+            await FocusLastPlayedLevel();
+
+            loadingCanvas.gameObject.SetActive(false);
         }
 
-        private async void FocusLastPlayedLevel()
+        private async Task FocusLastPlayedLevel()
         {
             Canvas.ForceUpdateCanvases();
-            await Task.Delay(1);
+            await Task.Delay(100);
             var button = GameObject.Find(_stateService.gameState.LevelsState.lastPlayedLevel);
+            Debug.Log($"Focusing on button for level {button.name}");
             if (_stateService.gameState.LevelsState.lastPlayedLevel.IsNullOrEmpty() || !button)
             {
                 return;
             }
-            
+
             var originalMovementType = scrollRect.movementType;
+            var offset = 0;
             scrollRect.movementType = ScrollRect.MovementType.Clamped;
             var buttonTransform = button.GetComponent<RectTransform>();
             var layoutTransform = button.transform.parent.GetComponent<RectTransform>();
             var contentTransform = scrollRect.content.GetComponent<RectTransform>();
-            var contentPos =  contentTransform.anchoredPosition;
-            contentPos.y = - (buttonTransform.anchoredPosition.y + layoutTransform.anchoredPosition.y);
+            var contentPos = contentTransform.anchoredPosition;
+            contentPos.y = -(buttonTransform.anchoredPosition.y + layoutTransform.anchoredPosition.y + offset);
             contentTransform.anchoredPosition = contentPos;
-            
+
             Canvas.ForceUpdateCanvases();
 
             await Task.Delay(1);
-            loadingCanvas.gameObject.SetActive(false);
             scrollRect.movementType = originalMovementType;
         }
 
@@ -106,9 +109,10 @@ namespace Menus
             var parent = worldTemplateLabel.transform.parent;
             var worldLabel = Instantiate(worldTemplateLabel, parent);
             var worldLayout = Instantiate(worldTemplateLayout, parent);
+            worldLayout.name = $"world_{world.number:2D}_layout";
 
             var localizedWorld = _localizationService.GetTranslatedText(world.name);
-            
+
             worldLabel.text = localizedWorld.ToUpper();
             for (var l = 1; l <= world.levelCount; l++)
             {
@@ -123,7 +127,7 @@ namespace Menus
             var newLevelButton = Instantiate(levelTemplateButton, container);
             newLevelButton.name = levelName;
             bool isCompleted = _stateService.gameState.LevelsState.winLevels.Contains(levelName);
-            newLevelButton.Setup($"{localizedLevel} {level:D2}", world, isCompleted, ()=>LoadLevel(levelName));
+            newLevelButton.Setup($"{localizedLevel} {level:D2}", world, isCompleted, () => LoadLevel(levelName));
         }
 
         private static void LoadLevel(string levelName)
