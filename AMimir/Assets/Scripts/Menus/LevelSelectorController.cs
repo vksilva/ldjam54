@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using AppCore;
 using AppCore.Audio;
@@ -8,6 +9,7 @@ using Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Application = AppCore.Application;
 using Button = UnityEngine.UI.Button;
@@ -19,7 +21,7 @@ namespace Menus
         // Each entry value is how many levels each world have
         [SerializeField] private WorldData[] worlds;
 
-        [SerializeField] private TMP_Text worldTemplateLabel;
+        [FormerlySerializedAs("worldInformation")] [FormerlySerializedAs("worldTemplateLabel")] [SerializeField] private WorldInformationContainer worldInformationContainer;
         [SerializeField] private LevelButton levelTemplateButton;
         [SerializeField] private LayoutGroup worldTemplateLayout;
 
@@ -55,7 +57,7 @@ namespace Menus
                 CreateWorldSection(t);
             }
 
-            worldTemplateLabel.gameObject.SetActive(false);
+            worldInformationContainer.gameObject.SetActive(false);
             levelTemplateButton.gameObject.SetActive(false);
             settingsPopUp.gameObject.SetActive(false);
             closeGamePopUp.gameObject.SetActive(false);
@@ -79,7 +81,6 @@ namespace Menus
             {
                 return;
             }
-            Debug.Log($"Focusing on button for level {button.name}");
 
             var originalMovementType = scrollRect.movementType;
             scrollRect.movementType = ScrollRect.MovementType.Clamped;
@@ -106,14 +107,17 @@ namespace Menus
 
         private void CreateWorldSection(WorldData world)
         {
-            var parent = worldTemplateLabel.transform.parent;
-            var worldLabel = Instantiate(worldTemplateLabel, parent);
+            var parent = worldInformationContainer.transform.parent;
+            var worldLabel = Instantiate(worldInformationContainer, parent);
             var worldLayout = Instantiate(worldTemplateLayout, parent);
-            worldLayout.name = $"world_{world.number:2D}_layout";
+            worldLayout.name = $"world_{world.number:D2}_layout";
 
             var localizedWorld = _localizationService.GetTranslatedText(world.name);
 
-            worldLabel.text = localizedWorld.ToUpper();
+            var completedCount = _stateService.gameState.LevelsState.winLevels
+                .Count(level => level.StartsWith($"world_{world.number:D2}"));
+            var worldProgress = $"{completedCount}/{world.levelCount}";
+            worldLabel.SetValues(localizedWorld.ToUpper(), worldProgress);
             for (var l = 1; l <= world.levelCount; l++)
             {
                 CreateLevelButton(world.number, l, worldLayout.transform);
