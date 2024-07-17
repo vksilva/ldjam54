@@ -5182,11 +5182,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 63121507}
   - {fileID: 1206839596}
   - {fileID: 1488707213}
   - {fileID: 220334438}
   - {fileID: 1058298960}
-  - {fileID: 63121507}
   m_Father: {fileID: 538903494}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6505,9 +6505,6 @@ MonoBehaviour:
   - name: hard
     number: 3
     levelCount: 6
-  - name: test
-    number: 4
-    levelCount: 100
   worldTemplateLabel: {fileID: 472174656}
   levelTemplateButton: {fileID: 157666813}
   worldTemplateLayout: {fileID: 667788929}
