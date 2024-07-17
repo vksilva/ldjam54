@@ -1,4 +1,3 @@
-using System;
 using AppCore.Audio;
 using AppCore.BackKey;
 using UnityEngine;

@@ -60,13 +60,11 @@ namespace Menus
 
         private void OnTermsOfService()
         {
-            Debug.Log($"OnTermsOfService");
             UnityEngine.Application.OpenURL("https://busta.dev/legal/terms-and-conditions/games.busta.mimir/");
         }
 
         private void OnPrivacyPolicy()
         {
-            Debug.Log($"OnPrivacyPolicy");
             UnityEngine.Application.OpenURL("https://busta.dev/legal/privacy-policy/games.busta.mimir/");
         }
 

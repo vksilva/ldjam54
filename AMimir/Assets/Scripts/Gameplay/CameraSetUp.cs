@@ -1,8 +1,6 @@
-﻿using System;
-using AppCore.SafeArea;
+﻿using AppCore.SafeArea;
 using Extensions;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Application = AppCore.Application;
 
 namespace Gameplay

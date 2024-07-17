@@ -10,14 +10,7 @@ namespace Gameplay
         
         public void SetColor(bool free)
         {
-            if (free)
-            {
-                spriteRenderer.color = freeSpaceColor;
-            }
-            else
-            {
-                spriteRenderer.color = occupiedSpaceColor;
-            }
+            spriteRenderer.color = free ? freeSpaceColor : occupiedSpaceColor;
         }
     }
 }

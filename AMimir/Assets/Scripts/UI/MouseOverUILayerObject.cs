@@ -10,12 +10,12 @@ namespace UI
         {
             PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
             eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            List<RaycastResult> results = new List<RaycastResult>();
+            var results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
 
-            for (int i = 0; i < results.Count; i++)
+            foreach (var t in results)
             {
-                if (results[i].gameObject.layer == 5) //5 = UI layer
+                if (t.gameObject.layer == 5) //5 = UI layer
                 {
                     return true;
                 }

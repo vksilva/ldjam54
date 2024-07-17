@@ -1,6 +1,6 @@
 namespace Menus
 {
-    public class LevelUtils
+    public abstract class LevelUtils
     {
         public static string GetLevelName(int world, int level)
         {

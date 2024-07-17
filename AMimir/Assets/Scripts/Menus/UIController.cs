@@ -15,10 +15,8 @@ namespace Menus
 
         private void Start()
         {
-            GetServices();
-        
             uiCanvas.gameObject.SetActive(true);
-
+            GetServices();
             AddListeners();
         }
 
@@ -35,7 +33,6 @@ namespace Menus
         private void OnPauseButtonClicked()
         {
             _audioService.PlaySfx(AudioSFXEnum.click);
-        
             pausePopUp.Show();
         }
     }

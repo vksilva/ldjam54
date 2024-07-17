@@ -4,7 +4,6 @@ using AppCore.Audio;
 using AppCore.BackKey;
 using AppCore.Localization;
 using AppCore.State;
-using DG.Tweening;
 using Extensions;
 using TMPro;
 using UnityEngine;

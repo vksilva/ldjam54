@@ -15,15 +15,12 @@ namespace Menus
         [SerializeField] private Button resetButton;
         [SerializeField] private ResetPopUpController resetPopUp;
     
-    
-    
         private static AudioService _audioService;
         private static BackKeyService _backKeyService;
     
         void Awake()
         {
             AddListeners();
-
             GetServices();
         }
 
@@ -77,7 +74,6 @@ namespace Menus
         public void Hide()
         {
             _backKeyService.PopAction();
-        
             gameObject.SetActive(false);
         }
     }

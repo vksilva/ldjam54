@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AppCore
+namespace AppCore.State
 {
     [Serializable]
     public class GameState

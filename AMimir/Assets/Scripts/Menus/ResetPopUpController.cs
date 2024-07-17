@@ -21,7 +21,11 @@ namespace Menus
         void Awake()
         {
             AddListeners();
+            GetServices();
+        }
 
+        private static void GetServices()
+        {
             _audioService = Application.Get<AudioService>();
             _backKeyService = Application.Get<BackKeyService>();
         }

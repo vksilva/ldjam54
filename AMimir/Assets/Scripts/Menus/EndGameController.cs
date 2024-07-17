@@ -1,24 +1,26 @@
-using AppCore;
 using AppCore.Audio;
 using UnityEngine;
 using UnityEngine.UI;
 using Application = AppCore.Application;
 
-public class EndGameController : MonoBehaviour
+namespace Menus
 {
-    [SerializeField] private Button backToLevelSelectorButton;
+    public class EndGameController : MonoBehaviour
+    {
+        [SerializeField] private Button backToLevelSelectorButton;
     
-    void Start()
-    {
-        gameObject.SetActive(true);
-        backToLevelSelectorButton.onClick.AddListener(OnBackToLevelSelectorButton);
-    }
+        void Start()
+        {
+            gameObject.SetActive(true);
+            backToLevelSelectorButton.onClick.AddListener(OnBackToLevelSelectorButton);
+        }
 
-    private void OnBackToLevelSelectorButton()
-    {
-        Application.Get<AudioService>().PlaySfx(AudioSFXEnum.closePopUp);
+        private void OnBackToLevelSelectorButton()
+        {
+            Application.Get<AudioService>().PlaySfx(AudioSFXEnum.closePopUp);
         
-        var command = new BackToLevelSelectorCommand();
-        command.Execute();
+            var command = new BackToLevelSelectorCommand();
+            command.Execute();
+        }
     }
 }

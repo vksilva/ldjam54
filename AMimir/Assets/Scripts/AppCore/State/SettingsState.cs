@@ -1,7 +1,7 @@
 ﻿using System;
 using AppCore.Localization;
 
-namespace AppCore
+namespace AppCore.State
 {
     [Serializable]
     public class SettingsState

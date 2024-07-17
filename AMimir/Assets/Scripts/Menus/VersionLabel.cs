@@ -1,11 +1,14 @@
 using TMPro;
 using UnityEngine;
 
-public class VersionLabel : MonoBehaviour
+namespace Menus
 {
-    void Start()
+    public class VersionLabel : MonoBehaviour
     {
-        var label = gameObject.GetComponent<TMP_Text>();
-        label.text = Application.version;
+        private void Start()
+        {
+            var label = gameObject.GetComponent<TMP_Text>();
+            label.text = Application.version;
+        }
     }
 }
