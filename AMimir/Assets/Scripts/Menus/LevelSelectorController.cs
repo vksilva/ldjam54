@@ -33,6 +33,7 @@ namespace Menus
         private static StateService _stateService;
         private static LocalizationService _localizationService;
         private static BackKeyService _backKeyService;
+        private readonly int scrollOffset = 300;
 
         private async void Start()
         {
@@ -73,20 +74,20 @@ namespace Menus
             Canvas.ForceUpdateCanvases();
             await Task.Delay(100);
             var button = GameObject.Find(_stateService.gameState.LevelsState.lastPlayedLevel);
-            Debug.Log($"Focusing on button for level {button.name}");
+            
             if (_stateService.gameState.LevelsState.lastPlayedLevel.IsNullOrEmpty() || !button)
             {
                 return;
             }
+            Debug.Log($"Focusing on button for level {button.name}");
 
             var originalMovementType = scrollRect.movementType;
-            var offset = 0;
             scrollRect.movementType = ScrollRect.MovementType.Clamped;
             var buttonTransform = button.GetComponent<RectTransform>();
             var layoutTransform = button.transform.parent.GetComponent<RectTransform>();
             var contentTransform = scrollRect.content.GetComponent<RectTransform>();
             var contentPos = contentTransform.anchoredPosition;
-            contentPos.y = -(buttonTransform.anchoredPosition.y + layoutTransform.anchoredPosition.y + offset);
+            contentPos.y = -(buttonTransform.anchoredPosition.y + layoutTransform.anchoredPosition.y + scrollOffset);
             contentTransform.anchoredPosition = contentPos;
 
             Canvas.ForceUpdateCanvases();

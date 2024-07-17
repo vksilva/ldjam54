@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading.Tasks;
 using Firebase;
 using Firebase.Analytics;
@@ -8,7 +7,7 @@ namespace AppCore.Firebase
 {
     public class FirebaseService
     {
-        public bool Initialized { get; private set; }
+        private bool Initialized { get; set; }
         private FirebaseApp firebaseApp;
         
         public async Task Init()
