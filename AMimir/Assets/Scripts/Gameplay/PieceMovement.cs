@@ -32,7 +32,7 @@ namespace Busta.Gameplay
         private readonly RaycastHit2D[] _hitResults = new RaycastHit2D[5];
         private SpriteRenderer _catRenderer;
         private static readonly int ShadowOffset = Shader.PropertyToID("_ShadowOffset");
-        private static readonly int ShadowNoise = Shader.PropertyToID("_ShadowNoise");
+        private static readonly int ShadowNoise = Shader.PropertyToID("_BreathNoise");
 
         private void Awake()
         {

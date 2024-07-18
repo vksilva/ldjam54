@@ -1,4 +1,4 @@
-Shader "Vanessa/SpritesWithShadow"
+Shader "Vanessa/BreathingAnimation"
 {
     Properties
     {
@@ -11,9 +11,9 @@ Shader "Vanessa/SpritesWithShadow"
         [PerRendererData] _EnableExternalAlpha ("Enable External Alpha", Float) = 0
         _ShadowColor ("Shadow Color", Color) = (0,0,0,1)
         [PerRendererData] _ShadowOffset("Shadow Offset", Float) = 1
-        _ShadowAmplitude("Shadow Amplitude", Vector) = (0, 0, 0, 0)
-        _ShadowSpeed("Shadow Speed", Vector) = (0, 0, 0, 0)
-        [PerRendererData] _ShadowNoise("Shadow Noise", float) = 0
+        _BreathAmplitude("Breath Amplitude", Float) = 0
+        _BreathSpeed("Breath Speed", Float) = 0
+        [PerRendererData] _BreathNoise("Shadow Noise", float) = 0
     }
 
     SubShader
@@ -47,9 +47,9 @@ Shader "Vanessa/SpritesWithShadow"
             float4 _ShadowColor;
             float _ShadowOffset;
 
-            float4 _ShadowAmplitude;
-            float4 _ShadowSpeed;
-            float _ShadowNoise;
+            float _BreathAmplitude;
+            float _BreathSpeed;
+            float _BreathNoise;
 
             v2f ShadowVert(appdata_t IN)
             {
@@ -59,7 +59,7 @@ Shader "Vanessa/SpritesWithShadow"
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
 
                 OUT.vertex = UnityFlipSprite(
-                    IN.vertex * get_scaling(_Time.y + _ShadowNoise, _ShadowAmplitude.xy, _ShadowSpeed.xy), _Flip);
+                    IN.vertex * get_scaling(_Time.y + _BreathNoise, _BreathAmplitude, _BreathSpeed), _Flip);
                 OUT.vertex = UnityObjectToClipPos(OUT.vertex);
                 OUT.vertex += mul(unity_CameraProjection,
                                   float4(-0.1 * _ShadowOffset, _ProjectionParams.x * -0.1 * _ShadowOffset, 0, 0));
@@ -94,9 +94,9 @@ Shader "Vanessa/SpritesWithShadow"
             #include "UnitySprites.cginc"
             #include "SpriteScaling.cginc"
 
-            float4 _ShadowAmplitude;
-            float4 _ShadowSpeed;
-            float _ShadowNoise;
+            float _BreathAmplitude;
+            float _BreathSpeed;
+            float _BreathNoise;
 
             v2f FaceVert(appdata_t IN)
             {
@@ -106,7 +106,7 @@ Shader "Vanessa/SpritesWithShadow"
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
 
                 OUT.vertex = UnityFlipSprite(
-                    IN.vertex * get_scaling(_Time.y + _ShadowNoise, _ShadowAmplitude, _ShadowSpeed), _Flip);
+                    IN.vertex * get_scaling(_Time.y + _BreathNoise, _BreathAmplitude, _BreathSpeed), _Flip);
                 OUT.vertex = UnityObjectToClipPos(OUT.vertex);
                 OUT.texcoord = IN.texcoord;
                 OUT.color = IN.color * _Color * _RendererColor;
