@@ -11,51 +11,62 @@ namespace Busta.Menus
     {
         [SerializeField] private Button closeButton;
         [SerializeField] private Button backgroundButton;
-        [SerializeField] private Button pt_brLanguageButton;
-        [SerializeField] private Button en_usLanguageButton;
+        [SerializeField] private TextButton languageButtonTemplate;
         [SerializeField] private SettingsPopUp settingsPopUp;
     
-        private AudioService _audioService;
-        private LocalizationService _localizationService;
-        private BackKeyService _backKeyService;
+        private AudioService audioService;
+        private LocalizationService localizationService;
+        private BackKeyService backKeyService;
     
         private void Awake()
         {
             GetServices();
             AddListeners();
+            CreateLanguageButtons();
         }
 
         private void GetServices()
         {
-            _audioService = Application.Get<AudioService>();
-            _localizationService = Application.Get<LocalizationService>();
-            _backKeyService = Application.Get<BackKeyService>();
+            audioService = Application.Get<AudioService>();
+            localizationService = Application.Get<LocalizationService>();
+            backKeyService = Application.Get<BackKeyService>();
         }
 
         private void AddListeners()
         {
             closeButton.onClick.AddListener(Hide);
             backgroundButton.onClick.AddListener(Hide);
-            pt_brLanguageButton.onClick.AddListener(()=>OnChangeLanguage(LanguagesEnum.pt_br));
-            en_usLanguageButton.onClick.AddListener(()=>OnChangeLanguage(LanguagesEnum.en_us));
         }
 
-        private void OnChangeLanguage(LanguagesEnum language)
+        private void CreateLanguageButtons()
         {
-            _localizationService.SetCurrentLanguage(language);
+            var languages = localizationService.GetLanguageInfo();
+
+            foreach (var language in languages)
+            {
+                var button = Instantiate(languageButtonTemplate, languageButtonTemplate.transform.parent);
+                button.Init(language.Name, () => OnChangeLanguage(language.Key));
+            }
+            
+            languageButtonTemplate.gameObject.SetActive(false);
+        }
+        
+        private void OnChangeLanguage(string language)
+        {
+            localizationService.SetCurrentLanguage(language);
         }
 
         public void Show()
         {
             settingsPopUp.Hide();
             gameObject.SetActive(true);
-            _backKeyService.PushAction(Hide);
+            backKeyService.PushAction(Hide);
         }
 
         public void Hide()
         {
-            _audioService.PlaySfx(AudioSFXEnum.closePopUp);
-            _backKeyService.PopAction();
+            audioService.PlaySfx(AudioSFXEnum.closePopUp);
+            backKeyService.PopAction();
         
             gameObject.SetActive(false);
         

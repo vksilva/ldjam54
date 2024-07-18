@@ -16,7 +16,8 @@ namespace Busta.AppCore.SafeArea
 
         public void Init(SafeAreaConfigurations config)
         {
-            this.configurations = config;
+            configurations = config;
+            UpdateSafeArea();
         }
 
         public void RegisterSafeArea(UnityAction<Rect> onUpdate)
@@ -28,16 +29,6 @@ namespace Busta.AppCore.SafeArea
         public void UnregisterSafeArea(UnityAction<Rect> onUpdate)
         {
             updateSafeAreaEvent.RemoveListener(onUpdate);
-        }
-
-        public Rect GetSafeArea()
-        {
-            return anchor;
-        }
-        
-        private void Update()
-        {
-            UpdateSafeArea();
         }
 
         private void UpdateSafeArea()

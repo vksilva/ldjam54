@@ -17,22 +17,34 @@ namespace Busta.AppCore.Localization
 
         public void Init(LocalizationConfigurations configurations, StateService state)
         {
+            languageMap = configurations.Localizations.ToDictionary(l => l.Key, l => l);
+
             _stateService = state;
-            if (_stateService.gameState.settingsState.currentLanguage.IsNullOrEmpty())
+            if (_stateService.gameState.settingsState.currentLanguage.IsNullOrEmpty() ||
+                !languageMap.ContainsKey(_stateService.gameState.settingsState.currentLanguage))
             {
-                var currentDeviceLanguage = UnityEngine.Application.systemLanguage;
-                _stateService.gameState.settingsState.currentLanguage = currentDeviceLanguage switch
-                {
-                    SystemLanguage.Portuguese => "pt_br",
-                    SystemLanguage.English => "en_us",
-                    SystemLanguage.German => "de_de",
-                    _ => "en_us"
-                };
+                _stateService.gameState.settingsState.currentLanguage = GetCurrentSystemLanguage();
             }
 
-            languageMap = configurations.Localizations.ToDictionary(l => l.Key, l => l);
+            SetCurrentLanguage(_stateService.gameState.settingsState.currentLanguage);
         }
-        
+
+        private string GetCurrentSystemLanguage()
+        {
+            return UnityEngine.Application.systemLanguage switch
+            {
+                SystemLanguage.Portuguese => "pt_br",
+                SystemLanguage.English => "en_us",
+                SystemLanguage.German => "de_de",
+                _ => "en_us"
+            };
+        }
+
+        public List<(string Key, string Name)> GetLanguageInfo()
+        {
+            return languageMap.Select(language => (language.Key, language.Value.Name)).ToList();
+        }
+
         public void SetCurrentLanguage(string language)
         {
             languageDictionary = languageMap[language].Translations.ToDictionary(t => t.Key, t => t.Value);
