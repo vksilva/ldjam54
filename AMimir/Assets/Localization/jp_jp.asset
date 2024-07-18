@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d530079e6ec4824b86e762cd8b48e6d, type: 3}
+  m_Name: jp_jp
+  m_EditorClassIdentifier: 
+  Name: "\u65E5\u672C\u8A9E"
+  Key: jp_jp
+  Translations:
+  - Key: title
+    Value: 
+  - Key: settings
+    Value: 
+  - Key: sound_effects
+    Value: 
+  - Key: music
+    Value: 
+  - Key: level
+    Value: 
+  - Key: small
+    Value: 
+  - Key: medium
+    Value: 
+  - Key: large
+    Value: 
+  - Key: challenge
+    Value: 
+  - Key: credits
+    Value: 
+  - Key: reset_title
+    Value: 
+  - Key: reset_button
+    Value: 
+  - Key: continue_button
+    Value: 
+  - Key: all_cats_are_a_mimir
+    Value: 
+  - Key: back_to_home
+    Value: 
+  - Key: paused
+    Value: 
+  - Key: language
+    Value: 
+  - Key: select_language_button
+    Value: 
+  - Key: close_game
+    Value: 
+  - Key: confirm_close_game_button
+    Value: 
+  - Key: decline_close_game_button
+    Value: 
+  - Key: privacy_policy_button
+    Value: 
+  - Key: terms_of_service_button
+    Value: 
