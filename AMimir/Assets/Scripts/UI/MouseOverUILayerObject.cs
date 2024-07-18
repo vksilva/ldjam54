@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UI
+namespace Busta.UI
 {
     public static class MouseOverUILayerObject
     {

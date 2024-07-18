@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace AppCore.Localization
+namespace Busta.AppCore.Localization
 {
     [Serializable]
     public struct LocalizedConfigEntry<T>

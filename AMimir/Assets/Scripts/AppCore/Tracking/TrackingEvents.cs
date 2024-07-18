@@ -1,4 +1,4 @@
-namespace AppCore.Tracking
+namespace Busta.AppCore.Tracking
 {
     public static class TrackingEvents
     {

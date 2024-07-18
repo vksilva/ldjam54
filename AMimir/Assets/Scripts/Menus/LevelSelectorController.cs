@@ -1,20 +1,19 @@
 using System.Linq;
 using System.Threading.Tasks;
-using AppCore;
-using AppCore.Audio;
-using AppCore.BackKey;
-using AppCore.Localization;
-using AppCore.State;
-using Extensions;
-using TMPro;
+using Busta.AppCore;
+using Busta.AppCore.Audio;
+using Busta.AppCore.BackKey;
+using Busta.AppCore.Localization;
+using Busta.AppCore.State;
+using Busta.Extensions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
-using Application = AppCore.Application;
+using Application = Busta.AppCore.Application;
 using Button = UnityEngine.UI.Button;
 
-namespace Menus
+namespace Busta.Menus
 {
     public class LevelSelectorController : MonoBehaviour
     {

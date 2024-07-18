@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Menus
+namespace Busta.Menus
 {
     public class LevelButton : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AppCore.Audio
+namespace Busta.AppCore.Audio
 {
     public struct SfxHandler
     {

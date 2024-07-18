@@ -1,9 +1,12 @@
 using UnityEngine.SceneManagement;
 
-public class BackToLevelSelectorCommand
+namespace Busta.Commands
 {
-    public void Execute()
+    public class BackToLevelSelectorCommand
     {
-        SceneManager.LoadScene("LevelSelector");
+        public void Execute()
+        {
+            SceneManager.LoadScene("LevelSelector");
+        }
     }
 }

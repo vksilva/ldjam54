@@ -1,5 +1,5 @@
 
-    namespace AppCore.Localization
+    namespace Busta.AppCore.Localization
     {
         public enum LanguagesEnum
         {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AppCore.State
+namespace Busta.AppCore.State
 {
     public class StateService
     {

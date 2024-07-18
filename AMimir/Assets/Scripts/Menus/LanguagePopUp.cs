@@ -1,11 +1,11 @@
-using AppCore.Audio;
-using AppCore.BackKey;
-using AppCore.Localization;
+using Busta.AppCore.Audio;
+using Busta.AppCore.BackKey;
+using Busta.AppCore.Localization;
 using UnityEngine;
 using UnityEngine.UI;
-using Application = AppCore.Application;
+using Application = Busta.AppCore.Application;
 
-namespace Menus
+namespace Busta.Menus
 {
     public class LanguagePopUp : MonoBehaviour, IPopUp
     {

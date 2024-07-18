@@ -3,7 +3,7 @@ using Firebase;
 using Firebase.Analytics;
 using UnityEngine;
 
-namespace AppCore.Firebase
+namespace Busta.AppCore.Firebase
 {
     public class FirebaseService
     {

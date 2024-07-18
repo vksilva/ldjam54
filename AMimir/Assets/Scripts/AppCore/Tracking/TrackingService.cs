@@ -1,7 +1,7 @@
-using AppCore.Firebase;
+using Busta.AppCore.Firebase;
 using Firebase.Analytics;
 
-namespace AppCore.Tracking
+namespace Busta.AppCore.Tracking
 {
     public class TrackingService
     {

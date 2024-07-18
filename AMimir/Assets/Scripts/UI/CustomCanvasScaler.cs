@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace Busta.UI
 {
     [RequireComponent(typeof(Canvas), typeof(GraphicRaycaster))]
     public class CustomCanvasScaler : CanvasScaler

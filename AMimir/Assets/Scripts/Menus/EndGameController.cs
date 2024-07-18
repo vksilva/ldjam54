@@ -1,9 +1,10 @@
-using AppCore.Audio;
+using Busta.AppCore.Audio;
+using Busta.Commands;
 using UnityEngine;
 using UnityEngine.UI;
-using Application = AppCore.Application;
+using Application = Busta.AppCore.Application;
 
-namespace Menus
+namespace Busta.Menus
 {
     public class EndGameController : MonoBehaviour
     {

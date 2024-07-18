@@ -1,4 +1,4 @@
-﻿namespace AppCore.Audio
+﻿namespace Busta.AppCore.Audio
 {
     public enum AudioMusicEnum
     {

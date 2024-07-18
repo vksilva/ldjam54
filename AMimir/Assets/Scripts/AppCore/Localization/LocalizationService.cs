@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using AppCore.State;
-using UnityEngine;
+using Busta.AppCore.State;
 using Newtonsoft.Json;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace AppCore.Localization
+namespace Busta.AppCore.Localization
 {
     public class LocalizationService : MonoBehaviour
     {

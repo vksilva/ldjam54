@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Gameplay
+namespace Busta.Gameplay
 {
     public class Bed : MonoBehaviour
     {

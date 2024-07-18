@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AppCore.State
+namespace Busta.AppCore.State
 {
     [Serializable]
     public class GameState

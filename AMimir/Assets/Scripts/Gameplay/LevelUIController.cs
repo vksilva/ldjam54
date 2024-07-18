@@ -1,10 +1,10 @@
-using AppCore.Audio;
-using AppCore.BackKey;
-using Menus;
+using Busta.AppCore.Audio;
+using Busta.AppCore.BackKey;
+using Busta.Menus;
 using UnityEngine;
-using Application = AppCore.Application;
+using Application = Busta.AppCore.Application;
 
-namespace Gameplay
+namespace Busta.Gameplay
 {
     public class LevelUIController : MonoBehaviour
     {

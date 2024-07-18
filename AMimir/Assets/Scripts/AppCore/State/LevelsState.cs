@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AppCore.State
+namespace Busta.AppCore.State
 {
     [Serializable]
     public class LevelsState

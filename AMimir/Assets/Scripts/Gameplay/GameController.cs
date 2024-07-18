@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AppCore;
-using AppCore.Audio;
-using AppCore.State;
-using AppCore.Tracking;
+using Busta.AppCore;
+using Busta.AppCore.Audio;
+using Busta.AppCore.State;
+using Busta.AppCore.Tracking;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Application = AppCore.Application;
+using Application = Busta.AppCore.Application;
 
-namespace Gameplay
+namespace Busta.Gameplay
 {
     public class GameController : MonoBehaviour
     {

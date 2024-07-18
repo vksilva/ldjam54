@@ -1,15 +1,15 @@
-﻿using AppCore.Audio;
-using AppCore.BackKey;
-using AppCore.Firebase;
-using AppCore.Localization;
-using AppCore.SafeArea;
-using AppCore.State;
-using AppCore.Tracking;
-using Extensions;
+﻿using Busta.AppCore.Audio;
+using Busta.AppCore.BackKey;
+using Busta.AppCore.Firebase;
+using Busta.AppCore.Localization;
+using Busta.AppCore.SafeArea;
+using Busta.AppCore.State;
+using Busta.AppCore.Tracking;
+using Busta.Extensions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace AppCore
+namespace Busta.AppCore
 {
     public class Initialize : MonoBehaviour
     {

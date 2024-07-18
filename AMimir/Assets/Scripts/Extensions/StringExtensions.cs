@@ -1,4 +1,4 @@
-namespace Extensions
+namespace Busta.Extensions
 {
     public static class StringExtensions
     {

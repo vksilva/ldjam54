@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Extensions
+namespace Busta.Extensions
 {
     public static class VectorExtensions
     {

@@ -1,9 +1,9 @@
-﻿using AppCore.SafeArea;
-using Extensions;
+﻿using Busta.AppCore.SafeArea;
+using Busta.Extensions;
 using UnityEngine;
-using Application = AppCore.Application;
+using Application = Busta.AppCore.Application;
 
-namespace Gameplay
+namespace Busta.Gameplay
 {
     [ExecuteInEditMode]
     public class CameraSetUp : MonoBehaviour

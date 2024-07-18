@@ -1,11 +1,11 @@
-using AppCore.Audio;
+using Busta.AppCore.Audio;
+using Busta.UI;
 using DG.Tweening;
-using UI;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Random = UnityEngine.Random;
 
-namespace Gameplay
+namespace Busta.Gameplay
 {
     public class PieceMovement : MonoBehaviour
     {

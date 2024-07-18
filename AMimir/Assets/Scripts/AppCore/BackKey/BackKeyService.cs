@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AppCore.BackKey
+namespace Busta.AppCore.BackKey
 {
     public class BackKeyService : MonoBehaviour
     {

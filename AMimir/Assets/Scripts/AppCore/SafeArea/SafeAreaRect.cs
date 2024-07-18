@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AppCore.SafeArea
+namespace Busta.AppCore.SafeArea
 {
     [RequireComponent(typeof(RectTransform))]
     public class SafeAreaRect : MonoBehaviour

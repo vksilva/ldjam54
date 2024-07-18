@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Menus
+namespace Busta.Menus
 {
     public class WorldInformationContainer : MonoBehaviour
     {

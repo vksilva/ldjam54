@@ -1,4 +1,4 @@
-namespace Menus
+namespace Busta.Menus
 {
     public abstract class LevelUtils
     {

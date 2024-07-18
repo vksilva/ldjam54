@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace AppCore.Localization
+namespace Busta.AppCore.Localization
 {
     public class LocalizedText : MonoBehaviour
     {

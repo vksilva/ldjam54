@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace AppCore.SafeArea
+namespace Busta.AppCore.SafeArea
 {
     public class SafeAreaService : MonoBehaviour
     {

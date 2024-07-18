@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace AppCore.Audio
+namespace Busta.AppCore.Audio
 {
     [Serializable]
     public struct AudioConfigEntry<T>

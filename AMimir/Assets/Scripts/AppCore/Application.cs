@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AppCore
+namespace Busta.AppCore
 {
     public class Application
     {

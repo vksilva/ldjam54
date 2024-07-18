@@ -1,7 +1,7 @@
 ﻿using System;
-using AppCore.Localization;
+using Busta.AppCore.Localization;
 
-namespace AppCore.State
+namespace Busta.AppCore.State
 {
     [Serializable]
     public class SettingsState

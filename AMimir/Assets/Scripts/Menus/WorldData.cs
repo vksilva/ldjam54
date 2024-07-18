@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Menus
+namespace Busta.Menus
 {
     [Serializable]
     public struct WorldData
