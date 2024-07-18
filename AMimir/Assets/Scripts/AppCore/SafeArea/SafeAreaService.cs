@@ -1,18 +1,23 @@
+using Busta.AppCore.Configurations;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Busta.AppCore.SafeArea
 {
-    public class SafeAreaService : MonoBehaviour
+    public class SafeAreaService
     {
-        [SerializeField] private bool useDebugSafeArea;
-        [SerializeField] private Rect debugSafeArea;
-
         private readonly UnityEvent<Rect> updateSafeAreaEvent = new ();
-        private Rect SafeAreaRect => useDebugSafeArea ? debugSafeArea : Screen.safeArea;
+        private Rect SafeAreaRect => configurations.UseDebugSafeArea ? configurations.DebugSafeArea : Screen.safeArea;
 
         private Rect previousSafeArea;
         private Rect anchor;
+
+        private SafeAreaConfigurations configurations;
+
+        public void Init(SafeAreaConfigurations config)
+        {
+            this.configurations = config;
+        }
 
         public void RegisterSafeArea(UnityAction<Rect> onUpdate)
         {

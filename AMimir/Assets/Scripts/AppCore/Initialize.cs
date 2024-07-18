@@ -1,5 +1,6 @@
 ﻿using Busta.AppCore.Audio;
 using Busta.AppCore.BackKey;
+using Busta.AppCore.Configurations;
 using Busta.AppCore.Firebase;
 using Busta.AppCore.Localization;
 using Busta.AppCore.SafeArea;
@@ -13,17 +14,14 @@ namespace Busta.AppCore
 {
     public class Initialize : MonoBehaviour
     {
-        [SerializeField] private GameObject servicesContainer;
-        [SerializeField] private AudioService audioService;
-        [SerializeField] private LocalizationService localizationService;
-        [SerializeField] private BackKeyService backKeyService;
-        [SerializeField] private SafeAreaService safeAreaService;
+        [SerializeField] private GameConfigurations gameConfigurations;
 
         public static string SceneToStart = null;
 
         private async void Start()
         {
-            DontDestroyOnLoad(servicesContainer);
+            var applicationGameObject = new GameObject("Application");
+            DontDestroyOnLoad(applicationGameObject);
 
             var firebaseService = new FirebaseService();
             await firebaseService.Init();
@@ -37,14 +35,18 @@ namespace Busta.AppCore
             stateService.Init();
             Application.Instance.Add(stateService);
 
-            audioService.Init(stateService);
+            var audioService = new AudioService();
+            audioService.Init(gameConfigurations.AudioConfigurations, stateService, applicationGameObject);
             Application.Instance.Add(audioService);
 
-            localizationService.Init(stateService);
+            var localizationService = new LocalizationService();
+            localizationService.Init(gameConfigurations.LocalizationConfigurations, stateService);
             Application.Instance.Add(localizationService);
 
-            Application.Instance.Add(backKeyService);
+            Application.Instance.Add(new BackKeyService());
 
+            var safeAreaService = new SafeAreaService();
+            safeAreaService.Init(gameConfigurations.SafeAreaConfigurations);
             Application.Instance.Add(safeAreaService);
 
             Application.Instance.Init();

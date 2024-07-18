@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Busta.AppCore.Configurations;
 using Busta.AppCore.State;
+using Busta.Extensions;
 using UnityEngine;
 
 namespace Busta.AppCore.Audio
 {
-    public class AudioService : MonoBehaviour
+    public class AudioService
     {
-        [SerializeField] private int sfxCount = 4;
+        private Dictionary<AudioMusicEnum, AudioClip> musicMap = new();
+        private Dictionary<AudioSFXEnum, AudioClip> sfxMap = new();
 
-        [SerializeField] private List<AudioConfigEntry<AudioMusicEnum>> _musicConfigEntries = new ();
-        [SerializeField] private List<AudioConfigEntry<AudioSFXEnum>> _sfxConfigEntries = new ();
-
-        private Dictionary<AudioMusicEnum, AudioClip> _musicMap = new();
-        private Dictionary<AudioSFXEnum, AudioClip> _sfxMap = new();
-        
         private AudioSource MusicSource;
-        private readonly List<AudioSource> SfxSources = new ();
+        private readonly List<AudioSource> SfxSources = new();
 
         private AudioMusicEnum currentMusic = AudioMusicEnum.none;
         private AudioMusicEnum previousMusic = AudioMusicEnum.none;
@@ -25,18 +22,18 @@ namespace Busta.AppCore.Audio
         private bool musicOff;
         private bool sfxOff;
 
-        public void Init(StateService stateService)
+        public void Init(AudioConfigurations configurations, StateService stateService, GameObject applicationObject)
         {
-            _musicMap = _musicConfigEntries.ToDictionary(x => x.name, x => x.audioClip);
-            _sfxMap = _sfxConfigEntries.ToDictionary(x => x.name, x => x.audioClip);
+            musicMap = configurations.musicConfigEntries.ToDictionary(x => x.name, x => x.audioClip);
+            sfxMap = configurations.sfxConfigEntries.ToDictionary(x => x.name, x => x.audioClip);
             
-            MusicSource = gameObject.AddComponent<AudioSource>();
+            MusicSource = applicationObject.CreateChildObject<AudioSource>("musicSource");
             MusicSource.playOnAwake = false;
             MusicSource.loop = true;
-            
-            for (var i = 0; i < sfxCount; i++)
+
+            for (var i = 0; i < configurations.sfxSourcesCount; i++)
             {
-                var sfxSource = gameObject.AddComponent<AudioSource>(); 
+                var sfxSource = applicationObject.CreateChildObject<AudioSource>($"SfxSource{i}");
                 SfxSources.Add(sfxSource);
                 sfxSource.playOnAwake = false;
                 sfxSource.loop = false;
@@ -45,7 +42,7 @@ namespace Busta.AppCore.Audio
             musicOff = stateService.gameState.settingsState.isMusicOff;
             sfxOff = stateService.gameState.settingsState.isSFXOff;
         }
-        
+
         public void PlayMusic(AudioMusicEnum music)
         {
             if (musicOff)
@@ -61,11 +58,11 @@ namespace Busta.AppCore.Audio
 
             StopMusic();
 
-            if (_musicMap.TryGetValue(music, out var clip))
+            if (musicMap.TryGetValue(music, out var clip))
             {
                 currentMusic = music;
                 MusicSource.clip = clip;
-                MusicSource.Play();    
+                MusicSource.Play();
             }
             else
             {
@@ -84,6 +81,7 @@ namespace Busta.AppCore.Audio
             {
                 return;
             }
+
             previousMusic = currentMusic;
             currentMusic = AudioMusicEnum.none;
             MusicSource.Stop();
@@ -117,18 +115,18 @@ namespace Busta.AppCore.Audio
             {
                 return new SfxHandler(null);
             }
-            
+
             foreach (var sfxSource in SfxSources)
             {
                 if (sfxSource.isPlaying)
                 {
                     continue;
                 }
-                
-                if (_sfxMap.TryGetValue(sfx, out var clip))
+
+                if (sfxMap.TryGetValue(sfx, out var clip))
                 {
                     sfxSource.clip = clip;
-                    sfxSource.Play();    
+                    sfxSource.Play();
                     return new SfxHandler(sfxSource);
                 }
 

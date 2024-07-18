@@ -1,16 +1,15 @@
 using System.Collections.Generic;
 using Busta.AppCore.Audio;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace Busta.AppCore
+namespace Busta.AppCore.Configurations
 {
     [CreateAssetMenu(fileName = "GameConfigs", menuName = "Mimir/GameConfigs")]
     public class GameConfigurations : ScriptableObject
     {
-        [Header("Audio")] // Audio Configs
-        public int sfxSourcesCount = 4;
-        
-        public List<AudioConfigEntry<AudioMusicEnum>> musicConfigEntries = new ();
-        public List<AudioConfigEntry<AudioSFXEnum>> sfxConfigEntries = new ();
+        public AudioConfigurations AudioConfigurations;
+        public LocalizationConfigurations LocalizationConfigurations;
+        public SafeAreaConfigurations SafeAreaConfigurations;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Busta.AppCore.BackKey
 {
-    public class BackKeyService : MonoBehaviour
+    public class BackKeyService
     {
         private Stack<Action> backKeyActions = new();
 
