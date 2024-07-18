@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d530079e6ec4824b86e762cd8b48e6d, type: 3}
+  m_Name: pt_br
+  m_EditorClassIdentifier: 
+  Name: "Portugu\xEAs"
+  Translations:
+  - Key: title
+    Value: A Mimir
+  - Key: settings
+    Value: "Op\xE7\xF5es"
+  - Key: sound_effects
+    Value: Efeitos sonoros
+  - Key: music
+    Value: "M\xFAsica"
+  - Key: level
+    Value: Fase
+  - Key: small
+    Value: Pequeno
+  - Key: medium
+    Value: "M\xE9dio"
+  - Key: large
+    Value: Grande
+  - Key: credits
+    Value: "Cr\xE9ditos"
+  - Key: reset_title
+    Value: Reiniciar fase
+  - Key: reset_button
+    Value: Reiniciar
+  - Key: continue_button
+    Value: Continuar
+  - Key: all_cats_are_a_mimir
+    Value: "Todos os gatinhos est\xE3o a mimir"
+  - Key: back_to_home
+    Value: "Voltar para in\xEDcio"
+  - Key: paused
+    Value: Pausado
+  - Key: language
+    Value: Idioma
+  - Key: select_language_button
+    Value: Selecionar idioma
+  - Key: close_game
+    Value: Fechar jogo?
+  - Key: confirm_close_game_button
+    Value: Sim
+  - Key: decline_close_game_button
+    Value: "N\xE3o"
+  - Key: privacy_policy_button
+    Value: "Pol\xEDtica de privacidade"
+  - Key: terms_of_service_button
+    Value: "Termos de servi\xE7o"

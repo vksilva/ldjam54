@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d530079e6ec4824b86e762cd8b48e6d, type: 3}
+  m_Name: de_de
+  m_EditorClassIdentifier: 
+  Name: Deutsch
+  Translations:
+  - Key: title
+    Value: A Mimir
+  - Key: settings
+    Value: Einstellungen
+  - Key: sound_effects
+    Value: Soundeffekt
+  - Key: music
+    Value: Musik
+  - Key: level
+    Value: Level
+  - Key: small
+    Value: Klein
+  - Key: medium
+    Value: Mittel
+  - Key: large
+    Value: "Gro\xDF"
+  - Key: credits
+    Value: Credits
+  - Key: reset_title
+    Value: "Level zur\xFCcksetzen"
+  - Key: reset_button
+    Value: Neustart
+  - Key: continue_button
+    Value: Weiter
+  - Key: all_cats_are_a_mimir
+    Value: All cats are a mimir
+  - Key: back_to_home
+    Value: Zuruck zum start
+  - Key: paused
+    Value: Pausiert
+  - Key: language
+    Value: Sprache
+  - Key: select_language_button
+    Value: "Sprache ausw\xE4hlen"
+  - Key: close_game
+    Value: Spiel beenden?
+  - Key: confirm_close_game_button
+    Value: Ja
+  - Key: decline_close_game_button
+    Value: Nein
+  - Key: privacy_policy_button
+    Value: "Datenschutzkl\xE4rung"
+  - Key: terms_of_service_button
+    Value: Nutzungsbedingungen
