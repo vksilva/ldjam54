@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Busta.Menus
 {
@@ -8,5 +9,7 @@ namespace Busta.Menus
         public string name;
         public int number;
         public int levelCount;
+        public Sprite buttonImage;
+        public Color textColor;
     }
 }

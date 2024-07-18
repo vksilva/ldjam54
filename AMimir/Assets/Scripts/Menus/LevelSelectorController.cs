@@ -103,6 +103,7 @@ namespace Busta.Menus
             stateService = Application.Get<StateService>();
             localizationService = Application.Get<LocalizationService>();
             backKeyService = Application.Get<BackKeyService>();
+            configurationService = Application.Get<ConfigurationService>();
         }
 
         private void CreateWorldSection(WorldData world)
@@ -120,26 +121,27 @@ namespace Busta.Menus
             worldLabel.SetValues(localizedWorld.ToUpper(), worldProgress);
             for (var l = 1; l <= world.levelCount; l++)
             {
-                CreateLevelButton(world.number, l, worldLayout.transform);
+                CreateLevelButton(world, l, worldLayout.transform);
             }
         }
 
-        private void CreateLevelButton(int world, int level, Transform container)
+        private void CreateLevelButton(WorldData world, int level, Transform container)
         {
             var localizedLevel = localizationService.GetTranslatedText("level");
-            var levelName = LevelUtils.GetLevelName(world, level);
+            var levelName = LevelUtils.GetLevelName(world.number, level);
             var newLevelButton = Instantiate(levelTemplateButton, container);
             newLevelButton.name = levelName;
             bool isCompleted = stateService.gameState.LevelsState.winLevels.Contains(levelName);
-            newLevelButton.Setup($"{localizedLevel} {level:D2}", world, isCompleted, () => LoadLevel(levelName));
+            var levelExists = SceneUtility.GetBuildIndexByScenePath(levelName) > 0;
+            newLevelButton.Setup($"{localizedLevel} {level:D2}", world.buttonImage, world.textColor, isCompleted, 
+                levelExists, () => LoadLevel(levelName));
+
         }
 
         private static void LoadLevel(string levelName)
         {
             audioService.PlaySfx(AudioSFXEnum.click);
-
-            var sceneName = levelName;
-            SceneManager.LoadScene(sceneName);
+            SceneManager.LoadScene(levelName);
         }
 
         private void ConnectButtons()

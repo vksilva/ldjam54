@@ -10,17 +10,15 @@ namespace Busta.Menus
         [SerializeField] private Button button;
         [SerializeField] private TMP_Text buttonText;
         [SerializeField] private Image checkMarkImage;
-        [SerializeField] private Sprite[] buttonImage;
-        [SerializeField] private Color[] textColor;
 
-        public void Setup(string text, int difficulty, bool isCompleted, UnityAction action)
+        public void Setup(string text, Sprite sprite, Color textColor, bool isCompleted, bool interactable, UnityAction action)
         {
-            var index = Mathf.Clamp(difficulty, 1, textColor.Length) - 1;
             buttonText.text = text;
-            buttonText.color = textColor[index];
+            buttonText.color = textColor;
             checkMarkImage.gameObject.SetActive(isCompleted);
             button.onClick.AddListener(action);
-            button.image.sprite = buttonImage[index];
+            button.image.sprite = sprite;
+            button.interactable = interactable;
         }
     }
 }
