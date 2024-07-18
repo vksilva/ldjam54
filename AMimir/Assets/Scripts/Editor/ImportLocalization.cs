@@ -33,10 +33,19 @@ namespace Busta.Editor
             // For each language, skipping col 0 because those are the keys only
             for (var languageIndex = 1; languageIndex < languages.Length; languageIndex++)
             {
-                var languageAsset = ScriptableObject.CreateInstance<LocalizationData>();
-                languageAsset.Translations = new List<LocalizationData.LocalizationEntry>();
+                var key = languages[languageIndex];
+                var assetPath = Path.Join(LocalizationPath, $"{key}.asset");
 
-                var languageKey = languages[languageIndex];
+                var languageAsset = AssetDatabase.LoadAssetAtPath<LocalizationData>(assetPath);
+                var fileDoesNotExist = !languageAsset;
+                if (fileDoesNotExist)
+                {
+                    languageAsset = ScriptableObject.CreateInstance<LocalizationData>();
+                }
+
+                languageAsset.Translations = new List<LocalizationData.LocalizationEntry>();
+                
+                languageAsset.Key = key;
                 languageAsset.Name = languageNames[languageIndex];
                 
                 // For each row, get element 0 (key) and element from it's language (languageIndex)
@@ -50,8 +59,11 @@ namespace Busta.Editor
                     });
                 }
 
-                // Create the actual asset file in the specified folder
-                AssetDatabase.CreateAsset(languageAsset, Path.Join(LocalizationPath, $"{languageKey}.asset"));
+                if (fileDoesNotExist)
+                {
+                    // Create the actual asset file in the specified folder
+                    AssetDatabase.CreateAsset(languageAsset, assetPath);
+                }
             }
 
             // Save all the created assets and refresh

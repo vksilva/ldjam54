@@ -15,6 +15,7 @@ namespace Busta.AppCore.Localization
         }
 
         public string Name;
+        public string Key;
         public List<LocalizationEntry> Translations;
     }
 }

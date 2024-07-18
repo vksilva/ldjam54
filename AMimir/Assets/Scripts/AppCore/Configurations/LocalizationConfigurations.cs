@@ -7,6 +7,6 @@ namespace Busta.AppCore.Configurations
     [Serializable]
     public class LocalizationConfigurations
     {
-        public List<LocalizedConfigEntry<LanguagesEnum>> languageEnumList;
+        public List<LocalizationData> Localizations;
     }
 }
