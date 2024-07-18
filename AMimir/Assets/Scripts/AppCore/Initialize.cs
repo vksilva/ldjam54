@@ -23,31 +23,24 @@ namespace Busta.AppCore
             var applicationGameObject = new GameObject("Application");
             DontDestroyOnLoad(applicationGameObject);
 
-            var firebaseService = new FirebaseService();
-            await firebaseService.Init();
-            Application.Instance.Add(firebaseService);
+            Application.Instance.Add(new ConfigurationService()).Init(gameConfigurations);
 
-            var trackingService = new TrackingService();
-            trackingService.Init(firebaseService);
-            Application.Instance.Add(trackingService);
+            var firebaseService = await Application.Instance.Add(new FirebaseService()).Init();
 
-            var stateService = new StateService();
-            stateService.Init();
-            Application.Instance.Add(stateService);
+            var trackingService = Application.Instance.Add(new TrackingService()).Init(firebaseService);
 
-            var audioService = new AudioService();
-            audioService.Init(gameConfigurations.AudioConfigurations, stateService, applicationGameObject);
-            Application.Instance.Add(audioService);
+            var stateService = Application.Instance.Add(new StateService()).Init();
 
-            var localizationService = new LocalizationService();
-            localizationService.Init(gameConfigurations.LocalizationConfigurations, stateService);
-            Application.Instance.Add(localizationService);
+            Application.Instance.Add(new AudioService())
+                .Init(gameConfigurations.AudioConfigurations, stateService, applicationGameObject);
+
+            Application.Instance.Add(new LocalizationService())
+                .Init(gameConfigurations.LocalizationConfigurations, stateService);
 
             Application.Instance.Add(new BackKeyService());
 
-            var safeAreaService = new SafeAreaService();
-            safeAreaService.Init(gameConfigurations.SafeAreaConfigurations);
-            Application.Instance.Add(safeAreaService);
+            Application.Instance.Add(new SafeAreaService())
+                .Init(gameConfigurations.SafeAreaConfigurations);
 
             Application.Instance.Init();
 

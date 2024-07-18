@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Busta.AppCore;
 using Busta.AppCore.Audio;
 using Busta.AppCore.BackKey;
+using Busta.AppCore.Configurations;
 using Busta.AppCore.Localization;
 using Busta.AppCore.State;
 using Busta.Extensions;
@@ -17,9 +18,6 @@ namespace Busta.Menus
 {
     public class LevelSelectorController : MonoBehaviour
     {
-        // Each entry value is how many levels each world have
-        [SerializeField] private WorldData[] worlds;
-
         [FormerlySerializedAs("worldInformation")] [FormerlySerializedAs("worldTemplateLabel")] [SerializeField] private WorldInformationContainer worldInformationContainer;
         [SerializeField] private LevelButton levelTemplateButton;
         [SerializeField] private LayoutGroup worldTemplateLayout;
@@ -30,10 +28,11 @@ namespace Busta.Menus
         [SerializeField] private ScrollRect scrollRect;
         [SerializeField] private Canvas loadingCanvas;
         
-        private static AudioService _audioService;
-        private static StateService _stateService;
-        private static LocalizationService _localizationService;
-        private static BackKeyService _backKeyService;
+        private static AudioService audioService;
+        private static StateService stateService;
+        private static LocalizationService localizationService;
+        private static BackKeyService backKeyService;
+        private static ConfigurationService configurationService;
         private readonly int scrollOffset = 300;
 
         private async void Start()
@@ -49,8 +48,10 @@ namespace Busta.Menus
             loadingCanvas.gameObject.SetActive(true);
 
             GetServices();
-            _audioService.PlayMusic(AudioMusicEnum.menu);
+            audioService.PlayMusic(AudioMusicEnum.menu);
 
+            var worlds = configurationService.Configs.WorldConfigurations.worlds;
+            
             foreach (var t in worlds)
             {
                 CreateWorldSection(t);
@@ -61,7 +62,7 @@ namespace Busta.Menus
             settingsPopUp.gameObject.SetActive(false);
             closeGamePopUp.gameObject.SetActive(false);
 
-            _backKeyService.PushAction(CloseLevelSelector);
+            backKeyService.PushAction(CloseLevelSelector);
 
             ConnectButtons();
 
@@ -74,9 +75,9 @@ namespace Busta.Menus
         {
             Canvas.ForceUpdateCanvases();
             await Task.Delay(100);
-            var button = GameObject.Find(_stateService.gameState.LevelsState.lastPlayedLevel);
+            var button = GameObject.Find(stateService.gameState.LevelsState.lastPlayedLevel);
             
-            if (_stateService.gameState.LevelsState.lastPlayedLevel.IsNullOrEmpty() || !button)
+            if (stateService.gameState.LevelsState.lastPlayedLevel.IsNullOrEmpty() || !button)
             {
                 return;
             }
@@ -98,10 +99,10 @@ namespace Busta.Menus
 
         private static void GetServices()
         {
-            _audioService = Application.Get<AudioService>();
-            _stateService = Application.Get<StateService>();
-            _localizationService = Application.Get<LocalizationService>();
-            _backKeyService = Application.Get<BackKeyService>();
+            audioService = Application.Get<AudioService>();
+            stateService = Application.Get<StateService>();
+            localizationService = Application.Get<LocalizationService>();
+            backKeyService = Application.Get<BackKeyService>();
         }
 
         private void CreateWorldSection(WorldData world)
@@ -111,9 +112,9 @@ namespace Busta.Menus
             var worldLayout = Instantiate(worldTemplateLayout, parent);
             worldLayout.name = $"world_{world.number:D2}_layout";
 
-            var localizedWorld = _localizationService.GetTranslatedText(world.name);
+            var localizedWorld = localizationService.GetTranslatedText(world.name);
 
-            var completedCount = _stateService.gameState.LevelsState.winLevels
+            var completedCount = stateService.gameState.LevelsState.winLevels
                 .Count(level => level.StartsWith($"world_{world.number:D2}"));
             var worldProgress = $"{completedCount}/{world.levelCount}";
             worldLabel.SetValues(localizedWorld.ToUpper(), worldProgress);
@@ -125,17 +126,17 @@ namespace Busta.Menus
 
         private void CreateLevelButton(int world, int level, Transform container)
         {
-            var localizedLevel = _localizationService.GetTranslatedText("level");
+            var localizedLevel = localizationService.GetTranslatedText("level");
             var levelName = LevelUtils.GetLevelName(world, level);
             var newLevelButton = Instantiate(levelTemplateButton, container);
             newLevelButton.name = levelName;
-            bool isCompleted = _stateService.gameState.LevelsState.winLevels.Contains(levelName);
+            bool isCompleted = stateService.gameState.LevelsState.winLevels.Contains(levelName);
             newLevelButton.Setup($"{localizedLevel} {level:D2}", world, isCompleted, () => LoadLevel(levelName));
         }
 
         private static void LoadLevel(string levelName)
         {
-            _audioService.PlaySfx(AudioSFXEnum.click);
+            audioService.PlaySfx(AudioSFXEnum.click);
 
             var sceneName = levelName;
             SceneManager.LoadScene(sceneName);
@@ -148,7 +149,7 @@ namespace Busta.Menus
 
         private void ShowSettings()
         {
-            _audioService.PlaySfx(AudioSFXEnum.click);
+            audioService.PlaySfx(AudioSFXEnum.click);
             settingsPopUp.Show();
         }
 

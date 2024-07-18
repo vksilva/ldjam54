@@ -43,3 +43,14 @@ MonoBehaviour:
       y: 0
       width: 0
       height: 0
+  WorldConfigurations:
+    worlds:
+    - name: small
+      number: 1
+      levelCount: 9
+    - name: medium
+      number: 2
+      levelCount: 8
+    - name: large
+      number: 3
+      levelCount: 6

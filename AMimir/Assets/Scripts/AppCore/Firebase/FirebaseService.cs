@@ -10,7 +10,7 @@ namespace Busta.AppCore.Firebase
         private bool Initialized { get; set; }
         private FirebaseApp firebaseApp;
         
-        public async Task Init()
+        public async Task<FirebaseService> Init()
         {
             var result = await FirebaseApp.CheckAndFixDependenciesAsync();
             if (result == DependencyStatus.Available)
@@ -23,6 +23,8 @@ namespace Busta.AppCore.Firebase
                 Initialized = false;
                 Debug.Log("Firebase Failed");
             }
+
+            return this;
         }
 
         public void LogEvent(string name, params Parameter[] parameters)

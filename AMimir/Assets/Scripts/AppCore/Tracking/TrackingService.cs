@@ -7,9 +7,10 @@ namespace Busta.AppCore.Tracking
     {
         private FirebaseService firebaseService;
 
-        public void Init(FirebaseService firebase)
+        public TrackingService Init(FirebaseService firebase)
         {
             firebaseService = firebase;
+            return this;
         }
 
         public void TrackApplicationStart()

@@ -8,5 +8,6 @@ namespace Busta.AppCore.Configurations
         public AudioConfigurations AudioConfigurations;
         public LocalizationConfigurations LocalizationConfigurations;
         public SafeAreaConfigurations SafeAreaConfigurations;
+        public WorldConfigurations WorldConfigurations;
     }
 }

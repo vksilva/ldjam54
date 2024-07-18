@@ -30,9 +30,10 @@ namespace Busta.AppCore
             Initialized = true;
         }
         
-        public void Add<T>(T service)
+        public T Add<T>(T service)
         {
             services.Add(typeof(T), service);
+            return service;
         }
 
         public static T Get<T>()
