@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Busta.AppCore.Configurations;
 using Busta.AppCore.State;
-using Newtonsoft.Json;
+using Busta.Extensions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,36 +10,32 @@ namespace Busta.AppCore.Localization
 {
     public class LocalizationService
     {
-        [SerializeField] private List<LocalizedConfigEntry<LanguagesEnum>> languageEnumList;
-
         private Dictionary<string, string> languageDictionary;
-        private Dictionary<LanguagesEnum, TextAsset> languageMap = new();
+        private Dictionary<string, LocalizationData> languageMap = new();
 
         private StateService _stateService;
 
         public void Init(LocalizationConfigurations configurations, StateService state)
         {
             _stateService = state;
-            if (_stateService.gameState.settingsState.currentLanguage == LanguagesEnum.none)
+            if (_stateService.gameState.settingsState.currentLanguage.IsNullOrEmpty())
             {
                 var currentDeviceLanguage = UnityEngine.Application.systemLanguage;
                 _stateService.gameState.settingsState.currentLanguage = currentDeviceLanguage switch
                 {
-                    SystemLanguage.Portuguese => LanguagesEnum.pt_br,
-                    SystemLanguage.English => LanguagesEnum.en_us,
-                    _ => LanguagesEnum.en_us
+                    SystemLanguage.Portuguese => "pt_br",
+                    SystemLanguage.English => "en_us",
+                    SystemLanguage.German => "de_de",
+                    _ => "en_us"
                 };
             }
 
-            languageMap = configurations.languageEnumList.ToDictionary(x => x.name, x => x.language);
-            var json = languageMap[_stateService.gameState.settingsState.currentLanguage].text;
-            languageDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            languageMap = configurations.Localizations.ToDictionary(l => l.Key, l => l);
         }
-
-        public void SetCurrentLanguage(LanguagesEnum language)
+        
+        public void SetCurrentLanguage(string language)
         {
-            var json = languageMap[language].text;
-            languageDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            languageDictionary = languageMap[language].Translations.ToDictionary(t => t.Key, t => t.Value);
 
             UpdateTextLanguage();
 

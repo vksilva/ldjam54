@@ -8,6 +8,6 @@ namespace Busta.AppCore.State
     {
         public bool isMusicOff;
         public bool isSFXOff;
-        public LanguagesEnum currentLanguage;
+        public string currentLanguage;
     }
 }
