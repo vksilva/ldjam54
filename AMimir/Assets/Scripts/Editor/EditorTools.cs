@@ -1,11 +1,11 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Editor
+namespace Busta.Editor
 {
     public static class EditorTools
     {
-        [MenuItem("Vanessa/cleanPlayerPrefs")]
+        [MenuItem("Vanessa/Clean Player Prefs")]
         public static void CleanPlayerPrefs()
         {
             PlayerPrefs.DeleteAll();

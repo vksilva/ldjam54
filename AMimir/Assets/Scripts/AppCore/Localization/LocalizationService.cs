@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Busta.AppCore.Configurations;
 using Busta.AppCore.State;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace Busta.AppCore.Localization
 {
-    public class LocalizationService : MonoBehaviour
+    public class LocalizationService
     {
         [SerializeField] private List<LocalizedConfigEntry<LanguagesEnum>> languageEnumList;
 
@@ -16,7 +17,7 @@ namespace Busta.AppCore.Localization
 
         private StateService _stateService;
 
-        public void Init(StateService state)
+        public void Init(LocalizationConfigurations configurations, StateService state)
         {
             _stateService = state;
             if (_stateService.gameState.settingsState.currentLanguage == LanguagesEnum.none)
@@ -29,8 +30,8 @@ namespace Busta.AppCore.Localization
                     _ => LanguagesEnum.en_us
                 };
             }
-            
-            languageMap = languageEnumList.ToDictionary(x => x.name, x => x.language);
+
+            languageMap = configurations.languageEnumList.ToDictionary(x => x.name, x => x.language);
             var json = languageMap[_stateService.gameState.settingsState.currentLanguage].text;
             languageDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
         }
@@ -41,7 +42,7 @@ namespace Busta.AppCore.Localization
             languageDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
 
             UpdateTextLanguage();
-            
+
             _stateService.gameState.settingsState.currentLanguage = language;
             _stateService.Save();
         }
@@ -53,7 +54,7 @@ namespace Busta.AppCore.Localization
             Debug.LogWarning($"Key {key} does not exist on languageDictionary");
             return key;
         }
-        
+
         private void UpdateTextLanguage()
         {
             SceneManager.LoadScene(1);
