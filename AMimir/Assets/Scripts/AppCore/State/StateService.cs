@@ -13,7 +13,7 @@ namespace Busta.AppCore.State
             return this;
         }
 
-        public void Load()
+        private void Load()
         {
             var json = PlayerPrefs.GetString(_gameStatePrefsKey, null);
             gameState = JsonUtility.FromJson<GameState>(json) ?? new GameState();
