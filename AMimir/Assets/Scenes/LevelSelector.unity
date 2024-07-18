@@ -2494,8 +2494,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 443.34976, y: 0}
-  m_SizeDelta: {x: 886.6995, y: 0}
+  m_AnchoredPosition: {x: 454.73682, y: 0}
+  m_SizeDelta: {x: 909.47363, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &667788928
 MonoBehaviour:
@@ -6646,13 +6646,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worlds:
-  - name: easy
+  - name: small
     number: 1
     levelCount: 9
   - name: medium
     number: 2
-    levelCount: 7
-  - name: hard
+    levelCount: 8
+  - name: large
     number: 3
     levelCount: 6
   worldInformationContainer: {fileID: 472174658}
