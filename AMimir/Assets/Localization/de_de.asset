@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: de_de
   m_EditorClassIdentifier: 
   Name: Deutsch
+  Key: de_de
   Translations:
   - Key: title
     Value: A Mimir

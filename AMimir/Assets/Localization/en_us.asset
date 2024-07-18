@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: en_us
   m_EditorClassIdentifier: 
   Name: English
+  Key: en_us
   Translations:
   - Key: title
     Value: A Mimir

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: pt_br
   m_EditorClassIdentifier: 
   Name: "Portugu\xEAs"
+  Key: pt_br
   Translations:
   - Key: title
     Value: A Mimir

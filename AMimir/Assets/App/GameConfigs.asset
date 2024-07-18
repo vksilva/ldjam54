@@ -31,9 +31,10 @@ MonoBehaviour:
     - name: 5
       audioClip: {fileID: 8300000, guid: 8f15e22734d7c1b4db884affed78df4a, type: 3}
   LocalizationConfigurations:
-    languageEnumList:
-    - name: 2
-      language: {fileID: 0}
+    Localizations:
+    - {fileID: 11400000, guid: 6d9f6f361aa508b40ae269d9b5fd25c3, type: 2}
+    - {fileID: 11400000, guid: b34986b5a56595e4883f058825cb1f03, type: 2}
+    - {fileID: 11400000, guid: 77ea3d6d496507a46a02bd8815fa304b, type: 2}
   SafeAreaConfigurations:
     UseDebugSafeArea: 0
     DebugSafeArea:
