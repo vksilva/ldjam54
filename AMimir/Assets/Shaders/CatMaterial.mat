@@ -11,8 +11,10 @@ Material:
   m_Shader: {fileID: 4800000, guid: 5bb64d3698479f4418fb267b9412c434, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ValidKeywords:
+  - COLOR_GRADIENT_ON
+  m_InvalidKeywords:
+  - ColorGradientOn
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -71,6 +73,7 @@ Material:
     - _BreathSpeed: 2
     - _BreathingOn: 1
     - _BumpScale: 1
+    - _ColorGradientOn: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -96,6 +99,8 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _GradientLight: {r: 1, g: 1, b: 1, a: 1}
+    - _GradientShadow: {r: 0, g: 0, b: 0, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowAmplitude: {r: 0.03, g: 0.03, b: 0, a: 0}
     - _ShadowColor: {r: 0.17206873, g: 0.04690281, b: 0.3207547, a: 0.5254902}
