@@ -198,7 +198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5169085808755074638, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: orthographic size
-      value: 10
+      value: 10.826667
       objectReference: {fileID: 0}
     - target: {fileID: 7938176268018679338, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: m_LocalPosition.x
@@ -449,11 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09244b1a18a7d754da63b03253ca60d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  piecesGrabArea:
-    x: -5
-    y: -8
-    width: 10
-    height: 7
+  failedMovesCounter: 0
 --- !u!4 &1672407449
 Transform:
   m_ObjectHideFlags: 0
@@ -577,6 +573,18 @@ PrefabInstance:
     - target: {fileID: 7572302553359180721, guid: f4b5fc8da90958447be5af25e2122fac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749571368258107023, guid: f4b5fc8da90958447be5af25e2122fac, type: 3}
+      propertyPath: m_Color.b
+      value: 0.3254272
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749571368258107023, guid: f4b5fc8da90958447be5af25e2122fac, type: 3}
+      propertyPath: m_Color.g
+      value: 0.741839
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749571368258107023, guid: f4b5fc8da90958447be5af25e2122fac, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9716981
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

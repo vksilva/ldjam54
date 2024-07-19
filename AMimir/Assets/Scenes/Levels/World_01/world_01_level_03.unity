@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5169085808755074638, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: orthographic size
-      value: 10
+      value: 10.826667
       objectReference: {fileID: 0}
     - target: {fileID: 7938176268018679338, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: m_LocalPosition.x
@@ -260,6 +260,18 @@ PrefabInstance:
     - target: {fileID: 4413627531022907656, guid: 0d11a88d7b0c8e34abe8ff2666709107, type: 3}
       propertyPath: m_Name
       value: cat_T_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365358065534854256, guid: 0d11a88d7b0c8e34abe8ff2666709107, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5235849
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365358065534854256, guid: 0d11a88d7b0c8e34abe8ff2666709107, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5546652
+      objectReference: {fileID: 0}
+    - target: {fileID: 6365358065534854256, guid: 0d11a88d7b0c8e34abe8ff2666709107, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6981132
       objectReference: {fileID: 0}
     - target: {fileID: 7572302553359180721, guid: 0d11a88d7b0c8e34abe8ff2666709107, type: 3}
       propertyPath: m_LocalPosition.x
@@ -449,11 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09244b1a18a7d754da63b03253ca60d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  piecesGrabArea:
-    x: -5
-    y: -8
-    width: 10
-    height: 7
+  failedMovesCounter: 0
 --- !u!4 &1672407449
 Transform:
   m_ObjectHideFlags: 0
