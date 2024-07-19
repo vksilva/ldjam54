@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Busta.AppCore;
@@ -30,8 +31,10 @@ namespace Busta.Gameplay
         private int movesCounter = 0;
         private float timeCounter = 0;
         private readonly RaycastHit2D[] _rayCastResult = new RaycastHit2D[5];
-        private const string winMessage = "Win";
-        private const string quitMessage = "Quit";
+        private const string matchResultWin = "Win";
+        private const string matchResultQuit = "Quit";
+        private const string matchResultAbandoned = "Abandoned";
+        private const string matchResultRestarted = "Restart";
 
         private void Awake()
         {
@@ -63,6 +66,13 @@ namespace Busta.Gameplay
             
             _stateService.gameState.LevelsState.lastPlayedLevel = SceneManager.GetActiveScene().name;
             _stateService.Save();
+            
+            _trackingService.TrackLevelStarted(SceneManager.GetActiveScene().name);
+        }
+
+        private void OnApplicationQuit()
+        {
+            _trackingService.TrackLevelEnded(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter, timeCounter, matchResultQuit);
         }
 
         private void SetUpBed()
@@ -115,11 +125,22 @@ namespace Busta.Gameplay
 
         private async void OpenEndGamePopUp()
         {
-            _trackingService.TrackLevelEnded(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter, timeCounter, winMessage);
+            _trackingService.TrackLevelEnded(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter, timeCounter, matchResultWin);
             
             await Task.Delay(500);
             _audioService.PlaySfx(AudioSFXEnum.EndGameCelebration);
             LevelUIController.Instance.ShowEndGameCanvas();
+        }
+
+        public void RestartLevel()
+        {
+            _trackingService.TrackLevelEnded(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter, timeCounter, matchResultRestarted);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        public void TrackAbandonLevel()
+        {
+            _trackingService.TrackLevelEnded(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter, timeCounter,matchResultAbandoned);
         }
 
         public void OnPiecePlaced()

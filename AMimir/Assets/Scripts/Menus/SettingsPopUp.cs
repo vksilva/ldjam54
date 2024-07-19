@@ -1,6 +1,7 @@
 using Busta.AppCore.Audio;
 using Busta.AppCore.BackKey;
 using Busta.AppCore.State;
+using Busta.AppCore.Tracking;
 using UnityEngine;
 using UnityEngine.UI;
 using Application = Busta.AppCore.Application;
@@ -23,6 +24,7 @@ namespace Busta.Menus
         private AudioService _audioService;
         private StateService _stateService;
         private BackKeyService _backKeyService;
+        private TrackingService _trackingService;
 
         private void Awake()
         {
@@ -45,6 +47,7 @@ namespace Busta.Menus
             _audioService = Application.Get<AudioService>();
             _stateService = Application.Get<StateService>();
             _backKeyService = Application.Get<BackKeyService>();
+            _trackingService = Application.Get<TrackingService>();
         }
 
         private void AddListeners()
@@ -113,6 +116,7 @@ namespace Busta.Menus
         {
             gameObject.SetActive(true);
             _backKeyService.PushAction(Hide);
+            _trackingService.TrackOpenSettings();
         }
 
         public void Hide()

@@ -1,6 +1,7 @@
 using Busta.AppCore.Audio;
 using Busta.AppCore.BackKey;
 using Busta.AppCore.Localization;
+using Busta.AppCore.Tracking;
 using UnityEngine;
 using UnityEngine.UI;
 using Application = Busta.AppCore.Application;
@@ -17,6 +18,7 @@ namespace Busta.Menus
         private AudioService audioService;
         private LocalizationService localizationService;
         private BackKeyService backKeyService;
+        private TrackingService trackingService;
     
         private void Awake()
         {
@@ -30,6 +32,7 @@ namespace Busta.Menus
             audioService = Application.Get<AudioService>();
             localizationService = Application.Get<LocalizationService>();
             backKeyService = Application.Get<BackKeyService>();
+            trackingService = Application.Get<TrackingService>();
         }
 
         private void AddListeners()
@@ -54,6 +57,7 @@ namespace Busta.Menus
         private void OnChangeLanguage(string language)
         {
             localizationService.SetCurrentLanguage(language);
+            trackingService.TrackChangeLanguage(language);
         }
 
         public void Show()

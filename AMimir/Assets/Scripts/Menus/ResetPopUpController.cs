@@ -1,5 +1,7 @@
 using Busta.AppCore.Audio;
 using Busta.AppCore.BackKey;
+using Busta.AppCore.Tracking;
+using Busta.Gameplay;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,9 +16,10 @@ namespace Busta.Menus
         [SerializeField] private Button backgroundButton;
         [SerializeField] private Button resetButton;
         [SerializeField] private PausePopUpController pausePopUp;
-
+        
         private static AudioService _audioService;
         private static BackKeyService _backKeyService;
+        private static TrackingService _trackingService;
         
         void Awake()
         {
@@ -28,6 +31,7 @@ namespace Busta.Menus
         {
             _audioService = Application.Get<AudioService>();
             _backKeyService = Application.Get<BackKeyService>();
+            _trackingService = Application.Get<TrackingService>();
         }
 
         private void AddListeners()
@@ -41,8 +45,7 @@ namespace Busta.Menus
         private void OnResetButton()
         {
             _audioService.PlaySfx(AudioSFXEnum.click);
-            
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            GameController.Instance.RestartLevel();
         }
         
         private void OnClose()

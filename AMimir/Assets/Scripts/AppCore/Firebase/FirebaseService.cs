@@ -23,7 +23,6 @@ namespace Busta.AppCore.Firebase
                 Initialized = false;
                 Debug.Log("Firebase Failed");
             }
-
             return this;
         }
 
@@ -32,7 +31,6 @@ namespace Busta.AppCore.Firebase
             if (Initialized)
             {
                 FirebaseAnalytics.LogEvent(name, parameters);
-                Debug.Log($"Firebase: [{name}]");
             }
         }
     }

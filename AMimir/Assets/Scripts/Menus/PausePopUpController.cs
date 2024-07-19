@@ -1,7 +1,10 @@
 using Busta.AppCore.Audio;
 using Busta.AppCore.BackKey;
+using Busta.AppCore.Tracking;
 using Busta.Commands;
+using Busta.Gameplay;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Application = Busta.AppCore.Application;
 
@@ -18,6 +21,7 @@ namespace Busta.Menus
     
         private static AudioService _audioService;
         private static BackKeyService _backKeyService;
+        private static TrackingService _trackingService;
     
         void Awake()
         {
@@ -29,6 +33,7 @@ namespace Busta.Menus
         {
             _audioService = Application.Get<AudioService>();
             _backKeyService = Application.Get<BackKeyService>();
+            _trackingService = Application.Get<TrackingService>();
         }
 
         private void AddListeners()
@@ -52,6 +57,7 @@ namespace Busta.Menus
         
             var command = new BackToLevelSelectorCommand();
             command.Execute();
+            GameController.Instance.TrackAbandonLevel();
         }
 
         private void OnContinueButtonClicked()
@@ -70,6 +76,7 @@ namespace Busta.Menus
         {
             gameObject.SetActive(true);
             _backKeyService.PushAction(Hide);
+            _trackingService.TrackPausedGame(SceneManager.GetActiveScene().name);
         }
 
         public void Hide()
