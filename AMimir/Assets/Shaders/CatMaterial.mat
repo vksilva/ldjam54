@@ -97,6 +97,6 @@ Material:
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowAmplitude: {r: 0.03, g: 0.03, b: 0, a: 0}
-    - _ShadowColor: {r: 0, g: 0, b: 0, a: 0.5254902}
+    - _ShadowColor: {r: 0.17206873, g: 0.04690281, b: 0.3207547, a: 0.5254902}
     - _ShadowSpeed: {r: 2, g: 2, b: 0, a: 0}
   m_BuildTextureStacks: []
