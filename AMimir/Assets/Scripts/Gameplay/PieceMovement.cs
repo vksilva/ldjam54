@@ -68,6 +68,10 @@ namespace Busta.Gameplay
             var mpb = new MaterialPropertyBlock();
             _catRenderer.GetPropertyBlock(mpb);
             mpb.SetFloat(ShadowNoise, noise);
+            foreach (var r in GetComponentsInChildren<Renderer>())
+            {
+                r.SetPropertyBlock(mpb);
+            }
             _catRenderer.SetPropertyBlock(mpb);
         }
 

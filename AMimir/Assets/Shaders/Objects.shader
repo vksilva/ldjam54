@@ -11,6 +11,7 @@ Shader "Vanessa/Objects"
         [PerRendererData] _EnableExternalAlpha ("Enable External Alpha", Float) = 0
 
         // Shadow
+        [ToggleOff(SHADOW_ON)] _ShadowOn ("Shadow Enabled", Float) = 1
         _ShadowColor ("Shadow Color", Color) = (0,0,0,1)
         [PerRendererData] _ShadowOffset("Shadow Offset", Float) = 1
 
@@ -24,6 +25,8 @@ Shader "Vanessa/Objects"
         [ToggleOff(COLOR_GRADIENT_ON)] _ColorGradientOn ("Color Gradient Enabled", Float) = 0
         _GradientLight ("Gradient Light", Color) = (1, 1, 1, 1)
         _GradientShadow ("Gradient Shadow", Color) = (0, 0, 0, 1)
+        
+        [PerRendererData] _OverlayTex ("Overlay Sprite Texture", 2D) = "black" {}
     }
 
     SubShader
@@ -45,6 +48,7 @@ Shader "Vanessa/Objects"
         Pass
         {
             CGPROGRAM
+            #pragma multi_compile_local _ SHADOW_ON
             #pragma vertex ShadowVert
             #pragma fragment ShadowFrag
             #pragma target 2.0
@@ -68,7 +72,9 @@ Shader "Vanessa/Objects"
             v2f ShadowVert(appdata_t IN)
             {
                 v2f OUT;
+                OUT.vertex = IN.vertex;
 
+                #ifndef SHADOW_ON
                 UNITY_SETUP_INSTANCE_ID(IN);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
 
@@ -79,13 +85,13 @@ Shader "Vanessa/Objects"
                                              , _Flip);
                 OUT.vertex = UnityObjectToClipPos(OUT.vertex);
                 OUT.vertex += mul(unity_CameraProjection,
-                                                                            float4(-0.1 * _ShadowOffset,
-                        _ProjectionParams.x * -0.1 * _ShadowOffset, 0, 0));
+                                  float4(-0.1 * _ShadowOffset, _ProjectionParams.x * -0.1 * _ShadowOffset, 0, 0));
                 OUT.texcoord = IN.texcoord;
                 OUT.color = IN.color * _Color * _RendererColor;
 
                 #ifdef PIXELSNAP_ON
                 OUT.vertex = UnityPixelSnap (OUT.vertex);
+                #endif
                 #endif
 
                 return OUT;
@@ -93,9 +99,13 @@ Shader "Vanessa/Objects"
 
             fixed4 ShadowFrag(v2f IN) : SV_Target
             {
+                #ifndef SHADOW_ON
                 fixed4 c = SampleSpriteTexture(IN.texcoord).a * _ShadowColor;
                 c.rgb *= c.a;
                 return c;
+                #else
+                return fixed4(0,0,0,0);
+                #endif
             }
             ENDCG
         }
@@ -148,10 +158,13 @@ Shader "Vanessa/Objects"
             float4 _GradientShadow;
             #endif
 
+            sampler2D _OverlayTex;
+
             fixed4 FaceFrag(v2f IN) : SV_Target
             {
                 #ifndef COLOR_GRADIENT_ON
                 fixed4 tex_color = SampleSpriteTexture(IN.texcoord);
+                fixed4 overlay_color = tex2D (_OverlayTex, IN.texcoord);
                 const int count = 3;
                 const fixed4 colors[count] = {_GradientShadow, IN.color, _GradientLight};
                 const fixed scaled_time = tex_color.r * (count - 1);
@@ -161,7 +174,7 @@ Shader "Vanessa/Objects"
 
                 fixed4 c;
                 c.a = tex_color.a;
-                c.rgb = color.rgb;
+                c.rgb = lerp(color.rgb, overlay_color.rgb, overlay_color.a);
                 c.rgb *= tex_color.a;
                 return c;
                 #else
