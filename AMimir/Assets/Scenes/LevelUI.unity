@@ -3091,8 +3091,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: all_cats_are_a_mimir
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3fa4ef00da4852f43b399226f0b47720, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 3fa4ef00da4852f43b399226f0b47720, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bae88a3fd9a711f42842a871b50a271c, type: 2}
+  m_sharedMaterial: {fileID: 6223523403732360964, guid: bae88a3fd9a711f42842a871b50a271c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3116,8 +3116,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 89.07
-  m_fontSizeBase: 89.07
+  m_fontSize: 120
+  m_fontSizeBase: 120
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
