@@ -127,13 +127,12 @@ namespace Busta.Menus
 
         private void CreateLevelButton(WorldData world, int level, Transform container)
         {
-            var localizedLevel = localizationService.GetTranslatedText("level");
             var levelName = LevelUtils.GetLevelName(world.number, level);
             var newLevelButton = Instantiate(levelTemplateButton, container);
             newLevelButton.name = levelName;
             bool isCompleted = stateService.gameState.LevelsState.winLevels.Contains(levelName);
             var levelExists = SceneUtility.GetBuildIndexByScenePath(levelName) > 0;
-            newLevelButton.Setup($"{localizedLevel} {level:D2}", world.buttonImage, world.textColor, isCompleted, 
+            newLevelButton.Setup(level.ToString(), world.buttonImage, world.textColor, isCompleted, 
                 levelExists, () => LoadLevel(levelName));
 
         }
