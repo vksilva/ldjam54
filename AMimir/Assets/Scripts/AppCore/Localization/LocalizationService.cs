@@ -13,20 +13,20 @@ namespace Busta.AppCore.Localization
         private Dictionary<string, string> languageDictionary;
         private Dictionary<string, LocalizationData> languageMap = new();
 
-        private StateService _stateService;
+        private StateService stateService;
 
         public void Init(LocalizationConfigurations configurations, StateService state)
         {
             languageMap = configurations.Localizations.ToDictionary(l => l.Key, l => l);
 
-            _stateService = state;
-            if (_stateService.gameState.settingsState.currentLanguage.IsNullOrEmpty() ||
-                !languageMap.ContainsKey(_stateService.gameState.settingsState.currentLanguage))
+            stateService = state;
+            if (stateService.gameState.settingsState.currentLanguage.IsNullOrEmpty() ||
+                !languageMap.ContainsKey(stateService.gameState.settingsState.currentLanguage))
             {
-                _stateService.gameState.settingsState.currentLanguage = GetCurrentSystemLanguage();
+                stateService.gameState.settingsState.currentLanguage = GetCurrentSystemLanguage();
             }
 
-            SetCurrentLanguage(_stateService.gameState.settingsState.currentLanguage);
+            SetCurrentLanguage(stateService.gameState.settingsState.currentLanguage);
         }
 
         private string GetCurrentSystemLanguage()
@@ -51,8 +51,8 @@ namespace Busta.AppCore.Localization
 
             UpdateTextLanguage();
 
-            _stateService.gameState.settingsState.currentLanguage = language;
-            _stateService.Save();
+            stateService.gameState.settingsState.currentLanguage = language;
+            stateService.Save();
         }
 
         public string GetTranslatedText(string key)

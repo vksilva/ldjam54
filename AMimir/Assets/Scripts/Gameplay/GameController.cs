@@ -5,6 +5,7 @@ using Busta.AppCore;
 using Busta.AppCore.Audio;
 using Busta.AppCore.State;
 using Busta.AppCore.Tracking;
+using Busta.Extensions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Application = Busta.AppCore.Application;
@@ -64,7 +65,7 @@ namespace Busta.Gameplay
 
             SceneManager.LoadScene("LevelUI", LoadSceneMode.Additive);
             
-            _stateService.gameState.LevelsState.lastPlayedLevel = SceneManager.GetActiveScene().name;
+            _stateService.gameState.levelsState.lastPlayedLevel = SceneManager.GetActiveScene().name;
             _stateService.Save();
             
             _trackingService.TrackLevelStarted(SceneManager.GetActiveScene().name);
@@ -127,7 +128,7 @@ namespace Busta.Gameplay
         {
             _trackingService.TrackLevelEnded(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter, timeCounter, matchResultWin);
             
-            await Task.Delay(500);
+            await Tasks.WaitForSeconds(0.5f);
             _audioService.PlaySfx(AudioSFXEnum.EndGameCelebration);
             LevelUIController.Instance.ShowEndGameCanvas();
         }
@@ -148,9 +149,9 @@ namespace Busta.Gameplay
             movesCounter++;
             if (IsBedCompleted())
             {
-                if (!_stateService.gameState.LevelsState.winLevels.Contains(SceneManager.GetActiveScene().name))
+                if (!_stateService.gameState.levelsState.winLevels.Contains(SceneManager.GetActiveScene().name))
                 {
-                    _stateService.gameState.LevelsState.winLevels.Add(SceneManager.GetActiveScene().name);
+                    _stateService.gameState.levelsState.winLevels.Add(SceneManager.GetActiveScene().name);
                     _stateService.Save();
                 }
 

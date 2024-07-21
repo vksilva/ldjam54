@@ -4,7 +4,7 @@ namespace Busta.AppCore.State
 {
     public class StateService
     {
-        private const string _gameStatePrefsKey = "GAME_STATE_KEY";
+        private const string GameStatePrefsKey = "GAME_STATE_KEY";
         
         public GameState gameState;
         public StateService Init()
@@ -15,14 +15,14 @@ namespace Busta.AppCore.State
 
         private void Load()
         {
-            var json = PlayerPrefs.GetString(_gameStatePrefsKey, null);
+            var json = PlayerPrefs.GetString(GameStatePrefsKey, null);
             gameState = JsonUtility.FromJson<GameState>(json) ?? new GameState();
         }
 
         public void Save()
         {
             var json = JsonUtility.ToJson(gameState);
-            PlayerPrefs.SetString(_gameStatePrefsKey, json);
+            PlayerPrefs.SetString(GameStatePrefsKey, json);
         }
     }
 }

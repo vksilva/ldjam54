@@ -1,5 +1,4 @@
 ﻿using System;
-using Busta.AppCore.Localization;
 
 namespace Busta.AppCore.State
 {
@@ -9,5 +8,6 @@ namespace Busta.AppCore.State
         public bool isMusicOff;
         public bool isSFXOff;
         public string currentLanguage;
+        public bool seenTutorial;
     }
 }

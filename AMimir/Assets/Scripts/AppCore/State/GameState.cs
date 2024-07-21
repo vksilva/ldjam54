@@ -6,6 +6,6 @@ namespace Busta.AppCore.State
     public class GameState
     {
         public SettingsState settingsState = new ();
-        public LevelsState LevelsState = new ();
+        public LevelsState levelsState = new ();
     }
 }

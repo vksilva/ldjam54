@@ -7,9 +7,9 @@ using Busta.AppCore.Configurations;
 using Busta.AppCore.Localization;
 using Busta.AppCore.State;
 using Busta.Extensions;
+using Busta.Tutorial;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Application = Busta.AppCore.Application;
 using Button = UnityEngine.UI.Button;
@@ -18,7 +18,7 @@ namespace Busta.Menus
 {
     public class LevelSelectorController : MonoBehaviour
     {
-        [FormerlySerializedAs("worldInformation")] [FormerlySerializedAs("worldTemplateLabel")] [SerializeField] private WorldInformationContainer worldInformationContainer;
+        [SerializeField] private WorldInformationContainer worldInformationContainer;
         [SerializeField] private LevelButton levelTemplateButton;
         [SerializeField] private LayoutGroup worldTemplateLayout;
 
@@ -73,11 +73,21 @@ namespace Busta.Menus
 
         private async Task FocusLastPlayedLevel()
         {
+            if (!stateService.gameState.settingsState.seenTutorial)
+            {
+                await FocusPlayedLevel(LevelSelectionTutorialController.TUTORIAL_LEVEL);
+                return;
+            }
+            await FocusPlayedLevel(stateService.gameState.levelsState.lastPlayedLevel);
+        }
+
+        private async Task FocusPlayedLevel(string level)
+        {
             Canvas.ForceUpdateCanvases();
-            await Task.Delay(100);
-            var button = GameObject.Find(stateService.gameState.LevelsState.lastPlayedLevel);
+            await Tasks.WaitForSeconds(0.1f);
+            var button = GameObject.Find(level);
             
-            if (stateService.gameState.LevelsState.lastPlayedLevel.IsNullOrEmpty() || !button)
+            if (level.IsNullOrEmpty() || !button)
             {
                 return;
             }
@@ -93,7 +103,7 @@ namespace Busta.Menus
 
             Canvas.ForceUpdateCanvases();
 
-            await Task.Delay(1);
+            await Tasks.WaitUntilNextFrame();
             scrollRect.movementType = originalMovementType;
         }
 
@@ -115,7 +125,7 @@ namespace Busta.Menus
 
             var localizedWorld = localizationService.GetTranslatedText(world.name);
 
-            var completedCount = stateService.gameState.LevelsState.winLevels
+            var completedCount = stateService.gameState.levelsState.winLevels
                 .Count(level => level.StartsWith($"world_{world.number:D2}"));
             var worldProgress = $"{completedCount}/{world.levelCount}";
             worldLabel.SetValues(localizedWorld.ToUpper(), worldProgress);
@@ -130,11 +140,10 @@ namespace Busta.Menus
             var levelName = LevelUtils.GetLevelName(world.number, level);
             var newLevelButton = Instantiate(levelTemplateButton, container);
             newLevelButton.name = levelName;
-            bool isCompleted = stateService.gameState.LevelsState.winLevels.Contains(levelName);
+            bool isCompleted = stateService.gameState.levelsState.winLevels.Contains(levelName);
             var levelExists = SceneUtility.GetBuildIndexByScenePath(levelName) > 0;
             newLevelButton.Setup(level.ToString(), world.buttonImage, world.textColor, isCompleted, 
                 levelExists, () => LoadLevel(levelName));
-
         }
 
         private static void LoadLevel(string levelName)
