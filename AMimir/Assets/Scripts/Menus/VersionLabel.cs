@@ -8,7 +8,7 @@ namespace Busta.Menus
         private void Start()
         {
             var label = gameObject.GetComponent<TMP_Text>();
-            label.text = Application.version;
+            label.text = $"v{Application.version}";
         }
     }
 }
