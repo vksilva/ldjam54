@@ -20,6 +20,8 @@ namespace Busta.Menus
         [SerializeField] private CreditsPopUp creditsPopUp;
         [SerializeField] private Button privacyPolicyButton;
         [SerializeField] private Button termsOfServiceButton;
+        [SerializeField] private Button tutorialButton;
+        [SerializeField] private TutorialAgainPopUp tutorialAgainPopUp;
 
         private AudioService _audioService;
         private StateService _stateService;
@@ -59,6 +61,13 @@ namespace Busta.Menus
             selectLanguageButton.onClick.AddListener(OnSelectLanguage);
             privacyPolicyButton.onClick.AddListener(OnPrivacyPolicy);
             termsOfServiceButton.onClick.AddListener(OnTermsOfService);
+            tutorialButton.onClick.AddListener(OnTutorialAgain);
+        }
+
+        private void OnTutorialAgain()
+        {
+            _audioService.PlaySfx(AudioSFXEnum.click);
+            tutorialAgainPopUp.Show();
         }
 
         private void OnTermsOfService()
