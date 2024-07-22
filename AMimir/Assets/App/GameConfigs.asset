@@ -62,6 +62,6 @@ MonoBehaviour:
       textColor: {r: 0.627451, g: 0.17254902, b: 0.3529412, a: 1}
     - name: challenge
       number: 4
-      levelCount: 10
+      levelCount: 12
       buttonImage: {fileID: 21300000, guid: 745ff8444db46ec4aa6044ebd1562367, type: 3}
       textColor: {r: 0.1764706, g: 0.08627451, b: 0.3137255, a: 1}

@@ -4,6 +4,7 @@
     "com.google.firebase.analytics": "git+https://github.com/GameWorkstore/com.google.firebase.analytics.git#12.1.0",
     "com.google.firebase.app": "git+https://github.com/GameWorkstore/com.google.firebase.app.git#12.1.0",
     "com.google.firebase.crashlytics": "git+https://github.com/GameWorkstore/com.google.firebase.crashlytics.git#12.1.0",
+    "com.unity.burst": "1.8.16",
     "com.unity.collab-proxy": "2.0.7",
     "com.unity.device-simulator.devices": "1.0.0",
     "com.unity.feature.2d": "2.0.0",

@@ -43,7 +43,9 @@ namespace Busta.Tutorial
                 SetUpTutorial();
                 return;
             }
-
+            
+            FindObjectOfType<GameController>().SetBeforeEndgameAction(BeforeEndgame);
+            
             await Tutorial();
         }
         
@@ -127,6 +129,22 @@ namespace Busta.Tutorial
             cat4.SetObstacle(true);
             catFrom4.SetActive(false);
             catTo4.SetActive(false);
+            
+            // Set tutorialExecuted
+            stateService.gameState.settingsState.seenTutorial = true;
+            stateService.Save();
+        }
+
+        private async Task BeforeEndgame()
+        {
+            // Celebrate!
+            tutorialPopUp.SetActive(true);
+            ClearText();
+            await dialogueCanvas.DOFade(1, 0.5f).AsyncWaitForCompletion();
+            await ShowText("Awesome! Now all cats are sleeping in the bed!");
+            await WaitForTap(backgroundButton);
+            await dialogueCanvas.DOFade(0, 0.5f).AsyncWaitForCompletion();
+            tutorialPopUp.SetActive(false);
             
             // Set tutorialExecuted
             stateService.gameState.settingsState.seenTutorial = true;

@@ -6,6 +6,7 @@ using Busta.AppCore.Audio;
 using Busta.AppCore.State;
 using Busta.AppCore.Tracking;
 using Busta.Extensions;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Application = Busta.AppCore.Application;
@@ -18,7 +19,6 @@ namespace Busta.Gameplay
         
         public static GameController Instance { get; private set; }
         public readonly Dictionary<Vector2Int, HighlightGridTile> highlightGridTiles = new();
-        public int failedMovesCounter = 0;
         
         private AudioService _audioService;
         private StateService _stateService;
@@ -31,11 +31,13 @@ namespace Busta.Gameplay
         private HighlightGridTile gridTilePrefab;
         private int movesCounter = 0;
         private float timeCounter = 0;
+        private int failedMovesCounter = 0;
         private readonly RaycastHit2D[] _rayCastResult = new RaycastHit2D[5];
         private const string matchResultWin = "Win";
         private const string matchResultQuit = "Quit";
         private const string matchResultAbandoned = "Abandoned";
         private const string matchResultRestarted = "Restart";
+        private Func<Task> OnBeforeEndGame;
 
         private void Awake()
         {
@@ -69,6 +71,11 @@ namespace Busta.Gameplay
             _stateService.Save();
             
             _trackingService.TrackLevelStarted(SceneManager.GetActiveScene().name);
+        }
+
+        public void IncrementFailedMovements()
+        {
+            failedMovesCounter++;
         }
 
         private void OnApplicationQuit()
@@ -128,9 +135,25 @@ namespace Busta.Gameplay
         {
             _trackingService.TrackLevelEnded(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter, timeCounter, matchResultWin);
             
+            await DoBeforeEndGame();
+            
             await Tasks.WaitForSeconds(0.5f);
             _audioService.PlaySfx(AudioSFXEnum.EndGameCelebration);
             LevelUIController.Instance.ShowEndGameCanvas();
+        }
+
+        public void SetBeforeEndgameAction(Func<Task> task)
+        {
+            OnBeforeEndGame = task;
+        }
+
+        private async Task DoBeforeEndGame()
+        {
+            if (OnBeforeEndGame == null)
+            {
+                return;
+            }
+            await OnBeforeEndGame.Invoke();
         }
 
         public void RestartLevel()

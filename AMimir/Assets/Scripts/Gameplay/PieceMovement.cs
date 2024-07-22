@@ -211,7 +211,7 @@ namespace Busta.Gameplay
                             _catCollider.enabled = true;
                             _pieceSortingGroup.sortingLayerName = DefaultPieceSortingLayer;
                         });
-                        _gameController.failedMovesCounter++;
+                        _gameController.IncrementFailedMovements();
                         return;
                     }
                 }

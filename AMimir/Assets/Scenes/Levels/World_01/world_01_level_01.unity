@@ -1645,37 +1645,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2918897710964618630, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3575644533726103652, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
-      propertyPath: m_BlocksRaycasts
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5122065653151109089, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5485875848649670651, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5869835478310968218, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
       propertyPath: m_Name
       value: TutorialPopUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5869835478310968218, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6522586901351047457, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7854623466397557802, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
