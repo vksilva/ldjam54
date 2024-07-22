@@ -3,6 +3,7 @@ using Busta.UI;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Busta.Gameplay
@@ -10,7 +11,7 @@ namespace Busta.Gameplay
     public class PieceMovement : MonoBehaviour
     {
         [SerializeField] private bool _obstacle = false;
-
+        
         private LayerMask pieceLayer;
         private LayerMask bedLayer;
         private Vector3 _anchor;
@@ -18,7 +19,7 @@ namespace Busta.Gameplay
         private Vector3 _positionBeforeMove;
         private Vector2Int _size;
         private static readonly Vector3 _offset = new(0.5f, 0.5f, 0f);
-        private bool isDragging;
+        public bool IsDragging { get; private set; }
         private const float catReturnSpeed = 15f;
 
         private const string FloatingPieceSortingLayer = "FloatingPiece";
@@ -57,7 +58,7 @@ namespace Busta.Gameplay
                 Mathf.RoundToInt(pieceCollider.bounds.size.y)
             );
 
-            isDragging = false;
+            IsDragging = false;
             _catRenderer = GetComponentInChildren<SpriteRenderer>();
             DisplayShadow(false);
             SetNoise(Random.Range(0, Mathf.PI * 2f));
@@ -85,7 +86,7 @@ namespace Busta.Gameplay
 
         private void OnMouseDrag()
         {
-            if (!isDragging)
+            if (!IsDragging)
             {
                 return;
             }
@@ -157,7 +158,7 @@ namespace Busta.Gameplay
                 return;
             }
 
-            isDragging = true;
+            IsDragging = true;
 
             _gameController.PlayGameSfx(AudioSFXEnum.MoveUpPiece);
 
@@ -180,7 +181,7 @@ namespace Busta.Gameplay
 
             DisplayShadow(false);
             CleanHighlightGrid();
-            isDragging = false;
+            IsDragging = false;
 
             _gameController.PlayGameSfx(AudioSFXEnum.MoveDownPiece);
 
@@ -241,6 +242,11 @@ namespace Busta.Gameplay
         private bool CheckHitArea(RectInt area, Vector3 position)
         {
             return position.x > area.xMin && position.x < area.xMax && position.y > area.yMin && position.y < area.yMax;
+        }
+
+        public void SetObstacle(bool isObstacle)
+        {
+            _obstacle = isObstacle;
         }
     }
 }

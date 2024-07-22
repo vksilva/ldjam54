@@ -9,13 +9,13 @@ namespace Busta.Gameplay
     {
         [SerializeField] private Texture2D sprite;
 
-        private SpriteRenderer renderer;
+        private SpriteRenderer spriteRenderer;
         
         private static readonly int OverlayTex = Shader.PropertyToID("_OverlayTex");
 
         private void Awake()
         {
-            renderer = GetComponent<SpriteRenderer>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
             UpdateOverlaySprite();
         }
 
@@ -26,14 +26,14 @@ namespace Busta.Gameplay
 
         private void UpdateOverlaySprite()
         {
-            if (!renderer || !sprite)
+            if (!spriteRenderer || !sprite)
             {
                 return;
             }
             var mpb = new MaterialPropertyBlock();
-            renderer.GetPropertyBlock(mpb);
+            spriteRenderer.GetPropertyBlock(mpb);
             mpb.SetTexture(OverlayTex, sprite);
-            renderer.SetPropertyBlock(mpb);
+            spriteRenderer.SetPropertyBlock(mpb);
         }
     }
 }

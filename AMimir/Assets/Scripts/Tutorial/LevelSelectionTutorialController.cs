@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Busta.AppCore.State;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,8 +20,12 @@ namespace Busta.Tutorial
             }
 
             tutorialPopUp.SetActive(false);
-            // check state service for tutorial complete
-            // if(tutorialExecuted) return;
+            stateService = Application.Get<StateService>();
+            if (stateService.gameState.settingsState.seenTutorial)
+            {
+                SetUpTutorial();
+                return;
+            }
 
             await Tutorial();
         }
@@ -29,6 +34,7 @@ namespace Busta.Tutorial
         {
             // Initial tutorial setup
             SetUpTutorial();
+            tutorialPopUp.SetActive(true);
 
             // Show cat and dialogue box
             await dialogueCanvas.DOFade(1, 0.5f).AsyncWaitForCompletion();
@@ -42,7 +48,7 @@ namespace Busta.Tutorial
             catAvatar.gameObject.SetActive(false);
             var tutorialLevelButton = GameObject.Find(TUTORIAL_LEVEL).GetComponent<Button>();
             await ShowHighlight(tutorialLevelButton.image);
-            dialogueText.text = string.Empty;
+            ClearText();
             await dialogueBox.DOFade(1, 0.5f).AsyncWaitForCompletion();
             await ShowText("Click the level button to start a level.");
             await WaitForTap(highlightButton);

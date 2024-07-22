@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Busta.AppCore.State;
 using Busta.Extensions;
 using DG.Tweening;
 using TMPro;
@@ -18,6 +19,8 @@ namespace Busta.Tutorial
         [SerializeField] protected Button backgroundButton;
         [SerializeField] protected Button highlightButton;
         
+        protected StateService stateService; 
+        
         protected async Task ShowText(string text)
         {
             dialogueText.text = text;
@@ -26,6 +29,11 @@ namespace Busta.Tutorial
 
             await DOVirtual.Int(0, dialogueText.text.Length, 1f, value => { dialogueText.maxVisibleCharacters = value; })
                 .AsyncWaitForCompletion();
+        }
+
+        protected void ClearText()
+        {
+            dialogueText.text = string.Empty;
         }
         
         protected async Task WaitForTap(Button target)
@@ -59,7 +67,6 @@ namespace Busta.Tutorial
         
         protected virtual void SetUpTutorial()
         {
-            tutorialPopUp.SetActive(true);
             dialogueCanvas.gameObject.SetActive(true);
             dialogueCanvas.alpha = 0;
             dialogueText.text = string.Empty;
