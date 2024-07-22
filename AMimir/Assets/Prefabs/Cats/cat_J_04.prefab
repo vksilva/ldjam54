@@ -93,9 +93,9 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0, y: 2}
-      - {x: 0, y: 0.9875643}
-      - {x: 1.9919292, y: 0.9922998}
-      - {x: 2.0188677, y: 0}
+      - {x: 0, y: 1}
+      - {x: 2, y: 1}
+      - {x: 2, y: 0}
       - {x: 3, y: 0}
       - {x: 3, y: 2}
   m_UseDelaunayMesh: 0
