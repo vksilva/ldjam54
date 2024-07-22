@@ -31,8 +31,17 @@ namespace Busta.Tutorial
             dialogueText.ForceMeshUpdate();
             dialogueText.maxVisibleCharacters = 0;
 
-            await DOVirtual.Int(0, dialogueText.text.Length, 1f, value => { dialogueText.maxVisibleCharacters = value; })
-                .AsyncWaitForCompletion();
+            var tween = DOVirtual.Int(0, dialogueText.text.Length, 5f, 
+                    value => { dialogueText.maxVisibleCharacters = value; });
+
+            void onButtonClicked()
+            {
+                tween.Complete();
+            }
+            
+            backgroundButton.onClick.AddListener(onButtonClicked);
+            await tween.AsyncWaitForCompletion();
+            backgroundButton.onClick.RemoveListener(onButtonClicked);
         }
 
         protected void ClearText()
