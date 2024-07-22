@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Busta.AppCore.Localization;
 using Busta.AppCore.State;
 using DG.Tweening;
 using UnityEngine;
@@ -27,6 +28,8 @@ namespace Busta.Tutorial
                 return;
             }
 
+            localizationService = Application.Get<LocalizationService>();
+
             await Tutorial();
         }
 
@@ -38,9 +41,9 @@ namespace Busta.Tutorial
 
             // Show cat and dialogue box
             await dialogueCanvas.DOFade(1, 0.5f).AsyncWaitForCompletion();
-            await ShowText("Welcome to \"A Mimir\", the cat puzzle game!");
+            await ShowText(localizationService.GetTranslatedText("tutorial_message_01"));
             await WaitForTap(backgroundButton);
-            await ShowText("My cat friends are sleepy and want to sleep in their bed.");
+            await ShowText(localizationService.GetTranslatedText("tutorial_message_02"));
             await WaitForTap(backgroundButton);
             await dialogueBox.DOFade(0, 0.5f).AsyncWaitForCompletion();
 
@@ -50,7 +53,7 @@ namespace Busta.Tutorial
             await ShowHighlight(tutorialLevelButton.image);
             ClearText();
             await dialogueBox.DOFade(1, 0.5f).AsyncWaitForCompletion();
-            await ShowText("Click the level button to start a level.");
+            await ShowText(localizationService.GetTranslatedText("tutorial_message_03"));
             await WaitForTap(highlightButton);
 
             SceneManager.LoadScene(TUTORIAL_LEVEL);

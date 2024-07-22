@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Busta.AppCore.Localization;
 using Busta.AppCore.State;
 using Busta.Extensions;
 using Busta.Gameplay;
@@ -43,7 +44,8 @@ namespace Busta.Tutorial
                 SetUpTutorial();
                 return;
             }
-            
+
+            localizationService = Application.Get<LocalizationService>();
             FindObjectOfType<GameController>().SetBeforeEndgameAction(BeforeEndgame);
             
             await Tutorial();
@@ -60,9 +62,9 @@ namespace Busta.Tutorial
 
             // Show cat and dialogue box
             await dialogueCanvas.DOFade(1, 0.5f).AsyncWaitForCompletion();
-            await ShowText("Let's put the cats on the bed.");
+            await ShowText(localizationService.GetTranslatedText("tutorial_message_04"));
             await WaitForTap(backgroundButton);
-            await ShowText("I'll move the first one for you.");
+            await ShowText(localizationService.GetTranslatedText("tutorial_message_05"));
             await WaitForTap(backgroundButton);
             await dialogueCanvas.DOFade(0, 0.5f).AsyncWaitForCompletion();
             
@@ -97,7 +99,7 @@ namespace Busta.Tutorial
             // Ask player to move more pieces
             ClearText();
             await dialogueCanvas.DOFade(1, 0.5f).AsyncWaitForCompletion();
-            await ShowText("Now it's your turn. Move the cats to the highlighted area.");
+            await ShowText(localizationService.GetTranslatedText("tutorial_message_06"));
             await WaitForTap(backgroundButton);
             await dialogueCanvas.DOFade(0, 0.5f).AsyncWaitForCompletion();
             tutorialPopUp.SetActive(false);
@@ -141,7 +143,9 @@ namespace Busta.Tutorial
             tutorialPopUp.SetActive(true);
             ClearText();
             await dialogueCanvas.DOFade(1, 0.5f).AsyncWaitForCompletion();
-            await ShowText("Awesome! Now all cats are sleeping in the bed!");
+            await ShowText(localizationService.GetTranslatedText("tutorial_message_07"));
+            await WaitForTap(backgroundButton);
+            await ShowText(localizationService.GetTranslatedText("tutorial_message_08"));
             await WaitForTap(backgroundButton);
             await dialogueCanvas.DOFade(0, 0.5f).AsyncWaitForCompletion();
             tutorialPopUp.SetActive(false);

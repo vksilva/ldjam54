@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Busta.AppCore.Localization;
 using Busta.AppCore.State;
 using Busta.Extensions;
 using DG.Tweening;
@@ -19,7 +20,8 @@ namespace Busta.Tutorial
         [SerializeField] protected Button backgroundButton;
         [SerializeField] protected Button highlightButton;
         
-        protected StateService stateService; 
+        protected StateService stateService;
+        protected LocalizationService localizationService;
         
         protected async Task ShowText(string text)
         {
