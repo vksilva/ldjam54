@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Busta.AppCore.Localization;
 using Busta.Extensions;
 using UnityEditor;
@@ -11,6 +12,7 @@ namespace Busta.Editor
     public static class ImportLocalization
     {
         private static readonly string LocalizationPath = Path.Join("Assets", "Localization");
+        private static Regex CSVParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
 
         [MenuItem("Vanessa/Import Localization")]
         public static void Import()
@@ -25,7 +27,10 @@ namespace Busta.Editor
             var lines = File.ReadAllLines(path);
 
             // Split comma separated values file by comma
-            var data = lines.Select(line => line.Split(",")).ToArray();
+            var data = lines.Select(
+                line => CSVParser.Split(line).Select(
+                    s => s.Trim('"')).ToArray()
+                ).ToArray();
             // Languages are row 0 (Header)
             var languages = data[0];
             var languageNames = data[1];
