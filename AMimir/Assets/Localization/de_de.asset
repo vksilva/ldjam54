@@ -23,14 +23,14 @@ MonoBehaviour:
     Value: Soundeffekt
   - Key: music
     Value: Musik
-  - Key: level
-    Value: Level
   - Key: small
     Value: Klein
   - Key: medium
     Value: Mittel
   - Key: large
     Value: "Gro\xDF"
+  - Key: challenge
+    Value: Herausforderung
   - Key: credits
     Value: Credits
   - Key: reset_title
@@ -40,7 +40,7 @@ MonoBehaviour:
   - Key: continue_button
     Value: Weiter
   - Key: all_cats_are_a_mimir
-    Value: All cats are a mimir
+    Value: Alle Katzen <i>a mimir</i>
   - Key: back_to_home
     Value: Zuruck zum start
   - Key: paused
@@ -59,3 +59,28 @@ MonoBehaviour:
     Value: "Datenschutzkl\xE4rung"
   - Key: terms_of_service_button
     Value: Nutzungsbedingungen
+  - Key: tutorial_button
+    Value: Tutorial
+  - Key: tutorial_again_title
+    Value: Tutorial wiederholung?
+  - Key: confirm_tutorial_again_button
+    Value: Ja
+  - Key: decline_tutorial_again_button
+    Value: Nein
+  - Key: tutorial_message_01
+    Value: Willkommen bei <b>A Mimir</b>, dem Katzenpuzzlespiel!
+  - Key: tutorial_message_02
+    Value: Meine Katzenfreunde sind verschlafen und wollen in ihrem Bett schlafen
+  - Key: tutorial_message_03
+    Value: "Klicken Sie auf die Schaltfl\xE4che \u201ELevel\u201C, um ein Level zu
+      starten"
+  - Key: tutorial_message_04
+    Value: Legen wir die Katzen auf das Bett
+  - Key: tutorial_message_05
+    Value: "Ich werde die erste f\xFCr Sie platzieren"
+  - Key: tutorial_message_06
+    Value: Jetzt bist du an der Reihe. Bewegen Sie die Katzen in den markierten Bereich
+  - Key: tutorial_message_07
+    Value: Super! Jetzt schlafen alle Katzen im Bett!
+  - Key: tutorial_message_08
+    Value: "Und nun viel Spa\xDF mit den anderen Levels! Auf Wiedersehen!"

@@ -16,48 +16,70 @@ MonoBehaviour:
   Key: es_es
   Translations:
   - Key: title
-    Value: 
+    Value: A Mimir
   - Key: settings
-    Value: 
+    Value: Opciones
   - Key: sound_effects
-    Value: 
+    Value: Efectos sonoros
   - Key: music
-    Value: 
-  - Key: level
-    Value: 
+    Value: "M\xFAsica"
   - Key: small
-    Value: 
+    Value: "Peque\xF1o"
   - Key: medium
-    Value: 
+    Value: Medio
   - Key: large
-    Value: 
+    Value: Grande
   - Key: challenge
-    Value: 
+    Value: "Desaf\xEDo"
   - Key: credits
-    Value: 
+    Value: "Cr\xE9ditos"
   - Key: reset_title
-    Value: 
+    Value: Reiniciar nivel
   - Key: reset_button
-    Value: 
+    Value: Reiniciar
   - Key: continue_button
-    Value: 
+    Value: Continuar
   - Key: all_cats_are_a_mimir
-    Value: 
+    Value: "Todos los gatitos est\xE1n <i>a mimir</i>"
   - Key: back_to_home
-    Value: 
+    Value: "Voltar para o in\xEDcio"
   - Key: paused
-    Value: 
+    Value: Pausado
   - Key: language
-    Value: 
+    Value: Idioma
   - Key: select_language_button
-    Value: 
+    Value: Seleccionar idioma
   - Key: close_game
-    Value: 
+    Value: "\xBFCerrar el juego?"
   - Key: confirm_close_game_button
-    Value: 
+    Value: "S\xED"
   - Key: decline_close_game_button
-    Value: 
+    Value: No
   - Key: privacy_policy_button
-    Value: 
+    Value: "Pol\xEDtica de privacidad"
   - Key: terms_of_service_button
-    Value: 
+    Value: Condiciones de servicio
+  - Key: tutorial_button
+    Value: Tutorial
+  - Key: tutorial_again_title
+    Value: "\xBFRepetici\xF3n del tutorial?"
+  - Key: confirm_tutorial_again_button
+    Value: "S\xED"
+  - Key: decline_tutorial_again_button
+    Value: No
+  - Key: tutorial_message_01
+    Value: "\xA1Bienvenido a <b>A Mimir</b>, el juego de puzles de gatos!"
+  - Key: tutorial_message_02
+    Value: "Mis amigos los gatitos tienen sue\xF1o y quieren dormir en su cama"
+  - Key: tutorial_message_03
+    Value: "Clica el bot\xF3n de nivel para empezar un nivel"
+  - Key: tutorial_message_04
+    Value: Vamos a poner los gatos en la cama
+  - Key: tutorial_message_05
+    Value: Voy a colocar el primero para usted
+  - Key: tutorial_message_06
+    Value: Ahora te toca a ti. Mueve los gatos a la zona resaltada
+  - Key: tutorial_message_07
+    Value: "\xA1Impresionante! \xA1Ahora todos los gatos duermen en la cama!"
+  - Key: tutorial_message_08
+    Value: "\xA1Y ahora divi\xE9rtete con los otros niveles! \xA1Hasta la vista!"

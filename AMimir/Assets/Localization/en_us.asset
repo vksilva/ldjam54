@@ -23,14 +23,14 @@ MonoBehaviour:
     Value: Sound effects
   - Key: music
     Value: Music
-  - Key: level
-    Value: Level
   - Key: small
     Value: Small
   - Key: medium
     Value: Medium
   - Key: large
     Value: Large
+  - Key: challenge
+    Value: Challenge
   - Key: credits
     Value: Credits
   - Key: reset_title
@@ -40,7 +40,7 @@ MonoBehaviour:
   - Key: continue_button
     Value: Continue
   - Key: all_cats_are_a_mimir
-    Value: All cats are a mimir
+    Value: All cats are <i>a mimir</i>
   - Key: back_to_home
     Value: Back to home
   - Key: paused
@@ -59,3 +59,27 @@ MonoBehaviour:
     Value: Privacy policy
   - Key: terms_of_service_button
     Value: Terms of service
+  - Key: tutorial_button
+    Value: Tutorial
+  - Key: tutorial_again_title
+    Value: Replay tutorial?
+  - Key: confirm_tutorial_again_button
+    Value: Yes
+  - Key: decline_tutorial_again_button
+    Value: No
+  - Key: tutorial_message_01
+    Value: Welcome to <b>A Mimir</b>, the cat puzzle game!
+  - Key: tutorial_message_02
+    Value: My cat friends are sleepy and want to sleep in their bed
+  - Key: tutorial_message_03
+    Value: Click the level button to start a level
+  - Key: tutorial_message_04
+    Value: Let's put the cats on the bed
+  - Key: tutorial_message_05
+    Value: I will place the first one for you
+  - Key: tutorial_message_06
+    Value: Now it's your turn. Move the cats to the highlighted area
+  - Key: tutorial_message_07
+    Value: Awesome! Now all cats are sleeping in the bed!
+  - Key: tutorial_message_08
+    Value: Now go and have fun with the other levels! See you!
