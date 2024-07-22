@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Busta.AppCore.Localization;
 using Busta.AppCore.State;
+using Busta.AppCore.Tracking;
 using Busta.Extensions;
 using Busta.Gameplay;
 using DG.Tweening;
@@ -46,6 +47,7 @@ namespace Busta.Tutorial
             }
 
             localizationService = Application.Get<LocalizationService>();
+            trackingService = Application.Get<TrackingService>();
             FindObjectOfType<GameController>().SetBeforeEndgameAction(BeforeEndgame);
             
             await Tutorial();
@@ -135,6 +137,8 @@ namespace Busta.Tutorial
             // Set tutorialExecuted
             stateService.gameState.settingsState.seenTutorial = true;
             stateService.Save();
+            
+            trackingService.TrackTutorialFinished();
         }
 
         private async Task BeforeEndgame()

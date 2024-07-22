@@ -1,6 +1,7 @@
 using Busta.AppCore.Audio;
 using Busta.AppCore.BackKey;
 using Busta.AppCore.State;
+using Busta.AppCore.Tracking;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,12 +20,14 @@ namespace Busta.Menus
         private static BackKeyService backKeyService;
         private static AudioService audioSource;
         private static StateService stateService;
+        private static TrackingService trackingService;
 
         public void Awake()
         {
             audioSource = Application.Get<AudioService>();
             backKeyService = Application.Get<BackKeyService>();
             stateService = Application.Get<StateService>();
+            trackingService = Application.Get<TrackingService>();
             
             declineTutorialAgainButton.onClick.AddListener(OnClose);
             backgroundButton.onClick.AddListener(OnClose);
@@ -36,6 +39,9 @@ namespace Busta.Menus
         {
             stateService.gameState.settingsState.seenTutorial = false;
             stateService.Save();
+            
+            trackingService.TrackTutorialReplayed();
+            
             SceneManager.LoadScene(1);
         }
 

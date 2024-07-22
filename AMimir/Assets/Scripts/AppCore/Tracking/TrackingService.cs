@@ -70,5 +70,20 @@ namespace Busta.AppCore.Tracking
             Parameter[] param = { new(TrackingParameters.Language, language) };
             firebaseService.LogEvent(TrackingEvents.LanguageChanged, param);
         }
+
+        public void TrackTutorialFinished()
+        {
+            firebaseService.LogEvent(TrackingEvents.TutorialFinished);
+        }
+
+        public void TrackTutorialReplayed()
+        {
+            firebaseService.LogEvent(TrackingEvents.TutorialReplayed);
+        }
+
+        public void TrackTutorialStarted()
+        {
+            firebaseService.LogEvent(TrackingEvents.TutorialStarted);
+        }
     }
 }

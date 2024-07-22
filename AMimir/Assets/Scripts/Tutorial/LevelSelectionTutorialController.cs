@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Busta.AppCore.Localization;
 using Busta.AppCore.State;
+using Busta.AppCore.Tracking;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -29,6 +30,7 @@ namespace Busta.Tutorial
             }
 
             localizationService = Application.Get<LocalizationService>();
+            trackingService = Application.Get<TrackingService>();
 
             await Tutorial();
         }
@@ -38,6 +40,7 @@ namespace Busta.Tutorial
             // Initial tutorial setup
             SetUpTutorial();
             tutorialPopUp.SetActive(true);
+            trackingService.TrackTutorialStarted();
 
             // Show cat and dialogue box
             await dialogueCanvas.DOFade(1, 0.5f).AsyncWaitForCompletion();

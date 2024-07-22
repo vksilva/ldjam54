@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Busta.AppCore.Localization;
 using Busta.AppCore.State;
+using Busta.AppCore.Tracking;
 using Busta.Extensions;
 using DG.Tweening;
 using TMPro;
@@ -22,6 +23,7 @@ namespace Busta.Tutorial
         
         protected StateService stateService;
         protected LocalizationService localizationService;
+        protected TrackingService trackingService;
         
         protected async Task ShowText(string text)
         {

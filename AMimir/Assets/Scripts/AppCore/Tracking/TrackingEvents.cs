@@ -12,6 +12,10 @@ namespace Busta.AppCore.Tracking
         public const string SettingsOpened = "settings_opened";
         public const string CreditsOpened = "credits_opened";
         public const string LanguageChanged = "language_changed";
+
+        public const string TutorialFinished = "tutorial_finished";
+        public const string TutorialReplayed = "tutorial_replayed";
+        public const string TutorialStarted = "tutorial_started";
     }
 
     public static class TrackingParameters
