@@ -3,7 +3,6 @@ using Busta.UI;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Busta.Gameplay
@@ -11,27 +10,29 @@ namespace Busta.Gameplay
     public class PieceMovement : MonoBehaviour
     {
         [SerializeField] private bool _obstacle = false;
+        [SerializeField] private Vector2 solutionPos;
         
         private LayerMask pieceLayer;
         private LayerMask bedLayer;
-        private Vector3 _anchor;
-        private Camera _camera;
-        private Vector3 _positionBeforeMove;
-        private Vector2Int _size;
-        private static readonly Vector3 _offset = new(0.5f, 0.5f, 0f);
+        private Vector3 anchor;
+        private Camera cam;
+        private Vector3 positionBeforeMove;
+        private Vector2Int size;
+        private static readonly Vector3 offset = new(0.5f, 0.5f, 0f);
         public bool IsDragging { get; private set; }
         private const float catReturnSpeed = 15f;
+
+        private SortingGroup pieceSortingGroup;
+        private GameController gameController;
+        private Collider2D catCollider;
+
+        private readonly RaycastHit2D[] hitResults = new RaycastHit2D[5];
+        private SpriteRenderer catRenderer;
 
         private const string FloatingPieceSortingLayer = "FloatingPiece";
         private const string DefaultPieceSortingLayer = "Default";
         private const string BedSortingLayer = "Bed";
-
-        private SortingGroup _pieceSortingGroup;
-        private GameController _gameController;
-        private Collider2D _catCollider;
-
-        private readonly RaycastHit2D[] _hitResults = new RaycastHit2D[5];
-        private SpriteRenderer _catRenderer;
+        
         private static readonly int ShadowOffset = Shader.PropertyToID("_ShadowOffset");
         private static readonly int ShadowNoise = Shader.PropertyToID("_BreathNoise");
 
@@ -39,27 +40,27 @@ namespace Busta.Gameplay
         {
             pieceLayer = LayerMask.GetMask(DefaultPieceSortingLayer);
             bedLayer = LayerMask.GetMask(BedSortingLayer);
-            _pieceSortingGroup = GetComponent<SortingGroup>();
-            _catCollider = GetComponent<Collider2D>();
+            pieceSortingGroup = GetComponent<SortingGroup>();
+            catCollider = GetComponent<Collider2D>();
         }
 
         private void Start()
         {
-            _gameController = GameController.Instance;
+            gameController = GameController.Instance;
 
             var position = transform.position;
             position = new Vector3(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y), 0);
             transform.position = position;
 
-            _camera = Camera.main;
+            cam = Camera.main;
             var pieceCollider = GetComponent<Collider2D>();
-            _size = new Vector2Int(
+            size = new Vector2Int(
                 Mathf.RoundToInt(pieceCollider.bounds.size.x),
                 Mathf.RoundToInt(pieceCollider.bounds.size.y)
             );
 
             IsDragging = false;
-            _catRenderer = GetComponentInChildren<SpriteRenderer>();
+            catRenderer = GetComponentInChildren<SpriteRenderer>();
             DisplayShadow(false);
             SetNoise(Random.Range(0, Mathf.PI * 2f));
         }
@@ -67,21 +68,21 @@ namespace Busta.Gameplay
         private void SetNoise(float noise)
         {
             var mpb = new MaterialPropertyBlock();
-            _catRenderer.GetPropertyBlock(mpb);
+            catRenderer.GetPropertyBlock(mpb);
             mpb.SetFloat(ShadowNoise, noise);
             foreach (var r in GetComponentsInChildren<Renderer>())
             {
                 r.SetPropertyBlock(mpb);
             }
-            _catRenderer.SetPropertyBlock(mpb);
+            catRenderer.SetPropertyBlock(mpb);
         }
 
         private void DisplayShadow(bool show)
         {
             var mpb = new MaterialPropertyBlock();
-            _catRenderer.GetPropertyBlock(mpb);
+            catRenderer.GetPropertyBlock(mpb);
             mpb.SetFloat(ShadowOffset, show ? 2f : 0.5f);
-            _catRenderer.SetPropertyBlock(mpb);
+            catRenderer.SetPropertyBlock(mpb);
         }
 
         private void OnMouseDrag()
@@ -92,7 +93,7 @@ namespace Busta.Gameplay
             }
 
             var worldPosition = GetMousePosition();
-            var position = worldPosition - _anchor;
+            var position = worldPosition - anchor;
 
             transform.position = position;
 
@@ -105,24 +106,24 @@ namespace Busta.Gameplay
 
             var nearIntPosition = NearIntPosition();
 
-            for (int x = 0; x < _size.x; x++)
+            for (int x = 0; x < size.x; x++)
             {
-                for (int y = 0; y < _size.y; y++)
+                for (int y = 0; y < size.y; y++)
                 {
                     var tile = new Vector3(x, y, 0);
                     var tileCoordinate = nearIntPosition + tile;
-                    var tileCenterPosition = tileCoordinate + _offset;
+                    var tileCenterPosition = tileCoordinate + offset;
 
-                    var hitBed = Physics2D.RaycastNonAlloc(tileCenterPosition, Vector2.zero, _hitResults,
+                    var hitBed = Physics2D.RaycastNonAlloc(tileCenterPosition, Vector2.zero, hitResults,
                         Mathf.Infinity, bedLayer);
-                    var hitPiece = Physics2D.RaycastNonAlloc(tileCenterPosition, Vector2.zero, _hitResults,
+                    var hitPiece = Physics2D.RaycastNonAlloc(tileCenterPosition, Vector2.zero, hitResults,
                         Mathf.Infinity, pieceLayer);
                     if (hitPiece > 0 && hitBed > 0)
                     {
-                        if (_gameController.highlightGridTiles.TryGetValue(
+                        if (gameController.highlightGridTiles.TryGetValue(
                                 new Vector2Int((int)tileCoordinate.x, (int)tileCoordinate.y), out var gridTile))
                         {
-                            if (_hitResults[0].collider.gameObject != this.gameObject)
+                            if (hitResults[0].collider.gameObject != this.gameObject)
                             {
                                 continue;
                             }
@@ -137,7 +138,7 @@ namespace Busta.Gameplay
 
         private void CleanHighlightGrid()
         {
-            foreach (var tile in _gameController.highlightGridTiles.Values)
+            foreach (var tile in gameController.highlightGridTiles.Values)
             {
                 tile.gameObject.SetActive(false);
             }
@@ -146,7 +147,7 @@ namespace Busta.Gameplay
         private Vector3 GetMousePosition()
         {
             var position = Input.mousePosition;
-            var worldPosition = _camera.ScreenToWorldPoint(position);
+            var worldPosition = cam.ScreenToWorldPoint(position);
             worldPosition.z = 0;
             return worldPosition;
         }
@@ -160,16 +161,16 @@ namespace Busta.Gameplay
 
             IsDragging = true;
 
-            _gameController.PlayGameSfx(AudioSFXEnum.MoveUpPiece);
+            gameController.PlayGameSfx(AudioSFXEnum.MoveUpPiece);
 
             DisplayShadow(true);
-            _pieceSortingGroup.sortingLayerName = FloatingPieceSortingLayer;
+            pieceSortingGroup.sortingLayerName = FloatingPieceSortingLayer;
 
             var piecePosition = transform.position;
-            _positionBeforeMove = piecePosition;
+            positionBeforeMove = piecePosition;
 
             var position = GetMousePosition();
-            _anchor = position - piecePosition;
+            anchor = position - piecePosition;
         }
 
         private void OnMouseUp()
@@ -183,35 +184,35 @@ namespace Busta.Gameplay
             CleanHighlightGrid();
             IsDragging = false;
 
-            _gameController.PlayGameSfx(AudioSFXEnum.MoveDownPiece);
+            gameController.PlayGameSfx(AudioSFXEnum.MoveDownPiece);
 
             var position = transform.position;
 
             //check if final position is valid
-            for (int x = 0; x < _size.x; x++)
+            for (int x = 0; x < size.x; x++)
             {
-                for (int y = 0; y < _size.y; y++)
+                for (int y = 0; y < size.y; y++)
                 {
                     var tile = new Vector3(x, y, 0);
-                    var hitGrabArea = CheckHitArea(_gameController.PiecesGrabArea, position + tile + _offset);
+                    var hitGrabArea = CheckHitArea(gameController.PiecesGrabArea, position + tile + offset);
 
-                    var origin = position + tile + _offset;
-                    var pieceHits = Physics2D.RaycastNonAlloc(origin, Vector2.zero, _hitResults,
+                    var origin = position + tile + offset;
+                    var pieceHits = Physics2D.RaycastNonAlloc(origin, Vector2.zero, hitResults,
                         Mathf.Infinity, pieceLayer);
-                    var bedHits = Physics2D.RaycastNonAlloc(origin, Vector2.zero, _hitResults,
+                    var bedHits = Physics2D.RaycastNonAlloc(origin, Vector2.zero, hitResults,
                         Mathf.Infinity, bedLayer);
                     if (pieceHits > 1 || (bedHits == 0 && !hitGrabArea))
                     {
                         //Move piece back to original position
                         // TODO check surrounding area for a valid position instead of returning piece
                         
-                        _catCollider.enabled = false;
-                        transform.DOMove(_positionBeforeMove, catReturnSpeed).SetSpeedBased().OnComplete(()=>
+                        catCollider.enabled = false;
+                        transform.DOMove(positionBeforeMove, catReturnSpeed).SetSpeedBased().OnComplete(()=>
                         {
-                            _catCollider.enabled = true;
-                            _pieceSortingGroup.sortingLayerName = DefaultPieceSortingLayer;
+                            catCollider.enabled = true;
+                            pieceSortingGroup.sortingLayerName = DefaultPieceSortingLayer;
                         });
-                        _gameController.IncrementFailedMovements();
+                        gameController.IncrementFailedMovements();
                         return;
                     }
                 }
@@ -219,7 +220,7 @@ namespace Busta.Gameplay
 
             //move piece to near int position
             transform.position = NearIntPosition();
-            _pieceSortingGroup.sortingLayerName = DefaultPieceSortingLayer;
+            pieceSortingGroup.sortingLayerName = DefaultPieceSortingLayer;
 
             GameController.Instance.OnPiecePlaced();
         }
