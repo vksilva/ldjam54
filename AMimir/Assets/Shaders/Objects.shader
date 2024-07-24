@@ -25,8 +25,9 @@ Shader "Vanessa/Objects"
         [ToggleOff(COLOR_GRADIENT_ON)] _ColorGradientOn ("Color Gradient Enabled", Float) = 0
         _GradientLight ("Gradient Light", Color) = (1, 1, 1, 1)
         _GradientShadow ("Gradient Shadow", Color) = (0, 0, 0, 1)
-        
+
         [PerRendererData] _OverlayTex ("Overlay Sprite Texture", 2D) = "black" {}
+        [PerRendererData] _OverlayOffsetUv("Overlay Offset UV", Vector) = (0, 0, 0, 0)
     }
 
     SubShader
@@ -156,15 +157,15 @@ Shader "Vanessa/Objects"
             #ifndef COLOR_GRADIENT_ON
             float4 _GradientLight;
             float4 _GradientShadow;
-            #endif
-
             sampler2D _OverlayTex;
+            float4 _OverlayOffsetUv;
+            #endif
 
             fixed4 FaceFrag(v2f IN) : SV_Target
             {
                 #ifndef COLOR_GRADIENT_ON
                 fixed4 tex_color = SampleSpriteTexture(IN.texcoord);
-                fixed4 overlay_color = tex2D (_OverlayTex, IN.texcoord);
+                fixed4 overlay_color = tex2D(_OverlayTex, IN.texcoord + _OverlayOffsetUv);
                 const int count = 3;
                 const fixed4 colors[count] = {_GradientShadow, IN.color, _GradientLight};
                 const fixed scaled_time = tex_color.r * (count - 1);
