@@ -132,8 +132,8 @@ namespace Busta.Gameplay
             Gizmos.DrawWireCube(grabArea.center, grabArea.size.ToVector3());
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(catPlacementArea.center, catPlacementArea.size.ToVector3());
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(safeArea.center, safeArea.size);
+            // Gizmos.color = Color.green;
+            // Gizmos.DrawWireCube(safeArea.center, safeArea.size);
         }
     }
 }
