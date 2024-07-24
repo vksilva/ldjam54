@@ -1,6 +1,10 @@
+using System;
+using System.Linq;
 using Busta.AppCore.Audio;
+using Busta.Extensions;
 using Busta.UI;
 using DG.Tweening;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Random = UnityEngine.Random;
@@ -10,15 +14,15 @@ namespace Busta.Gameplay
     public class PieceMovement : MonoBehaviour
     {
         [SerializeField] private bool _obstacle = false;
-        [SerializeField] private Vector2 solutionPos;
-        
+        [SerializeField] private Vector2Int solutionPos;
+
         private LayerMask pieceLayer;
         private LayerMask bedLayer;
         private Vector3 anchor;
         private Camera cam;
         private Vector3 positionBeforeMove;
         private Vector2Int size;
-        private static readonly Vector3 offset = new(0.5f, 0.5f, 0f);
+        private static readonly Vector3 gridOffset = new(0.5f, 0.5f, 0f);
         public bool IsDragging { get; private set; }
         private const float catReturnSpeed = 15f;
 
@@ -32,7 +36,7 @@ namespace Busta.Gameplay
         private const string FloatingPieceSortingLayer = "FloatingPiece";
         private const string DefaultPieceSortingLayer = "Default";
         private const string BedSortingLayer = "Bed";
-        
+
         private static readonly int ShadowOffset = Shader.PropertyToID("_ShadowOffset");
         private static readonly int ShadowNoise = Shader.PropertyToID("_BreathNoise");
 
@@ -74,6 +78,7 @@ namespace Busta.Gameplay
             {
                 r.SetPropertyBlock(mpb);
             }
+
             catRenderer.SetPropertyBlock(mpb);
         }
 
@@ -112,7 +117,7 @@ namespace Busta.Gameplay
                 {
                     var tile = new Vector3(x, y, 0);
                     var tileCoordinate = nearIntPosition + tile;
-                    var tileCenterPosition = tileCoordinate + offset;
+                    var tileCenterPosition = tileCoordinate + gridOffset;
 
                     var hitBed = Physics2D.RaycastNonAlloc(tileCenterPosition, Vector2.zero, hitResults,
                         Mathf.Infinity, bedLayer);
@@ -127,7 +132,7 @@ namespace Busta.Gameplay
                             {
                                 continue;
                             }
-                            
+
                             gridTile.gameObject.SetActive(true);
                             gridTile.SetColor(hitPiece == 1);
                         }
@@ -194,9 +199,9 @@ namespace Busta.Gameplay
                 for (int y = 0; y < size.y; y++)
                 {
                     var tile = new Vector3(x, y, 0);
-                    var hitGrabArea = CheckHitArea(gameController.PiecesGrabArea, position + tile + offset);
+                    var hitGrabArea = CheckHitArea(gameController.PiecesGrabArea, position + tile + gridOffset);
 
-                    var origin = position + tile + offset;
+                    var origin = position + tile + gridOffset;
                     var pieceHits = Physics2D.RaycastNonAlloc(origin, Vector2.zero, hitResults,
                         Mathf.Infinity, pieceLayer);
                     var bedHits = Physics2D.RaycastNonAlloc(origin, Vector2.zero, hitResults,
@@ -205,9 +210,9 @@ namespace Busta.Gameplay
                     {
                         //Move piece back to original position
                         // TODO check surrounding area for a valid position instead of returning piece
-                        
+
                         catCollider.enabled = false;
-                        transform.DOMove(positionBeforeMove, catReturnSpeed).SetSpeedBased().OnComplete(()=>
+                        transform.DOMove(positionBeforeMove, catReturnSpeed).SetSpeedBased().OnComplete(() =>
                         {
                             catCollider.enabled = true;
                             pieceSortingGroup.sortingLayerName = DefaultPieceSortingLayer;
@@ -249,5 +254,37 @@ namespace Busta.Gameplay
         {
             _obstacle = isObstacle;
         }
+
+#if UNITY_EDITOR
+        private void OnDrawGizmosSelected()
+        {
+            if (_obstacle)
+            {
+                return;
+            }
+            
+            var bed = FindObjectOfType<Bed>();
+            
+            Handles.color = Color.green;
+            Handles.Label(bed.transform.position + new Vector3(solutionPos.x+0.1f, solutionPos.y+0.3f), name);
+
+            Gizmos.color = Color.green;
+
+            var boxCollider = GetComponent<BoxCollider2D>();
+            if (boxCollider)
+            {
+                Gizmos.matrix = bed.transform.localToWorldMatrix * Matrix4x4.Translate(solutionPos.ToVector3());
+                Gizmos.DrawWireCube(boxCollider.offset, boxCollider.size);
+                return;
+            }
+
+            var polygonCollider = GetComponent<PolygonCollider2D>();
+            if (polygonCollider)
+            {
+                Gizmos.matrix = bed.transform.localToWorldMatrix * Matrix4x4.Translate(solutionPos.ToVector3());
+                Gizmos.DrawLineStrip(polygonCollider.points.Select(v => new Vector3(v.x, v.y)).ToArray(), true);
+            }
+        }
+#endif
     }
 }
