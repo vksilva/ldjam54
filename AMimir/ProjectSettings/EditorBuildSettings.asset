@@ -141,10 +141,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/World_02/world_02_level_13.unity
     guid: 67610f4d5bea5b443812f50bd74d50e2
   - enabled: 1
-    path: Assets/Scenes/Levels/World_04/world_04_level_01.unity
+    path: Assets/Scenes/Levels/World_04/world_04_level_05.unity
     guid: ac0039a69ba623d48ba7f865c6fb5901
   - enabled: 1
-    path: Assets/Scenes/Levels/World_04/world_04_level_12.unity
+    path: Assets/Scenes/Levels/World_04/world_04_level_06.unity
     guid: 660ad9f4b1574d6458f19490ae5abd43
   - enabled: 1
     path: Assets/Scenes/Levels/World_02/world_02_level_06.unity
@@ -170,4 +170,34 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/World_02/world_02_level_20.unity
     guid: 563f57714abd87946995515fd468777a
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_01.unity
+    guid: c53c93f64bf20f74a9b23f1a3da11a70
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_02.unity
+    guid: d6742e94831637b46b1033e72e7b840f
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_03.unity
+    guid: a962905747578ba43b596f82149117ff
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_09.unity
+    guid: 2ff617a77d5a8314ca462b1ca1d69452
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_10.unity
+    guid: 800c25c53001bc243ba0b228d0e4e90f
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_18.unity
+    guid: ccce3c91b5980864dbe6288f57c472ac
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_19.unity
+    guid: 7c78483e6f217f54abcb752ab4540a64
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_20.unity
+    guid: 4919751593b5ba041a27fe123560c627
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_04/world_04_level_01.unity
+    guid: 3daa9c5014835bd4da2ad1fcf8bf7737
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_04/world_04_level_02.unity
+    guid: 8ab7783dcc6d3104782e325c312e9421
   m_configObjects: {}
