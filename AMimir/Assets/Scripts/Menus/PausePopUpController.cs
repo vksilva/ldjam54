@@ -1,8 +1,10 @@
 using Busta.AppCore.Audio;
 using Busta.AppCore.BackKey;
+using Busta.AppCore.Localization;
 using Busta.AppCore.Tracking;
 using Busta.Commands;
 using Busta.Gameplay;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -18,15 +20,18 @@ namespace Busta.Menus
         [SerializeField] private Button backgroundButton;
         [SerializeField] private Button resetButton;
         [SerializeField] private ResetPopUpController resetPopUp;
+        [SerializeField] private TMP_Text title;
     
         private static AudioService _audioService;
         private static BackKeyService _backKeyService;
         private static TrackingService _trackingService;
+        private static LocalizationService _localizationService;
     
         void Awake()
         {
             AddListeners();
             GetServices();
+            title.text = LevelUtils.GetLevelName(SceneManager.GetActiveScene().name);
         }
 
         private static void GetServices()
@@ -34,6 +39,7 @@ namespace Busta.Menus
             _audioService = Application.Get<AudioService>();
             _backKeyService = Application.Get<BackKeyService>();
             _trackingService = Application.Get<TrackingService>();
+            _localizationService = Application.Get<LocalizationService>();
         }
 
         private void AddListeners()

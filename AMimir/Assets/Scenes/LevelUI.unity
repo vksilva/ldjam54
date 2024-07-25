@@ -964,6 +964,7 @@ MonoBehaviour:
   backgroundButton: {fileID: 724956615}
   resetButton: {fileID: 155584942}
   resetPopUp: {fileID: 942913290}
+  title: {fileID: 1116006429}
 --- !u!1 &513438234
 GameObject:
   m_ObjectHideFlags: 0
@@ -1951,7 +1952,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: paused
+  m_text: level
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bae88a3fd9a711f42842a871b50a271c, type: 2}
   m_sharedMaterial: {fileID: 6223523403732360964, guid: bae88a3fd9a711f42842a871b50a271c, type: 2}
