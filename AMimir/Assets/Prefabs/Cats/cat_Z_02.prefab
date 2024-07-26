@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _obstacle: 0
+  solutionPos: {x: 0, y: 0}
 --- !u!60 &265400772136822078
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -121,6 +122,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7572302553359180721}
     m_Modifications:
+    - target: {fileID: 299306427602747793, guid: bb080f11bfca5644b9fd28f5ca25074e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: df2b97e1feb585f4bb627994e5b5d3cc, type: 3}
     - target: {fileID: 2426870518501689145, guid: bb080f11bfca5644b9fd28f5ca25074e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5

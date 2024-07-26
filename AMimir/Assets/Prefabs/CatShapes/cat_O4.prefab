@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2704447470146497956}
   - component: {fileID: 6627981827344621122}
-  - component: {fileID: 1930630011526746455}
+  - component: {fileID: -3461659957958033811}
   m_Layer: 0
   m_Name: cat_O4
   m_TagString: Untagged
@@ -74,18 +74,18 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 696371506f1998448a429fc93c5a6ea4, type: 3}
-  m_Color: {r: 0.7960785, g: 0.8588236, b: 0.98823535, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 924b15989d636ac4a9166ae6c16aca29, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.1875, y: 3.91875}
+  m_Size: {x: 1.89375, y: 2.075}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1930630011526746455
+--- !u!114 &-3461659957958033811
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,7 +94,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7949704825468775112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2548bab72ad4a6ea093050e9b674f35, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c40c1a913bd41399674a793b969f6de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 7a22d23e724cc35448b4a596f24c8851, type: 3}
+  catSprites:
+  - {fileID: 21300000, guid: 924b15989d636ac4a9166ae6c16aca29, type: 3}
+  - {fileID: 21300000, guid: 1ae0f4ef6b7701f41a90411bf471876f, type: 3}
+  - {fileID: 21300000, guid: adddc715b3439b1429ea3be8f446c68a, type: 3}
