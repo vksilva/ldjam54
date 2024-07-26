@@ -128,7 +128,8 @@ namespace Busta.Menus
             var completedCount = stateService.gameState.levelsState.winLevels
                 .Count(level => level.StartsWith($"world_{world.number:D2}"));
             var worldProgress = $"{completedCount}/{world.levelCount}";
-            worldLabel.SetValues(localizedWorld.ToUpper(), worldProgress);
+            var isWorldCompleted = completedCount == world.levelCount;
+            worldLabel.SetValues(localizedWorld.ToUpper(), worldProgress, isWorldCompleted);
             for (var l = 1; l <= world.levelCount; l++)
             {
                 CreateLevelButton(world, l, worldLayout.transform);
