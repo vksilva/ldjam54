@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _obstacle: 1
+  solutionPos: {x: 0, y: 0}
 --- !u!61 &723503316778189575
 BoxCollider2D:
   m_ObjectHideFlags: 0
