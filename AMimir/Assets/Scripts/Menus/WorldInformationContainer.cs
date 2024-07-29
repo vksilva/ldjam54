@@ -12,7 +12,7 @@ namespace Busta.Menus
         {
             if (isCompleted)
             {
-                name = $"<sprite=0\"> {name} <sprite=0\">";
+                name = $"<sprite=1\"> {name} <sprite=1\">";
             }
             this.name.text = name;
             this.progress.text = progress;

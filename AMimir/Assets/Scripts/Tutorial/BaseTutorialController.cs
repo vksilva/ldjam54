@@ -31,7 +31,7 @@ namespace Busta.Tutorial
             dialogueText.ForceMeshUpdate();
             dialogueText.maxVisibleCharacters = 0;
 
-            var tween = DOVirtual.Int(0, dialogueText.text.Length, 5f, 
+            var tween = DOVirtual.Int(0, dialogueText.text.Length, 2f, 
                     value => { dialogueText.maxVisibleCharacters = value; });
 
             void onButtonClicked()
