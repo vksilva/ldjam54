@@ -68,6 +68,11 @@ namespace Busta.Gameplay
             SetNoise(Random.Range(0, Mathf.PI * 2f));
         }
 
+        public bool IsObstacle()
+        {
+            return _obstacle;
+        }
+
         private void SetNoise(float noise)
         {
             var mpb = new MaterialPropertyBlock();
