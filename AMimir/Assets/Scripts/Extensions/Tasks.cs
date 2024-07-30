@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -27,6 +28,11 @@ namespace Busta.Extensions
         public static async Task WaitUntilNextFrame()
         {
             await Task.Yield();
+        }
+
+        public static async Task Await(this CustomYieldInstruction yieldInstruction)
+        {
+            await WaitUntil(() => !yieldInstruction.keepWaiting);
         }
     }
 }

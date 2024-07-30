@@ -5,9 +5,11 @@ using Busta.AppCore.Audio;
 using Busta.AppCore.BackKey;
 using Busta.AppCore.Configurations;
 using Busta.AppCore.Localization;
+using Busta.AppCore.Review;
 using Busta.AppCore.State;
 using Busta.Extensions;
 using Busta.Tutorial;
+using Google.Play.Review;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -33,6 +35,7 @@ namespace Busta.Menus
         private static LocalizationService localizationService;
         private static BackKeyService backKeyService;
         private static ConfigurationService configurationService;
+        private static ReviewService reviewService;
         private readonly int scrollOffset = 300;
 
         private async void Start()
@@ -79,6 +82,8 @@ namespace Busta.Menus
                 return;
             }
             await FocusPlayedLevel(stateService.gameState.levelsState.lastPlayedLevel);
+
+            await reviewService.RequestReview();
         }
 
         private async Task FocusPlayedLevel(string level)
@@ -114,6 +119,7 @@ namespace Busta.Menus
             localizationService = Application.Get<LocalizationService>();
             backKeyService = Application.Get<BackKeyService>();
             configurationService = Application.Get<ConfigurationService>();
+            reviewService = Application.Get<ReviewService>();
         }
 
         private void CreateWorldSection(WorldData world)

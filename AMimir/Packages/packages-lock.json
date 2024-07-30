@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.google.android.appbundle": {
+      "version": "1.9.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.google.external-dependency-manager": {
       "version": "git+https://github.com/GameWorkstore/com.google.external-dependency-manager.git#1.2.180",
       "depth": 0,
@@ -33,6 +40,35 @@
         "com.google.firebase.app": "12.1.0"
       },
       "hash": "80142b0e4951236cf802a9340b65ef3625bac32b"
+    },
+    "com.google.play.common": {
+      "version": "git+https://github.com/GameWorkstore/com.google.play.common#1.9.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.google.android.appbundle": "1.9.0"
+      },
+      "hash": "b07b1313c0100198e7459977b555df9f433de5ba"
+    },
+    "com.google.play.core": {
+      "version": "git+https://github.com/GameWorkstore/com.google.play.core#1.8.3",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.google.android.appbundle": "1.9.0",
+        "com.google.external-dependency-manager": "1.2.172"
+      },
+      "hash": "fef4c35d7461b596b44b54e6d255742438cd82c3"
+    },
+    "com.google.play.review": {
+      "version": "git+https://github.com/GameWorkstore/com.google.play.review#1.8.1",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.google.play.common": "1.8.1",
+        "com.google.play.core": "1.8.1"
+      },
+      "hash": "dce7eb610042c396e9df9a5db7be7a24485e379e"
     },
     "com.unity.2d.animation": {
       "version": "9.0.3",

@@ -3,6 +3,7 @@ using Busta.AppCore.BackKey;
 using Busta.AppCore.Configurations;
 using Busta.AppCore.Firebase;
 using Busta.AppCore.Localization;
+using Busta.AppCore.Review;
 using Busta.AppCore.SafeArea;
 using Busta.AppCore.State;
 using Busta.AppCore.Tracking;
@@ -31,6 +32,8 @@ namespace Busta.AppCore
 
             var stateService = Application.Instance.Add(new StateService()).Init();
 
+            Application.Instance.Add(new ReviewService()).Init();
+            
             Application.Instance.Add(new AudioService())
                 .Init(gameConfigurations.AudioConfigurations, stateService, applicationGameObject);
 
