@@ -12,8 +12,6 @@ namespace Busta.Tutorial
 {
     public class GameplayTutorialController : BaseTutorialController
     {
-        [SerializeField] private GameObject tutorialPaw;
-        
         [SerializeField] private PieceMovement cat1;
         [SerializeField] private PieceMovement cat2;
         [SerializeField] private PieceMovement cat3;

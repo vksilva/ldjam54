@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Busta.AppCore.Localization;
 using Busta.AppCore.State;
 using Busta.AppCore.Tracking;
+using Busta.Extensions;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +14,7 @@ namespace Busta.Tutorial
     public class LevelSelectionTutorialController : BaseTutorialController
     {
         public const string TUTORIAL_LEVEL = "world_01_level_01";
+        private Vector3 tutorialPawOffscale = new (0,0);
 
         public async void Start()
         {
@@ -54,6 +56,10 @@ namespace Busta.Tutorial
             catAvatar.gameObject.SetActive(false);
             var tutorialLevelButton = GameObject.Find(TUTORIAL_LEVEL).GetComponent<Button>();
             await ShowHighlight(tutorialLevelButton.image);
+            tutorialPaw.SetActive(true);
+            tutorialPaw.transform.position = tutorialLevelButton.transform.position + tutorialPawOffscale;
+            Debug.Log($"tutorialPaw.transform.position: {tutorialPaw.transform.position}");
+            await Tasks.WaitForSeconds(0.3f);
             ClearText();
             await dialogueBox.DOFade(1, 0.5f).AsyncWaitForCompletion();
             await ShowText(localizationService.GetTranslatedText("tutorial_message_03"));

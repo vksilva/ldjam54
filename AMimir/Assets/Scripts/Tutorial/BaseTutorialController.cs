@@ -12,6 +12,7 @@ namespace Busta.Tutorial
 {
     public class BaseTutorialController : MonoBehaviour
     {
+        [SerializeField] protected GameObject tutorialPaw;
         [SerializeField] protected GameObject tutorialPopUp;
         [SerializeField] protected Image highlight;
         [SerializeField] protected CanvasGroup dialogueCanvas;
@@ -85,6 +86,7 @@ namespace Busta.Tutorial
             dialogueText.text = string.Empty;
             highlight.gameObject.SetActive(false);
             highlightButton.gameObject.SetActive(false);
+            tutorialPaw.SetActive(false);
         }
     }
 }
