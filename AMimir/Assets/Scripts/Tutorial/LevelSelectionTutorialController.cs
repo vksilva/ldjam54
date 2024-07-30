@@ -58,7 +58,6 @@ namespace Busta.Tutorial
             await ShowHighlight(tutorialLevelButton.image);
             tutorialPaw.SetActive(true);
             tutorialPaw.transform.position = tutorialLevelButton.transform.position + tutorialPawOffscale;
-            Debug.Log($"tutorialPaw.transform.position: {tutorialPaw.transform.position}");
             await Tasks.WaitForSeconds(0.3f);
             ClearText();
             await dialogueBox.DOFade(1, 0.5f).AsyncWaitForCompletion();
