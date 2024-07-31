@@ -1,3 +1,4 @@
+using Busta.Menus;
 using UnityEngine.SceneManagement;
 
 namespace Busta.Commands
@@ -6,6 +7,7 @@ namespace Busta.Commands
     {
         public void Execute()
         {
+            LevelSelectorController.IsCommingFromLevel = true;
             SceneManager.LoadScene("LevelSelector");
         }
     }

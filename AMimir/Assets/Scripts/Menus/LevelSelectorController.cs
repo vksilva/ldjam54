@@ -29,6 +29,8 @@ namespace Busta.Menus
         [SerializeField] private CloseGamePopUp closeGamePopUp;
         [SerializeField] private ScrollRect scrollRect;
         [SerializeField] private Canvas loadingCanvas;
+
+        public static bool IsCommingFromLevel = false;
         
         private static AudioService audioService;
         private static StateService stateService;
@@ -49,29 +51,51 @@ namespace Busta.Menus
             }
 
             loadingCanvas.gameObject.SetActive(true);
-
+            
             GetServices();
             audioService.PlayMusic(AudioMusicEnum.menu);
-
-            var worlds = configurationService.Configs.WorldConfigurations.worlds;
+            CreateWorlds();
+            DisableObjects();
+            ConnectButtons();
+            backKeyService.PushAction(CloseLevelSelector);
+            await FocusLastPlayedLevel();
             
+            loadingCanvas.gameObject.SetActive(false);
+
+            if (IsCommingFromLevel)
+            {
+                await AskReview();
+                IsCommingFromLevel = false;
+            }
+        }
+
+        private async Task AskReview()
+        {
+            if (stateService.gameState.settingsState.seenReview ||
+                stateService.gameState.levelsState.winLevels.Count() < 5)
+            {
+                return;
+            }
+            await reviewService.RequestReview();
+            stateService.gameState.settingsState.seenReview = true;
+            stateService.Save();
+        }
+
+        private void CreateWorlds()
+        {
+            var worlds = configurationService.Configs.WorldConfigurations.worlds;
             foreach (var t in worlds)
             {
                 CreateWorldSection(t);
             }
+        }
 
+        private void DisableObjects()
+        {
             worldInformationContainer.gameObject.SetActive(false);
             levelTemplateButton.gameObject.SetActive(false);
             settingsPopUp.gameObject.SetActive(false);
             closeGamePopUp.gameObject.SetActive(false);
-
-            backKeyService.PushAction(CloseLevelSelector);
-
-            ConnectButtons();
-
-            await FocusLastPlayedLevel();
-
-            loadingCanvas.gameObject.SetActive(false);
         }
 
         private async Task FocusLastPlayedLevel()
@@ -82,8 +106,6 @@ namespace Busta.Menus
                 return;
             }
             await FocusPlayedLevel(stateService.gameState.levelsState.lastPlayedLevel);
-
-            await reviewService.RequestReview();
         }
 
         private async Task FocusPlayedLevel(string level)

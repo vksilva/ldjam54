@@ -9,5 +9,6 @@ namespace Busta.AppCore.State
         public bool isSFXOff;
         public string currentLanguage;
         public bool seenTutorial;
+        public bool seenReview;
     }
 }
