@@ -6,7 +6,6 @@ using Busta.AppCore.Audio;
 using Busta.AppCore.State;
 using Busta.AppCore.Tracking;
 using Busta.Extensions;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Application = Busta.AppCore.Application;
@@ -38,6 +37,8 @@ namespace Busta.Gameplay
         private const string matchResultAbandoned = "Abandoned";
         private const string matchResultRestarted = "Restart";
         private Func<Task> OnBeforeEndGame;
+        private PieceSolutionPositions[] cats;
+        private Dictionary<PieceSolutionPositions, bool> isHintDisplayed;
 
         private void Awake()
         {
@@ -64,6 +65,7 @@ namespace Busta.Gameplay
 
             GetServices();
             SetUpBed();
+            SetUpHints();
 
             SceneManager.LoadScene("LevelUI", LoadSceneMode.Additive);
             
@@ -76,6 +78,29 @@ namespace Busta.Gameplay
         public void IncrementFailedMovements()
         {
             failedMovesCounter++;
+        }
+
+        public void Hint()
+        {
+            
+            foreach (var cat in cats)
+            {
+                if (!isHintDisplayed[cat])
+                {
+                    // Show hint for this cat
+                    isHintDisplayed[cat] = false;
+                    break;
+                }
+            }
+        }
+
+        private void SetUpHints()
+        {
+            cats = FindObjectsOfType<PieceSolutionPositions>();
+            foreach (var cat in cats)
+            {
+                isHintDisplayed[cat] = false;
+            }
         }
 
         private void OnApplicationQuit()

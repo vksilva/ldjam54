@@ -10,6 +10,7 @@ namespace Busta.Menus
         [SerializeField] private Canvas uiCanvas;
         [SerializeField] private Button pauseButton;
         [SerializeField] private PausePopUpController pausePopUp;
+        [SerializeField] private Button hintButton;
 
         private static AudioService _audioService;
 
@@ -28,6 +29,12 @@ namespace Busta.Menus
         private void AddListeners()
         {
             pauseButton.onClick.AddListener(OnPauseButtonClicked);
+            hintButton.onClick.AddListener(OnHintButtonClicked);
+        }
+
+        private void OnHintButtonClicked()
+        {
+            throw new System.NotImplementedException();
         }
 
         private void OnPauseButtonClicked()
