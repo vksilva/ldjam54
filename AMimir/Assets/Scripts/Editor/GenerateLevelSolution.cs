@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
 using Busta.Gameplay;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,24 +7,29 @@ namespace Busta.Editor
 {
     public static class GenerateLevelSolution
     {
+        private struct PiecePlacementData
+        {
+            public Vector2 size;
+            public List<Vector2> possiblePositions;
+        }
+        
         [MenuItem("Vanessa/Generate levels resolutions")]
         public static void GenerateResolutions()
         {
             var bed = Object.FindObjectOfType<Bed>();
-            var bedCollider = bed.GetComponent<BoxCollider2D>();
             var cats = Object.FindObjectsOfType<PieceSolutionPositions>();
+            var bedSize = bed.GetComponent<BoxCollider2D>().size;
+            var catsData = new Dictionary<PieceSolutionPositions, PiecePlacementData>();
             
-            Dictionary<PieceSolutionPositions, Vector2> catsSize = new();
-            Dictionary<PieceSolutionPositions, List<Vector2>> catsPossiblePositions = new();
-            
-            SetCatsPossiblePositions(cats, catsSize, bedCollider, catsPossiblePositions);
+            SetCatsPossiblePositions(cats, catsData, bedSize);
 
             foreach (var cat in cats)
             {
-                Debug.Log($"Bed: {bedCollider.size}");
-                Debug.Log($"Cat size: {catsSize[cat]}");
+                var data = catsData[cat];
+                Debug.Log($"Bed: {bedSize}");
+                Debug.Log($"Cat size: {data.size}");
                 Debug.Log($"Possible position for cat {cat}");
-                foreach (var position in catsPossiblePositions[cat])
+                foreach (var position in data.possiblePositions)
                 {
                     Debug.Log($"{position}");
                 }
@@ -47,31 +50,21 @@ namespace Busta.Editor
             // if invalid, return null
         }
 
-        private static void SetCatsPossiblePositions(PieceSolutionPositions[] cats, Dictionary<PieceSolutionPositions, 
-                Vector2> catsSize, BoxCollider2D bedCollider,
-                Dictionary<PieceSolutionPositions, List<Vector2>> catsPossiblePositions)
+        private static void SetCatsPossiblePositions(PieceSolutionPositions[] cats, Dictionary<PieceSolutionPositions, PiecePlacementData> catData, Vector2 bedSize)
         {
             foreach (var cat in cats)
             {
-                catsSize[cat] = GetCatSize(cat);
-
-                catsPossiblePositions[cat] = GetCatPositions(catsSize[cat], bedCollider);
-            }
-        }
-
-        private static List<Vector2> GetCatPositions(Vector2 catSize, BoxCollider2D bedCollider)
-        {
-            List<Vector2> catPositions = new();
-            for (var x = 0; x < (bedCollider.size.x - catSize.x + 1); x++)
-            {
-                for (var y = 0; y < (bedCollider.size.y - catSize.y + 1); y++)
+                var catSize = GetCatSize(cat);
+                var positions = GetCatPositions(catSize, bedSize);
+                
+                catData[cat] = new PiecePlacementData
                 {
-                    catPositions.Add(new Vector2(x, y));
-                }
+                    size = catSize,
+                    possiblePositions = positions
+                };
             }
-            return catPositions;
         }
-
+        
         private static Vector2 GetCatSize(PieceSolutionPositions cat)
         {
             var boxCollider = cat.GetComponent<BoxCollider2D>();
@@ -89,11 +82,32 @@ namespace Busta.Editor
             return Vector2.zero;
         }
 
-        private static bool TryToPositionCatonBed(PieceSolutionPositions catToPosition, Bed bed,
-            PieceSolutionPositions[] catsPositioned)
+        private static List<Vector2> GetCatPositions(Vector2 catSize, Vector2 bedSize)
         {
-            
-            return false;
+            List<Vector2> catPositions = new();
+            for (var x = 0; x < (bedSize.x - catSize.x + 1); x++)
+            {
+                for (var y = 0; y < (bedSize.y - catSize.y + 1); y++)
+                {
+                    catPositions.Add(new Vector2(x, y));
+                }
+            }
+            return catPositions;
+        }
+
+        private static bool CheckIfValid(Vector2 catPosition, Vector2 catSize)
+        {
+            for (var x = catPosition.x; x < catPosition.x + catSize.x; x++)
+            {
+                for (var y = catPosition.y; y < catPosition.y + catSize.y; y++)
+                {
+                    var origin = new Vector2(x, y);
+                    var pieceHits = Physics2D.RaycastNonAlloc(origin, Vector2.zero, hitResults,
+                        Mathf.Infinity, pieceLayer);
+                }
+            }
+
+            return true;
         }
     }
 }

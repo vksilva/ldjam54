@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4335317560407223456}
   - component: {fileID: 176909905408790173}
+  - component: {fileID: 8577621456675092693}
   - component: {fileID: 2119679722108370471}
   - component: {fileID: 7331783763029794904}
-  - component: {fileID: 8577621456675092693}
   m_Layer: 0
   m_Name: cat_H_02
   m_TagString: Untagged
@@ -50,6 +50,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _obstacle: 0
   solutionPos: {x: 0, y: 0}
+--- !u!114 &8577621456675092693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7993536367062855941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b86657ca34140b4811865880a919248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positions: []
 --- !u!210 &2119679722108370471
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -119,18 +132,6 @@ PolygonCollider2D:
       - {x: 0, y: 0}
       - {x: 1, y: 0}
   m_UseDelaunayMesh: 0
---- !u!114 &8577621456675092693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7993536367062855941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b86657ca34140b4811865880a919248, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8837182531114276850
 PrefabInstance:
   m_ObjectHideFlags: 0
