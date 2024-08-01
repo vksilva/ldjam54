@@ -4,8 +4,10 @@ using Busta.AppCore.State;
 using Busta.AppCore.Tracking;
 using Busta.Extensions;
 using Busta.Gameplay;
+using Busta.Menus;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 using Application = Busta.AppCore.Application;
 
 namespace Busta.Tutorial
@@ -55,6 +57,8 @@ namespace Busta.Tutorial
         {
             // Initial tutorial setup
             SetUpTutorial();
+            await DisableUI();
+
             tutorialPopUp.SetActive(true);
             cat2.SetObstacle(true);
             cat3.SetObstacle(true);
@@ -137,6 +141,17 @@ namespace Busta.Tutorial
             stateService.Save();
             
             trackingService.TrackTutorialFinished();
+        }
+
+        private static async Task DisableUI()
+        {
+            UIController uiController = null;
+            await Tasks.WaitUntil(() =>
+            {
+                uiController = FindObjectOfType<UIController>();
+                return uiController;
+            });
+            uiController.gameObject.SetActive(false);
         }
 
         private async Task BeforeEndgame()

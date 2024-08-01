@@ -65,7 +65,7 @@ namespace Busta.Gameplay
 
             GetServices();
             SetUpBed();
-            SetUpHints();
+            // SetUpHints();
 
             SceneManager.LoadScene("LevelUI", LoadSceneMode.Additive);
             
