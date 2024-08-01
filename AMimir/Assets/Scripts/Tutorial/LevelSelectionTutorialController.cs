@@ -14,7 +14,6 @@ namespace Busta.Tutorial
     public class LevelSelectionTutorialController : BaseTutorialController
     {
         public const string TUTORIAL_LEVEL = "world_01_level_01";
-        private Vector3 tutorialPawOffscale = new (0,0);
 
         public async void Start()
         {
@@ -55,9 +54,9 @@ namespace Busta.Tutorial
             // Hide cat and show highlight
             catAvatar.gameObject.SetActive(false);
             var tutorialLevelButton = GameObject.Find(TUTORIAL_LEVEL).GetComponent<Button>();
+            var buttonTransform = tutorialLevelButton.GetComponent<RectTransform>();
             await ShowHighlight(tutorialLevelButton.image);
-            tutorialPaw.SetActive(true);
-            tutorialPaw.transform.position = tutorialLevelButton.transform.position + tutorialPawOffscale;
+            tutorialPawContainer.gameObject.SetActive(true);
             await Tasks.WaitForSeconds(0.3f);
             ClearText();
             await dialogueBox.DOFade(1, 0.5f).AsyncWaitForCompletion();

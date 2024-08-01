@@ -1657,11 +1657,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialPopUp
       objectReference: {fileID: 0}
+    - target: {fileID: 5869835478310968218, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
+--- !u!224 &856500991 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3679441423750788308, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
+  m_PrefabInstance: {fileID: 856500990}
+  m_PrefabAsset: {fileID: 0}
 --- !u!225 &859586392 stripped
 CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 5503405610010603523, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
@@ -1820,7 +1829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607972dc10d8438da493f77e50e89698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialPaw: {fileID: 1498175171}
+  tutorialPawContainer: {fileID: 856500991}
   tutorialPopUp: {fileID: 365912982}
   highlight: {fileID: 1987170818}
   dialogueCanvas: {fileID: 859586392}
@@ -1841,6 +1850,7 @@ MonoBehaviour:
   catTo2: {fileID: 781728574}
   catTo3: {fileID: 1584387267}
   catTo4: {fileID: 1447254151}
+  tutorialPaw: {fileID: 9078078515091250544}
 --- !u!4 &939226234
 Transform:
   m_ObjectHideFlags: 0
@@ -2630,11 +2640,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b85c4df3d5e12d641b67b5e9ac7c13b1, type: 3}
---- !u!1 &1498175171 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8826915829379328900, guid: 72cf0b12e4bd7404ea19fba75af56b08, type: 3}
-  m_PrefabInstance: {fileID: 9078078515091250543}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1535725032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2934,7 +2939,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5169085808755074638, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: orthographic size
-      value: 10.555555
+      value: 8.878205
       objectReference: {fileID: 0}
     - target: {fileID: 7938176268018679338, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3490,13 +3495,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8826915829379328900, guid: 72cf0b12e4bd7404ea19fba75af56b08, type: 3}
       propertyPath: m_Name
-      value: TutorialPaw
+      value: TutorialGameplayPaw
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826915829379328900, guid: 72cf0b12e4bd7404ea19fba75af56b08, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72cf0b12e4bd7404ea19fba75af56b08, type: 3}
+--- !u!1 &9078078515091250544 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8826915829379328900, guid: 72cf0b12e4bd7404ea19fba75af56b08, type: 3}
+  m_PrefabInstance: {fileID: 9078078515091250543}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

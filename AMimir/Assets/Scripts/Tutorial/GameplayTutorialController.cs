@@ -7,6 +7,7 @@ using Busta.Gameplay;
 using Busta.Menus;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Application = Busta.AppCore.Application;
 
@@ -28,6 +29,8 @@ namespace Busta.Tutorial
         [SerializeField] private GameObject catTo2;
         [SerializeField] private GameObject catTo3;
         [SerializeField] private GameObject catTo4;
+        
+        [SerializeField] protected GameObject tutorialPaw;
         
         public async void Start()
         {

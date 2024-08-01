@@ -12,7 +12,7 @@ namespace Busta.Tutorial
 {
     public class BaseTutorialController : MonoBehaviour
     {
-        [SerializeField] protected GameObject tutorialPaw;
+        [SerializeField] protected RectTransform tutorialPawContainer;
         [SerializeField] protected GameObject tutorialPopUp;
         [SerializeField] protected Image highlight;
         [SerializeField] protected CanvasGroup dialogueCanvas;
@@ -21,25 +21,25 @@ namespace Busta.Tutorial
         [SerializeField] protected Image catAvatar;
         [SerializeField] protected Button backgroundButton;
         [SerializeField] protected Button highlightButton;
-        
+
         protected StateService stateService;
         protected LocalizationService localizationService;
         protected TrackingService trackingService;
-        
+
         protected async Task ShowText(string text)
         {
             dialogueText.text = text;
             dialogueText.ForceMeshUpdate();
             dialogueText.maxVisibleCharacters = 0;
 
-            var tween = DOVirtual.Int(0, dialogueText.text.Length, 2f, 
-                    value => { dialogueText.maxVisibleCharacters = value; });
+            var tween = DOVirtual.Int(0, dialogueText.text.Length, 2f,
+                value => { dialogueText.maxVisibleCharacters = value; });
 
             void onButtonClicked()
             {
                 tween.Complete();
             }
-            
+
             backgroundButton.onClick.AddListener(onButtonClicked);
             await tween.AsyncWaitForCompletion();
             backgroundButton.onClick.RemoveListener(onButtonClicked);
@@ -49,7 +49,7 @@ namespace Busta.Tutorial
         {
             dialogueText.text = string.Empty;
         }
-        
+
         protected async Task WaitForTap(Button target)
         {
             var buttonClicked = false;
@@ -58,12 +58,12 @@ namespace Busta.Tutorial
             {
                 buttonClicked = true;
             }
-            
+
             target.onClick.AddListener(onButtonClicked);
             await Tasks.WaitUntil(() => buttonClicked);
             target.onClick.RemoveListener(onButtonClicked);
         }
-        
+
         protected async Task ShowHighlight(Graphic target)
         {
             highlight.gameObject.SetActive(true);
@@ -71,14 +71,21 @@ namespace Busta.Tutorial
             var highlightTransform = highlight.rectTransform;
             var highlightButtonTr = highlightButton.image.rectTransform;
             var targetTransform = target.rectTransform;
-            highlightButtonTr.pivot = highlightTransform.pivot = targetTransform.pivot;
-            highlightButtonTr.sizeDelta = highlightTransform.sizeDelta = targetTransform.sizeDelta;
-            highlightButtonTr.localScale = highlightTransform.localScale = targetTransform.localScale;
-            highlightButtonTr.position = highlightTransform.position = targetTransform.position;
+            CopyTransform(targetTransform, highlightTransform);
+            CopyTransform(targetTransform, highlightButtonTr);
+            CopyTransform(targetTransform, tutorialPawContainer);
             highlightTransform.localScale = Vector3.zero;
             await highlightTransform.DOScale(targetTransform.localScale, 0.3f).AsyncWaitForCompletion();
         }
-        
+
+        private void CopyTransform(RectTransform from, RectTransform to)
+        {
+            to.pivot = from.pivot;
+            to.sizeDelta = from.sizeDelta;
+            to.localScale = from.localScale;
+            to.position = from.position;
+        }
+
         protected virtual void SetUpTutorial()
         {
             dialogueCanvas.gameObject.SetActive(true);
@@ -86,7 +93,7 @@ namespace Busta.Tutorial
             dialogueText.text = string.Empty;
             highlight.gameObject.SetActive(false);
             highlightButton.gameObject.SetActive(false);
-            tutorialPaw.SetActive(false);
+            tutorialPawContainer.gameObject.SetActive(false);
         }
     }
 }

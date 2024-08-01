@@ -1788,11 +1788,6 @@ CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 5503405610010603523, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
   m_PrefabInstance: {fileID: 7659534507923490747}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &184962269 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6556365733093488383, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
-  m_PrefabInstance: {fileID: 7659534507923490747}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &220334437
 GameObject:
   m_ObjectHideFlags: 0
@@ -2865,8 +2860,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 454.73682, y: 0}
-  m_SizeDelta: {x: 909.47363, y: 0}
+  m_AnchoredPosition: {x: 540.6498, y: 0}
+  m_SizeDelta: {x: 1081.2996, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &667788928
 MonoBehaviour:
@@ -3173,81 +3168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d0955e63e943a9997c4b5ca82c410b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &700325995
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 700325996}
-  - component: {fileID: 700325998}
-  - component: {fileID: 700325997}
-  m_Layer: 5
-  m_Name: TutorialPaw
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &700325996
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 700325995}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 184962269}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -485, y: 182}
-  m_SizeDelta: {x: 264, y: 298}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &700325997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 700325995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dc6e2e7ebb1f3b74588b35c830a41d15, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &700325998
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 700325995}
-  m_CullTransparentMesh: 1
 --- !u!1 &721278648
 GameObject:
   m_ObjectHideFlags: 0
@@ -6926,7 +6846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00e9d1b922d4687b159e6fcc8f9fd94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialPaw: {fileID: 700325995}
+  tutorialPawContainer: {fileID: 7659534507923490748}
   tutorialPopUp: {fileID: 1737186857}
   highlight: {fileID: 742276335}
   dialogueCanvas: {fileID: 184962268}
@@ -10074,30 +9994,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2918897710964618630, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
-      propertyPath: m_fontColor.b
-      value: 0.23529413
-      objectReference: {fileID: 0}
-    - target: {fileID: 2918897710964618630, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
-      propertyPath: m_fontColor.g
-      value: 0.15686275
-      objectReference: {fileID: 0}
-    - target: {fileID: 2918897710964618630, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
-      propertyPath: m_fontColor.r
-      value: 0.27058825
-      objectReference: {fileID: 0}
-    - target: {fileID: 2918897710964618630, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4282132549
-      objectReference: {fileID: 0}
-    - target: {fileID: 5122065653151109089, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: d08e17437e688864b9bb273f0cadd219, type: 3}
-    - target: {fileID: 5485875848649670651, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 5728a7d779823de4f922e805b0948a47, type: 3}
     - target: {fileID: 5869835478310968218, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
       propertyPath: m_Name
       value: TutorialPopUp
@@ -10106,18 +10002,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6220209249443180868, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 6556365733093488383, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
-      insertIndex: 3
-      addedObject: {fileID: 700325996}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
+--- !u!224 &7659534507923490748 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3679441423750788308, guid: 8f7dcd5bf7351be4d9c310e6f5bd47e2, type: 3}
+  m_PrefabInstance: {fileID: 7659534507923490747}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
