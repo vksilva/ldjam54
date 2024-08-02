@@ -37,6 +37,8 @@ namespace Busta.AppCore.Localization
                 SystemLanguage.English => "en_us",
                 SystemLanguage.German => "de_de",
                 SystemLanguage.Spanish => "es_es",
+                SystemLanguage.French => "fr_fr",
+                SystemLanguage.Italian => "it_it",
                 _ => "en_us"
             };
         }

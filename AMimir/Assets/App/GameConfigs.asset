@@ -36,6 +36,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: b34986b5a56595e4883f058825cb1f03, type: 2}
     - {fileID: 11400000, guid: 77ea3d6d496507a46a02bd8815fa304b, type: 2}
     - {fileID: 11400000, guid: 1d21403081c204b409a5b3d864432c22, type: 2}
+    - {fileID: 11400000, guid: 55a9a6a58fec2594695fb11e3637538a, type: 2}
+    - {fileID: 11400000, guid: 3b8d42902bfed7a48ab36f08d45ec999, type: 2}
   SafeAreaConfigurations:
     UseDebugSafeArea: 0
     DebugSafeArea:
