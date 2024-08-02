@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d530079e6ec4824b86e762cd8b48e6d, type: 3}
+  m_Name: it_it
+  m_EditorClassIdentifier: 
+  Name: Italiano
+  Key: it_it
+  Translations:
+  - Key: title
+    Value: A Mimir
+  - Key: settings
+    Value: Impostazioni
+  - Key: sound_effects
+    Value: Effetti sonori
+  - Key: music
+    Value: Musica
+  - Key: small
+    Value: Piccolo
+  - Key: medium
+    Value: Medio
+  - Key: large
+    Value: Grande
+  - Key: challenge
+    Value: Sfida
+  - Key: level
+    Value: Livello
+  - Key: credits
+    Value: Crediti
+  - Key: reset_title
+    Value: Livello di reset
+  - Key: reset_button
+    Value: Riavvio
+  - Key: continue_button
+    Value: Continua
+  - Key: all_cats_are_a_mimir
+    Value: Tutti i gatti sono <i>a mimir</i>
+  - Key: back_to_home
+    Value: Torna all'inizio
+  - Key: paused
+    Value: Pausa
+  - Key: language
+    Value: Lingua
+  - Key: select_language_button
+    Value: Selezionare la lingua
+  - Key: close_game
+    Value: Chiudere la partita?
+  - Key: confirm_close_game_button
+    Value: "S\xEC"
+  - Key: decline_close_game_button
+    Value: No
+  - Key: privacy_policy_button
+    Value: Politica sulla privacy
+  - Key: terms_of_service_button
+    Value: Termini di servizio
+  - Key: tutorial_button
+    Value: Tutorial
+  - Key: tutorial_again_title
+    Value: Guardare di nuovo il tutorial?
+  - Key: confirm_tutorial_again_button
+    Value: "S\xEC"
+  - Key: decline_tutorial_again_button
+    Value: No
+  - Key: tutorial_message_01
+    Value: Benvenuti a <b>A Mimir</b>, il gioco di puzzle di gatti!
+  - Key: tutorial_message_02
+    Value: I miei amici gatti hanno sonno e vogliono dormire nel loro letto
+  - Key: tutorial_message_03
+    Value: Fare clic sul pulsante del livello per avviare un livello
+  - Key: tutorial_message_04
+    Value: Mettiamo i gatti sul letto
+  - Key: tutorial_message_05
+    Value: Vi posto il primo
+  - Key: tutorial_message_06
+    Value: Ora tocca a voi. Spostate i gatti nell'area evidenziata
+  - Key: tutorial_message_07
+    Value: Fantastico! Ora tutti i gatti dormono nel letto!
+  - Key: tutorial_message_08
+    Value: Ora andate a divertirvi con gli altri livelli! Ci vediamo!
