@@ -13,6 +13,8 @@ namespace Busta.Gameplay
     public class PieceMovement : MonoBehaviour
     {
         [SerializeField] private bool _obstacle = false;
+        [SerializeField] private bool isInvisibleObstacle = false;
+        
         [SerializeField] private Vector2Int solutionPos;
 
         private LayerMask pieceLayer;
@@ -64,8 +66,12 @@ namespace Busta.Gameplay
 
             IsDragging = false;
             catRenderer = GetComponentInChildren<SpriteRenderer>();
-            DisplayShadow(false);
-            SetNoise(Random.Range(0, Mathf.PI * 2f));
+            
+            if (!isInvisibleObstacle)
+            {
+                DisplayShadow(false);
+                SetNoise(Random.Range(0, Mathf.PI * 2f));
+            }
         }
 
         public bool IsObstacle()
