@@ -126,10 +126,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/World_02/world_02_level_13.unity
     guid: 67610f4d5bea5b443812f50bd74d50e2
   - enabled: 1
-    path: Assets/Scenes/Levels/World_04/world_04_level_05.unity
+    path: Assets/Scenes/Levels/World_05/world_05_level_05.unity
     guid: ac0039a69ba623d48ba7f865c6fb5901
   - enabled: 1
-    path: Assets/Scenes/Levels/World_04/world_04_level_06.unity
+    path: Assets/Scenes/Levels/World_05/world_05_level_06.unity
     guid: 660ad9f4b1574d6458f19490ae5abd43
   - enabled: 1
     path: Assets/Scenes/Levels/World_02/world_02_level_06.unity
@@ -180,10 +180,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/World_03/world_03_level_20.unity
     guid: 4919751593b5ba041a27fe123560c627
   - enabled: 1
-    path: Assets/Scenes/Levels/World_04/world_04_level_01.unity
+    path: Assets/Scenes/Levels/World_05/world_05_level_01.unity
     guid: 3daa9c5014835bd4da2ad1fcf8bf7737
   - enabled: 1
-    path: Assets/Scenes/Levels/World_04/world_04_level_02.unity
+    path: Assets/Scenes/Levels/World_05/world_05_level_02.unity
     guid: 8ab7783dcc6d3104782e325c312e9421
   - enabled: 1
     path: Assets/Scenes/Levels/World_03/world_03_level_11.unity
@@ -207,9 +207,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/World_03/world_03_level_17.unity
     guid: cc113332af20fa84791a11fc2c1cd137
   - enabled: 1
-    path: Assets/Scenes/Levels/World_04/world_04_level_03.unity
+    path: Assets/Scenes/Levels/World_05/world_05_level_03.unity
     guid: 8e70296d4dc50934cb4a0a2d76814ebe
   - enabled: 1
-    path: Assets/Scenes/Levels/World_04/world_04_level_04.unity
+    path: Assets/Scenes/Levels/World_05/world_05_level_04.unity
     guid: 4d6e07ad666608646adf88f4825a4826
   m_configObjects: {}

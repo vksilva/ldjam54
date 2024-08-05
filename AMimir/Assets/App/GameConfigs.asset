@@ -63,6 +63,11 @@ MonoBehaviour:
       levelCount: 20
       buttonImage: {fileID: 21300000, guid: 461564aa8d3ea084abcdf2082640b88f, type: 3}
       textColor: {r: 0.627451, g: 0.17254902, b: 0.3529412, a: 1}
+    - name: double
+      number: 5
+      levelCount: 20
+      buttonImage: {fileID: 21300000, guid: 745ff8444db46ec4aa6044ebd1562367, type: 3}
+      textColor: {r: 0.086274505, g: 0.3137255, b: 0.22534902, a: 1}
     - name: challenge
       number: 4
       levelCount: 6
