@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Busta.Extensions;
@@ -11,54 +12,63 @@ namespace Busta.Editor
 {
     public static class GenerateLevelSolution
     {
-        private static readonly RaycastHit2D[] hitResults = new RaycastHit2D[5];
+        private static readonly RaycastHit2D[] HitResults = new RaycastHit2D[5];
         private const string DefaultPieceSortingLayer = "Default";
         private static LayerMask pieceLayer;
-
-        private struct PiecePlacementData
+        private static readonly Vector3 PieceCenterOffset = new (0.5f, 0.5f);
+        
+        public struct PiecePlacementData
         {
-            public Vector2 size;
-            public List<Vector2Int> possiblePositions;
+            public Vector2Int Size;
+            public List<Vector2Int> PossiblePositions;
+            public int[,] Matrix;
         }
 
-        private struct CatState
+        public struct BedData
         {
-            public Vector2Int[] positions;
+            public Vector2Int Size;
+            public int[,] Matrix;
+        }
+
+        public struct CatState
+        {
+            public Vector2Int[] Positions;
 
             public CatState(int size)
             {
-                positions = new Vector2Int[size];
+                Positions = new Vector2Int[size];
                 for (var i = 0; i < size; i++)
                 {
-                    positions[i] = new Vector2Int(-1, -1);
+                    Positions[i] = new Vector2Int(-1, -1);
                 }
             }
 
             public CatState MakeCopy()
             {
-                var newPositions = new Vector2Int[positions.Length];
-                positions.CopyTo(newPositions, 0);
+                var newPositions = new Vector2Int[Positions.Length];
+                Positions.CopyTo(newPositions, 0);
                 return new CatState
                 {
-                    positions = newPositions
+                    Positions = newPositions
                 };
             }
 
             public override string ToString()
             {
-                return string.Join("\n", positions);
+                return string.Join("\n", Positions);
             }
         }
 
         [MenuItem("Vanessa/Levels/Generate levels resolutions")]
-        public static async void GenerateResolutions()
+        public static void GenerateResolutions()
         {
             var bed = Object.FindObjectOfType<Bed>();
             var cats = Object.FindObjectsOfType<PieceSolutionPositions>();
+            var catsPositions = cats.Select(cat => cat.transform.position).ToArray();
             var bedCollider = bed.GetComponent<BoxCollider2D>();
-            var bedSize = bedCollider.size;
+            var bedSize = bedCollider.size.ToVector2Int();
             var bedPosition = bedCollider.transform.position;
-            var catsData = new Dictionary<PieceSolutionPositions, PiecePlacementData>();
+            var catsData = new PiecePlacementData[cats.Length];
             pieceLayer = LayerMask.GetMask(DefaultPieceSortingLayer);
 
             SetCatsPossiblePositions(cats, catsData, bedSize);
@@ -66,65 +76,108 @@ namespace Busta.Editor
             var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine($"Bed size: {bedSize}");
             stringBuilder.AppendLine($"Bed position: {bedPosition}");
-            foreach (var cat in cats)
+
+            var bedMatrix = GetBedMatrix(bedSize, bedPosition);
+
+            var bedData = new BedData
             {
+                Size = bedSize,
+                Matrix = bedMatrix
+            };
+
+            for (var index = 0; index < cats.Length; index++)
+            {
+                var cat = cats[index];
                 cat.positions.Clear();
-                var data = catsData[cat];
+                var data = catsData[index];
+
                 stringBuilder.AppendLine("---------------");
                 stringBuilder.AppendLine($"Cat: {cat.name}");
-                stringBuilder.AppendLine($"Size: {data.size}");
-                stringBuilder.AppendLine("Possible position:");
-                foreach (var position in data.possiblePositions)
-                {
-                    stringBuilder.AppendLine($"- {position}");
-                }
+                stringBuilder.AppendLine($"Size: {data.Size}");
             }
 
             Debug.Log(stringBuilder.ToString());
 
-            var solutions = await GetSolutionsRecursive(cats, catsData, new CatState(cats.Length), bedPosition, 0);
-
+            var solutions = GetSolutionsRecursive(cats, catsData, new CatState(cats.Length), bedData, 0);
+            
             for (var i = 0; i < cats.Length; i++)
             {
                 cats[i].gameObject.SetActive(true);
                 foreach (var solution in solutions)
                 {
-                    cats[i].positions.Add(solution.positions[i]);
+                    cats[i].positions.Add(solution.Positions[i]);
                 }
+            
+                cats[i].transform.position = catsPositions[i];
             }
         }
 
-        private static void SetCatsPossiblePositions(PieceSolutionPositions[] cats,
-            Dictionary<PieceSolutionPositions, PiecePlacementData> catData, Vector2 bedSize)
+        private static int[,] GetBedMatrix(Vector2Int bedSize, Vector3 bedPosition)
         {
-            foreach (var cat in cats)
+            var bedMatrix = new int[bedSize.x, bedSize.y];
+            for (var y = bedSize.y - 1; y >= 0; y--)
             {
+                for (var x = 0; x < bedSize.x; x++)
+                {
+                    var origin = new Vector2(x, y) + new Vector2(bedPosition.x, bedPosition.y) + new Vector2(PieceCenterOffset.x, PieceCenterOffset.y);
+                    var pieceHits = Physics2D.RaycastNonAlloc(origin, Vector2.zero, HitResults,
+                        Mathf.Infinity, pieceLayer);
+                    bedMatrix[x, y] = pieceHits > 0 ? 1 : 0;
+                }
+            }
+
+            return bedMatrix;
+        }
+
+        private static void SetCatsPossiblePositions(PieceSolutionPositions[] cats, PiecePlacementData[] catData, Vector2 bedSize)
+        {
+            for (var index = 0; index < cats.Length; index++)
+            {
+                var cat = cats[index];
                 var catSize = GetCatSize(cat);
                 var positions = GetCatPositions(catSize, bedSize);
+                var catMatrix = GetCatMatrix(catSize, cat);
 
-                catData[cat] = new PiecePlacementData
+                catData[index] = new PiecePlacementData
                 {
-                    size = catSize,
-                    possiblePositions = positions
+                    Size = catSize,
+                    PossiblePositions = positions,
+                    Matrix = catMatrix
                 };
             }
         }
 
-        private static Vector2 GetCatSize(PieceSolutionPositions cat)
+        private static int[,] GetCatMatrix(Vector2Int catSize, PieceSolutionPositions cat)
+        {
+            var catMatrix = new int[catSize.x, catSize.y];
+
+            for (var y = catSize.y-1; y >=0 ; y--)
+            {
+                for (var x = 0; x < catSize.x; x++)
+                {
+                    var overlap = cat.GetComponent<Collider2D>().OverlapPoint(cat.transform.position + new Vector3(x, y) + PieceCenterOffset);
+                    catMatrix[x, y] = overlap?1:0;
+                }
+            }
+
+            return catMatrix;
+        }
+
+        private static Vector2Int GetCatSize(PieceSolutionPositions cat)
         {
             var boxCollider = cat.GetComponent<BoxCollider2D>();
             if (boxCollider != null)
             {
-                return boxCollider.size;
+                return boxCollider.size.ToVector2Int();
             }
 
             var polygonCollider = cat.GetComponent<PolygonCollider2D>();
             if (polygonCollider != null)
             {
-                return polygonCollider.bounds.size;
+                return polygonCollider.bounds.size.ToVector2Int();
             }
 
-            return Vector2.zero;
+            return Vector2Int.zero;
         }
 
         private static List<Vector2Int> GetCatPositions(Vector2 catSize, Vector2 bedSize)
@@ -141,92 +194,56 @@ namespace Busta.Editor
             return catPositions;
         }
 
-        private static bool CheckIfValid(Vector2 catPosition, Vector2 catSize, Vector2 bedPosition)
+        public static bool CheckIfValid(int index, CatState newState, PiecePlacementData[] catsData, BedData bedData)
         {
-            var pieces = Object.FindObjectsOfType<PieceMovement>();
+            var currentCat = catsData[index];
             
-            var stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine("Raycasting");
-            for (var x = catPosition.x; x < catPosition.x + catSize.x; x++)
+            for (var x = 0; x < currentCat.Size.x; x++)
             {
-                for (var y = catPosition.y; y < catPosition.y + catSize.y; y++)
+                for (var y = 0; y < currentCat.Size.y; y++)
                 {
-                    var origin = new Vector2(x, y) + bedPosition + new Vector2(0.5f, 0.5f);
-                    //var pieceHits = colliders.Where(c => c.OverlapPoint(origin)).Count();
-                    var pieceHits = Physics2D.RaycastNonAlloc(origin, Vector2.zero, hitResults,
-                        Mathf.Infinity, pieceLayer);
-                    stringBuilder.AppendLine($"Ray {origin} - Piece Hits {pieceHits}");
-                    if (pieceHits > 1)
+                    if (x==y) // todo replace with correct logic after test is implemented
                     {
-                        stringBuilder.AppendLine("false");
-                        Debug.Log(stringBuilder.ToString());
-                        // More than one piece (cat/obstacle) overlapping
+                        // Pieces are overlapping, cut this tree branch
                         return false;
                     }
                 }
             }
             
-            stringBuilder.AppendLine("true");
-            Debug.Log(stringBuilder.ToString());
-            // No pieces are overlapping after placing the new cat
+            // No pieces are overlapping after placing the new cat, this might be part of a solution
             return true;
         }
 
-        private static void SetCatsPositionsFromState(PieceSolutionPositions[] cats, CatState catState,
-            Vector2 bedPosition)
-        {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine($"Cat setup from state:\n{catState.ToString()}");
-            for (var i = 0; i < cats.Length; i++)
-            {
-                var pos = catState.positions[i];
-                if (pos == new Vector2Int(-1, -1))
-                {
-                    cats[i].gameObject.SetActive(false);
-                    stringBuilder.AppendLine($"Cat {cats[i].name} deactivated");
-                }
-                else
-                {
-                    cats[i].gameObject.SetActive(true);
-                    cats[i].transform.position = pos + bedPosition;
-                    stringBuilder.AppendLine($"Cat {cats[i].name} set at pos {pos+bedPosition}");
-                }
-            }
-            Debug.Log(stringBuilder.ToString());
-        }
-
-        private static async Task<List<CatState>> GetSolutionsRecursive(PieceSolutionPositions[] cats,
-            Dictionary<PieceSolutionPositions, PiecePlacementData> catsData, CatState catState, Vector2 bedPosition,
+        private static List<CatState> GetSolutionsRecursive(PieceSolutionPositions[] cats,
+            PiecePlacementData[] catsData, CatState catState, BedData bedData,
             int catIndex)
         {
             var solutions = new List<CatState>();
             var currentCat = cats[catIndex];
-            var currentPlacementData = catsData[currentCat];
+            var currentPlacementData = catsData[catIndex];
 
-            foreach (var position in currentPlacementData.possiblePositions)
+            foreach (var position in currentPlacementData.PossiblePositions)
             {
                 var newState = catState.MakeCopy();
 
-                newState.positions[catIndex] = position;
-                SetCatsPositionsFromState(cats, newState, bedPosition);
-                await Tasks.WaitUntilNextFrame();
+                newState.Positions[catIndex] = position;
 
-                var valid = CheckIfValid(position, catsData[currentCat].size, bedPosition);
+                var valid = CheckIfValid(catIndex, newState, catsData, bedData);
                 if (!valid)
                 {
-                    Debug.Log($"Add cat {currentCat.name}[{catIndex}] to position {position}\nState not valid:\n{newState.ToString()}");
-                    continue; // Invalid state, cut the tree branch by not adding to solutions
+                    // Invalid state, cut the tree branch by not adding to solutions
+                    continue; 
                 }
 
-                if (catIndex >= cats.Length - 1) // Tree leaf, add current valid state
+                if (catIndex >= cats.Length - 1) 
                 {
-                    Debug.Log($"Add cat {currentCat.name}[{catIndex}] to position {position}\nValid state\n{newState.ToString()}");
+                    // Tree leaf, add current valid state
                     solutions.Add(newState);
                 }
-                else // Recursion, add solution from child nodes.
+                else 
                 {
-                    Debug.Log($"Add cat {currentCat.name}[{catIndex}] to position {position}\nTree recursion\n{newState.ToString()}");
-                    solutions.AddRange(await GetSolutionsRecursive(cats, catsData, newState, bedPosition, catIndex + 1));
+                    // Recursion, add solution from child nodes.
+                    solutions.AddRange(GetSolutionsRecursive(cats, catsData, newState, bedData, catIndex + 1));
                 }
             }
 
