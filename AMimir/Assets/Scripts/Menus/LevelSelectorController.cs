@@ -72,7 +72,9 @@ namespace Busta.Menus
         {
             if (stateService.gameState.settingsState.seenReview ||
                 stateService.gameState.levelsState.winLevels.Count() < 5)
+            {
                 return;
+            }
 
             await reviewService.RequestReview();
             stateService.gameState.settingsState.seenReview = true;
@@ -83,8 +85,12 @@ namespace Busta.Menus
         {
             var worlds = configurationService.Configs.WorldConfigurations.worlds;
             foreach (var t in worlds)
+            {
                 if (t.isEnabled)
+                {
                     CreateWorldSection(t);
+                }
+            }
         }
 
         private void DisableObjects()
@@ -112,7 +118,10 @@ namespace Busta.Menus
             await Tasks.WaitForSeconds(0.1f);
             var button = GameObject.Find(level);
 
-            if (level.IsNullOrEmpty() || !button) return;
+            if (level.IsNullOrEmpty() || !button)
+            {
+                return;
+            }
 
             var originalMovementType = scrollRect.movementType;
             scrollRect.movementType = ScrollRect.MovementType.Clamped;
@@ -153,7 +162,10 @@ namespace Busta.Menus
             var worldProgress = $"{completedCount}/{world.levelCount}";
             var isWorldCompleted = completedCount == world.levelCount;
             worldLabel.SetValues(localizedWorld.ToUpper(), worldProgress, isWorldCompleted);
-            for (var l = 1; l <= world.levelCount; l++) CreateLevelButton(world, l, worldLayout.transform);
+            for (var l = 1; l <= world.levelCount; l++)
+            {
+                CreateLevelButton(world, l, worldLayout.transform);
+            }
         }
 
         private void CreateLevelButton(WorldData world, int level, Transform container)

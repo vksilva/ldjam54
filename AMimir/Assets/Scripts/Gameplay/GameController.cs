@@ -84,18 +84,23 @@ namespace Busta.Gameplay
         public void Hint()
         {
             foreach (var cat in cats)
+            {
                 if (!isHintDisplayed[cat])
                 {
                     // Show hint for this cat
                     isHintDisplayed[cat] = false;
                     break;
                 }
+            }
         }
 
         private void SetUpHints()
         {
             cats = FindObjectsOfType<PieceSolutionPositions>();
-            foreach (var cat in cats) isHintDisplayed[cat] = false;
+            foreach (var cat in cats)
+            {
+                isHintDisplayed[cat] = false;
+            }
         }
 
         private void OnApplicationQuit()
@@ -132,9 +137,13 @@ namespace Busta.Gameplay
 
                     //f is double bed gap, continue
                     if (_bed.IsDoubleBed())
+                    {
                         if (FindObjectOfType<DoubleBedGap>().GetComponent<BoxCollider2D>()
                             .OverlapPoint(tilePos + _offset))
+                        {
                             continue;
+                        }
+                    }
 
                     var tile = Instantiate(gridTilePrefab, tilePos, Quaternion.identity);
                     tile.gameObject.SetActive(false);
@@ -179,7 +188,11 @@ namespace Busta.Gameplay
 
         private async Task DoBeforeEndGame()
         {
-            if (OnBeforeEndGame == null) return;
+            if (OnBeforeEndGame == null)
+            {
+                return;
+            }
+
             await OnBeforeEndGame.Invoke();
         }
 
@@ -220,7 +233,10 @@ namespace Busta.Gameplay
                 var tile = new Vector3(x, y, 0);
                 var size = Physics2D.RaycastNonAlloc(_bed.transform.position + tile + _offset, Vector2.zero,
                     _rayCastResult, Mathf.Infinity, _checkLayer);
-                if (size < 2) emptySpaceCount++;
+                if (size < 2)
+                {
+                    emptySpaceCount++;
+                }
             }
 
             return emptySpaceCount == 0;

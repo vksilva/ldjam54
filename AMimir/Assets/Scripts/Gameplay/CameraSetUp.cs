@@ -36,14 +36,20 @@ namespace Busta.Gameplay
 
             UpdateCameraSize();
 
-            if (!Application.Initialized) return;
+            if (!Application.Initialized)
+            {
+                return;
+            }
 
             Application.Get<SafeAreaService>().RegisterSafeArea(UpdateSafeArea);
         }
 
         private void OnDestroy()
         {
-            if (!Application.Initialized) return;
+            if (!Application.Initialized)
+            {
+                return;
+            }
 
             Application.Get<SafeAreaService>().UnregisterSafeArea(UpdateSafeArea);
         }
