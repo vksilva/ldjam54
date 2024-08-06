@@ -238,11 +238,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8884286226491309043, guid: f4b5fc8da90958447be5af25e2122fac, type: 3}
       propertyPath: solutionPos.x
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8884286226491309043, guid: f4b5fc8da90958447be5af25e2122fac, type: 3}
       propertyPath: solutionPos.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -258,8 +258,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 414290825675999517, guid: ed0c182463edc224e81ea4e13f5caf55, type: 3}
+      propertyPath: solutionPos.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 414290825675999517, guid: ed0c182463edc224e81ea4e13f5caf55, type: 3}
       propertyPath: solutionPos.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2930046209054890537, guid: ed0c182463edc224e81ea4e13f5caf55, type: 3}
       propertyPath: m_Name
@@ -324,11 +328,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 414290825675999517, guid: 834866ad1c5fca7479f469256e269f0d, type: 3}
       propertyPath: solutionPos.x
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 414290825675999517, guid: 834866ad1c5fca7479f469256e269f0d, type: 3}
       propertyPath: solutionPos.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2930046209054890537, guid: 834866ad1c5fca7479f469256e269f0d, type: 3}
       propertyPath: m_Name
@@ -504,6 +508,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 176909905408790173, guid: 4a0cabd0f3ecfe74580dc7d1e78a2ee8, type: 3}
+      propertyPath: solutionPos.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 176909905408790173, guid: 4a0cabd0f3ecfe74580dc7d1e78a2ee8, type: 3}
+      propertyPath: solutionPos.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4335317560407223456, guid: 4a0cabd0f3ecfe74580dc7d1e78a2ee8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -766,7 +778,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5169085808755074638, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: orthographic size
-      value: 8.886199
+      value: 8.870968
       objectReference: {fileID: 0}
     - target: {fileID: 7938176268018679338, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: m_LocalPosition.x

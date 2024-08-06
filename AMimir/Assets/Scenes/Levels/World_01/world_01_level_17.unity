@@ -133,7 +133,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5169085808755074638, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: orthographic size
-      value: 10.555555
+      value: 8.870968
       objectReference: {fileID: 0}
     - target: {fileID: 7938176268018679338, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: m_LocalPosition.x
@@ -249,6 +249,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 414290825675999517, guid: 914b9c89c49c3654e90eccf308716dff, type: 3}
+      propertyPath: solutionPos.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 414290825675999517, guid: 914b9c89c49c3654e90eccf308716dff, type: 3}
+      propertyPath: solutionPos.y
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2930046209054890537, guid: 914b9c89c49c3654e90eccf308716dff, type: 3}
       propertyPath: m_Name
       value: cat_L_02
@@ -432,6 +440,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 176909905408790173, guid: 1024b1fef1102da42b460c296e9eef28, type: 3}
+      propertyPath: solutionPos.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 176909905408790173, guid: 1024b1fef1102da42b460c296e9eef28, type: 3}
+      propertyPath: solutionPos.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4335317560407223456, guid: 1024b1fef1102da42b460c296e9eef28, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
@@ -632,6 +648,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7572302553359180721, guid: f4b5fc8da90958447be5af25e2122fac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884286226491309043, guid: f4b5fc8da90958447be5af25e2122fac, type: 3}
+      propertyPath: solutionPos.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884286226491309043, guid: f4b5fc8da90958447be5af25e2122fac, type: 3}
+      propertyPath: solutionPos.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884286226491309043, guid: f4b5fc8da90958447be5af25e2122fac, type: 3}
+      propertyPath: isInvisibleObstacle
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
