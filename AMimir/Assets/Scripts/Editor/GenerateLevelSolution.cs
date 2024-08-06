@@ -50,7 +50,7 @@ namespace Busta.Editor
             }
         }
 
-        [MenuItem("Vanessa/Generate levels resolutions")]
+        [MenuItem("Vanessa/Levels/Generate levels resolutions")]
         public static async void GenerateResolutions()
         {
             var bed = Object.FindObjectOfType<Bed>();

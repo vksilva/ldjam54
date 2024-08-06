@@ -13,13 +13,13 @@ namespace Busta.Editor
         private static readonly string catsPath = Path.Join("Assets", "Prefabs", "Cats");
         private static readonly string obstaclesPath = Path.Join("Assets", "Prefabs", "Obstacles");
 
-        [MenuItem("Vanessa/Clean Player Prefs")]
+        [MenuItem("Vanessa/Utils/Clean Player Prefs")]
         public static void CleanPlayerPrefs()
         {
             PlayerPrefs.DeleteAll();
         }
 
-        [MenuItem("Vanessa/Add levels to Build Settings")]
+        [MenuItem("Vanessa/Configs/Add levels to Build Settings")]
         public static void AddLevelsToBuildSettings()
         {
             var scenes = new List<EditorBuildSettingsScene>();
@@ -39,7 +39,7 @@ namespace Busta.Editor
             EditorBuildSettings.scenes = scenes.DistinctBy(s => s.guid).ToArray();
         }
 
-        [MenuItem("Vanessa/Fix Cat Collider")]
+        [MenuItem("Vanessa/Configs/Fix Cat Collider")]
         public static void FixCatCollider()
         {
             Debug.Log($"Fix cat collider {catsPath}");

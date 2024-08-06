@@ -14,7 +14,7 @@ namespace Busta.Editor
         private static readonly string LocalizationPath = Path.Join("Assets", "Localization");
         private static Regex CSVParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
 
-        [MenuItem("Vanessa/Import Localization")]
+        [MenuItem("Vanessa/Configs/Import Localization")]
         public static void Import()
         {
             // Show open file dialog to select csv file
