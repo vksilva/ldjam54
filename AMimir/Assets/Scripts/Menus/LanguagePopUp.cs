@@ -14,12 +14,12 @@ namespace Busta.Menus
         [SerializeField] private Button backgroundButton;
         [SerializeField] private TextButton languageButtonTemplate;
         [SerializeField] private SettingsPopUp settingsPopUp;
-    
+
         private AudioService audioService;
         private LocalizationService localizationService;
         private BackKeyService backKeyService;
         private TrackingService trackingService;
-    
+
         private void Awake()
         {
             GetServices();
@@ -50,10 +50,10 @@ namespace Busta.Menus
                 var button = Instantiate(languageButtonTemplate, languageButtonTemplate.transform.parent);
                 button.Init(language.Name, () => OnChangeLanguage(language.Key));
             }
-            
+
             languageButtonTemplate.gameObject.SetActive(false);
         }
-        
+
         private void OnChangeLanguage(string language)
         {
             localizationService.SetCurrentLanguage(language);
@@ -71,9 +71,9 @@ namespace Busta.Menus
         {
             audioService.PlaySfx(AudioSFXEnum.closePopUp);
             backKeyService.PopAction();
-        
+
             gameObject.SetActive(false);
-        
+
             settingsPopUp.Show();
         }
     }

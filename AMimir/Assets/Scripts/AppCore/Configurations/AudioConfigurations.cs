@@ -8,8 +8,8 @@ namespace Busta.AppCore.Configurations
     public class AudioConfigurations
     {
         public int sfxSourcesCount = 4;
-        
-        public List<AudioConfigEntry<AudioMusicEnum>> musicConfigEntries = new ();
-        public List<AudioConfigEntry<AudioSFXEnum>> sfxConfigEntries = new ();
+
+        public List<AudioConfigEntry<AudioMusicEnum>> musicConfigEntries = new();
+        public List<AudioConfigEntry<AudioSFXEnum>> sfxConfigEntries = new();
     }
 }

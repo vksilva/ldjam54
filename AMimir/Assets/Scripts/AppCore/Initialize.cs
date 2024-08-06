@@ -33,7 +33,7 @@ namespace Busta.AppCore
             var stateService = Application.Instance.Add(new StateService()).Init();
 
             Application.Instance.Add(new ReviewService()).Init();
-            
+
             Application.Instance.Add(new AudioService())
                 .Init(gameConfigurations.AudioConfigurations, stateService, applicationGameObject);
 

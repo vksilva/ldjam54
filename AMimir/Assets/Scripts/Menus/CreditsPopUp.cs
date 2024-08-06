@@ -42,9 +42,9 @@ namespace Busta.Menus
         {
             _audioService.PlaySfx(AudioSFXEnum.closePopUp);
             _backKeyService.PopAction();
-        
+
             gameObject.SetActive(false);
-            
+
             settingsPopUp.Show();
         }
     }

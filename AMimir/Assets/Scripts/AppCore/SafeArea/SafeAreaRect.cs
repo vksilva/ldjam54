@@ -7,7 +7,7 @@ namespace Busta.AppCore.SafeArea
     {
         private RectTransform panel;
         private SafeAreaService safeAreaService;
-        
+
         private void Awake()
         {
             panel = GetComponent<RectTransform>();
@@ -27,7 +27,7 @@ namespace Busta.AppCore.SafeArea
             {
                 return;
             }
-            
+
             safeAreaService.UnregisterSafeArea(UpdatePanel);
         }
 

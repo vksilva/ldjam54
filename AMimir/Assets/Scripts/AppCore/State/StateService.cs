@@ -5,8 +5,9 @@ namespace Busta.AppCore.State
     public class StateService
     {
         private const string GameStatePrefsKey = "GAME_STATE_KEY";
-        
+
         public GameState gameState;
+
         public StateService Init()
         {
             Load();

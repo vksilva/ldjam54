@@ -28,7 +28,7 @@ namespace Busta.Menus
             backKeyService = Application.Get<BackKeyService>();
             stateService = Application.Get<StateService>();
             trackingService = Application.Get<TrackingService>();
-            
+
             declineTutorialAgainButton.onClick.AddListener(OnClose);
             backgroundButton.onClick.AddListener(OnClose);
             closePopUpButton.onClick.AddListener(OnClose);
@@ -39,9 +39,9 @@ namespace Busta.Menus
         {
             stateService.gameState.settingsState.seenTutorial = false;
             stateService.Save();
-            
+
             trackingService.TrackTutorialReplayed();
-            
+
             SceneManager.LoadScene(1);
         }
 

@@ -4,6 +4,5 @@ namespace Busta.Gameplay
 {
     public class DoubleBedGap : MonoBehaviour
     {
-        
     }
 }

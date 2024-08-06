@@ -37,14 +37,14 @@ Shader "Vanessa/Objects"
             #pragma multi_compile_local _ PIXELSNAP_ON
             #pragma multi_compile _ ETC1_EXTERNAL_ALPHA
             #include "UnitySprites.cginc"
-            
+
             fixed4 FaceFrag(v2f IN) : SV_Target
             {
                 fixed4 c = SampleSpriteTexture(IN.texcoord);
                 fixed4 color = c;
                 color.g = 1;
-                color.b = (sin(_Time.w + c.r*3.14) + 1 + c.g/2)/2.0;
-                color.r = (cos(_Time.w + c.b*3.14) + 1 + c.g/2)/2.0;
+                color.b = (sin(_Time.w + c.r * 3.14) + 1 + c.g / 2) / 2.0;
+                color.r = (cos(_Time.w + c.b * 3.14) + 1 + c.g / 2) / 2.0;
                 color.rgb *= color.a;
                 return color;
             }

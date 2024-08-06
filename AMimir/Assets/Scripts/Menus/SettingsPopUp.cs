@@ -39,7 +39,7 @@ namespace Busta.Menus
         {
             musicToggle.isOn = !_stateService.gameState.settingsState.isMusicOff;
             soundToggle.isOn = !_stateService.gameState.settingsState.isSFXOff;
-            
+
             languagePopUp.gameObject.SetActive(false);
             ConnectButtons();
         }
@@ -114,7 +114,7 @@ namespace Busta.Menus
             _stateService.gameState.settingsState.isSFXOff = !isOn;
             _stateService.Save();
         }
-        
+
         private void OnClose()
         {
             _audioService.PlaySfx(AudioSFXEnum.closePopUp);

@@ -20,16 +20,16 @@ namespace Busta.AppCore
                 return _instance;
             }
         }
-        
+
         public static bool Initialized { get; private set; }
 
-        private readonly Dictionary<Type, object> services = new ();
+        private readonly Dictionary<Type, object> services = new();
 
         public void Init()
         {
             Initialized = true;
         }
-        
+
         public T Add<T>(T service)
         {
             services.Add(typeof(T), service);
@@ -40,7 +40,7 @@ namespace Busta.AppCore
         {
             if (Instance.services.TryGetValue(typeof(T), out var service))
             {
-                return (T) service;
+                return (T)service;
             }
 
             Debug.LogWarning($"Service {typeof(T).Name} not initialized.");

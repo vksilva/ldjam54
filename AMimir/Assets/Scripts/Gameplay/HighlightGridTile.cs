@@ -7,7 +7,7 @@ namespace Busta.Gameplay
         [SerializeField] private Color freeSpaceColor;
         [SerializeField] private Color occupiedSpaceColor;
         [SerializeField] private SpriteRenderer spriteRenderer;
-        
+
         public void SetColor(bool free)
         {
             spriteRenderer.color = free ? freeSpaceColor : occupiedSpaceColor;

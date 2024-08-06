@@ -6,7 +6,7 @@ namespace Busta.AppCore.State
     [Serializable]
     public class LevelsState
     {
-        public List<string> winLevels = new ();
+        public List<string> winLevels = new();
         public string lastPlayedLevel;
     }
 }

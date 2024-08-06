@@ -22,7 +22,7 @@ namespace Busta.Extensions
 
         public static async Task WaitForSeconds(float seconds)
         {
-            await Task.Delay(Mathf.RoundToInt(seconds*1000));
+            await Task.Delay(Mathf.RoundToInt(seconds * 1000));
         }
 
         public static async Task WaitUntilNextFrame()

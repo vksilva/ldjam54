@@ -16,7 +16,7 @@ namespace Busta.Extensions
             return gameObject;
         }
 
-        public static T CreateChildObject<T>(this GameObject parent, string name) where T: Component
+        public static T CreateChildObject<T>(this GameObject parent, string name) where T : Component
         {
             var gameObject = parent.CreateChildObject(name);
             var component = gameObject.AddComponent<T>();

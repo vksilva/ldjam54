@@ -9,8 +9,8 @@ namespace Busta.Menus
     public class EndGameController : MonoBehaviour
     {
         [SerializeField] private Button backToLevelSelectorButton;
-    
-        void Start()
+
+        private void Start()
         {
             gameObject.SetActive(true);
             backToLevelSelectorButton.onClick.AddListener(OnBackToLevelSelectorButton);
@@ -19,7 +19,7 @@ namespace Busta.Menus
         private void OnBackToLevelSelectorButton()
         {
             Application.Get<AudioService>().PlaySfx(AudioSFXEnum.closePopUp);
-        
+
             var command = new BackToLevelSelectorCommand();
             command.Execute();
         }

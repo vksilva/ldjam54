@@ -5,7 +5,7 @@ namespace Busta.AppCore.Audio
     public struct SfxHandler
     {
         private AudioSource _audioSource;
-            
+
         public SfxHandler(AudioSource source = null)
         {
             _audioSource = source;

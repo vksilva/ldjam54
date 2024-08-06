@@ -16,12 +16,12 @@ namespace Busta.Menus
         [SerializeField] private Button backgroundButton;
         [SerializeField] private Button resetButton;
         [SerializeField] private PausePopUpController pausePopUp;
-        
+
         private static AudioService _audioService;
         private static BackKeyService _backKeyService;
         private static TrackingService _trackingService;
-        
-        void Awake()
+
+        private void Awake()
         {
             AddListeners();
             GetServices();
@@ -47,7 +47,7 @@ namespace Busta.Menus
             _audioService.PlaySfx(AudioSFXEnum.click);
             GameController.Instance.RestartLevel();
         }
-        
+
         private void OnClose()
         {
             _audioService.PlaySfx(AudioSFXEnum.click);

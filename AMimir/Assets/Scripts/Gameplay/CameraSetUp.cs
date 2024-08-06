@@ -36,20 +36,14 @@ namespace Busta.Gameplay
 
             UpdateCameraSize();
 
-            if (!Application.Initialized)
-            {
-                return;
-            }
+            if (!Application.Initialized) return;
 
             Application.Get<SafeAreaService>().RegisterSafeArea(UpdateSafeArea);
         }
 
         private void OnDestroy()
         {
-            if (!Application.Initialized)
-            {
-                return;
-            }
+            if (!Application.Initialized) return;
 
             Application.Get<SafeAreaService>().UnregisterSafeArea(UpdateSafeArea);
         }
@@ -76,7 +70,7 @@ namespace Busta.Gameplay
                 transform.position = new Vector3(XOffset, 0f, -10f);
                 _previousSize = _gameArea;
                 _previousAspect = _camera.aspect;
-                cameraRect.min = -_gameArea/2;
+                cameraRect.min = -_gameArea / 2;
                 cameraRect.size = _gameArea;
 
                 var cameraHeight = _camera.orthographicSize;

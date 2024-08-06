@@ -9,7 +9,6 @@ using Busta.AppCore.Review;
 using Busta.AppCore.State;
 using Busta.Extensions;
 using Busta.Tutorial;
-using Google.Play.Review;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -31,7 +30,7 @@ namespace Busta.Menus
         [SerializeField] private Canvas loadingCanvas;
 
         public static bool IsCommingFromLevel = false;
-        
+
         private static AudioService audioService;
         private static StateService stateService;
         private static LocalizationService localizationService;
@@ -51,7 +50,7 @@ namespace Busta.Menus
             }
 
             loadingCanvas.gameObject.SetActive(true);
-            
+
             GetServices();
             audioService.PlayMusic(AudioMusicEnum.menu);
             CreateWorlds();
@@ -59,7 +58,7 @@ namespace Busta.Menus
             ConnectButtons();
             backKeyService.PushAction(CloseLevelSelector);
             await FocusLastPlayedLevel();
-            
+
             loadingCanvas.gameObject.SetActive(false);
 
             if (IsCommingFromLevel)
@@ -73,9 +72,8 @@ namespace Busta.Menus
         {
             if (stateService.gameState.settingsState.seenReview ||
                 stateService.gameState.levelsState.winLevels.Count() < 5)
-            {
                 return;
-            }
+
             await reviewService.RequestReview();
             stateService.gameState.settingsState.seenReview = true;
             stateService.Save();
@@ -85,12 +83,8 @@ namespace Busta.Menus
         {
             var worlds = configurationService.Configs.WorldConfigurations.worlds;
             foreach (var t in worlds)
-            {
                 if (t.isEnabled)
-                {
                     CreateWorldSection(t);
-                }
-            }
         }
 
         private void DisableObjects()
@@ -108,6 +102,7 @@ namespace Busta.Menus
                 await FocusPlayedLevel(LevelSelectionTutorialController.TUTORIAL_LEVEL);
                 return;
             }
+
             await FocusPlayedLevel(stateService.gameState.levelsState.lastPlayedLevel);
         }
 
@@ -116,11 +111,8 @@ namespace Busta.Menus
             Canvas.ForceUpdateCanvases();
             await Tasks.WaitForSeconds(0.1f);
             var button = GameObject.Find(level);
-            
-            if (level.IsNullOrEmpty() || !button)
-            {
-                return;
-            }
+
+            if (level.IsNullOrEmpty() || !button) return;
 
             var originalMovementType = scrollRect.movementType;
             scrollRect.movementType = ScrollRect.MovementType.Clamped;
@@ -161,10 +153,7 @@ namespace Busta.Menus
             var worldProgress = $"{completedCount}/{world.levelCount}";
             var isWorldCompleted = completedCount == world.levelCount;
             worldLabel.SetValues(localizedWorld.ToUpper(), worldProgress, isWorldCompleted);
-            for (var l = 1; l <= world.levelCount; l++)
-            {
-                CreateLevelButton(world, l, worldLayout.transform);
-            }
+            for (var l = 1; l <= world.levelCount; l++) CreateLevelButton(world, l, worldLayout.transform);
         }
 
         private void CreateLevelButton(WorldData world, int level, Transform container)
@@ -172,9 +161,9 @@ namespace Busta.Menus
             var levelName = LevelUtils.GetLevelName(world.number, level);
             var newLevelButton = Instantiate(levelTemplateButton, container);
             newLevelButton.name = levelName;
-            bool isCompleted = stateService.gameState.levelsState.winLevels.Contains(levelName);
+            var isCompleted = stateService.gameState.levelsState.winLevels.Contains(levelName);
             var levelExists = SceneUtility.GetBuildIndexByScenePath(levelName) > 0;
-            newLevelButton.Setup(level.ToString(), world.buttonImage, world.textColor, isCompleted, 
+            newLevelButton.Setup(level.ToString(), world.buttonImage, world.textColor, isCompleted,
                 levelExists, () => LoadLevel(levelName));
         }
 

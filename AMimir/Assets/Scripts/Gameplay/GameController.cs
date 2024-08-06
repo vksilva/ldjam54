@@ -15,10 +15,10 @@ namespace Busta.Gameplay
     public class GameController : MonoBehaviour
     {
         public RectInt PiecesGrabArea => _cameraSetUp.GrabArea;
-        
+
         public static GameController Instance { get; private set; }
         public readonly Dictionary<Vector2Int, HighlightGridTile> highlightGridTiles = new();
-        
+
         private AudioService _audioService;
         private StateService _stateService;
         private TrackingService _trackingService;
@@ -61,6 +61,7 @@ namespace Busta.Gameplay
                 Debug.LogError("Missing camera");
                 return;
             }
+
             gridTilePrefab = Resources.Load<HighlightGridTile>("GameElements/grid_tile");
 
             GetServices();
@@ -68,10 +69,10 @@ namespace Busta.Gameplay
             // SetUpHints();
 
             SceneManager.LoadScene("LevelUI", LoadSceneMode.Additive);
-            
+
             _stateService.gameState.levelsState.lastPlayedLevel = SceneManager.GetActiveScene().name;
             _stateService.Save();
-            
+
             _trackingService.TrackLevelStarted(SceneManager.GetActiveScene().name);
         }
 
@@ -82,30 +83,25 @@ namespace Busta.Gameplay
 
         public void Hint()
         {
-            
             foreach (var cat in cats)
-            {
                 if (!isHintDisplayed[cat])
                 {
                     // Show hint for this cat
                     isHintDisplayed[cat] = false;
                     break;
                 }
-            }
         }
 
         private void SetUpHints()
         {
             cats = FindObjectsOfType<PieceSolutionPositions>();
-            foreach (var cat in cats)
-            {
-                isHintDisplayed[cat] = false;
-            }
+            foreach (var cat in cats) isHintDisplayed[cat] = false;
         }
 
         private void OnApplicationQuit()
         {
-            _trackingService.TrackLevelEnded(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter, timeCounter, matchResultQuit);
+            _trackingService.TrackLevelEnded(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter,
+                timeCounter, matchResultQuit);
         }
 
         private void SetUpBed()
@@ -126,23 +122,20 @@ namespace Busta.Gameplay
             var bedPosition = new Vector2Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y));
 
             // Set Highlight grid in the bed
-            for (int x = 0; x < _bedSize.x; x++)
+            for (var x = 0; x < _bedSize.x; x++)
             {
                 var posX = bedPosition.x + x;
-                for (int y = 0; y < _bedSize.y; y++)
+                for (var y = 0; y < _bedSize.y; y++)
                 {
                     var posY = bedPosition.y + y;
                     var tilePos = new Vector3(posX, posY, 0);
-                    
+
                     //f is double bed gap, continue
                     if (_bed.IsDoubleBed())
-                    {
-                        if (FindObjectOfType<DoubleBedGap>().GetComponent<BoxCollider2D>().OverlapPoint(tilePos+_offset))
-                        {
+                        if (FindObjectOfType<DoubleBedGap>().GetComponent<BoxCollider2D>()
+                            .OverlapPoint(tilePos + _offset))
                             continue;
-                        }
-                    }
-                    
+
                     var tile = Instantiate(gridTilePrefab, tilePos, Quaternion.identity);
                     tile.gameObject.SetActive(false);
                     highlightGridTiles[new Vector2Int(posX, posY)] = tile;
@@ -169,10 +162,11 @@ namespace Busta.Gameplay
 
         private async void OpenEndGamePopUp()
         {
-            _trackingService.TrackLevelEnded(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter, timeCounter, matchResultWin);
-            
+            _trackingService.TrackLevelEnded(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter,
+                timeCounter, matchResultWin);
+
             await DoBeforeEndGame();
-            
+
             await Tasks.WaitForSeconds(0.5f);
             _audioService.PlaySfx(AudioSFXEnum.EndGameCelebration);
             LevelUIController.Instance.ShowEndGameCanvas();
@@ -185,22 +179,21 @@ namespace Busta.Gameplay
 
         private async Task DoBeforeEndGame()
         {
-            if (OnBeforeEndGame == null)
-            {
-                return;
-            }
+            if (OnBeforeEndGame == null) return;
             await OnBeforeEndGame.Invoke();
         }
 
         public void RestartLevel()
         {
-            _trackingService.TrackLevelEnded(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter, timeCounter, matchResultRestarted);
+            _trackingService.TrackLevelEnded(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter,
+                timeCounter, matchResultRestarted);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         public void TrackAbandonLevel()
         {
-            _trackingService.TrackLevelEnded(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter, timeCounter,matchResultAbandoned);
+            _trackingService.TrackLevelEnded(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter,
+                timeCounter, matchResultAbandoned);
         }
 
         public void OnPiecePlaced()
@@ -222,17 +215,12 @@ namespace Busta.Gameplay
         {
             var emptySpaceCount = 0;
             for (var x = 0; x < _bedSize.x; x++)
+            for (var y = 0; y < _bedSize.y; y++)
             {
-                for (var y = 0; y < _bedSize.y; y++)
-                {
-                    var tile = new Vector3(x, y, 0);
-                    var size = Physics2D.RaycastNonAlloc(_bed.transform.position + tile + _offset, Vector2.zero,
-                        _rayCastResult, Mathf.Infinity, _checkLayer);
-                    if (size < 2)
-                    {
-                        emptySpaceCount++;
-                    }
-                }
+                var tile = new Vector3(x, y, 0);
+                var size = Physics2D.RaycastNonAlloc(_bed.transform.position + tile + _offset, Vector2.zero,
+                    _rayCastResult, Mathf.Infinity, _checkLayer);
+                if (size < 2) emptySpaceCount++;
             }
 
             return emptySpaceCount == 0;

@@ -32,7 +32,7 @@ namespace Busta.AppCore.Tracking
                 new(TrackingParameters.Moves, moves),
                 new(TrackingParameters.FailedMoves, failedMoves),
                 new(TrackingParameters.TimeSeconds, timeSeconds),
-                new(TrackingParameters.Result, result),
+                new(TrackingParameters.Result, result)
             };
             firebaseService.LogEvent(TrackingEvents.LevelEnded, param);
         }

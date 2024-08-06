@@ -21,13 +21,13 @@ namespace Busta.Menus
         [SerializeField] private Button resetButton;
         [SerializeField] private ResetPopUpController resetPopUp;
         [SerializeField] private TMP_Text title;
-    
+
         private static AudioService _audioService;
         private static BackKeyService _backKeyService;
         private static TrackingService _trackingService;
         private static LocalizationService _localizationService;
-    
-        void Awake()
+
+        private void Awake()
         {
             AddListeners();
             GetServices();
@@ -60,7 +60,7 @@ namespace Busta.Menus
         private void OnBackToLevelSelectorButton()
         {
             _audioService.PlaySfx(AudioSFXEnum.click);
-        
+
             var command = new BackToLevelSelectorCommand();
             command.Execute();
             GameController.Instance.TrackAbandonLevel();

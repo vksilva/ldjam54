@@ -24,6 +24,7 @@ namespace Busta.AppCore.Review
                 Debug.LogWarning($"Request flow error {requestFlowOperation.Error}");
                 return;
             }
+
             playReviewInfo = requestFlowOperation.GetResult();
             Debug.Log($"Review requested");
 
@@ -35,6 +36,7 @@ namespace Busta.AppCore.Review
                 Debug.LogWarning($"Launch flow error {launchFlowOperation.Error}");
                 return;
             }
+
             Debug.Log("Review launched");
         }
     }

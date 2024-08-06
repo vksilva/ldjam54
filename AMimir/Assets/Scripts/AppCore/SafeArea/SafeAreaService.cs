@@ -6,7 +6,7 @@ namespace Busta.AppCore.SafeArea
 {
     public class SafeAreaService
     {
-        private readonly UnityEvent<Rect> updateSafeAreaEvent = new ();
+        private readonly UnityEvent<Rect> updateSafeAreaEvent = new();
         private Rect SafeAreaRect => configurations.UseDebugSafeArea ? configurations.DebugSafeArea : Screen.safeArea;
 
         private Rect previousSafeArea;
@@ -39,10 +39,10 @@ namespace Busta.AppCore.SafeArea
             }
 
             previousSafeArea = SafeAreaRect;
-            
+
             anchor.min = SafeAreaRect.position;
             anchor.max = SafeAreaRect.position + SafeAreaRect.size;
-            
+
             // Normalize from 0 to 1
             anchor.xMin /= Screen.width;
             anchor.yMin /= Screen.height;

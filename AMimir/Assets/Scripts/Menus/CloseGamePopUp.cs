@@ -12,7 +12,7 @@ namespace Busta.Menus
         [SerializeField] private Button declineCloseGameButton;
         [SerializeField] private Button backgroundButton;
         [SerializeField] private Button closePopUpButton;
-        
+
 
         private static BackKeyService _backKeyService;
         private static AudioService _audioSource;
@@ -21,7 +21,7 @@ namespace Busta.Menus
         {
             _audioSource = Application.Get<AudioService>();
             _backKeyService = Application.Get<BackKeyService>();
-            
+
             declineCloseGameButton.onClick.AddListener(OnClose);
             backgroundButton.onClick.AddListener(OnClose);
             closePopUpButton.onClick.AddListener(OnClose);

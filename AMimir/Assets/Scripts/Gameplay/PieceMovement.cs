@@ -14,7 +14,7 @@ namespace Busta.Gameplay
     {
         [SerializeField] private bool _obstacle = false;
         [SerializeField] private bool isInvisibleObstacle = false;
-        
+
         [SerializeField] private Vector2Int solutionPos;
 
         private LayerMask pieceLayer;
@@ -66,7 +66,7 @@ namespace Busta.Gameplay
 
             IsDragging = false;
             catRenderer = GetComponentInChildren<SpriteRenderer>();
-            
+
             if (!isInvisibleObstacle)
             {
                 DisplayShadow(false);
@@ -121,31 +121,29 @@ namespace Busta.Gameplay
 
             var nearIntPosition = NearIntPosition();
 
-            for (int x = 0; x < size.x; x++)
+            for (var x = 0; x < size.x; x++)
+            for (var y = 0; y < size.y; y++)
             {
-                for (int y = 0; y < size.y; y++)
+                var tile = new Vector3(x, y, 0);
+                var tileCoordinate = nearIntPosition + tile;
+                var tileCenterPosition = tileCoordinate + gridOffset;
+
+                var hitBed = Physics2D.RaycastNonAlloc(tileCenterPosition, Vector2.zero, hitResults,
+                    Mathf.Infinity, bedLayer);
+                var hitPiece = Physics2D.RaycastNonAlloc(tileCenterPosition, Vector2.zero, hitResults,
+                    Mathf.Infinity, pieceLayer);
+                if (hitPiece > 0 && hitBed > 0)
                 {
-                    var tile = new Vector3(x, y, 0);
-                    var tileCoordinate = nearIntPosition + tile;
-                    var tileCenterPosition = tileCoordinate + gridOffset;
-
-                    var hitBed = Physics2D.RaycastNonAlloc(tileCenterPosition, Vector2.zero, hitResults,
-                        Mathf.Infinity, bedLayer);
-                    var hitPiece = Physics2D.RaycastNonAlloc(tileCenterPosition, Vector2.zero, hitResults,
-                        Mathf.Infinity, pieceLayer);
-                    if (hitPiece > 0 && hitBed > 0)
+                    if (gameController.highlightGridTiles.TryGetValue(
+                            new Vector2Int((int)tileCoordinate.x, (int)tileCoordinate.y), out var gridTile))
                     {
-                        if (gameController.highlightGridTiles.TryGetValue(
-                                new Vector2Int((int)tileCoordinate.x, (int)tileCoordinate.y), out var gridTile))
+                        if (hitResults[0].collider.gameObject != gameObject)
                         {
-                            if (hitResults[0].collider.gameObject != this.gameObject)
-                            {
-                                continue;
-                            }
-
-                            gridTile.gameObject.SetActive(true);
-                            gridTile.SetColor(hitPiece == 1);
+                            continue;
                         }
+
+                        gridTile.gameObject.SetActive(true);
+                        gridTile.SetColor(hitPiece == 1);
                     }
                 }
             }
@@ -204,32 +202,29 @@ namespace Busta.Gameplay
             var position = transform.position;
 
             //check if final position is valid
-            for (int x = 0; x < size.x; x++)
+            for (var x = 0; x < size.x; x++)
+            for (var y = 0; y < size.y; y++)
             {
-                for (int y = 0; y < size.y; y++)
+                var tile = new Vector3(x, y, 0);
+                var hitGrabArea = CheckHitArea(gameController.PiecesGrabArea, position + tile + gridOffset);
+
+                var origin = position + tile + gridOffset;
+                var pieceHits = Physics2D.RaycastNonAlloc(origin, Vector2.zero, hitResults,
+                    Mathf.Infinity, pieceLayer);
+                var bedHits = Physics2D.RaycastNonAlloc(origin, Vector2.zero, hitResults,
+                    Mathf.Infinity, bedLayer);
+                if (pieceHits > 1 || (bedHits == 0 && !hitGrabArea))
                 {
-                    var tile = new Vector3(x, y, 0);
-                    var hitGrabArea = CheckHitArea(gameController.PiecesGrabArea, position + tile + gridOffset);
-
-                    var origin = position + tile + gridOffset;
-                    var pieceHits = Physics2D.RaycastNonAlloc(origin, Vector2.zero, hitResults,
-                        Mathf.Infinity, pieceLayer);
-                    var bedHits = Physics2D.RaycastNonAlloc(origin, Vector2.zero, hitResults,
-                        Mathf.Infinity, bedLayer);
-                    if (pieceHits > 1 || (bedHits == 0 && !hitGrabArea))
+                    //Move piece back to original position
+                    // TODO check surrounding area for a valid position instead of returning piece
+                    catCollider.enabled = false;
+                    transform.DOMove(positionBeforeMove, catReturnSpeed).SetSpeedBased().OnComplete(() =>
                     {
-                        //Move piece back to original position
-                        // TODO check surrounding area for a valid position instead of returning piece
-
-                        catCollider.enabled = false;
-                        transform.DOMove(positionBeforeMove, catReturnSpeed).SetSpeedBased().OnComplete(() =>
-                        {
-                            catCollider.enabled = true;
-                            pieceSortingGroup.sortingLayerName = DefaultPieceSortingLayer;
-                        });
-                        gameController.IncrementFailedMovements();
-                        return;
-                    }
+                        catCollider.enabled = true;
+                        pieceSortingGroup.sortingLayerName = DefaultPieceSortingLayer;
+                    });
+                    gameController.IncrementFailedMovements();
+                    return;
                 }
             }
 
@@ -272,12 +267,12 @@ namespace Busta.Gameplay
             {
                 return;
             }
-            
+
             var bed = FindObjectOfType<Bed>();
             var bedPosition = new Vector2(bed.transform.position.x, bed.transform.position.y);
-            
+
             Handles.color = Color.green;
-            Handles.Label(bed.transform.position + new Vector3(solutionPos.x+0.1f, solutionPos.y+0.3f), name);
+            Handles.Label(bed.transform.position + new Vector3(solutionPos.x + 0.1f, solutionPos.y + 0.3f), name);
 
             Gizmos.color = Color.magenta;
 
@@ -285,7 +280,7 @@ namespace Busta.Gameplay
             if (boxCollider)
             {
                 Gizmos.matrix = bed.transform.localToWorldMatrix * Matrix4x4.Translate(solutionPos.ToVector3());
-                Gizmos.DrawWireCube( boxCollider.offset - bedPosition, boxCollider.size);
+                Gizmos.DrawWireCube(boxCollider.offset - bedPosition, boxCollider.size);
                 return;
             }
 
@@ -293,7 +288,8 @@ namespace Busta.Gameplay
             if (polygonCollider)
             {
                 Gizmos.matrix = bed.transform.localToWorldMatrix * Matrix4x4.Translate(solutionPos.ToVector3());
-                Gizmos.DrawLineStrip(polygonCollider.points.Select(v => new Vector3(v.x, v.y) - bed.transform.position).ToArray(), true);
+                Gizmos.DrawLineStrip(
+                    polygonCollider.points.Select(v => new Vector3(v.x, v.y) - bed.transform.position).ToArray(), true);
             }
         }
 #endif

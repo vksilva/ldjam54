@@ -8,6 +8,7 @@ namespace Busta.AppCore.Localization
         private LocalizationService localizationService;
         private TMP_Text textToLocalize;
         private string key;
+
         private void Start()
         {
             if (!Application.Initialized)

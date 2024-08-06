@@ -26,7 +26,7 @@ namespace Busta.AppCore.Audio
         {
             musicMap = configurations.musicConfigEntries.ToDictionary(x => x.name, x => x.audioClip);
             sfxMap = configurations.sfxConfigEntries.ToDictionary(x => x.name, x => x.audioClip);
-            
+
             MusicSource = applicationObject.CreateChildObject<AudioSource>("musicSource");
             MusicSource.playOnAwake = false;
             MusicSource.loop = true;

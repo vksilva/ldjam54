@@ -10,7 +10,7 @@ namespace Busta.Gameplay
         [SerializeField] private Sprite sprite;
 
         private SpriteRenderer spriteRenderer;
-        
+
         private static readonly int OverlayTex = Shader.PropertyToID("_OverlayTex");
         private static readonly int OverlayOffsetUv = Shader.PropertyToID("_OverlayOffsetUv");
 
@@ -35,7 +35,7 @@ namespace Busta.Gameplay
             var baseUv = spriteRenderer.sprite.uv[0];
             var overlayUv = sprite.uv[0];
             var offsetUv = overlayUv - baseUv;
-            
+
             var mpb = new MaterialPropertyBlock();
             spriteRenderer.GetPropertyBlock(mpb);
             mpb.SetTexture(OverlayTex, sprite.texture);

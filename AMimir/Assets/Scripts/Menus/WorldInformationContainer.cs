@@ -14,6 +14,7 @@ namespace Busta.Menus
             {
                 name = $"<sprite=1\"> {name} <sprite=1\">";
             }
+
             this.name.text = name;
             this.progress.text = progress;
         }
