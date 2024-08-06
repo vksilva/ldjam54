@@ -210,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5169085808755074638, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: orthographic size
-      value: 8.870968
+      value: 8.88535
       objectReference: {fileID: 0}
     - target: {fileID: 7938176268018679338, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: m_LocalPosition.x
@@ -883,15 +883,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8749571368258107023, guid: f4b5fc8da90958447be5af25e2122fac, type: 3}
       propertyPath: m_Color.b
-      value: 0.3254272
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8749571368258107023, guid: f4b5fc8da90958447be5af25e2122fac, type: 3}
       propertyPath: m_Color.g
-      value: 0.741839
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8749571368258107023, guid: f4b5fc8da90958447be5af25e2122fac, type: 3}
       propertyPath: m_Color.r
-      value: 0.9716981
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8884286226491309043, guid: f4b5fc8da90958447be5af25e2122fac, type: 3}
       propertyPath: solutionPos.x
