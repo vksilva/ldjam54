@@ -86,7 +86,10 @@ namespace Busta.Menus
             var worlds = configurationService.Configs.WorldConfigurations.worlds;
             foreach (var t in worlds)
             {
-                CreateWorldSection(t);
+                if (t.isEnabled)
+                {
+                    CreateWorldSection(t);
+                }
             }
         }
 

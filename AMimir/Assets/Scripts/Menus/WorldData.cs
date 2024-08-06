@@ -11,5 +11,6 @@ namespace Busta.Menus
         public int levelCount;
         public Sprite buttonImage;
         public Color textColor;
+        public bool isEnabled;
     }
 }
