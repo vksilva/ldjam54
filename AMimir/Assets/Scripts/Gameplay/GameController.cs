@@ -135,13 +135,9 @@ namespace Busta.Gameplay
                     var tilePos = new Vector3(posX, posY, 0);
                     
                     //f is double bed gap, continue
-                    if (_bed.IsDoubleBed())
+                    if (FindObjectOfType<DoubleBedGap>().GetComponent<BoxCollider2D>().OverlapPoint(tilePos+_offset))
                     {
-                        var gapPosition = FindObjectOfType<DoubleBedGap>().GetComponent<BoxCollider2D>();
-                        if (gapPosition.OverlapPoint(tilePos+_offset))
-                        {
-                            continue;
-                        }
+                        continue;
                     }
                     
                     var tile = Instantiate(gridTilePrefab, tilePos, Quaternion.identity);
@@ -242,18 +238,6 @@ namespace Busta.Gameplay
         public void PlayGameSfx(AudioSFXEnum sfx)
         {
             _audioService.PlaySfx(sfx);
-        }
-        
-        private void OnDrawGizmos()
-        {
-            _bed = FindObjectOfType<Bed>();
-            if (_bed.IsDoubleBed())
-            {
-                var bedGap = FindObjectOfType<DoubleBedGap>().GetComponent<BoxCollider2D>().bounds;
-                
-                Gizmos.color = Color.magenta;
-                Gizmos.DrawWireCube(bedGap.center, bedGap.size);
-            }
         }
     }
 }
