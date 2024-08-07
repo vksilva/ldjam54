@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id">
+  <string name="gcm_defaultSenderId" translatable="false">798534389781</string>
+  <string name="google_storage_bucket" translatable="false">amimir-game.appspot.com</string>
+  <string name="project_id" translatable="false">amimir-game</string>
+  <string name="google_api_key" translatable="false">AIzaSyCHy7F8M_8QIPv9_TUiPJM2zkr7UY4gNNg</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCHy7F8M_8QIPv9_TUiPJM2zkr7UY4gNNg</string>
+  <string name="google_app_id" translatable="false">1:798534389781:android:072931b6de7235459bfe1c</string>
+</resources>

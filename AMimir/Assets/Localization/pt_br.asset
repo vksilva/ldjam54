@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d530079e6ec4824b86e762cd8b48e6d, type: 3}
+  m_Name: pt_br
+  m_EditorClassIdentifier: 
+  Name: "Portugu\xEAs"
+  Key: pt_br
+  Translations:
+  - Key: title
+    Value: A Mimir
+  - Key: settings
+    Value: "Op\xE7\xF5es"
+  - Key: sound_effects
+    Value: Efeitos sonoros
+  - Key: music
+    Value: "M\xFAsica"
+  - Key: small
+    Value: Pequeno
+  - Key: medium
+    Value: "M\xE9dio"
+  - Key: large
+    Value: Grande
+  - Key: challenge
+    Value: Desafio
+  - Key: credits
+    Value: "Cr\xE9ditos"
+  - Key: reset_title
+    Value: Reiniciar fase
+  - Key: reset_button
+    Value: Reiniciar
+  - Key: continue_button
+    Value: Continuar
+  - Key: all_cats_are_a_mimir
+    Value: "Todos os gatinhos est\xE3o <i>a mimir</i>"
+  - Key: back_to_home
+    Value: "Voltar para in\xEDcio"
+  - Key: paused
+    Value: Pausado
+  - Key: language
+    Value: Idioma
+  - Key: select_language_button
+    Value: Selecionar idioma
+  - Key: close_game
+    Value: Fechar jogo?
+  - Key: confirm_close_game_button
+    Value: Sim
+  - Key: decline_close_game_button
+    Value: "N\xE3o"
+  - Key: privacy_policy_button
+    Value: "Pol\xEDtica de privacidade"
+  - Key: terms_of_service_button
+    Value: "Termos de servi\xE7o"
+  - Key: tutorial_button
+    Value: Tutorial
+  - Key: tutorial_again_title
+    Value: Rever tutorial?
+  - Key: confirm_tutorial_again_button
+    Value: Sim
+  - Key: decline_tutorial_again_button
+    Value: "N\xE3o"
+  - Key: tutorial_message_01
+    Value: "Bem vindo ao <b>A Mimir</b>, o quebra cabe\xE7a de gatos"
+  - Key: tutorial_message_02
+    Value: "Meus amigos gatos est\xE3o com sono e querem dormir em suas camas"
+  - Key: tutorial_message_03
+    Value: "Clique no bot\xE3o da fase para iniciar a partida"
+  - Key: tutorial_message_04
+    Value: Vamos colocar os gatos na cama
+  - Key: tutorial_message_05
+    Value: "Eu vou mover o primeiro para voc\xEA"
+  - Key: tutorial_message_06
+    Value: "Agora \xE9 a sua vez. Mova os gatos para a \xE1rea marcada"
+  - Key: tutorial_message_07
+    Value: "Incr\xEDvel! Agora todos os gatos est\xE3o dormindo na caminha!"
+  - Key: tutorial_message_08
+    Value: "Agora v\xE1 e se divirta com as outras fases! At\xE9 mais!"

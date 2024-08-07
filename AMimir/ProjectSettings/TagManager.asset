@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Bed
+  - Water
+  - UI
+  - Pieces Area
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 3869410041
+    locked: 0
+  - name: Bed
+    uniqueID: 2016804587
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: FloatingPiece
+    uniqueID: 3210991459
+    locked: 0

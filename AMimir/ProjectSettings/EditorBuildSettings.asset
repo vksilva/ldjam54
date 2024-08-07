@@ -1,0 +1,215 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Start.unity
+    guid: 528c5e95b19514743869eaae21a126da
+  - enabled: 1
+    path: Assets/Scenes/LevelSelector.unity
+    guid: 0c6945290429557429279c38abd826b8
+  - enabled: 1
+    path: Assets/Scenes/LevelUI.unity
+    guid: 828abee73b07f9049b3f3650175251b4
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_01.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_02.unity
+    guid: dc0be5b5519626342be64a23f25175ec
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_03.unity
+    guid: 77929909aa86739459ae9a6762c317c5
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_04.unity
+    guid: 7554455c7c69e824da1858a8bec102c7
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_05.unity
+    guid: 156ac151256f32d4fb179f52e3a98d4b
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_06.unity
+    guid: 5e73a583eed23f548a3410c301e7f0c5
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_07.unity
+    guid: 0b05d0fa791950645b143525c8d25b52
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_09.unity
+    guid: 374e5123b5ef6c1419b03a35e183a1f2
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_08.unity
+    guid: be477a417c0caf24a92baa1a4347dbe8
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_01.unity
+    guid: f07d0cce4a805514e966b08d924cb4e7
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_02.unity
+    guid: 91e418d4e0b14b94baaf1c277610333f
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_03.unity
+    guid: 370123b8c5996194985f4c9374d7a5f1
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_04.unity
+    guid: 969015cf0dce0d74b99791a4df1d300c
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_05.unity
+    guid: c6ca0937c9052ff4083b5d562c403133
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_07.unity
+    guid: 5290a3038e363094584ffcbb62443408
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_08.unity
+    guid: a24aaa95126add9439f44a4de295c411
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_16.unity
+    guid: 0161030bc6c8de84baa90ae04def824c
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_17.unity
+    guid: 27eb33e9df2505246be36fd810a8652d
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_18.unity
+    guid: 23769e4207331574786f260db2e37130
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_04.unity
+    guid: 910e5b7829aa356479c218f6a6d488aa
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_05.unity
+    guid: 799b73cba00ee9540ab74b9c17c2a5e2
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_06.unity
+    guid: 2efa534121786c34590fb80e24160cf8
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_10.unity
+    guid: 095b773e0fabb4449815a383f6a5983c
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_20.unity
+    guid: 67ed4864a0ec16d4b833d72ddaecea85
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_15.unity
+    guid: 40a553e48d0514d4f9885b4f8271e32c
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_14.unity
+    guid: 8f594c76250924944b3cd6623e7e590e
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_13.unity
+    guid: f48a5dc3a17a49c4db0779e9bb64b371
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_12.unity
+    guid: 7ea717cdbf13ef24c96bfe475324c6e6
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_11.unity
+    guid: f1e7f41a849d92b488e980db0d02a00a
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_01/world_01_level_19.unity
+    guid: 6d9f7ad82f0bde0409c8ddaa8213e5c4
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_14.unity
+    guid: 620ce6976e56b0646a2ddbdd6b31db46
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_08.unity
+    guid: c6ffb57ab4a4b05429c1c1ddbbbe73a0
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_09.unity
+    guid: fa3b178b9df08f2489161543528d3193
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_10.unity
+    guid: 612c06e998298e44a967dc417d4b3d6b
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_11.unity
+    guid: af8008d98d5ad9e4aadb61f9ae6661a1
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_12.unity
+    guid: 3116dda1849469340ba46a46ec8b685e
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_13.unity
+    guid: 67610f4d5bea5b443812f50bd74d50e2
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_04/world_04_level_05.unity
+    guid: ac0039a69ba623d48ba7f865c6fb5901
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_04/world_04_level_06.unity
+    guid: 660ad9f4b1574d6458f19490ae5abd43
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_06.unity
+    guid: 16714335b9851f24fa6f32e6382f2372
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_07.unity
+    guid: e65f762790052a94d8ba0a4dee994de4
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_16.unity
+    guid: 67ef55c1fb37aee46be68d2f27b7f34c
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_17.unity
+    guid: a88a67a72afcaaf40bc8cb52e1a31e7d
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_15.unity
+    guid: 0de603e92a56da644a974e5da67f981e
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_18.unity
+    guid: e6a682846be166943bd770e481160b26
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_19.unity
+    guid: 9830f729a29c98d478dc05a1391d301c
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_02/world_02_level_20.unity
+    guid: 563f57714abd87946995515fd468777a
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_01.unity
+    guid: c53c93f64bf20f74a9b23f1a3da11a70
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_02.unity
+    guid: d6742e94831637b46b1033e72e7b840f
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_03.unity
+    guid: a962905747578ba43b596f82149117ff
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_09.unity
+    guid: 2ff617a77d5a8314ca462b1ca1d69452
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_10.unity
+    guid: 800c25c53001bc243ba0b228d0e4e90f
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_18.unity
+    guid: ccce3c91b5980864dbe6288f57c472ac
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_19.unity
+    guid: 7c78483e6f217f54abcb752ab4540a64
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_20.unity
+    guid: 4919751593b5ba041a27fe123560c627
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_04/world_04_level_01.unity
+    guid: 3daa9c5014835bd4da2ad1fcf8bf7737
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_04/world_04_level_02.unity
+    guid: 8ab7783dcc6d3104782e325c312e9421
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_11.unity
+    guid: 9126d322fd224134f8d9da77b52fef91
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_12.unity
+    guid: 4deffc3a7de1c8647972e33945e60884
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_13.unity
+    guid: da94bb73d3b158f4fb32fc750736d2c2
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_14.unity
+    guid: c700acaa91725f2468e613df39fe9865
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_15.unity
+    guid: 5df6922e0f3d2684a803cf0ad5474f2f
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_16.unity
+    guid: a3e68a6bffb8b094284994a04fab8813
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_03/world_03_level_17.unity
+    guid: cc113332af20fa84791a11fc2c1cd137
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_04/world_04_level_03.unity
+    guid: 8e70296d4dc50934cb4a0a2d76814ebe
+  - enabled: 1
+    path: Assets/Scenes/Levels/World_04/world_04_level_04.unity
+    guid: 4d6e07ad666608646adf88f4825a4826
+  m_configObjects: {}
