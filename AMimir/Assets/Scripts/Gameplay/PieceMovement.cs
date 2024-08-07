@@ -13,6 +13,8 @@ namespace Busta.Gameplay
     public class PieceMovement : MonoBehaviour
     {
         [SerializeField] private bool _obstacle = false;
+        [SerializeField] private bool isInvisibleObstacle = false;
+        
         [SerializeField] private Vector2Int solutionPos;
 
         private LayerMask pieceLayer;
@@ -64,8 +66,12 @@ namespace Busta.Gameplay
 
             IsDragging = false;
             catRenderer = GetComponentInChildren<SpriteRenderer>();
-            DisplayShadow(false);
-            SetNoise(Random.Range(0, Mathf.PI * 2f));
+            
+            if (!isInvisibleObstacle)
+            {
+                DisplayShadow(false);
+                SetNoise(Random.Range(0, Mathf.PI * 2f));
+            }
         }
 
         public bool IsObstacle()
@@ -268,17 +274,18 @@ namespace Busta.Gameplay
             }
             
             var bed = FindObjectOfType<Bed>();
+            var bedPosition = new Vector2(bed.transform.position.x, bed.transform.position.y);
             
             Handles.color = Color.green;
             Handles.Label(bed.transform.position + new Vector3(solutionPos.x+0.1f, solutionPos.y+0.3f), name);
 
-            Gizmos.color = Color.green;
+            Gizmos.color = Color.magenta;
 
             var boxCollider = GetComponent<BoxCollider2D>();
             if (boxCollider)
             {
                 Gizmos.matrix = bed.transform.localToWorldMatrix * Matrix4x4.Translate(solutionPos.ToVector3());
-                Gizmos.DrawWireCube(boxCollider.offset, boxCollider.size);
+                Gizmos.DrawWireCube( boxCollider.offset - bedPosition, boxCollider.size);
                 return;
             }
 
@@ -286,7 +293,7 @@ namespace Busta.Gameplay
             if (polygonCollider)
             {
                 Gizmos.matrix = bed.transform.localToWorldMatrix * Matrix4x4.Translate(solutionPos.ToVector3());
-                Gizmos.DrawLineStrip(polygonCollider.points.Select(v => new Vector3(v.x, v.y)).ToArray(), true);
+                Gizmos.DrawLineStrip(polygonCollider.points.Select(v => new Vector3(v.x, v.y) - bed.transform.position).ToArray(), true);
             }
         }
 #endif

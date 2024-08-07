@@ -132,7 +132,18 @@ namespace Busta.Gameplay
                 for (int y = 0; y < _bedSize.y; y++)
                 {
                     var posY = bedPosition.y + y;
-                    var tile = Instantiate(gridTilePrefab, new Vector3(posX, posY, 0), Quaternion.identity);
+                    var tilePos = new Vector3(posX, posY, 0);
+                    
+                    //f is double bed gap, continue
+                    if (_bed.IsDoubleBed())
+                    {
+                        if (FindObjectOfType<DoubleBedGap>().GetComponent<BoxCollider2D>().OverlapPoint(tilePos+_offset))
+                        {
+                            continue;
+                        }
+                    }
+                    
+                    var tile = Instantiate(gridTilePrefab, tilePos, Quaternion.identity);
                     tile.gameObject.SetActive(false);
                     highlightGridTiles[new Vector2Int(posX, posY)] = tile;
                 }

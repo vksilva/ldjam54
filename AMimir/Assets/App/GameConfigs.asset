@@ -53,18 +53,28 @@ MonoBehaviour:
       levelCount: 20
       buttonImage: {fileID: 21300000, guid: efe76f6c8b8a4284aa495c9a049a0967, type: 3}
       textColor: {r: 0.12941177, g: 0.26666668, b: 0.47058824, a: 1}
+      isEnabled: 1
     - name: medium
       number: 2
       levelCount: 20
       buttonImage: {fileID: 21300000, guid: 64d6e7d2cc775304eb4d4a83312a6e07, type: 3}
       textColor: {r: 0.4, g: 0.23921569, b: 0.23921569, a: 1}
+      isEnabled: 1
     - name: large
       number: 3
       levelCount: 20
       buttonImage: {fileID: 21300000, guid: 461564aa8d3ea084abcdf2082640b88f, type: 3}
       textColor: {r: 0.627451, g: 0.17254902, b: 0.3529412, a: 1}
+      isEnabled: 1
+    - name: double
+      number: 5
+      levelCount: 20
+      buttonImage: {fileID: 21300000, guid: 745ff8444db46ec4aa6044ebd1562367, type: 3}
+      textColor: {r: 0.086274505, g: 0.3137255, b: 0.22534902, a: 1}
+      isEnabled: 0
     - name: challenge
       number: 4
       levelCount: 6
       buttonImage: {fileID: 21300000, guid: 745ff8444db46ec4aa6044ebd1562367, type: 3}
       textColor: {r: 0.1764706, g: 0.08627451, b: 0.3137255, a: 1}
+      isEnabled: 1
