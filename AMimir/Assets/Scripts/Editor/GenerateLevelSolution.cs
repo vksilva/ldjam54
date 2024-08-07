@@ -102,10 +102,12 @@ namespace Busta.Editor
 
             for (var i = 0; i < cats.Length; i++)
             {
-                cats[i].gameObject.SetActive(true);
+                var cat = cats[i];
+                cat.gameObject.SetActive(true);
                 foreach (var solution in solutions)
                 {
-                    cats[i].positions.Add(solution.Positions[i]);
+                    cat.positions.Add(solution.Positions[i]);
+                    EditorUtility.SetDirty(cat); // Indicate changes so level can be saved
                 }
 
                 cats[i].transform.position = catsPositions[i];
