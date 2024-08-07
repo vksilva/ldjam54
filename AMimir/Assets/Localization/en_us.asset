@@ -31,6 +31,8 @@ MonoBehaviour:
     Value: Large
   - Key: challenge
     Value: Challenge
+  - Key: level
+    Value: Level
   - Key: credits
     Value: Credits
   - Key: reset_title
@@ -83,3 +85,5 @@ MonoBehaviour:
     Value: Awesome! Now all cats are sleeping in the bed!
   - Key: tutorial_message_08
     Value: Now go and have fun with the other levels! See you!
+  - Key: new_level_text
+    Value: New

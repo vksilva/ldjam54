@@ -31,6 +31,8 @@ MonoBehaviour:
     Value: Grande
   - Key: challenge
     Value: Desafio
+  - Key: level
+    Value: Fase
   - Key: credits
     Value: "Cr\xE9ditos"
   - Key: reset_title
@@ -83,3 +85,5 @@ MonoBehaviour:
     Value: "Incr\xEDvel! Agora todos os gatos est\xE3o dormindo na caminha!"
   - Key: tutorial_message_08
     Value: "Agora v\xE1 e se divirta com as outras fases! At\xE9 mais!"
+  - Key: new_level_text
+    Value: Novo

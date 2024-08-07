@@ -175,7 +175,8 @@ namespace Busta.Menus
             newLevelButton.name = levelName;
             var isCompleted = stateService.gameState.levelsState.winLevels.Contains(levelName);
             var levelExists = SceneUtility.GetBuildIndexByScenePath(levelName) > 0;
-            newLevelButton.Setup(level.ToString(), world.buttonImage, world.textColor, isCompleted,
+            var isNew = world.newLevelFrom > 0 && level > world.newLevelFrom;
+            newLevelButton.Setup(level.ToString(), world.buttonImage, world.textColor, isCompleted, isNew, 
                 levelExists, () => LoadLevel(levelName));
         }
 

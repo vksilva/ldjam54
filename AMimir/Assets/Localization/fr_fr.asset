@@ -16,48 +16,75 @@ MonoBehaviour:
   Key: fr_fr
   Translations:
   - Key: title
-    Value: 
+    Value: A Mimir
   - Key: settings
-    Value: 
+    Value: "Param\xE8tres"
   - Key: sound_effects
-    Value: 
+    Value: Effets sonores
   - Key: music
-    Value: 
-  - Key: level
-    Value: 
+    Value: Musique
   - Key: small
-    Value: 
+    Value: Petit
   - Key: medium
-    Value: 
+    Value: Moyen
   - Key: large
-    Value: 
+    Value: Grande
   - Key: challenge
-    Value: 
+    Value: "D\xE9fi"
+  - Key: level
+    Value: Niveau
   - Key: credits
-    Value: 
+    Value: "Cr\xE9dits"
   - Key: reset_title
-    Value: 
+    Value: "R\xE9initialisation du niveau"
   - Key: reset_button
-    Value: 
+    Value: "Red\xE9marrage"
   - Key: continue_button
-    Value: 
+    Value: Continuer
   - Key: all_cats_are_a_mimir
-    Value: 
+    Value: Tous les chats sont <i>un mimir</i>
   - Key: back_to_home
-    Value: 
+    Value: "Retour \xE0 l'accueil"
   - Key: paused
-    Value: 
+    Value: En pause
   - Key: language
-    Value: 
+    Value: Langue
   - Key: select_language_button
-    Value: 
+    Value: "S\xE9lection de la langue"
   - Key: close_game
-    Value: 
+    Value: Fermer le jeu ?
   - Key: confirm_close_game_button
-    Value: 
+    Value: Oui
   - Key: decline_close_game_button
-    Value: 
+    Value: Non
   - Key: privacy_policy_button
-    Value: 
+    Value: "Politique de confidentialit\xE9"
   - Key: terms_of_service_button
-    Value: 
+    Value: Conditions d'utilisation
+  - Key: tutorial_button
+    Value: Tutoriel
+  - Key: tutorial_again_title
+    Value: Revoir le tutoriel?
+  - Key: confirm_tutorial_again_button
+    Value: Oui
+  - Key: decline_tutorial_again_button
+    Value: Non
+  - Key: tutorial_message_01
+    Value: Bienvenue dans <b>A Mimir</b>, le jeu de puzzle du chat !
+  - Key: tutorial_message_02
+    Value: Mes amis les chats ont sommeil et veulent dormir dans leur lit.
+  - Key: tutorial_message_03
+    Value: Cliquez sur le bouton niveau pour commencer un niveau
+  - Key: tutorial_message_04
+    Value: Mettons les chats sur le lit
+  - Key: tutorial_message_05
+    Value: Je placerai le premier pour vous
+  - Key: tutorial_message_06
+    Value: "C'est maintenant \xE0 vous de jouer. D\xE9placez les chats vers la zone
+      surlign\xE9e"
+  - Key: tutorial_message_07
+    Value: "G\xE9nial ! Maintenant, tous les chats dorment dans le lit !"
+  - Key: tutorial_message_08
+    Value: "Maintenant, va t'amuser dans les autres niveaux ! A bient\xF4t !"
+  - Key: new_level_text
+    Value: Nouveau

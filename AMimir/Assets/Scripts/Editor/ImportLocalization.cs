@@ -63,6 +63,8 @@ namespace Busta.Editor
                         Value =  data[dataIndex][languageIndex]
                     });
                 }
+                
+                EditorUtility.SetDirty(languageAsset);
 
                 if (fileDoesNotExist)
                 {

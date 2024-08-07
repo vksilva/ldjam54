@@ -85,3 +85,5 @@ MonoBehaviour:
     Value: Fantastico! Ora tutti i gatti dormono nel letto!
   - Key: tutorial_message_08
     Value: Ora andate a divertirvi con gli altri livelli! Ci vediamo!
+  - Key: new_level_text
+    Value: Nuovo

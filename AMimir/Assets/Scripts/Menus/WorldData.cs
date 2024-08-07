@@ -9,6 +9,7 @@ namespace Busta.Menus
         public string name;
         public int number;
         public int levelCount;
+        public int newLevelFrom;
         public Sprite buttonImage;
         public Color textColor;
         public bool isEnabled;

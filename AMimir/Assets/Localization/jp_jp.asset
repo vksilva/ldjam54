@@ -23,8 +23,6 @@ MonoBehaviour:
     Value: 
   - Key: music
     Value: 
-  - Key: level
-    Value: 
   - Key: small
     Value: 
   - Key: medium
@@ -32,6 +30,8 @@ MonoBehaviour:
   - Key: large
     Value: 
   - Key: challenge
+    Value: 
+  - Key: level
     Value: 
   - Key: credits
     Value: 
@@ -60,4 +60,30 @@ MonoBehaviour:
   - Key: privacy_policy_button
     Value: 
   - Key: terms_of_service_button
+    Value: 
+  - Key: tutorial_button
+    Value: 
+  - Key: tutorial_again_title
+    Value: 
+  - Key: confirm_tutorial_again_button
+    Value: 
+  - Key: decline_tutorial_again_button
+    Value: 
+  - Key: tutorial_message_01
+    Value: 
+  - Key: tutorial_message_02
+    Value: 
+  - Key: tutorial_message_03
+    Value: 
+  - Key: tutorial_message_04
+    Value: 
+  - Key: tutorial_message_05
+    Value: 
+  - Key: tutorial_message_06
+    Value: 
+  - Key: tutorial_message_07
+    Value: 
+  - Key: tutorial_message_08
+    Value: 
+  - Key: new_level_text
     Value: 

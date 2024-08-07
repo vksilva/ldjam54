@@ -31,6 +31,8 @@ MonoBehaviour:
     Value: "Gro\xDF"
   - Key: challenge
     Value: Herausforderung
+  - Key: level
+    Value: Stufe
   - Key: credits
     Value: Credits
   - Key: reset_title
@@ -84,3 +86,5 @@ MonoBehaviour:
     Value: Super! Jetzt schlafen alle Katzen im Bett!
   - Key: tutorial_message_08
     Value: "Und nun viel Spa\xDF mit den anderen Levels! Auf Wiedersehen!"
+  - Key: new_level_text
+    Value: Neu
