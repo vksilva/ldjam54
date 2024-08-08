@@ -45,6 +45,8 @@ MonoBehaviour:
     Value: Tutti i gatti sono <i>a mimir</i>
   - Key: back_to_home
     Value: Torna all'inizio
+  - Key: next_level
+    Value: Prossimo livello
   - Key: paused
     Value: Pausa
   - Key: language

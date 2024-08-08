@@ -45,6 +45,8 @@ MonoBehaviour:
     Value: Alle Katzen <i>a mimir</i>
   - Key: back_to_home
     Value: Zuruck zum start
+  - Key: next_level
+    Value: "N\xE4chster Level"
   - Key: paused
     Value: Pausiert
   - Key: language

@@ -45,6 +45,8 @@ MonoBehaviour:
     Value: All cats are <i>a mimir</i>
   - Key: back_to_home
     Value: Back to home
+  - Key: next_level
+    Value: Next level
   - Key: paused
     Value: Paused
   - Key: language

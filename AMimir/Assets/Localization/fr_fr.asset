@@ -45,6 +45,8 @@ MonoBehaviour:
     Value: Tous les chats sont <i>un mimir</i>
   - Key: back_to_home
     Value: "Retour \xE0 l'accueil"
+  - Key: next_level
+    Value: Niveau suivant
   - Key: paused
     Value: En pause
   - Key: language

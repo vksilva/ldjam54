@@ -45,6 +45,8 @@ MonoBehaviour:
     Value: "Todos los gatitos est\xE1n <i>a mimir</i>"
   - Key: back_to_home
     Value: "Voltar para o in\xEDcio"
+  - Key: next_level
+    Value: "Pr\xF3ximo nivel"
   - Key: paused
     Value: Pausado
   - Key: language

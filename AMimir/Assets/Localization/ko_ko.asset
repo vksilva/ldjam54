@@ -45,6 +45,8 @@ MonoBehaviour:
     Value: 
   - Key: back_to_home
     Value: 
+  - Key: next_level
+    Value: 
   - Key: paused
     Value: 
   - Key: language
