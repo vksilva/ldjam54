@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Busta.AppCore;
@@ -9,6 +10,7 @@ using Busta.AppCore.Review;
 using Busta.AppCore.State;
 using Busta.Extensions;
 using Busta.Tutorial;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -178,6 +180,11 @@ namespace Busta.Menus
             var isNew = world.newLevelFrom > -1 && level > world.newLevelFrom && !isCompleted;
             newLevelButton.Setup(level.ToString(), world.buttonImage, world.textColor, isCompleted, isNew, 
                 levelExists, () => LoadLevel(levelName));
+
+            if (!LevelsList.levels.Contains(levelName))
+            {
+                LevelsList.levels.Add(levelName);
+            }
         }
 
         private static void LoadLevel(string levelName)
