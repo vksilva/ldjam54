@@ -100,6 +100,11 @@ namespace Busta.Editor
 
             var solutions = GetSolutionsRecursive(cats, catsData, new CatState(cats.Length), bedData, 0);
 
+            if (solutions.Count == 0)
+            {
+                Debug.LogWarning("Could not find a solution for this level");
+            }
+            
             for (var i = 0; i < cats.Length; i++)
             {
                 var cat = cats[i];
@@ -298,7 +303,7 @@ namespace Busta.Editor
             {
                 EditorUtility.ClearProgressBar();
             }
-
+            
             return solutions;
         }
     }
