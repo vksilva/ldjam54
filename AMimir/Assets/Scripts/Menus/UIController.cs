@@ -1,8 +1,5 @@
-using System;
-using System.Globalization;
 using Busta.AppCore.Audio;
 using Busta.Gameplay;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Application = Busta.AppCore.Application;
@@ -19,7 +16,7 @@ namespace Busta.Menus
 
         private static AudioService _audioService;
         
-        private static readonly float hintCooldown = 60f;
+        private static readonly float hintCooldown = 1f;
         private float currentHintCooldown = 0;
 
         private void Start()
@@ -54,8 +51,6 @@ namespace Busta.Menus
         {
             if (currentHintCooldown > 0)
             {
-                Debug.Log($"Sem hint irmão.");
-                Debug.Log($"Tempo para proxima hint: {currentHintCooldown}");
                 return;
             }
             GameController.Instance.ShowNewHint();

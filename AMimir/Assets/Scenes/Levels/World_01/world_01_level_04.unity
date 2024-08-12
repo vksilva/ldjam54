@@ -135,6 +135,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: cat_Z_02
       objectReference: {fileID: 0}
+    - target: {fileID: 6750074431065701759, guid: 0c868b53d85e6924c92569404911d62a, type: 3}
+      propertyPath: positions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750074431065701759, guid: 0c868b53d85e6924c92569404911d62a, type: 3}
+      propertyPath: positions.Array.data[0].x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7572302553359180721, guid: 0c868b53d85e6924c92569404911d62a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -177,11 +185,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8884286226491309043, guid: 0c868b53d85e6924c92569404911d62a, type: 3}
       propertyPath: solutionPos.x
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8884286226491309043, guid: 0c868b53d85e6924c92569404911d62a, type: 3}
       propertyPath: solutionPos.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -263,7 +271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5169085808755074638, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: orthographic size
-      value: 8.870968
+      value: 10.277778
       objectReference: {fileID: 0}
     - target: {fileID: 7938176268018679338, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: m_LocalPosition.x
@@ -383,13 +391,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2885730442466307398, guid: b4c58de9c050a1a428a7268f6218444e, type: 3}
+      propertyPath: positions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 176909905408790173, guid: b4c58de9c050a1a428a7268f6218444e, type: 3}
       propertyPath: solutionPos.x
-      value: -2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 176909905408790173, guid: b4c58de9c050a1a428a7268f6218444e, type: 3}
       propertyPath: solutionPos.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1617682685700466512, guid: b4c58de9c050a1a428a7268f6218444e, type: 3}
       propertyPath: m_Color.b
@@ -464,6 +476,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: cat_T_04
       objectReference: {fileID: 0}
+    - target: {fileID: 6943543240617661480, guid: bb463ee51055043479b81a6ecf857187, type: 3}
+      propertyPath: positions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6943543240617661480, guid: bb463ee51055043479b81a6ecf857187, type: 3}
+      propertyPath: positions.Array.data[0].y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7572302553359180721, guid: bb463ee51055043479b81a6ecf857187, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -506,11 +526,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8884286226491309043, guid: bb463ee51055043479b81a6ecf857187, type: 3}
       propertyPath: solutionPos.x
-      value: -2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8884286226491309043, guid: bb463ee51055043479b81a6ecf857187, type: 3}
       propertyPath: solutionPos.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -634,13 +654,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 176909905408790173, guid: 03b56cc1fa7390e45a25b1d1a822cb2a, type: 3}
-      propertyPath: solutionPos.x
+    - target: {fileID: -2531426308587045191, guid: 03b56cc1fa7390e45a25b1d1a822cb2a, type: 3}
+      propertyPath: positions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2531426308587045191, guid: 03b56cc1fa7390e45a25b1d1a822cb2a, type: 3}
+      propertyPath: positions.Array.data[0].x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2531426308587045191, guid: 03b56cc1fa7390e45a25b1d1a822cb2a, type: 3}
+      propertyPath: positions.Array.data[0].y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 176909905408790173, guid: 03b56cc1fa7390e45a25b1d1a822cb2a, type: 3}
+      propertyPath: solutionPos.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 176909905408790173, guid: 03b56cc1fa7390e45a25b1d1a822cb2a, type: 3}
       propertyPath: solutionPos.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4335317560407223456, guid: 03b56cc1fa7390e45a25b1d1a822cb2a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -711,6 +743,18 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.6603774
       objectReference: {fileID: 0}
+    - target: {fileID: 1848254968772334179, guid: f6a44cf88fe42bb4e8c1816615e7242b, type: 3}
+      propertyPath: positions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848254968772334179, guid: f6a44cf88fe42bb4e8c1816615e7242b, type: 3}
+      propertyPath: positions.Array.data[0].x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848254968772334179, guid: f6a44cf88fe42bb4e8c1816615e7242b, type: 3}
+      propertyPath: positions.Array.data[0].y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4413627531022907656, guid: f6a44cf88fe42bb4e8c1816615e7242b, type: 3}
       propertyPath: m_Name
       value: cat_T_01
@@ -757,11 +801,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8884286226491309043, guid: f6a44cf88fe42bb4e8c1816615e7242b, type: 3}
       propertyPath: solutionPos.x
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8884286226491309043, guid: f6a44cf88fe42bb4e8c1816615e7242b, type: 3}
       propertyPath: solutionPos.y
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

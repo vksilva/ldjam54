@@ -261,7 +261,7 @@ namespace Busta.Gameplay
         }
 
 #if UNITY_EDITOR
-        private void OnDrawGizmosSelected()
+        private void OnDrawGizmos()
         {
             if (_obstacle)
             {
@@ -269,7 +269,6 @@ namespace Busta.Gameplay
             }
 
             var bed = FindObjectOfType<Bed>();
-            var bedPosition = new Vector2(bed.transform.position.x, bed.transform.position.y);
 
             Handles.color = Color.green;
             Handles.Label(bed.transform.position + new Vector3(solutionPos.x + 0.1f, solutionPos.y + 0.3f), name);
@@ -280,7 +279,7 @@ namespace Busta.Gameplay
             if (boxCollider)
             {
                 Gizmos.matrix = bed.transform.localToWorldMatrix * Matrix4x4.Translate(solutionPos.ToVector3());
-                Gizmos.DrawWireCube(boxCollider.offset - bedPosition, boxCollider.size);
+                Gizmos.DrawWireCube(boxCollider.offset, boxCollider.size);
                 return;
             }
 
@@ -289,7 +288,7 @@ namespace Busta.Gameplay
             {
                 Gizmos.matrix = bed.transform.localToWorldMatrix * Matrix4x4.Translate(solutionPos.ToVector3());
                 Gizmos.DrawLineStrip(
-                    polygonCollider.points.Select(v => new Vector3(v.x, v.y) - bed.transform.position).ToArray(), true);
+                    polygonCollider.points.Select(v => new Vector3(v.x, v.y)).ToArray(), true);
             }
         }
 #endif

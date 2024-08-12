@@ -939,7 +939,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5169085808755074638, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: orthographic size
-      value: 10.555555
+      value: 10.277778
       objectReference: {fileID: 0}
     - target: {fileID: 7938176268018679338, guid: 41da004bcbcf5dd4b9b483f4575dae09, type: 3}
       propertyPath: m_LocalPosition.x
@@ -998,8 +998,6 @@ SceneRoots:
   - {fileID: 4188179409556337987}
   - {fileID: 974062058}
   - {fileID: 1698422618}
-  - {fileID: 608135245}
-  - {fileID: 1586105629}
   - {fileID: 1071098265}
   - {fileID: 1824308777}
   - {fileID: 1238846115}
@@ -1007,5 +1005,7 @@ SceneRoots:
   - {fileID: 862722709}
   - {fileID: 345389843}
   - {fileID: 91632320}
+  - {fileID: 608135245}
+  - {fileID: 1586105629}
   - {fileID: 40790627}
   - {fileID: 763090493}
