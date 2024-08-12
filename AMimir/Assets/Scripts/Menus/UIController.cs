@@ -1,4 +1,5 @@
 using Busta.AppCore.Audio;
+using Busta.Gameplay;
 using UnityEngine;
 using UnityEngine.UI;
 using Application = Busta.AppCore.Application;
@@ -34,7 +35,7 @@ namespace Busta.Menus
 
         private void OnHintButtonClicked()
         {
-            throw new System.NotImplementedException();
+            GameController.Instance.ShowNewHint();
         }
 
         private void OnPauseButtonClicked()

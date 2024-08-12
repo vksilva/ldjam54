@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Busta.AppCore;
 using Busta.AppCore.Audio;
@@ -37,8 +38,9 @@ namespace Busta.Gameplay
         private const string matchResultAbandoned = "Abandoned";
         private const string matchResultRestarted = "Restart";
         private Func<Task> OnBeforeEndGame;
-        private PieceSolutionPositions[] cats;
-        private Dictionary<PieceSolutionPositions, bool> isHintDisplayed;
+        private PieceMovement[] cats;
+        private Dictionary<PieceMovement, bool> isHintDisplayed = new ();
+        private Material hintMaterial;
 
         private void Awake()
         {
@@ -63,10 +65,11 @@ namespace Busta.Gameplay
             }
 
             gridTilePrefab = Resources.Load<HighlightGridTile>("GameElements/grid_tile");
+            hintMaterial = Resources.Load<Material>("Materials/Outline");
 
             GetServices();
             SetUpBed();
-            // SetUpHints();
+            SetUpHints();
 
             SceneManager.LoadScene("LevelUI", LoadSceneMode.Additive);
 
@@ -81,22 +84,39 @@ namespace Busta.Gameplay
             failedMovesCounter++;
         }
 
-        public void Hint()
+        public bool ShowNewHint()
         {
             foreach (var cat in cats)
             {
-                if (!isHintDisplayed[cat])
+                if (isHintDisplayed[cat])
                 {
-                    // Show hint for this cat
-                    isHintDisplayed[cat] = false;
-                    break;
+                    continue;
                 }
+
+                if ((cat.transform.position - _bed.transform.position).ToVector2Int() == cat.solutionPos)
+                {
+                    continue;
+                }
+                    
+                // Show hint for this cat
+                var catHint = new GameObject(cat.name + "hint");
+                var hintRenderer = catHint.AddComponent<SpriteRenderer>();
+                var catRenderer = cat.GetComponentInChildren<SpriteRenderer>();
+                hintRenderer.sprite = catRenderer.sprite;
+                hintRenderer.transform.rotation = catRenderer.transform.rotation;
+                hintRenderer.material = hintMaterial;
+                catHint.transform.position = cat.solutionPos.ToVector3() + catRenderer.transform.localPosition + _bed.transform.position;
+                    
+                isHintDisplayed[cat] = true;
+                return true;
             }
+
+            return false;
         }
 
         private void SetUpHints()
         {
-            cats = FindObjectsOfType<PieceSolutionPositions>();
+            cats = FindObjectsOfType<PieceMovement>().Where(piece => !piece.IsObstacle()).ToArray();
             foreach (var cat in cats)
             {
                 isHintDisplayed[cat] = false;

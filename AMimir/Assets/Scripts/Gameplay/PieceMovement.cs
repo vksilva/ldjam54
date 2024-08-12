@@ -15,7 +15,7 @@ namespace Busta.Gameplay
         [SerializeField] private bool _obstacle = false;
         [SerializeField] private bool isInvisibleObstacle = false;
 
-        [SerializeField] private Vector2Int solutionPos;
+        [SerializeField] public Vector2Int solutionPos;
 
         private LayerMask pieceLayer;
         private LayerMask bedLayer;
