@@ -16,7 +16,7 @@ namespace Busta.Menus
 
         private static AudioService _audioService;
         
-        private static readonly float hintCooldown = 0.1f;
+        private static readonly float hintCooldown = 30f;
         private float currentHintCooldown = 0;
 
         private void Start()
