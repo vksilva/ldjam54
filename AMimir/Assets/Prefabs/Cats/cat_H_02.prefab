@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _obstacle: 0
+  isInvisibleObstacle: 0
   solutionPos: {x: 0, y: 0}
 --- !u!114 &8577621456675092693
 MonoBehaviour:
@@ -63,6 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positions: []
+  positionIndex: 0
 --- !u!210 &2119679722108370471
 SortingGroup:
   m_ObjectHideFlags: 0

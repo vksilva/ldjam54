@@ -29,6 +29,8 @@ MonoBehaviour:
     Value: Moyen
   - Key: large
     Value: Grande
+  - Key: double
+    Value: Double
   - Key: challenge
     Value: "D\xE9fi"
   - Key: level

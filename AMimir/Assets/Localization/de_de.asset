@@ -29,6 +29,8 @@ MonoBehaviour:
     Value: Mittel
   - Key: large
     Value: "Gro\xDF"
+  - Key: double
+    Value: Doppelter
   - Key: challenge
     Value: Herausforderung
   - Key: level

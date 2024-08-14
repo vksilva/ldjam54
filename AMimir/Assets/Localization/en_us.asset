@@ -29,6 +29,8 @@ MonoBehaviour:
     Value: Medium
   - Key: large
     Value: Large
+  - Key: double
+    Value: Double
   - Key: challenge
     Value: Challenge
   - Key: level

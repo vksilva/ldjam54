@@ -29,6 +29,8 @@ MonoBehaviour:
     Value: Medio
   - Key: large
     Value: Grande
+  - Key: double
+    Value: Doble
   - Key: challenge
     Value: "Desaf\xEDo"
   - Key: level

@@ -29,6 +29,8 @@ MonoBehaviour:
     Value: "M\xE9dio"
   - Key: large
     Value: Grande
+  - Key: double
+    Value: Duplo
   - Key: challenge
     Value: Desafio
   - Key: level

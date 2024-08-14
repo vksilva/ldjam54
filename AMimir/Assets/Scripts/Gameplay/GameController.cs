@@ -105,6 +105,8 @@ namespace Busta.Gameplay
                 hintRenderer.sprite = catRenderer.sprite;
                 hintRenderer.transform.rotation = catRenderer.transform.rotation;
                 hintRenderer.material = hintMaterial;
+                hintRenderer.flipX = catRenderer.flipX;
+                hintRenderer.flipY = catRenderer.flipY;
                 catHint.transform.position = cat.solutionPos.ToVector3() + catRenderer.transform.localPosition + _bed.transform.position;
                     
                 isHintDisplayed[cat] = true;

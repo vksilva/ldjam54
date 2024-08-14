@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _obstacle: 0
+  isInvisibleObstacle: 0
   solutionPos: {x: 0, y: 0}
 --- !u!114 &5662771331411021171
 MonoBehaviour:
@@ -63,6 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positions: []
+  positionIndex: 0
 --- !u!60 &8049845255338235416
 PolygonCollider2D:
   m_ObjectHideFlags: 0
