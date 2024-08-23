@@ -71,8 +71,8 @@ MonoBehaviour:
       isEnabled: 1
     - name: double
       number: 5
-      levelCount: 5
-      newLevelFrom: 0
+      levelCount: 10
+      newLevelFrom: 5
       buttonImage: {fileID: 21300000, guid: 7c866f2e4173a074bb44142b26e33330, type: 3}
       textColor: {r: 0.1764706, g: 0.3137255, b: 0.08627451, a: 1}
       isEnabled: 1

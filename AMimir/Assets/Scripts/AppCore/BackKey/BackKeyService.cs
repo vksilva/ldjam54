@@ -8,7 +8,11 @@ namespace Busta.AppCore.BackKey
     {
         private Stack<Action> backKeyActions = new();
 
-        private void Update()
+        public void Init(LifecycleService lifecycleService) {
+            lifecycleService.OnUpdate.AddListener(OnUpdate);
+        }
+        
+        private void OnUpdate()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {

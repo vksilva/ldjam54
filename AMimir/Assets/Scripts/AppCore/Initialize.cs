@@ -24,6 +24,10 @@ namespace Busta.AppCore
             var applicationGameObject = new GameObject("Application");
             DontDestroyOnLoad(applicationGameObject);
 
+            var lifecycleService = applicationGameObject.AddComponent<LifecycleService>();
+
+            Application.Instance.Add(lifecycleService);
+
             Application.Instance.Add(new ConfigurationService()).Init(gameConfigurations);
 
             var firebaseService = await Application.Instance.Add(new FirebaseService()).Init();
@@ -40,7 +44,7 @@ namespace Busta.AppCore
             Application.Instance.Add(new LocalizationService())
                 .Init(gameConfigurations.LocalizationConfigurations, stateService);
 
-            Application.Instance.Add(new BackKeyService());
+            Application.Instance.Add(new BackKeyService()).Init(lifecycleService);
 
             Application.Instance.Add(new SafeAreaService())
                 .Init(gameConfigurations.SafeAreaConfigurations);
