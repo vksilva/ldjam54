@@ -55,6 +55,11 @@ namespace Busta.AppCore.Tracking
             firebaseService.LogEvent(TrackingEvents.LevelRestarted, param);
         }
 
+        public void TrackHintUsed()
+        {
+            firebaseService.LogEvent(TrackingEvents.HintUsed);
+        }
+
         public void TrackOpenSettings()
         {
             firebaseService.LogEvent(TrackingEvents.SettingsOpened);

@@ -110,6 +110,9 @@ namespace Busta.Gameplay
                 catHint.transform.position = cat.solutionPos.ToVector3() + catRenderer.transform.localPosition + _bed.transform.position;
                     
                 isHintDisplayed[cat] = true;
+                
+                _trackingService.TrackHintUsed();
+                
                 return true;
             }
 
@@ -222,6 +225,9 @@ namespace Busta.Gameplay
         {
             _trackingService.TrackLevelEnded(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter,
                 timeCounter, matchResultRestarted);
+            _trackingService.TrackRestartedGame(SceneManager.GetActiveScene().name, movesCounter, failedMovesCounter,
+                timeCounter);
+            
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 

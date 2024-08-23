@@ -9,6 +9,8 @@ namespace Busta.AppCore.Tracking
         public const string LevelPaused = "level_paused";
         public const string LevelRestarted = "level_restarted";
 
+        public const string HintUsed = "hint_used";
+
         public const string SettingsOpened = "settings_opened";
         public const string CreditsOpened = "credits_opened";
         public const string LanguageChanged = "language_changed";
