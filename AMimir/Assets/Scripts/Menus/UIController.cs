@@ -13,6 +13,9 @@ namespace Busta.Menus
         [SerializeField] private PausePopUpController pausePopUp;
         [SerializeField] private Button hintButton;
         [SerializeField] private Image hintButtonCooldownImage;
+        [SerializeField] private Sprite hintButtonOnSprite;
+        [SerializeField] private Sprite hintButtonOffSprite;
+        
 
         private static AudioService _audioService;
         
@@ -22,6 +25,7 @@ namespace Busta.Menus
         private void Start()
         {
             uiCanvas.gameObject.SetActive(true);
+            hintButtonCooldownImage.fillAmount = 0;
             GetServices();
             AddListeners();
         }
@@ -33,7 +37,10 @@ namespace Busta.Menus
                 currentHintCooldown -= Time.deltaTime;
                 currentHintCooldown = Mathf.Max(0, currentHintCooldown);
                 hintButtonCooldownImage.fillAmount = currentHintCooldown / hintCooldown;
+                return;
             }
+
+            hintButton.image.sprite = hintButtonOnSprite;
         }
 
         private static void GetServices()
@@ -56,6 +63,7 @@ namespace Busta.Menus
             GameController.Instance.ShowNewHint();
             currentHintCooldown = hintCooldown;
             hintButtonCooldownImage.fillAmount = 1f;
+            hintButton.image.sprite = hintButtonOffSprite;
         }
 
         private void OnPauseButtonClicked()
