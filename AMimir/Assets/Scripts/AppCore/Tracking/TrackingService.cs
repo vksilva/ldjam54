@@ -1,5 +1,4 @@
 using Busta.AppCore.Firebase;
-using Firebase.Analytics;
 
 namespace Busta.AppCore.Tracking
 {
@@ -20,13 +19,13 @@ namespace Busta.AppCore.Tracking
 
         public void TrackLevelStarted(string level)
         {
-            Parameter[] param = { new(TrackingParameters.Level, level) };
+            TrackingParameter[] param = { new(TrackingParameters.Level, level) };
             firebaseService.LogEvent(TrackingEvents.LevelStarted, param);
         }
 
         public void TrackLevelEnded(string level, int moves, int failedMoves, float timeSeconds, string result)
         {
-            Parameter[] param =
+            TrackingParameter[] param =
             {
                 new(TrackingParameters.Level, level),
                 new(TrackingParameters.Moves, moves),
@@ -39,13 +38,13 @@ namespace Busta.AppCore.Tracking
 
         public void TrackPausedGame(string level)
         {
-            Parameter[] param = { new(TrackingParameters.Level, level) };
+            TrackingParameter[] param = { new(TrackingParameters.Level, level) };
             firebaseService.LogEvent(TrackingEvents.LevelPaused, param);
         }
 
         public void TrackRestartedGame(string level, int moves, int failedMoves, float timeSeconds)
         {
-            Parameter[] param =
+            TrackingParameter[] param =
             {
                 new(TrackingParameters.Level, level),
                 new(TrackingParameters.Moves, moves),
@@ -72,7 +71,7 @@ namespace Busta.AppCore.Tracking
 
         public void TrackChangeLanguage(string language)
         {
-            Parameter[] param = { new(TrackingParameters.Language, language) };
+            TrackingParameter[] param = { new(TrackingParameters.Language, language) };
             firebaseService.LogEvent(TrackingEvents.LanguageChanged, param);
         }
 
