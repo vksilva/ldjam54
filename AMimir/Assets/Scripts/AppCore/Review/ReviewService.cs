@@ -44,8 +44,10 @@ namespace Busta.AppCore.Review
                 Debug.LogWarning($"Launch flow error {launchFlowOperation.Error}");
                 return;
             }
+#else
+            await Task.CompletedTask;
 #endif
-
+            
             Debug.Log("Review launched");
         }
     }

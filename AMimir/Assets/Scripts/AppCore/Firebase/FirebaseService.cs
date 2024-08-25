@@ -30,6 +30,8 @@ namespace Busta.AppCore.Firebase
                 Initialized = false;
                 Debug.Log("Firebase Failed");
             }
+#else
+            await Task.CompletedTask;
 #endif
             return this;
         }
