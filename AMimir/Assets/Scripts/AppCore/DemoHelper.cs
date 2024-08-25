@@ -6,12 +6,21 @@ namespace Busta
     {
         public static bool IsDemo()
         {
-            if (Application.platform == RuntimePlatform.WebGLPlayer)
-            {
-                return true;
-            }
+            Debug.Log($"Application.platform {Application.platform}");
 
-            return false;
+            switch (Application.platform)
+            {
+                case RuntimePlatform.WindowsEditor:
+#if MIMIR_DEMO
+                    return true;
+#else
+                    return false;
+#endif
+                case RuntimePlatform.WebGLPlayer:
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }

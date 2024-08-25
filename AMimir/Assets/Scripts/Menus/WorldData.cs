@@ -10,6 +10,7 @@ namespace Busta.Menus
         public int number;
         public int levelCount;
         public int newLevelFrom;
+        public int maxDemoLevel;
         public Sprite buttonImage;
         public Color textColor;
         public bool isEnabled;

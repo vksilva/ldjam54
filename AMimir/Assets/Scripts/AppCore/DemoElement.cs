@@ -1,15 +1,12 @@
 using UnityEngine;
 
-namespace Busta
+namespace Busta.AppCore
 {
     public class DemoElement : MonoBehaviour
     {
-        void Awake()
+        private void Start()
         {
-            if (DemoHelper.IsDemo())
-            {
-                gameObject.SetActive(false);
-            }
+            gameObject.SetActive(DemoHelper.IsDemo());
         }
     }
 }
