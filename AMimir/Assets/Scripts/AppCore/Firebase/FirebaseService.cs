@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Busta.AppCore.Tracking;
 using UnityEngine;
@@ -38,7 +39,7 @@ namespace Busta.AppCore.Firebase
 #if !UNITY_WEBGL
             if (Initialized)
             {
-                FirebaseAnalytics.LogEvent(name, parameters);
+                FirebaseAnalytics.LogEvent(name, parameters.Select(p => p.Parameter).ToArray());
             }
 #endif
         }

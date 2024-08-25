@@ -1,22 +1,30 @@
 using System.Threading.Tasks;
+using UnityEngine;
+
+#if !UNITY_WEBGL
 using Busta.Extensions;
 using Google.Play.Review;
-using UnityEngine;
+#endif
 
 namespace Busta.AppCore.Review
 {
     public class ReviewService
     {
+#if !UNITY_WEBGL
         private ReviewManager reviewManager;
         private PlayReviewInfo playReviewInfo;
+#endif
 
         public void Init()
         {
+#if !UNITY_WEBGL
             reviewManager = new ReviewManager();
+#endif
         }
 
         public async Task RequestReview()
         {
+#if !UNITY_WEBGL
             var requestFlowOperation = reviewManager.RequestReviewFlow();
             await requestFlowOperation.Await();
             if (requestFlowOperation.Error != ReviewErrorCode.NoError)
@@ -36,6 +44,7 @@ namespace Busta.AppCore.Review
                 Debug.LogWarning($"Launch flow error {launchFlowOperation.Error}");
                 return;
             }
+#endif
 
             Debug.Log("Review launched");
         }
