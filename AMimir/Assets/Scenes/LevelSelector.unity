@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -378,16 +377,20 @@ MonoBehaviour:
     Fernando
     Rosell
 
+    Jonathan Hoschkara
+
     Matheus Oliveira
+
+    Ricardo Bustamante
 
 
     <b>Music</b>
 
-    "Morning" and "Bossa Antigua"
-    Kevin MacLeod (incompetech.com)
+    "Morning"
+    and "Bossa Antigua" Kevin MacLeod (incompetech.com)
 
-    Licensed under Creative Commons: By Attribution
-    4.0 License
+    Licensed under Creative
+    Commons: By Attribution 4.0 License
 
     http://creativecommons.org/licenses/by/4.0/'
   m_isRightToLeft: 0
@@ -9716,7 +9719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1812807636880362631, guid: 07679b1e54c64514793b3a74a3541d7f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1812807636880362631, guid: 07679b1e54c64514793b3a74a3541d7f, type: 3}
       propertyPath: m_AnchorMin.x
@@ -9724,11 +9727,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1812807636880362631, guid: 07679b1e54c64514793b3a74a3541d7f, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1812807636880362631, guid: 07679b1e54c64514793b3a74a3541d7f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1078.9381
+      value: 1080.7362
       objectReference: {fileID: 0}
     - target: {fileID: 1812807636880362631, guid: 07679b1e54c64514793b3a74a3541d7f, type: 3}
       propertyPath: m_SizeDelta.y
@@ -9764,11 +9767,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1812807636880362631, guid: 07679b1e54c64514793b3a74a3541d7f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 539.46906
+      value: 540.3681
       objectReference: {fileID: 0}
     - target: {fileID: 1812807636880362631, guid: 07679b1e54c64514793b3a74a3541d7f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -502.1
       objectReference: {fileID: 0}
     - target: {fileID: 1812807636880362631, guid: 07679b1e54c64514793b3a74a3541d7f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
