@@ -46,11 +46,11 @@ MonoBehaviour:
   - Key: all_cats_are_a_mimir
     Value: "Todos los gatitos est\xE1n <i>a mimir</i>"
   - Key: back_to_home
-    Value: "Voltar para o in\xEDcio"
+    Value: Volver al inicio
   - Key: next_level
     Value: "Pr\xF3ximo nivel"
   - Key: paused
-    Value: Pausado
+    Value: En pausa
   - Key: language
     Value: Idioma
   - Key: select_language_button
