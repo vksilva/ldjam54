@@ -18,9 +18,9 @@ MonoBehaviour:
   - Key: title
     Value: A Mimir
   - Key: settings
-    Value: Einstellungen
+    Value: Optionen
   - Key: sound_effects
-    Value: Soundeffekt
+    Value: Soundeffekte
   - Key: music
     Value: Musik
   - Key: small
@@ -30,11 +30,11 @@ MonoBehaviour:
   - Key: large
     Value: "Gro\xDF"
   - Key: double
-    Value: Doppelter
+    Value: Doppelt
   - Key: challenge
     Value: Herausforderung
   - Key: level
-    Value: Stufe
+    Value: Level
   - Key: credits
     Value: Credits
   - Key: reset_title
@@ -44,9 +44,9 @@ MonoBehaviour:
   - Key: continue_button
     Value: Weiter
   - Key: all_cats_are_a_mimir
-    Value: Alle Katzen <i>a mimir</i>
+    Value: Alle Katzen sind <i>a mimir</i>
   - Key: back_to_home
-    Value: Zuruck zum start
+    Value: "Zur\xFCck zum Start"
   - Key: next_level
     Value: "N\xE4chster Level"
   - Key: paused
@@ -62,13 +62,13 @@ MonoBehaviour:
   - Key: decline_close_game_button
     Value: Nein
   - Key: privacy_policy_button
-    Value: "Datenschutzkl\xE4rung"
+    Value: "Datenschutzerkl\xE4rung"
   - Key: terms_of_service_button
     Value: Nutzungsbedingungen
   - Key: tutorial_button
     Value: Tutorial
   - Key: tutorial_again_title
-    Value: Tutorial wiederholung?
+    Value: Tutorial wiederholen?
   - Key: confirm_tutorial_again_button
     Value: Ja
   - Key: decline_tutorial_again_button
@@ -76,19 +76,18 @@ MonoBehaviour:
   - Key: tutorial_message_01
     Value: Willkommen bei <b>A Mimir</b>, dem Katzenpuzzlespiel!
   - Key: tutorial_message_02
-    Value: Meine Katzenfreunde sind verschlafen und wollen in ihrem Bett schlafen
+    Value: "Meine Katzenfreunde sind schl\xE4frig und wollen in ihrem Bett schlafen"
   - Key: tutorial_message_03
-    Value: "Klicken Sie auf die Schaltfl\xE4che \u201ELevel\u201C, um ein Level zu
-      starten"
+    Value: "Klicke auf die Schaltfl\xE4che \u201ELevel\u201C, um einen Level zu starten"
   - Key: tutorial_message_04
     Value: Legen wir die Katzen auf das Bett
   - Key: tutorial_message_05
-    Value: "Ich werde die erste f\xFCr Sie platzieren"
+    Value: "Ich werde die erste f\xFCr dich platzieren"
   - Key: tutorial_message_06
-    Value: Jetzt bist du an der Reihe. Bewegen Sie die Katzen in den markierten Bereich
+    Value: Jetzt bist du an der Reihe. Bewege die Katzen in den markierten Bereich
   - Key: tutorial_message_07
     Value: Super! Jetzt schlafen alle Katzen im Bett!
   - Key: tutorial_message_08
-    Value: "Und nun viel Spa\xDF mit den anderen Levels! Auf Wiedersehen!"
+    Value: "Und jetzt viel Spa\xDF mit den anderen Levels! Bis bald!"
   - Key: new_level_text
     Value: Neu
