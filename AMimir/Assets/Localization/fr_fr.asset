@@ -44,7 +44,7 @@ MonoBehaviour:
   - Key: continue_button
     Value: Continuer
   - Key: all_cats_are_a_mimir
-    Value: Tous les chats sont <i>un mimir</i>
+    Value: Tous les chats sont <i>a mimir</i>
   - Key: back_to_home
     Value: "Retour \xE0 l'accueil"
   - Key: next_level
